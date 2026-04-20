@@ -1,0 +1,7 @@
+{
+  "name": "your-birthday",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}

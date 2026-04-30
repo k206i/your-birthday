@@ -1,0 +1,64 @@
+.widgetPageLink {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  z-index: var( --brd-z-index-layout );
+  min-height: var( --brd-size-widget-min-height );
+  overflow: hidden;
+  text-decoration: none;
+  border-radius: var( --brd-size-border-radius );
+  background-size: auto 150px;
+  background-repeat: no-repeat;
+  background-position: left 50% bottom 50px;
+
+  &.dog1 {
+    background-image: url( "../../assets/img/animals/dog_1.png" );
+  }
+
+  &.dog2 {
+    background-image: url( "../../assets/img/animals/dog_2.png" );
+  }
+
+  &.dog2_questions {
+    background-image: url( "../../assets/img/animals/dog_2_questions.png" );
+  }
+
+  &__comment {
+    padding-right: 30px;
+    font-size: 12px;
+  }
+
+  &__title {
+    margin-bottom: var( --brd-size-gap-xs );
+    font-family: var( --brd-font-default-alt );
+    font-size: 16px;
+  }
+
+  &__link {
+    position: absolute;
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 100;
+    padding: var( --brd-size-gap );
+    border-radius: var( --brd-size-border-radius );
+    background-color: rgba( 0, 0, 0, .5 );
+    backdrop-filter: blur( 5px );
+  }
+
+  &__gradient {
+    position: absolute;
+    z-index: 50;
+    left: 0;
+    bottom: 50px;
+    width: 100%;
+    height: 20%;
+  }
+}

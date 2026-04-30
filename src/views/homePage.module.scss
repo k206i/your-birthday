@@ -1,0 +1,42 @@
+.homePage {
+  &__titleWidget {
+    min-height: 100px;
+    padding: var( --brd-size-gap-l );
+    border-radius: var( --brd-size-border-radius );
+    background-color: var( --brd-theme-color-dark );
+    background-image: url( "../assets/img/animals/dog_1_stars.png" );
+    background-size: auto 100px;
+    background-repeat: no-repeat;
+    background-position: right var( --brd-size-border-radius ) bottom;
+  }
+
+  &__title {
+    margin-top: 0;
+  }
+
+  &__titleLead {
+    margin-bottom: var( --brd-size-gap-xs );
+    padding-right: 130px;
+    font-size: 16px;
+    color: var( --brd-theme-color );
+  }
+
+  &__titleComment {
+    font-size: 12px;
+    color: var( --brd-color-white-50 );
+  }
+
+  &__servicesList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var( --brd-size-gap-s );
+    list-style: none;
+    padding: 0;
+  }
+
+  &__service {
+
+  }
+
+
+}

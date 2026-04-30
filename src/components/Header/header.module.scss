@@ -1,0 +1,21 @@
+.header {
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__logo {
+    display: inline-block;
+    width: 50px;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    gap: var( --brd-size-gap );
+    padding: var( --brd-size-gap-xs );
+    font-family: var( --brd-font-default-alt );
+  }
+
+  &__accent {
+    color: var( --brd-theme-color );
+  }
+}

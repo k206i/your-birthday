@@ -1,0 +1,45 @@
+// font-family: 'Roboto', sans-serif;
+@font-face {
+    font-family: 'Roboto';
+    src: url('./Roboto/regular.woff') format('woff'),
+        url('./Roboto/regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./Roboto/bold.woff') format('woff'),
+    url('./Roboto/bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+// font-family: 'Roboto Condensed', sans-serif;
+@font-face {
+    font-family: 'Roboto Condensed';
+    src: url('./Roboto_Condensed/regular.woff') format('woff'),
+    url('./Roboto_Condensed/regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto Condensed';
+    src: url('./Roboto_Condensed/bold.woff') format('woff'),
+    url('./Roboto_Condensed/bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Skyquake';
+    src: url('./Skyquake/symbols_skyquake_short.woff') format('woff'),url('./Skyquake/symbols_skyquake_short.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}

@@ -1,6 +1,10 @@
-import holidaysData from '@/jsons/holidays_data.json';
+// Праздничные дни
 
-type THolidayData = {
+import holidaysData from '@/jsons/holidays_data.json';
+import {getNewFormattedDate} from '@/composables/getNewFormattedDate';
+import {appVars} from '@/configApp';
+
+export type THolidayData = {
   "date": string, // DD-MM
   "name": string,
   "category": string,
@@ -10,54 +14,58 @@ type THolidayData = {
   "isActive": boolean,
 }
 
-type TResponse = {
-  datesNow: THolidayData[], // Праздники в течение ADDITIONAL_PERIOD до даты
-  datesBefore: THolidayData[], // Праздники в течение ADDITIONAL_PERIOD после даты
-  datesAfter: THolidayData[],
+export type TGetHolidaysNamesResponse = {
+  datesNow: THolidayData[], // Праздники в расчётный день
+  datesBefore: THolidayData[], // Праздники в случае преждевременных родов
+  datesNormal: THolidayData[], // Праздники в нормальном случае с погрешностью appVars.dayNormalPeriod
+  datesAfter: THolidayData[], // Праздники в случае запоздалых родов
 }
 
-const ADDITIONAL_PERIOD = 7; // Дней
-
-export const getHolidaysNames = async ( datePayload: Date ): Promise< TResponse > => {
-  const returnData: TResponse = {
-    datesBefore: [],
+export const getHolidaysNames = async ( datePayload: Date ): Promise< TGetHolidaysNamesResponse > => {
+  const returnData: TGetHolidaysNamesResponse = {
     datesNow: [],
+    datesBefore: [],
+    datesNormal: [],
     datesAfter: [],
   };
 
-  const getNewDay = ( days: number ) => {
-    const result: Date = new Date( datePayload );
-    result.setDate( datePayload.getDate() + days);
-    return result;
-  };
-
-  //returnData.datesNow = holidaysArr;
-
-  for ( let i = 0; i <= ADDITIONAL_PERIOD; i++) {
-    let formattedDay: string = getNewDay( i ).getDate().toString().padStart(2, '0');
-    let formattedMonth: string = (getNewDay( i ).getMonth() + 1).toString().padStart(2, '0');
-    let holidaysArr: THolidayData[] = holidaysData.filter( item => {
+  const getFilteredData = ( daysShift: number ): THolidayData[] => {
+    const formattedDay: string = getNewFormattedDate({
+      dateObject: datePayload,
+      dateName: 'day',
+      daysShift,
+    });
+    const formattedMonth: string = getNewFormattedDate({
+      dateObject: datePayload,
+      dateName: 'month',
+      daysShift,
+    });
+    return holidaysData.filter( item => {
       return item.date === formattedDay + '-' + formattedMonth;
     });
+  };
 
-    if ( i === 0 ) {
-      returnData.datesNow = holidaysArr;
+  // в расчётный день
+  returnData.datesNow.push( ...getFilteredData( 0 ));
 
-    } else {
-      returnData.datesAfter.push( ...holidaysArr );
-
-      formattedDay = getNewDay(-i).getDate().toString().padStart(2, '0');
-      formattedMonth = (getNewDay(-i).getMonth() + 1).toString().padStart(2, '0');
-
-      holidaysArr = holidaysData.filter( item => {
-        return item.date === formattedDay + '-' + formattedMonth;
-      });
-
-      returnData.datesBefore.push( ...holidaysArr );
-    }
+  // от расчётной даты зачатия, в пределах нормального срока беременности
+  for ( let i = -appVars.dayNormalPeriod; i < appVars.dayNormalPeriod; i++) {
+    returnData.datesNormal.push( ...getFilteredData( i ));
   }
 
-  console.log( returnData)
+  // от расчётной даты зачатия, в случае преждевременных родов
+  for (
+    let i = - (appVars.dayNormalPeriod + appVars.dayAdditionalPeriod);
+    i < -appVars.dayNormalPeriod; i++) {
+    returnData.datesAfter.push( ...getFilteredData( i ));
+  }
+
+  // от расчётной даты зачатия, в случае запоздалых родов
+  for (
+    let i = appVars.dayNormalPeriod;
+    i <= appVars.dayNormalPeriod + appVars.dayAdditionalPeriod; i++) {
+    returnData.datesBefore.push( ...getFilteredData( i ));
+  }
 
   return returnData;
 }

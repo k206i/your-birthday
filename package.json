@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "build:an": "ionic capacitor build android",
+    "build:andr": "ionic capacitor build android",
     "preview": "vite preview",
     "test:e2e": "cypress run",
     "test:unit": "vitest",

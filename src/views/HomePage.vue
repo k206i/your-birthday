@@ -50,8 +50,8 @@ onMounted(async () => {
           <li>
             <WidgetPageLink
                 link="/dayConception"
-                title="День вашего зачатия"
-                comment="Какой был праздник в день вашего зачатия?"
+                title="День зачатия"
+                comment="Какой был праздник в день зачатия?"
                 bg-image="dog-2_questions"
                 color="#a876ec"
             />
@@ -72,7 +72,9 @@ onMounted(async () => {
 
         <h2>Для мужиков</h2>
         <p>
-          Мастурбация
+          Мастурбация<br />
+          Алкоголь<br />
+          Спермограмма перед зачатием
         </p>
 
         <h2>Для девушек</h2>

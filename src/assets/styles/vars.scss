@@ -1,0 +1,35 @@
+:root {
+  --brd-size-gap-base: 8px;
+  --brd-size-gap-mobile: 8px;
+  --brd-size-gap-xxs: calc( var( --brd-size-gap-base ) / 4 );
+  --brd-size-gap-xs: calc( var( --brd-size-gap-base ) / 2 );
+  --brd-size-gap-s: var( --brd-size-gap-base );
+  --brd-size-gap: calc( var( --brd-size-gap-base ) * 2 );
+  --brd-size-gap-l: calc( var( --brd-size-gap-base ) * 3 );
+  --brd-size-gap-xl: calc( var( --brd-size-gap-base ) * 4 );
+
+  --brd-size-widget-min-height: 200px;
+
+  --brd-size-border-radius-base: 8px;
+  --brd-size-border-radius-xs: calc( var( --brd-size-border-radius-base ) / 2 );
+  --brd-size-border-radius-s: var( --brd-size-border-radius-base );
+  --brd-size-border-radius: calc( var( --brd-size-border-radius-base ) * 2 );
+
+  --brd-z-index-layout: 100;
+  --brd-z-index-tooltip: 200;
+  --brd-z-index-dropdown: 300;
+  --brd-z-index-header: 350;
+  --brd-z-index-overlay: 400;
+  --brd-z-index-popup: 500;
+  --brd-z-index-modal: 1000;
+
+  // Transitions
+  --brd-transition-duration: .3s;
+  --brd-transition-all: all ease var( --brd-transition-duration );
+  --brd-transition-height: height ease var( --brd-transition-duration );
+  --brd-transition-border: border ease var( --brd-transition-duration );
+  --brd-transition-opacity: opacity ease var( --brd-transition-duration );
+  --brd-transition-filter: filter ease var( --brd-transition-duration );
+  --brd-transition-color: color ease var( --brd-transition-duration );
+  --brd-transition-transform: transform ease var( --brd-transition-duration );
+}

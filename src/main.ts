@@ -35,6 +35,8 @@ import '@ionic/vue/css/palettes/dark.always.css'
 
 /* Theme variables */
 import './theme/variables.css';
+import './assets/styles/vars.scss';
+import './assets/styles/transitions.scss';
 
 const app = createApp(App)
   .use(IonicVue)

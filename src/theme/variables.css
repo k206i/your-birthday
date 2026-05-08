@@ -9,6 +9,9 @@ http://ionicframework.com/docs/theming/ */
 h1, h2, h3  {
     font-family: var( --brd-font-default-alt );
 }
+.accent {
+    color: var( --brd-theme-color );
+}
 h1:first-child,
 h2:first-child,
 h3:first-child  {
@@ -24,6 +27,10 @@ ion-datetime {
     border-radius: var( --brd-size-border-radius );
 }
 
+.accordion-group-expand-inset {
+    margin: 0;
+}
+
 
 :root {
     --brd-font-default: 'Roboto Condensed', sans-serif;
@@ -35,31 +42,10 @@ ion-datetime {
     --brd-theme-color-dark_rgb: 32, 26, 52;
     --brd-theme-color-bg: var( --brd-theme-color-dark );
 
-    --brd-size-gap-base: 8px;
-    --brd-size-gap-mobile: 8px;
-    --brd-size-gap-xs: calc( var( --brd-size-gap-base ) / 2 );
-    --brd-size-gap-s: var( --brd-size-gap-base );
-    --brd-size-gap: calc( var( --brd-size-gap-base ) * 2 );
-    --brd-size-gap-l: calc( var( --brd-size-gap-base ) * 3 );
-
-    --brd-size-widget-min-height: 200px;
-
-    --brd-size-border-radius-base: 8px;
-    --brd-size-border-radius-xs: calc( var( --brd-size-border-radius-base ) / 2 );
-    --brd-size-border-radius-s: var( --brd-size-border-radius-base );
-    --brd-size-border-radius: calc( var( --brd-size-border-radius-base ) * 2 );
-
     --brd-color-white: #fff;
     --brd-color-white-80: rgba( 255, 255, 255, .8 );
     --brd-color-white-50: rgba( 255, 255, 255, .5 );
-
-    --brd-z-index-layout: 100;
-    --brd-z-index-tooltip: 200;
-    --brd-z-index-dropdown: 300;
-    --brd-z-index-header: 350;
-    --brd-z-index-overlay: 400;
-    --brd-z-index-popup: 500;
-    --brd-z-index-modal: 1000;
+    --brd-color-white-20: rgba( 255, 255, 255, .2 );
 
     --ion-font-family: var( --brd-font-default );
     --ion-text-color: var( --brd-color-white );

@@ -1,0 +1,23 @@
+.brd-fade-enter-active,
+.brd-fade-leave-active {
+    transition:
+            opacity ease var( --brd-transition-duration );
+}
+
+.brd-fade-enter-from,
+.brd-fade-leave-to {
+    opacity: 0;
+}
+
+.brd-fade-scale-enter-active,
+.brd-fade-scale-leave-active {
+    transition:
+            opacity ease var( --brd-transition-duration ),
+            scale ease var( --brd-transition-duration );
+}
+
+.brd-fade-scale-enter-from,
+.brd-fade-scale-leave-to {
+    opacity: 0;
+    scale: 1.1;
+}

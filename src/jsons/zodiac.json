@@ -1,0 +1,149 @@
+{
+  "description": "Список знаков зодиака с датами, стихиями, планетами-покровителями и краткими характеристиками",
+  "signs": [
+    {
+      "name": "Овен",
+      "name_en": "Aries",
+      "symbol": "♈",
+      "date_start": "21-03",
+      "date_end": "20-04",
+      "element": "Огонь",
+      "planet": "Марс",
+      "modality": "кардинальный",
+      "traits": "энергичный, смелый, импульсивный",
+      "note": "Начало зодиакального круга, точка весеннего равноденствия"
+    },
+    {
+      "name": "Телец",
+      "name_en": "Taurus",
+      "symbol": "♉",
+      "date_start": "21-04",
+      "date_end": "21-05",
+      "element": "Земля",
+      "planet": "Венера",
+      "modality": "фиксированный",
+      "traits": "надежный, практичный, упрямый",
+      "note": null
+    },
+    {
+      "name": "Близнецы",
+      "name_en": "Gemini",
+      "symbol": "♊",
+      "date_start": "22-05",
+      "date_end": "21-06",
+      "element": "Воздух",
+      "planet": "Меркурий",
+      "modality": "мутабельный",
+      "traits": "любознательный, остроумный, непоследовательный",
+      "note": null
+    },
+    {
+      "name": "Рак",
+      "name_en": "Cancer",
+      "symbol": "♋",
+      "date_start": "22-06",
+      "date_end": "22-07",
+      "element": "Вода",
+      "planet": "Луна",
+      "modality": "кардинальный",
+      "traits": "верный, заботливый, чувствительный",
+      "note": null
+    },
+    {
+      "name": "Лев",
+      "name_en": "Leo",
+      "symbol": "♌",
+      "date_start": "23-07",
+      "date_end": "21-08",
+      "element": "Огонь",
+      "planet": "Солнце",
+      "modality": "фиксированный",
+      "traits": "щедрый, уверенный, доминирующий",
+      "note": null
+    },
+    {
+      "name": "Дева",
+      "name_en": "Virgo",
+      "symbol": "♍",
+      "date_start": "22-08",
+      "date_end": "23-09",
+      "element": "Земля",
+      "planet": "Меркурий",
+      "modality": "мутабельный",
+      "traits": "аналитичный, трудолюбивый, критичный",
+      "note": null
+    },
+    {
+      "name": "Весы",
+      "name_en": "Libra",
+      "symbol": "♎",
+      "date_start": "24-09",
+      "date_end": "23-10",
+      "element": "Воздух",
+      "planet": "Венера",
+      "modality": "кардинальный",
+      "traits": "дипломатичный, уравновешенный, нерешительный",
+      "note": null
+    },
+    {
+      "name": "Скорпион",
+      "name_en": "Scorpio",
+      "symbol": "♏",
+      "date_start": "24-10",
+      "date_end": "22-11",
+      "element": "Вода",
+      "planet": "Марс, Плутон",
+      "modality": "фиксированный",
+      "traits": "страстный, решительный, интенсивный",
+      "note": null
+    },
+    {
+      "name": "Стрелец",
+      "name_en": "Sagittarius",
+      "symbol": "♐",
+      "date_start": "23-11",
+      "date_end": "21-12",
+      "element": "Огонь",
+      "planet": "Юпитер",
+      "modality": "мутабельный",
+      "traits": "авантюрный, честный, свободолюбивый",
+      "note": null
+    },
+    {
+      "name": "Козерог",
+      "name_en": "Capricorn",
+      "symbol": "♑",
+      "date_start": "22-12",
+      "date_end": "20-01",
+      "element": "Земля",
+      "planet": "Сатурн",
+      "modality": "кардинальный",
+      "traits": "дисциплинированный, ответственный, целеустремленный",
+      "note": null
+    },
+    {
+      "name": "Водолей",
+      "name_en": "Aquarius",
+      "symbol": "♒",
+      "date_start": "21-01",
+      "date_end": "19-02",
+      "element": "Воздух",
+      "planet": "Сатурн, Уран",
+      "modality": "фиксированный",
+      "traits": "независимый, оригинальный, непредсказуемый",
+      "note": null
+    },
+    {
+      "name": "Рыбы",
+      "name_en": "Pisces",
+      "symbol": "♓",
+      "date_start": "20-02",
+      "date_end": "20-03",
+      "element": "Вода",
+      "planet": "Юпитер, Нептун",
+      "modality": "мутабельный",
+      "traits": "творческий, чуткий, мечтательный",
+      "note": null
+    }
+  ]
+}

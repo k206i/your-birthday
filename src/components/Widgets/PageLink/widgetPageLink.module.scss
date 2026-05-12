@@ -12,18 +12,6 @@
   background-repeat: no-repeat;
   background-position: left 50% bottom 50px;
 
-  &.dog1 {
-    background-image: url( "../../assets/img/animals/dog_1.png" );
-  }
-
-  &.dog2 {
-    background-image: url( "../../assets/img/animals/dog_2.png" );
-  }
-
-  &.dog2_questions {
-    background-image: url( "../../assets/img/animals/dog_2_questions.png" );
-  }
-
   &__comment {
     padding-right: 30px;
     font-size: 12px;
@@ -42,6 +30,21 @@
     height: 100%;
     left: 0;
     top: 0;
+  }
+
+  &__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 150;
+    right: var( --brd-size-gap-xs );
+    bottom: var( --brd-size-gap-xs );
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    font-size: 1.2em;
+    color: var( --brd-color-white );
   }
 
   &__content {

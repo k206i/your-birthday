@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import styles from './dayConception.module.scss';
-import {IonContent, IonPage, IonIcon, IonDatetime, IonAccordion, IonAccordionGroup, IonItem, IonLabel} from '@ionic/vue';
+import {IonContent, IonPage, IonDatetime, IonAccordion, IonAccordionGroup, IonItem, IonLabel} from '@ionic/vue';
 import Header from '@/components/Header/header.vue';
-import { logoIonic } from 'ionicons/icons';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {ref, computed, watch} from 'vue';
 import {getHolidaysNames, TGetHolidaysNamesResponse} from '@/api/getHolidaysNames';
 import {getNamesDays, TGetNamesDaysResponse} from '@/api/getDayNames';
 import {appVars} from '@/configApp';
+import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 
 const selectedDate = ref();
 const holidaysNames = ref< TGetHolidaysNamesResponse >();
 const namesDays = ref< TGetNamesDaysResponse >();
 const conceptionDay = ref();
+const birthDay = ref();
 
 const formattedDate = computed(() => {
   if ( !selectedDate.value ) {
@@ -31,6 +32,12 @@ watch(formattedDate, async () => {
     month: 'short',
     year: 'numeric'
   });
+  birthDay.value = new Date( formattedDate.value ).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+
   holidaysNames.value = await getHolidaysNames( datePayload );
   namesDays.value = await getNamesDays( datePayload );
 });
@@ -38,16 +45,24 @@ watch(formattedDate, async () => {
 
 <template>
   <ion-page :class="styles.dayConception">
-    <Header>
-      День зачатия
-    </Header>
+    <Header />
 
     <ion-content :fullscreen="true" class="ion-padding">
 
-      <ion-icon :icon="logoIonic"></ion-icon>
+      <WidgetPageTitle bg-image="dog-2" color="#a876ec">
+        Вы знаете дату рождения?
 
-      <h1>Если вы знаете день рождения, давайте посмотрим день зачатия</h1>
-      <p>Что праздновали в день зачатия?</p>
+        <template #lead>
+          Давайте посчитаем примерную дату зачатия 💫
+        </template>
+
+        <template #comment>
+          И посмотрим, какое событие было в этот день 🤭
+        </template>
+      </WidgetPageTitle>
+
+      <h1></h1>
+      <p>Выберите дату рождения:</p>
 
       <ion-datetime
           v-model="selectedDate"
@@ -58,7 +73,7 @@ watch(formattedDate, async () => {
       ></ion-datetime>
       <Transition name="brd-fade">
         <h3 v-if="formattedDate">
-          Выбранный день рождения: <span class="accent">{{ formattedDate }}</span>
+          Выбранный день рождения: <span class="accent">{{ birthDay }}</span>
         </h3>
       </Transition>
 
@@ -254,15 +269,6 @@ watch(formattedDate, async () => {
           </ion-accordion-group>
         </div>
       </Transition>
-
-
-      <h3>
-        В этот день именины:
-      </h3>
-      <p>
-        {{ namesDays }}
-      </p>
-
     </ion-content>
 
     <AppFooter />

@@ -19,7 +19,6 @@ import '@ionic/vue/css/text-alignment.css';
 import '@ionic/vue/css/text-transformation.css';
 import '@ionic/vue/css/flex-utils.css';
 import '@ionic/vue/css/display.css';
-import './assets/fonts/fonts.scss';
 
 /**
  * Ionic Dark Mode
@@ -34,6 +33,8 @@ import './assets/fonts/fonts.scss';
 import '@ionic/vue/css/palettes/dark.always.css'
 
 /* Theme variables */
+import './assets/fonts/fonts.scss';
+import './assets/styles/backgrounds.css';
 import './theme/variables.css';
 import './assets/styles/vars.scss';
 import './assets/styles/transitions.scss';

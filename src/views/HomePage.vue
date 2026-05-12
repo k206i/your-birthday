@@ -2,9 +2,10 @@
 import styles from './homePage.module.scss';
 import { IonContent, IonPage } from '@ionic/vue';
 import { Preferences } from '@capacitor/preferences';
-import WidgetPageLink from '@/components/Widgets/widgetPageLink.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {onMounted, ref} from 'vue';
+import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
+import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 
 const userName = ref();
 
@@ -32,19 +33,17 @@ onMounted(async () => {
   <ion-page :class="styles.homePage">
     <ion-content :fullscreen="true" class="ion-padding">
       <div id="container">
-        <div :class="styles.homePage__titleWidget">
-          <h2 :class="styles.homePage__title">
-            Здравствуйте<slot v-if="userName">, {{ userName }}</slot>!
-          </h2>
+        <WidgetPageTitle bg-image="dog-1_art" color="#a876ec">
+          Здравствуйте<slot v-if="userName">, {{ userName }}</slot>!
 
-          <div :class="styles.homePage__titleLead">
+          <template #lead>
             До вашего ДР: 365 дней ✨
-          </div>
+          </template>
 
-          <div :class="styles.homePage__titleComment">
+          <template #comment>
             Все важные даты в одном месте 💜
-          </div>
-        </div>
+          </template>
+        </WidgetPageTitle>
 
         <ul :class="styles.homePage__servicesList">
           <li>
@@ -52,18 +51,18 @@ onMounted(async () => {
                 link="/dayConception"
                 title="День зачатия"
                 comment="Какой был праздник в день зачатия?"
-                bg-image="dog-2_questions"
+                bg-image="dog-2_art"
                 color="#a876ec"
             />
           </li>
 
           <li>
             <WidgetPageLink
-                link="/dayConception"
-                title="Дата рождения ребёнка"
+                link="/childBirthday"
+                title="Планируем дату рождения ребёнка"
                 comment="Посмотрим, что будет в этот день?"
-                bg-image="dog-1"
-                color="#c75a99"
+                bg-image="cat-1_art"
+                color="#548fd6"
             />
           </li>
         </ul>

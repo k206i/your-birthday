@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import styles from './widgetPageTitle.module.scss';
+import {appVars} from '@/configApp';
 
 const props = defineProps<{
   color?: string,
@@ -13,10 +14,12 @@ const props = defineProps<{
       styles.widgetPageTitle,
       props.bgImage
     ]"
-       :style="`background-color: color-mix( in srgb, ${ props.color }, black 79%);`"
+       :style="`background-color: color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix });`"
   >
     <div :class="styles.widgetPageTitle__wrapper">
-      <h2 :class="styles.widgetPageTitle__title">
+      <h2 :class="styles.widgetPageTitle__title"
+          :style="`text-shadow: 1px 1px 6px color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix });`"
+      >
         <slot/>
       </h2>
 

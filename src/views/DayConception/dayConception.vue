@@ -25,7 +25,7 @@ const formattedDate = computed(() => {
 
 watch(formattedDate, async () => {
   const datePayload: Date = new Date( selectedDate.value );
-  datePayload.setDate( datePayload.getDate() - appVars.pregnancyDuration);
+  datePayload.setDate( datePayload.getDate() - appVars.pregnancyDuration );
 
   conceptionDay.value = datePayload.toLocaleDateString('ru-RU', {
     day: 'numeric',
@@ -61,7 +61,6 @@ watch(formattedDate, async () => {
         </template>
       </WidgetPageTitle>
 
-      <h1></h1>
       <p>Выберите дату рождения:</p>
 
       <ion-datetime

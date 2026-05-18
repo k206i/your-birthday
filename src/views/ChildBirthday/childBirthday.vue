@@ -1,9 +1,52 @@
 <script setup lang="ts">
 import styles from './childBirthday.module.scss';
-import {IonContent, IonPage} from '@ionic/vue';
+import {IonContent, IonDatetime, IonPage} from '@ionic/vue';
 import Header from '@/components/Header/header.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
+import {computed, onMounted, ref, watch} from 'vue';
+import {getHolidaysNames, TGetHolidaysNamesResponse} from '@/api/getHolidaysNames';
+import {getNamesDays, TGetNamesDaysResponse} from '@/api/getDayNames';
+import {appVars} from '@/configApp';
+
+const selectedDate = ref();
+const birthDay = ref();
+const minDate = ref();
+const conceptionDay = ref();
+const holidaysNames = ref< TGetHolidaysNamesResponse >();
+const namesDays = ref< TGetNamesDaysResponse >();
+
+const formattedDate = computed(() => {
+  if ( !selectedDate.value ) {
+    return '';
+  }
+  return selectedDate.value.split('T')[0];
+});
+
+watch( formattedDate, async () => {
+  const datePayload: Date = new Date( selectedDate.value );
+
+  birthDay.value = new Date( formattedDate.value ).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+
+  holidaysNames.value = await getHolidaysNames( datePayload );
+  namesDays.value = await getNamesDays( datePayload );
+
+  conceptionDay.value = new Date( datePayload.setDate( datePayload.getDate() - appVars.pregnancyDuration)).toLocaleDateString('ru-RU', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+});
+
+onMounted(() => {
+  minDate.value = new Date();
+  minDate.value.setDate( minDate.value.getDate() + appVars.pregnancyDuration);
+  minDate.value = minDate.value.toISOString();
+});
 
 </script>
 
@@ -14,7 +57,7 @@ import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue'
     <ion-content :fullscreen="true" class="ion-padding">
 
       <WidgetPageTitle bg-image="cat-1" color="#548fd6">
-        Вы собираетесь завести ребёнка?
+        Хотите родить ребёнка в определённый день?
 
         <template #lead>
           Давайте спланируем примерный день зачатия! ☀️
@@ -24,6 +67,73 @@ import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue'
           Но помните, лучший советчик &mdash; ваш лечащий врач&nbsp;💖
         </template>
       </WidgetPageTitle>
+
+      <p>Выберите дату, когда хотите родить:</p>
+
+      <ion-datetime
+          v-model="selectedDate"
+          locale="ru-RU"
+          presentation="date"
+          :show-default-buttons="true"
+          done-text="Готово" cancel-text="Не, отмена"
+          :min="minDate" max="2050-01-01T23:59:59"
+      ></ion-datetime>
+
+      <Transition name="brd-fade">
+        <h3 v-if="formattedDate">
+          Примерная дата зачатия: <span class="accent">{{ conceptionDay }}</span>
+        </h3>
+      </Transition>
+
+      <Transition name="brd-fade">
+        <div v-if="conceptionDay">
+          <h1>
+            В выбранный день рождения будет
+          </h1>
+
+          <h3>
+            Праздники
+          </h3>
+          <p v-if="!holidaysNames?.datesNow.length">
+            Праздников нет
+          </p>
+          <ul v-else :class="styles.dayConception__daysList">
+            <li :class="styles.dayConception__dayItem"
+                v-for="(item, index) in holidaysNames?.datesNow" :key="item.date + index"
+            >
+              <div :class="styles.dayConception__subTitle">
+                {{ item.name }}
+              </div>
+              <div :class="styles.dayConception__note">
+                {{ item.note }}
+              </div>
+            </li>
+          </ul>
+
+          <h3>
+            Именины
+          </h3>
+          <p>
+            Мужские имена:
+          </p>
+          <p v-if="!namesDays?.nameDayNow[0].male_names.length">
+            Мужских именин в этот день нет
+          </p>
+          <p v-else>
+            {{ namesDays?.nameDayNow[0].male_names.join( ', ' )}}
+          </p>
+
+          <p>
+            Женские имена:
+          </p>
+          <p v-if="!namesDays?.nameDayNow[0].female_names.length">
+            Женских именин в этот день нет
+          </p>
+          <p v-else>
+            {{ namesDays?.nameDayNow[0].female_names.join( ', ' )}}
+          </p>
+        </div>
+      </Transition>
 
     </ion-content>
 

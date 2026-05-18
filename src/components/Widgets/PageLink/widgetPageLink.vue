@@ -2,6 +2,7 @@
 import styles from './widgetPageLink.module.scss';
 import { IonIcon } from '@ionic/vue';
 import { arrowForwardOutline } from 'ionicons/icons';
+import {appVars} from '@/configApp';
 
 const props = defineProps<{
   title?: string,
@@ -20,7 +21,7 @@ const props = defineProps<{
           props.bgImage
         ]"
       :style="`
-        background-color: color-mix( in srgb, ${ props.color }, black 79%);
+        background-color: color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix });
       `"
   >
     <div :class="styles.widgetPageLink__content">
@@ -39,7 +40,7 @@ const props = defineProps<{
     </div>
 
     <div :class="styles.widgetPageLink__gradient"
-         :style="`background: linear-gradient( to bottom, transparent 0%, color-mix( in srgb, ${ props.color }, black 79%) 100%);`"
+         :style="`background: linear-gradient( to bottom, transparent 0%, color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix }) 100%);`"
     ></div>
 
     <div :class="styles.widgetPageLink__arrow"

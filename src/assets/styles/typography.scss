@@ -1,0 +1,7 @@
+.typography {
+  &__widgetTitle {
+    margin-bottom: var( --brd-size-gap );
+    font-size: 18px;
+    font-family: var( --brd-font-default-alt );
+  }
+}

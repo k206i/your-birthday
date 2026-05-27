@@ -8,6 +8,10 @@ import {computed, onMounted, ref, watch} from 'vue';
 import {getHolidaysNames, TGetHolidaysNamesResponse} from '@/api/getHolidaysNames';
 import {getNamesDays, TGetNamesDaysResponse} from '@/api/getDayNames';
 import {appVars} from '@/configApp';
+import WidgetDayNamesList from '@/components/Widgets/DayNamesList/widgetDayNamesList.vue';
+
+
+const SUB_THEME_COLOR = "#548fd6";
 
 const selectedDate = ref();
 const birthDay = ref();
@@ -56,7 +60,7 @@ onMounted(() => {
 
     <ion-content :fullscreen="true" class="ion-padding">
 
-      <WidgetPageTitle bg-image="cat-1" color="#548fd6">
+      <WidgetPageTitle bg-image="cat-1" :color="SUB_THEME_COLOR">
         Хотите родить ребёнка в определённый день?
 
         <template #lead>
@@ -110,28 +114,11 @@ onMounted(() => {
             </li>
           </ul>
 
-          <h3>
-            Именины
-          </h3>
-          <p>
-            Мужские имена:
-          </p>
-          <p v-if="!namesDays?.nameDayNow[0].male_names.length">
-            Мужских именин в этот день нет
-          </p>
-          <p v-else>
-            {{ namesDays?.nameDayNow[0].male_names.join( ', ' )}}
-          </p>
-
-          <p>
-            Женские имена:
-          </p>
-          <p v-if="!namesDays?.nameDayNow[0].female_names.length">
-            Женских именин в этот день нет
-          </p>
-          <p v-else>
-            {{ namesDays?.nameDayNow[0].female_names.join( ', ' )}}
-          </p>
+          <WidgetDayNamesList
+              :name-date-male="namesDays?.nameDayNow[0].male_names"
+              :name-date-female="namesDays?.nameDayNow[0].female_names"
+              :color="SUB_THEME_COLOR"
+          />
         </div>
       </Transition>
 

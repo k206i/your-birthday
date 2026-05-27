@@ -3,8 +3,8 @@
     min-height: 100px;
     padding: var( --brd-size-gap-l );
     border-radius: var( --brd-size-border-radius );
-    background-color: var( --brd-theme-color-dark );
-    background-image: url( "../assets/img/animals/dog_1_stars.png" );
+    background-color: var( --brd-color-theme-dark );
+    background-image: url( "../assets/img/animals/dog-1_art.png" );
     background-size: auto 100px;
     background-repeat: no-repeat;
     background-position: right var( --brd-size-border-radius ) bottom;
@@ -18,7 +18,7 @@
     margin-bottom: var( --brd-size-gap-xs );
     padding-right: 130px;
     font-size: 16px;
-    color: var( --brd-theme-color );
+    color: var( --brd-color-theme );
   }
 
   &__titleComment {

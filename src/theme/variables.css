@@ -10,7 +10,7 @@ h1, h2, h3  {
     font-family: var( --brd-font-default-alt );
 }
 .accent {
-    color: var( --brd-theme-color );
+    color: var( --brd-color-theme );
 }
 h1:first-child,
 h2:first-child,
@@ -19,10 +19,10 @@ h3:first-child  {
 }
 
 ion-datetime {
-    --background: var( --brd-theme-color-dark );
-    --background-rgb: var( --brd-theme-color_rgb );
+    --background: var( --brd-color-theme-dark );
+    --background-rgb: var( --brd-color-theme_rgb );
 
-    --wheel-fade-background-rgb: var( --brd-theme-color-dark_rgb );
+    --wheel-fade-background-rgb: var( --brd-color-theme-dark_rgb );
 
     border-radius: var( --brd-size-border-radius );
 }
@@ -36,11 +36,11 @@ ion-datetime {
     --brd-font-default: 'Roboto Condensed', sans-serif;
     --brd-font-default-alt: 'Roboto', sans-serif;
     --brd-font-default-alt2: 'Skyquake', sans-serif;
-    --brd-theme-color_rgb: 168, 118, 236;
-    --brd-theme-color: #a876ec;
-    --brd-theme-color-dark: #201a34;
-    --brd-theme-color-dark_rgb: 32, 26, 52;
-    --brd-theme-color-bg: var( --brd-theme-color-dark );
+    --brd-color-theme: #a876ec;
+    --brd-color-theme_rgb: 168, 118, 236;
+    --brd-color-theme-dark: #201a34;
+    --brd-color-theme-dark_rgb: 32, 26, 52;
+    --brd-color-theme-bg: var( --brd-color-theme-dark );
 
     --brd-color-white: #fff;
     --brd-color-white-80: rgba( 255, 255, 255, .8 );

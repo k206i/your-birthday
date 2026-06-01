@@ -9,6 +9,7 @@ import {getHolidaysNames, TGetHolidaysNamesResponse} from '@/api/getHolidaysName
 import {getNamesDays, TGetNamesDaysResponse} from '@/api/getDayNames';
 import {appVars} from '@/configApp';
 import WidgetDayNamesList from '@/components/Widgets/DayNamesList/widgetDayNamesList.vue';
+import WidgetPrimaryDate from '@/components/Widgets/PrimaryDate/widgetPrimaryDate.vue';
 
 
 const SUB_THEME_COLOR = "#548fd6";
@@ -84,9 +85,13 @@ onMounted(() => {
       ></ion-datetime>
 
       <Transition name="brd-fade">
-        <h3 v-if="formattedDate">
-          Примерная дата зачатия: <span class="accent">{{ conceptionDay }}</span>
-        </h3>
+        <WidgetPrimaryDate
+            v-if="formattedDate"
+            title="Примерная дата зачатия"
+            comment="Примерно 280 дней, акушерский срок 👀"
+            :date="conceptionDay"
+            :color="SUB_THEME_COLOR"
+        />
       </Transition>
 
       <Transition name="brd-fade">

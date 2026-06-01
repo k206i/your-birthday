@@ -42,6 +42,10 @@ ion-datetime {
     --brd-color-theme-dark_rgb: 32, 26, 52;
     --brd-color-theme-bg: var( --brd-color-theme-dark );
 
+    --brd-color-female_rgb: 168, 118, 236;
+    --brd-color-male: #40629e;
+    --brd-color-male_rgb: 64, 98, 158;
+
     --brd-color-white: #fff;
     --brd-color-white-80: rgba( 255, 255, 255, .8 );
     --brd-color-white-50: rgba( 255, 255, 255, .5 );

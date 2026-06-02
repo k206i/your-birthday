@@ -10,20 +10,8 @@
     background-position: right var( --brd-size-border-radius ) bottom;
   }
 
-  &__title {
-    margin-top: 0;
-  }
-
-  &__titleLead {
-    margin-bottom: var( --brd-size-gap-xs );
-    padding-right: 130px;
-    font-size: 16px;
-    color: var( --brd-color-theme );
-  }
-
-  &__titleComment {
-    font-size: 12px;
-    color: var( --brd-color-white-50 );
+  &__titleWidget {
+    margin-bottom: var( --brd-size-gap );
   }
 
   &__servicesList {
@@ -32,10 +20,6 @@
     gap: var( --brd-size-gap-s );
     list-style: none;
     padding: 0;
-  }
-
-  &__service {
-
   }
 
 

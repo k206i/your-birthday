@@ -21,7 +21,7 @@
   }
 
   &__comment {
-    @extend .typography__subText;
+    color: var( --brd-color-font );
   }
 
   &__date {

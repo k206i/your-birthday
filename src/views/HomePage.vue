@@ -33,7 +33,7 @@ onMounted(async () => {
   <ion-page :class="styles.homePage">
     <ion-content :fullscreen="true" class="ion-padding">
       <div id="container">
-        <WidgetPageTitle bg-image="dog-1_art" color="#a876ec">
+        <WidgetPageTitle :class="styles.homePage__titleWidget" bg-image="dog-1_art" color="#a876ec">
           Здравствуйте<slot v-if="userName">, {{ userName }}</slot>!
 
           <template #lead>

@@ -10,6 +10,7 @@ import {getNamesDays, TGetNamesDaysResponse} from '@/api/getDayNames';
 import {appVars} from '@/configApp';
 import WidgetDayNamesList from '@/components/Widgets/DayNamesList/widgetDayNamesList.vue';
 import WidgetPrimaryDate from '@/components/Widgets/PrimaryDate/widgetPrimaryDate.vue';
+import WidgetHolidaysList from '@/components/Widgets/HolidaysList/widgetHolidaysList.vue';
 
 
 const SUB_THEME_COLOR = "#548fd6";
@@ -61,7 +62,11 @@ onMounted(() => {
 
     <ion-content :fullscreen="true" class="ion-padding">
 
-      <WidgetPageTitle bg-image="cat-1" :color="SUB_THEME_COLOR">
+      <WidgetPageTitle
+          :class="styles.dayConception__titleBlock"
+          bg-image="cat-1"
+          :color="SUB_THEME_COLOR"
+      >
         Хотите родить ребёнка в определённый день?
 
         <template #lead>
@@ -87,6 +92,7 @@ onMounted(() => {
       <Transition name="brd-fade">
         <WidgetPrimaryDate
             v-if="formattedDate"
+            :class="styles.dayConception__block"
             title="Примерная дата зачатия"
             comment="Примерно 280 дней, акушерский срок 👀"
             :date="conceptionDay"
@@ -97,29 +103,17 @@ onMounted(() => {
       <Transition name="brd-fade">
         <div v-if="conceptionDay">
           <h1>
-            В выбранный день рождения будет
+            В выбранный день рождения будут:
           </h1>
 
-          <h3>
-            Праздники
-          </h3>
-          <p v-if="!holidaysNames?.datesNow.length">
-            Праздников нет
-          </p>
-          <ul v-else :class="styles.dayConception__daysList">
-            <li :class="styles.dayConception__dayItem"
-                v-for="(item, index) in holidaysNames?.datesNow" :key="item.date + index"
-            >
-              <div :class="styles.dayConception__subTitle">
-                {{ item.name }}
-              </div>
-              <div :class="styles.dayConception__note">
-                {{ item.note }}
-              </div>
-            </li>
-          </ul>
+          <WidgetHolidaysList
+              :class="styles.dayConception__block"
+              :holidays="holidaysNames?.datesNow"
+              :color="SUB_THEME_COLOR"
+          />
 
           <WidgetDayNamesList
+              :class="styles.dayConception__block"
               :name-date-male="namesDays?.nameDayNow[0].male_names"
               :name-date-female="namesDays?.nameDayNow[0].female_names"
               :color="SUB_THEME_COLOR"

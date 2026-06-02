@@ -13,6 +13,14 @@
     margin-bottom: var( --brd-size-gap-s );
   }
 
+  &__block {
+    margin-bottom: var( --brd-size-gap );
+  }
+
+  &__titleBlock {
+    margin-bottom: var( --brd-size-gap-l );
+  }
+
   &__subTitle {
     margin-bottom: var( --brd-size-gap-xxs );
     font-family: var( --brd-font-default-alt );

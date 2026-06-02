@@ -49,17 +49,13 @@ watch(formattedDate, async () => {
 
     <ion-content :fullscreen="true" class="ion-padding">
 
-      <WidgetPageTitle bg-image="dog-2" color="#a876ec">
-        Вы знаете дату рождения?
-
-        <template #lead>
-          Давайте посчитаем примерную дату зачатия 💫
-        </template>
-
-        <template #comment>
-          И посмотрим, какое событие было в этот день 🤭
-        </template>
-      </WidgetPageTitle>
+      <WidgetPageTitle
+          bg-image="dog-2"
+          color="#a876ec"
+          title="Вы знаете дату рождения?"
+          lead="Давайте посчитаем примерную дату зачатия 💫"
+          comment="И посмотрим, какое событие было в этот день 🤭"
+      />
 
       <p>Выберите дату рождения:</p>
 

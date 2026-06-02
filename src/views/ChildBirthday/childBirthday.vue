@@ -66,17 +66,10 @@ onMounted(() => {
           :class="styles.dayConception__titleBlock"
           bg-image="cat-1"
           :color="SUB_THEME_COLOR"
-      >
-        Хотите родить ребёнка в определённый день?
-
-        <template #lead>
-          Давайте спланируем примерный день зачатия! ☀️
-        </template>
-
-        <template #comment>
-          Но помните, лучший советчик &mdash; ваш лечащий врач&nbsp;💖
-        </template>
-      </WidgetPageTitle>
+          title="Хотите родить ребёнка в определённый день?"
+          lead="Давайте спланируем примерный день зачатия! ☀️"
+          comment="Но помните, лучший советчик &mdash; ваш лечащий врач&nbsp;💖"
+      />
 
       <p>Выберите дату, когда хотите родить:</p>
 

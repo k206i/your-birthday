@@ -33,17 +33,14 @@ onMounted(async () => {
   <ion-page :class="styles.homePage">
     <ion-content :fullscreen="true" class="ion-padding">
       <div id="container">
-        <WidgetPageTitle :class="styles.homePage__titleWidget" bg-image="dog-1_art" color="#a876ec">
-          Здравствуйте<slot v-if="userName">, {{ userName }}</slot>!
-
-          <template #lead>
-            До вашего ДР: 365 дней ✨
-          </template>
-
-          <template #comment>
-            Все важные даты в одном месте 💜
-          </template>
-        </WidgetPageTitle>
+        <WidgetPageTitle
+            :class="styles.homePage__titleWidget"
+            bg-image="dog-1_art"
+            color="#a876ec"
+            :title="`Здравствуйте${ userName && ', ' + userName }!`"
+            lead="До вашего ДР: 365 дней ✨"
+            comment="Все важные даты в одном месте 💜"
+        />
 
         <ul :class="styles.homePage__servicesList">
           <li>

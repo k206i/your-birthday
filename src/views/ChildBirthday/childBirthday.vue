@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import styles from './childBirthday.module.scss';
-import {IonContent, IonDatetime, IonPage} from '@ionic/vue';
+import { IonContent, IonDatetime, IonPage, IonModal, IonButton } from '@ionic/vue';
 import Header from '@/components/Header/header.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
@@ -15,6 +15,7 @@ import WidgetHolidaysList from '@/components/Widgets/HolidaysList/widgetHolidays
 
 const SUB_THEME_COLOR = "#548fd6";
 
+const isDateModalOpen = ref( false );
 const selectedDate = ref();
 const birthDay = ref();
 const minDate = ref();
@@ -71,16 +72,33 @@ onMounted(() => {
           comment="Но помните, лучший советчик &mdash; ваш лечащий врач&nbsp;💖"
       />
 
-      <p>Выберите дату, когда хотите родить:</p>
+      <ion-button
+          :class="styles.dayConception__dateButton"
+          expand="block"
+          @click="isDateModalOpen = true"
+      >
+        {{ birthDay ? `📅 ${birthDay}` : 'Выбрать дату рождения' }}
+      </ion-button>
 
-      <ion-datetime
-          v-model="selectedDate"
-          locale="ru-RU"
-          presentation="date"
-          :show-default-buttons="true"
-          done-text="Готово" cancel-text="Не, отмена"
-          :min="minDate" max="2050-01-01T23:59:59"
-      ></ion-datetime>
+      <ion-modal
+          :is-open="isDateModalOpen"
+          @did-dismiss="isDateModalOpen = false"
+      >
+        <ion-content>
+          <div class="center-content">
+            <ion-datetime
+                v-model="selectedDate"
+                locale="ru-RU"
+                presentation="date"
+                :show-default-buttons="true"
+                done-text="Готово" cancel-text="Не, отмена"
+                :min="minDate" max="2050-01-01T23:59:59"
+                @ionChange="isDateModalOpen = false"
+                @ionCancel="isDateModalOpen = false"
+            ></ion-datetime>
+          </div>
+        </ion-content>
+      </ion-modal>
 
       <Transition name="brd-fade">
         <WidgetPrimaryDate

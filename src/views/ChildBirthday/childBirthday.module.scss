@@ -21,33 +21,13 @@
     margin-bottom: var( --brd-size-gap-l );
   }
 
+  &__dateButton {
+    margin-bottom: var( --brd-size-gap );
+  }
+
   &__subTitle {
     margin-bottom: var( --brd-size-gap-xxs );
     font-family: var( --brd-font-default-alt );
     font-size: 14px;
-  }
-
-  &__spoilerContent {
-    margin-bottom: var(--brd-size-gap );
-    padding: var( --brd-size-gap );
-    border-style: solid;
-    border-color: var( --brd-color-white-20 );
-    border-width: 0 1px 1px;
-    border-radius: 0 0 var(--brd-size-border-radius-s ) var(--brd-size-border-radius-s );
-  }
-
-  &__spoilersGroup {
-    margin-bottom: var( --brd-size-gap-l );
-  }
-
-  &__note {
-    font-size: 12px;
-    color: var( --brd-color-white-50 );
-  }
-
-  &__date {
-    margin-bottom: var( --brd-size-gap-xxs );
-    font-size: 12px;
-    color: var( --brd-color-theme );
   }
 }

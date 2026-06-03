@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import styles from './childBirthday.module.scss';
 import { IonContent, IonDatetime, IonPage, IonModal, IonButton } from '@ionic/vue';
-import Header from '@/components/Header/header.vue';
+import AppHeader from '@/components/AppHeader/appHeader.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import {computed, onMounted, ref, watch} from 'vue';
@@ -59,7 +59,7 @@ onMounted(() => {
 
 <template>
   <ion-page :class="styles.dayConception">
-    <Header />
+    <AppHeader />
 
     <ion-content :fullscreen="true" class="ion-padding">
 

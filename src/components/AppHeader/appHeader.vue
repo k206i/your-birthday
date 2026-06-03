@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import {IonHeader, IonToolbar, IonButtons, IonBackButton } from '@ionic/vue';
 import { arrowBack } from 'ionicons/icons';
-import styles from './header.module.scss';
+import styles from './appHeader.module.scss';
 </script>
 
 <template>
-  <ion-header :class="styles.header">
+  <ion-header :class="styles.appHeader" :translucent="true">
     <ion-toolbar>
       <ion-buttons slot="start" class="ion-padding">
         <ion-back-button text="" defaultHref="/" :icon="arrowBack" ></ion-back-button>
       </ion-buttons>
 
-      <div :class="styles.header__title">
+      <div :class="styles.appHeader__title">
         <div>
           <slot>
             День <span class="accent">рождения</span>

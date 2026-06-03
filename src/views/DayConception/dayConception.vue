@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import styles from './dayConception.module.scss';
 import {IonContent, IonPage, IonDatetime, IonAccordion, IonAccordionGroup, IonItem, IonLabel} from '@ionic/vue';
-import Header from '@/components/Header/header.vue';
+import AppHeader from '@/components/AppHeader/appHeader.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {ref, computed, watch} from 'vue';
 import {getHolidaysNames, TGetHolidaysNamesResponse} from '@/api/getHolidaysNames';
@@ -45,7 +45,7 @@ watch(formattedDate, async () => {
 
 <template>
   <ion-page :class="styles.dayConception">
-    <Header />
+    <AppHeader />
 
     <ion-content :fullscreen="true" class="ion-padding">
 

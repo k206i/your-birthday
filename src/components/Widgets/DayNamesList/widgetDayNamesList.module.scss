@@ -3,7 +3,7 @@
 .widgetDayNamesList {
   position: relative;
   z-index: var( --brd-z-index-layout );
-  min-height: 170px;
+  min-height: 150px;
   padding: var( --brd-size-gap ) 120px var( --brd-size-gap ) var( --brd-size-gap );
   border-radius: var( --brd-size-border-radius );
 
@@ -58,6 +58,6 @@
     width: 100%;
     height: calc( 100% + 30px );
     background: url( "../../../assets/img/animals/panda_art.png" ) no-repeat 100% 100%;
-    background-size: 200px auto;
+    background-size: 180px auto;
   }
 }

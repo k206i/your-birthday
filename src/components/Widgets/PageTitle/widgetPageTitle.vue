@@ -14,10 +14,12 @@ const props = defineProps<{
 
 <template>
   <div :class="[
-      styles.widgetPageTitle,
-      props.bgImage
-    ]"
-       :style="`background-color: color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix });`"
+        styles.widgetPageTitle,
+        props.bgImage
+      ]"
+       :style="{
+        backgroundColor: `color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix })`,
+       }"
   >
     <div :class="styles.widgetPageTitle__wrapper">
       <h2 :class="styles.widgetPageTitle__title"

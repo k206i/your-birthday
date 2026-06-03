@@ -10,9 +10,9 @@ const props = defineProps<{
 
 <template>
   <div :class="styles.widgetDayNamesList"
-       :style="`
-        background-color: color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix });
-      `"
+       :style="{
+        backgroundColor: `color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix })`,
+       }"
   >
     <div :class="styles.widgetDayNamesList__contentWrapper">
       <div :class="styles.widgetDayNamesList__title">

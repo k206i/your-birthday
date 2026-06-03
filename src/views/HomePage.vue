@@ -37,7 +37,7 @@ onMounted(async () => {
             :class="styles.homePage__titleWidget"
             bg-image="dog-1_art"
             color="#a876ec"
-            :title="`Здравствуйте${ userName && ', ' + userName }!`"
+            :title="`Здравствуйте${ userName ? ', ' + userName : '' }!`"
             lead="До вашего ДР: 365 дней ✨"
             comment="Все важные даты в одном месте 💜"
         />

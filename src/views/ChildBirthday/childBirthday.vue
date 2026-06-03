@@ -11,6 +11,8 @@ import {appVars} from '@/configApp';
 import WidgetDayNamesList from '@/components/Widgets/DayNamesList/widgetDayNamesList.vue';
 import WidgetPrimaryDate from '@/components/Widgets/PrimaryDate/widgetPrimaryDate.vue';
 import WidgetHolidaysList from '@/components/Widgets/HolidaysList/widgetHolidaysList.vue';
+import {getZodiacName, TGetZodiacNameResponse} from '@/api/getZodiacName';
+import WidgetZodiacNames from '@/components/Widgets/ZodiacNames/widgetZodiacNames.vue';
 
 
 const SUB_THEME_COLOR = "#548fd6";
@@ -22,6 +24,7 @@ const minDate = ref();
 const conceptionDay = ref();
 const holidaysNames = ref< TGetHolidaysNamesResponse >();
 const namesDays = ref< TGetNamesDaysResponse >();
+const zodiacNames = ref< TGetZodiacNameResponse >();
 
 const formattedDate = computed(() => {
   if ( !selectedDate.value ) {
@@ -41,6 +44,9 @@ watch( formattedDate, async () => {
 
   holidaysNames.value = await getHolidaysNames( datePayload );
   namesDays.value = await getNamesDays( datePayload );
+  zodiacNames.value = await getZodiacName( datePayload );
+
+  console.log( zodiacNames )
 
   conceptionDay.value = new Date( datePayload.setDate( datePayload.getDate() - appVars.pregnancyDuration)).toLocaleDateString('ru-RU', {
     day: 'numeric',
@@ -120,6 +126,12 @@ onMounted(() => {
           <WidgetHolidaysList
               :class="styles.dayConception__block"
               :holidays="holidaysNames?.datesNow"
+              :color="SUB_THEME_COLOR"
+          />
+
+          <WidgetZodiacNames
+              :class="styles.dayConception__block"
+              :signs="zodiacNames?.exact"
               :color="SUB_THEME_COLOR"
           />
 

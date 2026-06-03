@@ -20,9 +20,9 @@ const props = defineProps<{
           styles.widgetPageLink,
           props.bgImage
         ]"
-      :style="`
-        background-color: color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix });
-      `"
+      :style="{
+        backgroundColor: `color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix })`,
+       }"
   >
     <div :class="styles.widgetPageLink__content">
       <div v-if="props.title"

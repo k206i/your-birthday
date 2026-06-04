@@ -17,6 +17,10 @@
     margin-bottom: var( --brd-size-gap );
   }
 
+  &__artTitle {
+    margin: var( --brd-size-gap-xl ) 0;
+  }
+
   &__titleBlock {
     margin-bottom: var( --brd-size-gap-l );
   }

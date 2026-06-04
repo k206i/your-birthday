@@ -27,6 +27,10 @@ ion-datetime {
     border-radius: var( --brd-size-border-radius );
 }
 
+.show-month-and-year {
+    min-width: 350px;
+}
+
 .accordion-group-expand-inset {
     margin: 0;
 }

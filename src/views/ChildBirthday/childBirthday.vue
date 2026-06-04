@@ -13,6 +13,7 @@ import WidgetPrimaryDate from '@/components/Widgets/PrimaryDate/widgetPrimaryDat
 import WidgetHolidaysList from '@/components/Widgets/HolidaysList/widgetHolidaysList.vue';
 import {getZodiacName, TGetZodiacNameResponse} from '@/api/getZodiacName';
 import WidgetZodiacNames from '@/components/Widgets/ZodiacNames/widgetZodiacNames.vue';
+import WidgetArtTitle from '@/components/Widgets/ArtTitle/widgetArtTitle.vue';
 
 
 const SUB_THEME_COLOR = "#548fd6";
@@ -88,6 +89,7 @@ onMounted(() => {
 
       <ion-modal
           :is-open="isDateModalOpen"
+          keep-contents-mounted="true"
           @did-dismiss="isDateModalOpen = false"
       >
         <ion-content>
@@ -119,9 +121,10 @@ onMounted(() => {
 
       <Transition name="brd-fade">
         <div v-if="conceptionDay">
-          <h1>
-            В выбранный день рождения будут:
-          </h1>
+          <WidgetArtTitle :class="styles.dayConception__artTitle">
+            Что особенного
+            <span :style="{color: SUB_THEME_COLOR}">в этот день</span>?
+          </WidgetArtTitle>
 
           <WidgetHolidaysList
               :class="styles.dayConception__block"

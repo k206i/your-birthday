@@ -5,4 +5,11 @@
     font-family: var( --brd-font-default-alt );
     text-shadow: 1px 1px 6px #000;
   }
+
+  &__h1 {
+    font-family: var( --brd-font-default-alt );
+    font-size: 28px;
+    font-weight: bold;
+    color: var( --brd-color-font-accent );
+  }
 }

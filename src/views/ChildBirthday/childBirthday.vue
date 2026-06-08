@@ -14,6 +14,10 @@ import WidgetHolidaysList from '@/components/Widgets/HolidaysList/widgetHolidays
 import {getZodiacName, TGetZodiacNameResponse} from '@/api/getZodiacName';
 import WidgetZodiacNames from '@/components/Widgets/ZodiacNames/widgetZodiacNames.vue';
 import WidgetArtTitle from '@/components/Widgets/ArtTitle/widgetArtTitle.vue';
+import { getFamousNames, TGetFamousNamesResponse } from '@/api/getFamousNames';
+import WidgetFamousPersons from '@/components/Widgets/FamousPersons/widgetFamousPersons.vue';
+import { getFamousPolitics, TGetFamousPoliticsResponse } from '@/api/getFamousPolitics';
+import WidgetFamousPolitics from '@/components/Widgets/FamousPolitics/widgetFamousPolitics.vue';
 
 
 const SUB_THEME_COLOR = "#548fd6";
@@ -26,6 +30,8 @@ const conceptionDay = ref();
 const holidaysNames = ref< TGetHolidaysNamesResponse >();
 const namesDays = ref< TGetNamesDaysResponse >();
 const zodiacNames = ref< TGetZodiacNameResponse >();
+const famousNames = ref< TGetFamousNamesResponse >();
+const famousPolitics = ref< TGetFamousPoliticsResponse >();
 
 const formattedDate = computed(() => {
   if ( !selectedDate.value ) {
@@ -46,8 +52,8 @@ watch( formattedDate, async () => {
   holidaysNames.value = await getHolidaysNames( datePayload );
   namesDays.value = await getNamesDays( datePayload );
   zodiacNames.value = await getZodiacName( datePayload );
-
-  console.log( zodiacNames )
+  famousNames.value = await getFamousNames( datePayload );
+  famousPolitics.value = await getFamousPolitics( datePayload );
 
   conceptionDay.value = new Date( datePayload.setDate( datePayload.getDate() - appVars.pregnancyDuration)).toLocaleDateString('ru-RU', {
     day: 'numeric',
@@ -142,6 +148,18 @@ onMounted(() => {
               :class="styles.dayConception__block"
               :name-date-male="namesDays?.nameDayNow[0].male_names"
               :name-date-female="namesDays?.nameDayNow[0].female_names"
+              :color="SUB_THEME_COLOR"
+          />
+
+          <WidgetFamousPersons
+              :class="styles.dayConception__block"
+              :persons="famousNames?.birthNow"
+              :color="SUB_THEME_COLOR"
+          />
+
+          <WidgetFamousPolitics
+              :class="styles.dayConception__block"
+              :persons="famousPolitics?.birthNow"
               :color="SUB_THEME_COLOR"
           />
         </div>

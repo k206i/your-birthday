@@ -1,6 +1,6 @@
 @use "@/assets/styles/typography";
 
-.widgetHolidaysList {
+.widgetFamousPolitics {
   position: relative;
   z-index: var( --brd-z-index-layout );
   min-height: 125px;
@@ -22,27 +22,30 @@
     gap: var( --brd-size-gap-xs );
   }
 
+  &__empty,
   &__item {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: var( --brd-size-gap-s );
     padding: 6px 10px;
+    color: var( --brd-color-font );
     border-radius: var( --brd-size-border-radius-s );
     background-color: rgba( 255, 255, 255, .07 );
     backdrop-filter: blur( 5px );
   }
 
   &__date {
-    flex-shrink: 0;
-    min-width: 44px;
     font-size: 11px;
-    color: var( --brd-color-white-50 );
+    padding-top: 2px;
   }
 
   &__name {
-    font-size: 13px;
-    color: var( --brd-color-white-80 );
-    line-height: 1.3;
+    font-size: 14px;
+    color: var( --brd-color-font-accent );
+  }
+
+  &__comment {
+    font-size: 11px;
   }
 
   &__empty {
@@ -58,7 +61,7 @@
     bottom: 0;
     width: 100%;
     height: calc( 100% + 30px );
-    background: url( "../../../assets/img/animals/cat-2_art.png" ) no-repeat 100% 100%;
+    background: url( "../../../assets/img/animals/capibara_politics.png" ) no-repeat 100% 100%;
     background-size: 150px auto;
   }
 }

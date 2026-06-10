@@ -49,6 +49,7 @@
   }
 
   &__empty {
+    display: inline-flex;
     font-size: 13px;
     color: var( --brd-color-font );
   }

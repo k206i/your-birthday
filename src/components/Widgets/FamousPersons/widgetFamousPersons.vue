@@ -1,12 +1,23 @@
 <script setup lang="ts">
 import styles from './widgetFamousPersons.module.scss';
 import { appVars } from '@/configApp';
-import type { TFamousPersonData } from '@/api/getFamousNames';
+import { computed } from 'vue';
+import type { TFamousPersonData, TGetFamousNamesResponse } from '@/api/getFamousNames';
+
+type TFamousPersonEntry = {
+  person: TFamousPersonData,
+  type: 'birth' | 'death',
+}
 
 const props = defineProps<{
-  persons?: TFamousPersonData[],
+  famousNames?: TGetFamousNamesResponse,
   color: string,
 }>();
+
+const persons = computed<TFamousPersonEntry[]>(() => [
+  ...( props.famousNames?.birthNow ?? [] ).map( p => ({ person: p, type: 'birth' as const }) ),
+  ...( props.famousNames?.deathNow ?? [] ).map( p => ({ person: p, type: 'death' as const }) ),
+]);
 
 const formatDate = ( date: string | null ): string => {
   if ( !date ) return '';
@@ -26,28 +37,29 @@ const formatDate = ( date: string | null ): string => {
         Знаменитости 🌟
       </div>
 
-      <ul v-if="props.persons?.length"
+      <ul v-if="persons.length"
           :class="styles.widgetFamousPersons__list"
       >
-        <li v-for="(item, index) in props.persons" :key="item.name + index"
+        <li v-for="(item, index) in persons" :key="item.person.name + index"
             :class="styles.widgetFamousPersons__item"
         >
           <div :class="styles.widgetFamousPersons__date">
-            {{ formatDate( item.date_birth ) }}
+            {{ formatDate( item.type === 'birth' ? item.person.date_birth : item.person.date_death ) }}
+            {{ item.type === 'birth' ? 'д. р.' : 'д. с.' }}
           </div>
 
           <div :class="styles.widgetFamousPersons__name">
-            {{ item.name }}
+            {{ item.person.name }}
           </div>
 
           <div :class="styles.widgetFamousPersons__comment">
-            {{ item.category }}
+            {{ item.person.category }}
           </div>
 
-          <div v-if="item.note"
+          <div v-if="item.person.note"
                :class="styles.widgetFamousPersons__comment"
           >
-            {{ item.note }}
+            {{ item.person.note }}
           </div>
         </li>
       </ul>

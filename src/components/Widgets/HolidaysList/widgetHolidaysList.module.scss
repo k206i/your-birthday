@@ -36,16 +36,17 @@
     flex-shrink: 0;
     min-width: 44px;
     font-size: 11px;
-    color: var( --brd-color-white-50 );
+    color: var( --brd-color-font );
   }
 
   &__name {
     font-size: 13px;
-    color: var( --brd-color-white-80 );
+    color: var( --brd-color-font-accent );
     line-height: 1.3;
   }
 
   &__empty {
+    display: inline-flex;
     font-size: 13px;
     color: var( --brd-color-font );
   }

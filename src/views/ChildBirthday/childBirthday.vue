@@ -18,6 +18,7 @@ import { getFamousNames, TGetFamousNamesResponse } from '@/api/getFamousNames';
 import WidgetFamousPersons from '@/components/Widgets/FamousPersons/widgetFamousPersons.vue';
 import { getFamousPolitics, TGetFamousPoliticsResponse } from '@/api/getFamousPolitics';
 import WidgetFamousPolitics from '@/components/Widgets/FamousPolitics/widgetFamousPolitics.vue';
+import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 
 
 const SUB_THEME_COLOR = "#548fd6";
@@ -128,13 +129,14 @@ onMounted(() => {
       <Transition name="brd-fade">
         <div v-if="conceptionDay">
           <WidgetArtTitle :class="styles.dayConception__artTitle">
-            Что особенного
-            <span :style="{color: SUB_THEME_COLOR}">в этот день</span>?
+            Что особенного будет
+            <span :style="{color: SUB_THEME_COLOR}">в день рождения</span>?
           </WidgetArtTitle>
 
-          <WidgetHolidaysList
+          <WidgetDayNamesList
               :class="styles.dayConception__block"
-              :holidays="holidaysNames?.datesNow"
+              :name-date-male="namesDays?.nameDayNow[0].male_names"
+              :name-date-female="namesDays?.nameDayNow[0].female_names"
               :color="SUB_THEME_COLOR"
           />
 
@@ -144,24 +146,27 @@ onMounted(() => {
               :color="SUB_THEME_COLOR"
           />
 
-          <WidgetDayNamesList
+          <WidgetHolidaysList
               :class="styles.dayConception__block"
-              :name-date-male="namesDays?.nameDayNow[0].male_names"
-              :name-date-female="namesDays?.nameDayNow[0].female_names"
+              :holidays="holidaysNames?.datesNow"
               :color="SUB_THEME_COLOR"
           />
 
           <WidgetFamousPersons
               :class="styles.dayConception__block"
-              :persons="famousNames?.birthNow"
+              :famous-names="famousNames"
               :color="SUB_THEME_COLOR"
           />
 
           <WidgetFamousPolitics
               :class="styles.dayConception__block"
-              :persons="famousPolitics?.birthNow"
+              :famous-politics="famousPolitics"
               :color="SUB_THEME_COLOR"
           />
+
+          <WidgetTipInfo :color="SUB_THEME_COLOR">
+            Роды редко происходят точно <span :style="{color: SUB_THEME_COLOR}">в предполагаемую дату</span>. Поэтому давайте посмотрим, какие события произойдут в период наибольшей вероятности рождения малыша — в течение <span :style="{color: SUB_THEME_COLOR}">36 дней при нормальном течении беременности</span>.
+          </WidgetTipInfo>
         </div>
       </Transition>
 

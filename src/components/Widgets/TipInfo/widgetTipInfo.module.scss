@@ -1,0 +1,18 @@
+.widgetTipInfo {
+  position: relative;
+  padding: 20px 50px 20px 60px;
+  font-family: var( --brd-font-default-alt );
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  text-shadow: 1px 1px 6px #000;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: var( --brd-size-border-radius );
+  background:
+          url( "../../../assets/img/png/art_4.png" ) no-repeat calc( 100% - 10px) 50%,
+          url( "../../../assets/img/png/icon-lamp.png" ) no-repeat 10px 20px;
+  background-size:
+          auto 90%,
+          auto 40px;
+}

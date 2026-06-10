@@ -22,9 +22,7 @@ const props = defineProps<{
        }"
   >
     <div :class="styles.widgetPageTitle__wrapper">
-      <h2 :class="styles.widgetPageTitle__title"
-          :style="`text-shadow: 1px 1px 6px color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix });`"
-      >
+      <h2 :class="styles.widgetPageTitle__title">
         {{ props.title }}
       </h2>
 

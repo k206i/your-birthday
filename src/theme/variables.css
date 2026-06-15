@@ -27,6 +27,10 @@ ion-datetime {
     border-radius: var( --brd-size-border-radius );
 }
 
+.ion-color-dark {
+    --ion-color-base: var( --brd-custom-theme-color ) !important;
+}
+
 .show-month-and-year {
     min-width: 350px;
 }

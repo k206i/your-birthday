@@ -19,11 +19,21 @@ import WidgetFamousPersons from '@/components/Widgets/FamousPersons/widgetFamous
 import { getFamousPolitics, TGetFamousPoliticsResponse } from '@/api/getFamousPolitics';
 import WidgetFamousPolitics from '@/components/Widgets/FamousPolitics/widgetFamousPolitics.vue';
 import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
+import WidgetDatesLists from '@/components/Widgets/DatesLists/widgetDatesLists.vue';
 
 
 const SUB_THEME_COLOR = "#548fd6";
 
 const isDateModalOpen = ref( false );
+
+const openDateModal = () => {
+  if ( !selectedDate.value ) {
+    setTimeout(() => {
+      selectedDate.value = minDate.value;
+    }, 200)
+  }
+  isDateModalOpen.value = true;
+};
 const selectedDate = ref();
 const birthDay = ref();
 const minDate = ref();
@@ -89,7 +99,7 @@ onMounted(() => {
       <ion-button
           :class="styles.dayConception__dateButton"
           expand="block"
-          @click="isDateModalOpen = true"
+          @click="openDateModal"
       >
         {{ birthDay ? `📅 ${birthDay}` : 'Выбрать дату рождения' }}
       </ion-button>
@@ -167,6 +177,12 @@ onMounted(() => {
           <WidgetTipInfo :color="SUB_THEME_COLOR">
             Роды редко происходят точно <span :style="{color: SUB_THEME_COLOR}">в предполагаемую дату</span>. Поэтому давайте посмотрим, какие события произойдут в период наибольшей вероятности рождения малыша — в течение <span :style="{color: SUB_THEME_COLOR}">36 дней при нормальном течении беременности</span>.
           </WidgetTipInfo>
+
+          <WidgetDatesLists
+              :color="SUB_THEME_COLOR"
+              :holidays-names="holidaysNames"
+              :names-days="namesDays"
+          />
         </div>
       </Transition>
 

@@ -5,16 +5,11 @@ import type { THolidayData } from '@/api/getHolidaysNames';
 
 const props = defineProps<{
   holidays?: THolidayData[],
-  color: string,
 }>();
 </script>
 
 <template>
-  <div :class="styles.widgetHolidaysList"
-       :style="{
-        backgroundColor: `color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix })`,
-       }"
-  >
+  <div :class="styles.widgetHolidaysList">
     <div :class="styles.widgetHolidaysList__contentWrapper">
       <div :class="styles.widgetHolidaysList__title">
         🎉 Праздники

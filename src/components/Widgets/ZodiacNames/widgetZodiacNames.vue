@@ -5,16 +5,11 @@ import type { TZodiacSign } from '@/api/getZodiacName';
 
 const props = defineProps<{
   signs?: TZodiacSign[],
-  color: string,
 }>();
 </script>
 
 <template>
-  <div :class="styles.widgetZodiacNames"
-       :style="{
-        backgroundColor: `color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix })`,
-       }"
-  >
+  <div :class="styles.widgetZodiacNames">
     <div :class="styles.widgetZodiacNames__contentWrapper">
       <div :class="styles.widgetZodiacNames__title">
         Знак зодиака ✨

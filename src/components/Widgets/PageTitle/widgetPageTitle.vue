@@ -6,7 +6,6 @@ const props = defineProps<{
   title: string,
   lead?: string,
   comment?: string,
-  color?: string,
   bgImage?: string,
 }>();
 
@@ -17,9 +16,6 @@ const props = defineProps<{
         styles.widgetPageTitle,
         props.bgImage
       ]"
-       :style="{
-        backgroundColor: `color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix })`,
-       }"
   >
     <div :class="styles.widgetPageTitle__wrapper">
       <h2 :class="styles.widgetPageTitle__title">
@@ -28,7 +24,6 @@ const props = defineProps<{
 
       <div v-if="props.lead"
            :class="styles.widgetPageTitle__titleLead"
-           :style="`color: ${ props.color };`"
       >
         {{ lead }}
       </div>

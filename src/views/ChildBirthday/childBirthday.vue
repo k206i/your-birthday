@@ -82,7 +82,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <ion-page :class="styles.dayConception">
+  <ion-page :class="styles.dayConception"
+            :style="{
+              '--brd-custom-theme-color': SUB_THEME_COLOR,
+            }"
+  >
     <AppHeader />
 
     <ion-content :fullscreen="true" class="ion-padding">
@@ -90,7 +94,6 @@ onMounted(() => {
       <WidgetPageTitle
           :class="styles.dayConception__titleBlock"
           bg-image="cat-1"
-          :color="SUB_THEME_COLOR"
           title="Хотите родить ребёнка в определённый день?"
           lead="Давайте спланируем примерный день зачатия! ☀️"
           comment="Но помните, лучший советчик &mdash; ваш лечащий врач&nbsp;💖"
@@ -132,7 +135,6 @@ onMounted(() => {
             title="Примерная дата зачатия"
             comment="Примерно 280 дней, акушерский срок 👀"
             :date="conceptionDay"
-            :color="SUB_THEME_COLOR"
         />
       </Transition>
 
@@ -147,31 +149,26 @@ onMounted(() => {
               :class="styles.dayConception__block"
               :name-date-male="namesDays?.nameDayNow[0].male_names"
               :name-date-female="namesDays?.nameDayNow[0].female_names"
-              :color="SUB_THEME_COLOR"
           />
 
           <WidgetZodiacNames
               :class="styles.dayConception__block"
               :signs="zodiacNames?.exact"
-              :color="SUB_THEME_COLOR"
           />
 
           <WidgetHolidaysList
               :class="styles.dayConception__block"
               :holidays="holidaysNames?.datesNow"
-              :color="SUB_THEME_COLOR"
           />
 
           <WidgetFamousPersons
               :class="styles.dayConception__block"
               :famous-names="famousNames"
-              :color="SUB_THEME_COLOR"
           />
 
           <WidgetFamousPolitics
               :class="styles.dayConception__block"
               :famous-politics="famousPolitics"
-              :color="SUB_THEME_COLOR"
           />
 
           <WidgetTipInfo :color="SUB_THEME_COLOR">
@@ -179,7 +176,6 @@ onMounted(() => {
           </WidgetTipInfo>
 
           <WidgetDatesLists
-              :color="SUB_THEME_COLOR"
               :holidays-names="holidaysNames"
               :names-days="namesDays"
           />

@@ -1,19 +1,11 @@
 <script setup lang="ts">
 import styles from './widgetTipInfo.module.scss';
-import {appVars} from '@/configApp';
-
-const props = defineProps<{
-  color: string,
-}>();
+import IconBubbleTail from '@/assets/img/svg/icon-bubble-tail.svg?component';
 </script>
 
 <template>
-  <div :class="styles.widgetTipInfo"
-       :style="{
-        backgroundColor: `color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix })`,
-        borderColor: props.color,
-       }"
-  >
+  <div :class="styles.widgetTipInfo">
     <slot />
+    <IconBubbleTail :class="styles.widgetTipInfo__tail" />
   </div>
 </template>

@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import styles from './widgetDayNamesList.module.scss';
-import {appVars} from '@/configApp';
+
 const props = defineProps<{
   nameDateMale?: string[],
   nameDateFemale?: string[],
-  color: string,
 }>();
 </script>
 
 <template>
-  <div :class="styles.widgetDayNamesList"
-       :style="{
-        backgroundColor: `color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix })`,
-       }"
-  >
+  <div :class="styles.widgetDayNamesList">
     <div :class="styles.widgetDayNamesList__contentWrapper">
       <div :class="styles.widgetDayNamesList__title">
         🎀 Именины

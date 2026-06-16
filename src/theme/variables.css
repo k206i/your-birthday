@@ -28,7 +28,7 @@ ion-datetime {
 }
 
 .ion-color-dark {
-    --ion-color-base: var( --brd-custom-theme-color ) !important;
+    --ion-color-base: color-mix( in srgb, var( --brd-custom-theme-color ), black var( --brd-color-mix-bg )) !important;
 }
 
 .show-month-and-year {
@@ -59,6 +59,8 @@ ion-datetime {
     --brd-color-theme-dark: #201a34;
     --brd-color-theme-dark_rgb: 32, 26, 52;
     --brd-color-theme-bg: var( --brd-color-theme-dark );
+
+    --brd-custom-theme-color: var( --brd-color-theme );
 
     --brd-color-female_rgb: 168, 118, 236;
     --brd-color-male: #40629e;

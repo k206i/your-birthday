@@ -5,6 +5,7 @@
   background-size: auto calc( 100% - 40px );
   background-repeat: no-repeat;
   background-position: right var( --brd-size-border-radius ) bottom;
+  background-color: color-mix( in srgb, var( --brd-custom-theme-color ), black var( --brd-color-mix-bg ));
 
   &__title {
     margin-top: 0;
@@ -15,6 +16,7 @@
     padding-right: 130px;
     margin-bottom: var( --brd-size-gap-s );
     font-size: 16px;
+    color: var( --brd-custom-theme-color );
     line-height: 1.2;
   }
 

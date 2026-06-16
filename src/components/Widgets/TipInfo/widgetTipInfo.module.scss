@@ -1,18 +1,33 @@
 .widgetTipInfo {
   position: relative;
   padding: 20px 50px 20px 60px;
+  margin-bottom: 22px;
   font-family: var( --brd-font-default-alt );
   font-size: 14px;
   font-weight: 400;
   line-height: 1.6;
   text-shadow: 1px 1px 6px #000;
+  border-color: var( --brd-custom-theme-color );
   border-style: solid;
   border-width: 2px;
   border-radius: var( --brd-size-border-radius );
-  background:
-          url( "../../../assets/img/png/art_4.png" ) no-repeat calc( 100% - 10px) 50%,
-          url( "../../../assets/img/png/icon-lamp.png" ) no-repeat 10px 20px;
+  background-image:
+          url( "../../../assets/img/png/art_4.png" ),
+          url( "../../../assets/img/png/icon-lamp.png" );
   background-size:
           auto 90%,
           auto 40px;
+  background-position:
+          calc( 100% - 10px) 50%,
+          10px 20px;
+  background-repeat: no-repeat;
+  background-color: color-mix( in srgb, var( --brd-custom-theme-color ), black var( --brd-color-mix-bg ));
+
+  &__tail {
+    position: absolute;
+    top: 100%;
+    left: calc( var( --brd-size-border-radius) / 2 );
+    width: 25px;
+    color: var( --brd-custom-theme-color );
+  }
 }

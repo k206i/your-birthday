@@ -12,16 +12,11 @@ const props = defineProps<{
   famousPolitics?: TGetFamousPoliticsResponse,
   holidaysNames?: TGetHolidaysNamesResponse,
   namesDays?: TGetNamesDaysResponse,
-  color: string,
 }>();
 </script>
 
 <template>
-  <div :class="styles.widgetDatesLists"
-       :style="{
-          ['--brd-custom-theme-color']: `color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix })`,
-      }"
-  >
+  <div :class="styles.widgetDatesLists">
     <ion-accordion-group expand="inset" :multiple="true">
       <ion-accordion v-if="holidaysNames?.datesNormal" value="datesNormal">
         <ion-item slot="header" color="dark">
@@ -34,11 +29,7 @@ const props = defineProps<{
             <li :class="styles.widgetDatesLists__dayItem"
                 v-for="(item, index) in holidaysNames?.datesNormal" :key="item.date + index"
             >
-              <div :class="styles.widgetDatesLists__date"
-                   :style="{
-                      color,
-                   }"
-              >
+              <div :class="styles.widgetDatesLists__date">
                 {{ item.date.split( '-' ).join( '.' ) }}
               </div>
               <div :class="styles.widgetDatesLists__subTitle">

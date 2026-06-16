@@ -11,7 +11,6 @@ type TFamousPoliticEntry = {
 
 const props = defineProps<{
   famousPolitics?: TGetFamousPoliticsResponse,
-  color: string,
 }>();
 
 const persons = computed<TFamousPoliticEntry[]>(() => [
@@ -27,11 +26,7 @@ const formatDate = ( date: string | null ): string => {
 </script>
 
 <template>
-  <div :class="styles.widgetFamousPolitics"
-       :style="{
-        backgroundColor: `color-mix( in srgb, ${ props.color }, black ${ appVars.colorMix })`,
-       }"
-  >
+  <div :class="styles.widgetFamousPolitics">
     <div :class="styles.widgetFamousPolitics__contentWrapper">
       <div :class="styles.widgetFamousPolitics__title">
         🏛️ Политики

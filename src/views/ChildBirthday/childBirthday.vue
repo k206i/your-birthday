@@ -178,6 +178,8 @@ onMounted(() => {
           <WidgetDatesLists
               :holidays-names="holidaysNames"
               :names-days="namesDays"
+              :famous-names="famousNames"
+              :famous-politics="famousPolitics"
           />
         </div>
       </Transition>

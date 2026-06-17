@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import styles from './widgetDatesLists.module.scss';
+import { computed } from 'vue';
 import {IonAccordion, IonAccordionGroup, IonItem, IonLabel} from '@ionic/vue';
-import type {TGetFamousNamesResponse} from '@/api/getFamousNames';
+import type {TGetFamousNamesResponse, TFamousPersonData} from '@/api/getFamousNames';
 import {TGetHolidaysNamesResponse} from '@/api/getHolidaysNames';
 import {TGetNamesDaysResponse} from '@/api/getDayNames';
-import {TGetFamousPoliticsResponse} from '@/api/getFamousPolitics';
-import {appVars} from '@/configApp';
+import {TGetFamousPoliticsResponse, TFamousPoliticData} from '@/api/getFamousPolitics';
 
 const props = defineProps<{
   famousNames?: TGetFamousNamesResponse,
@@ -13,6 +13,22 @@ const props = defineProps<{
   holidaysNames?: TGetHolidaysNamesResponse,
   namesDays?: TGetNamesDaysResponse,
 }>();
+
+console.log( props.famousNames );
+
+type TFamousEntry = { person: TFamousPersonData, type: 'birth' | 'death' };
+
+const famousNormalList = computed<TFamousEntry[]>(() => [
+  ...( props.famousNames?.birthNormal ?? [] ).map( p => ({ person: p, type: 'birth' as const }) ),
+  ...( props.famousNames?.deathNormal ?? [] ).map( p => ({ person: p, type: 'death' as const }) ),
+]);
+
+type TPoliticEntry = { person: TFamousPoliticData, type: 'birth' | 'death' };
+
+const politicsNormalList = computed<TPoliticEntry[]>(() => [
+  ...( props.famousPolitics?.birthNormal ?? [] ).map( p => ({ person: p, type: 'birth' as const }) ),
+  ...( props.famousPolitics?.deathNormal ?? [] ).map( p => ({ person: p, type: 'death' as const }) ),
+]);
 </script>
 
 <template>
@@ -21,7 +37,7 @@ const props = defineProps<{
       <ion-accordion v-if="holidaysNames?.datesNormal" value="datesNormal">
         <ion-item slot="header" color="dark">
           <ion-label>
-            Праздники
+            Праздники 🎉
           </ion-label>
         </ion-item>
         <div :class="styles.widgetDatesLists__spoilerContent" slot="content">
@@ -46,33 +62,39 @@ const props = defineProps<{
       <ion-accordion v-if="namesDays?.nameDayNormal" value="nameDayNormal">
         <ion-item slot="header" color="dark">
           <ion-label>
-            Именины
+            Именины 🎀
           </ion-label>
         </ion-item>
         <div :class="styles.widgetDatesLists__spoilerContent" slot="content">
-          <h4>
+          <div :class="styles.widgetDatesLists__subTitle">
             Мужские имена
-          </h4>
+          </div>
+
           <ul :class="styles.widgetDatesLists__daysList">
             <slot v-for="(item, index) in namesDays?.nameDayNormal"
                   :key="item.date + index"
             >
               <li v-if="item.male_names.length"
-                  :class="styles.widgetDatesLists__dayItem"
+                  :class="[
+                      styles.widgetDatesLists__dayItem,
+                      styles.widgetDatesLists__dayItem_names
+                    ]"
               >
                 <div :class="styles.widgetDatesLists__date">
                   {{ item.date.split( '-' ).join( '.' ) }}
                 </div>
-                <div :class="styles.widgetDatesLists__subTitle">
-                  {{ item.male_names }}
+
+                <div :class="styles.widgetDatesLists__note">
+                  {{ item.male_names.join( ', ' ) }}
                 </div>
               </li>
             </slot>
           </ul>
 
-          <h4>
+          <div :class="styles.widgetDatesLists__subTitle">
             Женские имена
-          </h4>
+          </div>
+
           <ul :class="styles.widgetDatesLists__daysList">
             <slot v-for="(item, index) in namesDays?.nameDayNormal"
                   :key="item.date + index"
@@ -83,14 +105,80 @@ const props = defineProps<{
                 <div :class="styles.widgetDatesLists__date">
                   {{ item.date.split( '-' ).join( '.' ) }}
                 </div>
-                <div :class="styles.widgetDatesLists__subTitle">
-                  {{ item.female_names }}
+
+                <div :class="styles.widgetDatesLists__note">
+                  {{ item.female_names.join( ', ' ) }}
                 </div>
               </li>
             </slot>
           </ul>
         </div>
       </ion-accordion>
+
+      <ion-accordion v-if="famousNormalList.length" value="famousNormal">
+        <ion-item slot="header" color="dark">
+          <ion-label>
+            Знаменитости 🌟
+          </ion-label>
+        </ion-item>
+        <div :class="styles.widgetDatesLists__spoilerContent" slot="content">
+          <ul :class="styles.widgetDatesLists__daysList">
+            <li v-for="(entry, index) in famousNormalList" :key="entry.person.name + index"
+                :class="styles.widgetDatesLists__dayItem"
+            >
+              <div :class="styles.widgetDatesLists__date">
+                {{ ( entry.type === 'birth' ? entry.person.date_birth : entry.person.date_death )?.split( '-' ).join( '.' ) }}
+                <span :class="styles.widgetDatesLists__note">
+                  {{ entry.type === 'birth' ? 'д.р.' : 'д.с.' }}
+                </span>
+              </div>
+
+              <div :class="styles.widgetDatesLists__subTitle">
+                {{ entry.person.name }}
+              </div>
+
+              <div v-if="entry.person.category || entry.person.note"
+                   :class="styles.widgetDatesLists__note"
+              >
+                {{ [ entry.person.category, entry.person.note ].filter( Boolean ).join( ' · ' ) }}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion v-if="politicsNormalList.length" value="politicsNormal">
+        <ion-item slot="header" color="dark">
+          <ion-label>
+            Политики 🏛️
+          </ion-label>
+        </ion-item>
+        <div :class="styles.widgetDatesLists__spoilerContent" slot="content">
+          <ul :class="styles.widgetDatesLists__daysList">
+            <li v-for="(entry, index) in politicsNormalList" :key="entry.person.name + index"
+                :class="styles.widgetDatesLists__dayItem"
+            >
+              <div :class="styles.widgetDatesLists__date">
+                {{ ( entry.type === 'birth' ? entry.person.date_birth : entry.person.date_death )?.split( '-' ).join( '.' ) }}
+                <span :class="styles.widgetDatesLists__note">
+                  {{ entry.type === 'birth' ? 'д.р.' : 'д.с.' }}
+                </span>
+              </div>
+
+              <div :class="styles.widgetDatesLists__subTitle">
+                {{ entry.person.name }}
+              </div>
+
+              <div v-if="entry.person.category || entry.person.note"
+                   :class="styles.widgetDatesLists__note"
+              >
+                {{ [ entry.person.category, entry.person.note ].filter( Boolean ).join( ' · ' ) }}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </ion-accordion>
+
     </ion-accordion-group>
   </div>
 </template>

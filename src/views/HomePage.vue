@@ -6,6 +6,7 @@ import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {onMounted, ref} from 'vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
+import AppHeader from '@/components/AppHeader/appHeader.vue';
 
 const userName = ref();
 
@@ -31,6 +32,8 @@ onMounted(async () => {
 
 <template>
   <ion-page :class="styles.homePage">
+    <AppHeader />
+
     <ion-content :fullscreen="true" class="ion-padding">
       <div id="container">
         <WidgetPageTitle

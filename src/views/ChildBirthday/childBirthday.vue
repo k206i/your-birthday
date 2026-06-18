@@ -124,6 +124,8 @@ onMounted(() => {
                 @ionChange="isDateModalOpen = false"
                 @ionCancel="isDateModalOpen = false"
             ></ion-datetime>
+
+            <img :class="styles.dayConception__modalArt" src="@/assets/img/animals/cat-3_art.png" alt="" />
           </div>
         </ion-content>
       </ion-modal>

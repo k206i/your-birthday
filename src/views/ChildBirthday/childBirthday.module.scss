@@ -34,4 +34,12 @@
     font-family: var( --brd-font-default-alt );
     font-size: 14px;
   }
+
+  &__modalArt {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX( -50% );
+    width: 200px;
+  }
 }

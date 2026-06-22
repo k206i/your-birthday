@@ -13,6 +13,14 @@
     margin-bottom: var( --brd-size-gap-s );
   }
 
+  &__titleBlock {
+    margin-bottom: var( --brd-size-gap-l );
+  }
+
+  &__block {
+    margin-bottom: var( --brd-size-gap );
+  }
+
   &__subTitle {
     margin-bottom: var( --brd-size-gap-xxs );
     font-family: var( --brd-font-default-alt );
@@ -28,6 +36,14 @@
     border-radius: 0 0 var(--brd-size-border-radius-s ) var(--brd-size-border-radius-s );
   }
 
+  &__dateButton {
+    margin-bottom: var( --brd-size-gap );
+  }
+
+  &__artTitle {
+    margin: var( --brd-size-gap-xl ) 0;
+  }
+
   &__spoilersGroup {
     margin-bottom: var( --brd-size-gap-l );
   }
@@ -41,5 +57,13 @@
     margin-bottom: var( --brd-size-gap-xxs );
     font-size: 12px;
     color: var( --brd-color-theme );
+  }
+
+  &__modalArt {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX( -50% );
+    width: 200px;
   }
 }

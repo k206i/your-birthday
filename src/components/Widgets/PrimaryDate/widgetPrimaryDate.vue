@@ -5,6 +5,7 @@ const props = defineProps<{
   title: string
   date: string,
   comment?: string,
+  bgImage: string,
 }>();
 </script>
 <template>
@@ -23,6 +24,10 @@ const props = defineProps<{
       </div>
     </div>
 
-    <div :class="styles.widgetPrimaryDate__art"></div>
+    <div :class="[
+          styles.widgetPrimaryDate__art,
+          props.bgImage
+        ]"
+    ></div>
   </div>
 </template>

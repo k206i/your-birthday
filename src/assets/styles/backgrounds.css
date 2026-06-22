@@ -14,10 +14,18 @@
     background-image: url( "../../assets/img/animals/dog-2_art.png" );
 }
 
+.dog-3_art {
+    background-image: url( "../../assets/img/animals/dog-3_art.png" );
+}
+
 .cat-1 {
     background-image: url( "../../assets/img/animals/cat-1.png" );
 }
 
 .cat-1_art {
     background-image: url( "../../assets/img/animals/cat-1_art.png" );
+}
+
+.alpaka {
+    background-image: url( "../../assets/img/animals/alpaka_art.png" );
 }

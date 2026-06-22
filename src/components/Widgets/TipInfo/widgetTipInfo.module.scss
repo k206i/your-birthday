@@ -1,7 +1,8 @@
 .widgetTipInfo {
   position: relative;
+  z-index: calc( var( --brd-z-index-layout ) + 10 );
   padding: 20px 50px 20px 60px;
-  margin-bottom: 22px;
+  margin-bottom: 88px;
   font-family: var( --brd-font-default-alt );
   font-size: 14px;
   font-weight: 400;
@@ -26,8 +27,19 @@
   &__tail {
     position: absolute;
     top: 100%;
-    left: calc( var( --brd-size-border-radius) / 2 );
+    left: 20px;
     width: 25px;
     color: var( --brd-custom-theme-color );
+  }
+
+  &__art {
+    position: absolute;
+    top: calc( 100% + 22px );
+    left: 0;
+    height: 70px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: auto 100%;
   }
 }

@@ -62,6 +62,16 @@ onMounted(async () => {
                 title="Планируем дату рождения ребёнка"
                 comment="Посмотрим, что будет в этот день?"
                 bg-image="cat-1_art"
+                color="#ff63f0"
+            />
+          </li>
+
+          <li>
+            <WidgetPageLink
+                link="/mensCalendar"
+                title="Планирование зачатия, для мужиков"
+                comment="Посчитаем сильные дни!"
+                bg-image="cat-1_art"
                 color="#548fd6"
             />
           </li>

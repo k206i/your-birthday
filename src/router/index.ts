@@ -3,6 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue';
 import DayConception from '@/views/DayConception/dayConception.vue';
 import ChildBirthday from '@/views/ChildBirthday/childBirthday.vue';
+import MensCalendar from '@/views/MensCalendar/mensCalendar.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -23,6 +24,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/childBirthday',
     name: 'ChildBirthday',
     component: ChildBirthday
+  },
+  {
+    path: '/mensCalendar',
+    name: 'MensCalendar',
+    component: MensCalendar
   }
 ]
 

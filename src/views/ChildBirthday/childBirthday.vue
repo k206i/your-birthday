@@ -22,7 +22,7 @@ import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 import WidgetDatesLists from '@/components/Widgets/DatesLists/widgetDatesLists.vue';
 
 
-const SUB_THEME_COLOR = "#548fd6";
+const SUB_THEME_COLOR = "#ff63f0";
 
 const isDateModalOpen = ref( false );
 

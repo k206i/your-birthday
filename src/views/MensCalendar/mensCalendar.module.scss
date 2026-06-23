@@ -1,0 +1,11 @@
+.mensCalendar {
+  position: relative;
+
+  &__titleBlock {
+    margin-bottom: var( --brd-size-gap-l );
+  }
+
+  &__block {
+    margin-bottom: var( --brd-size-gap );
+  }
+}

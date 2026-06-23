@@ -12,4 +12,10 @@
     font-weight: bold;
     color: var( --brd-color-font-accent );
   }
+
+  &__h4 {
+    font-family: var( --brd-font-default-alt );
+    font-size: 14px;
+    color: var( --brd-color-font-accent );
+  }
 }

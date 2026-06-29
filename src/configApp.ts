@@ -3,4 +3,12 @@ export const appVars = {
   dayNormalPeriod: 18, // Погрешность в днях, соответствующая нормальному течению беременности
   pregnancyDuration: 280, // Дней. Акушерский срок (от первого дня последних месячных)
   colorMix: '79%', // На сколько затемнять подложки карточек, от основного цвета
+  abstinenceEjaculationDuration: { // Воздержание от эякуляции в днях
+    short: 0,
+    normal: 3,
+    long: 7,
+  },
+  abstinenceAlcoholDuration: { // Воздержание от алкоголя в днях
+    normal: 80, // Цикл сперматогенеза
+  }
 }

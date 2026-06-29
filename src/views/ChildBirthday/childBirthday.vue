@@ -121,6 +121,7 @@ onMounted(() => {
                 :show-default-buttons="true"
                 done-text="Готово" cancel-text="Не, отмена"
                 :min="minDate" max="2050-01-01T23:59:59"
+                :first-day-of-week="1"
                 @ionChange="isDateModalOpen = false"
                 @ionCancel="isDateModalOpen = false"
             ></ion-datetime>

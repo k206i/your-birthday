@@ -8,4 +8,18 @@
   &__block {
     margin-bottom: var( --brd-size-gap );
   }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var( --brd-size-gap-s);
+  }
+
+  &__modalArt {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX( -50% );
+    width: 200px;
+  }
 }

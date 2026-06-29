@@ -114,6 +114,7 @@ watch(formattedDate, async () => {
                 :show-default-buttons="true"
                 done-text="Готово" cancel-text="Не, отмена"
                 :max="maxDate"
+                :first-day-of-week="1"
                 @ionChange="isDateModalOpen = false"
                 @ionCancel="isDateModalOpen = false"
             ></ion-datetime>

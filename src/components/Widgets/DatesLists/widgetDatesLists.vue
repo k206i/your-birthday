@@ -14,8 +14,6 @@ const props = defineProps<{
   namesDays?: TGetNamesDaysResponse,
 }>();
 
-console.log( props.famousNames );
-
 type TFamousEntry = { person: TFamousPersonData, type: 'birth' | 'death' };
 
 const famousNormalList = computed<TFamousEntry[]>(() => [

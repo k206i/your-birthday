@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import styles from './mensCalendar.module.scss';
 import stylesArtButton from '@/assets/styles/artButton.module.scss';
+import stylesOverflowSection from '@/assets/styles/overflowSection.module.scss';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
-import {IonContent, IonPage, IonIcon, IonModal, IonDatetime} from '@ionic/vue';
+import {IonContent, IonPage, IonIcon, IonModal, IonDatetime, IonHeader, IonToolbar, IonButtons, IonButton} from '@ionic/vue';
 import { chevronForwardCircleOutline } from 'ionicons/icons';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {ref, watch, onMounted, computed} from 'vue';
 import {appVars} from '@/configApp';
+import UiDayCard from '@/components/Ui/DayCard/uiDayCard.vue';
+import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 
 const SUB_THEME_COLOR = "#548fd6";
 
@@ -19,6 +22,7 @@ const selectedAlcoholDate = ref();
 const isEjaculationDateModalOpen = ref(false);
 const selectedEjaculationDate = ref();
 const maxDate = ref();
+const isAlcoholInfoModalOpen = ref( false );
 
 const openAlcoholDateModal = () => {
   isAlcoholDateModalOpen.value = true;
@@ -105,7 +109,7 @@ const optimalDates = computed(() => {
     <ion-content :fullscreen="true" class="ion-padding">
       <WidgetPageTitle
           :class="styles.mensCalendar__titleBlock"
-          bg-image="cat-4"
+          bg-image="cat-5"
           title="Вы тоже можете планировать!"
           lead="Давайте рассчитаем оптимальный день, когда ваши сперматозоиды будут полны сил! 😎"
           comment="Но помните, лучший советчик &mdash; ваш лечащий врач&nbsp; 🤙"
@@ -114,7 +118,7 @@ const optimalDates = computed(() => {
       <div :class="styles.mensCalendar__buttons">
         <div :class="stylesArtButton.artButton" @click="openAlcoholDateModal">
           <div :class="stylesArtButton.artButton__art">
-            <img src="@/assets/img/png/icon-bottle.png" alt="" />
+            <img src="@/assets/img/animals/cat-alco.png" alt="" />
           </div>
 
           <div :class="stylesArtButton.artButton__content">
@@ -151,14 +155,14 @@ const optimalDates = computed(() => {
                   @ionCancel="isAlcoholDateModalOpen = false"
               ></ion-datetime>
 
-              <img :class="styles.mensCalendar__modalArt" src="@/assets/img/animals/cat-3_art.png" alt="" />
+              <img :class="styles.mensCalendar__modalArt" src="@/assets/img/animals/cat-alco.png" alt="" />
             </div>
           </ion-content>
         </ion-modal>
 
         <div :class="stylesArtButton.artButton" @click="openEjaculationDateModal">
           <div :class="stylesArtButton.artButton__art">
-            <img src="@/assets/img/png/icon-bottle.png" alt="" />
+            <img src="@/assets/img/animals/cat-4.png" alt="" />
           </div>
 
           <div :class="stylesArtButton.artButton__content">
@@ -195,22 +199,90 @@ const optimalDates = computed(() => {
                   @ionCancel="isEjaculationDateModalOpen = false"
               ></ion-datetime>
 
-              <img :class="styles.mensCalendar__modalArt" src="@/assets/img/animals/cat-3_art.png" alt="" />
+              <img :class="styles.mensCalendar__modalArt" src="@/assets/img/animals/cat-4.png" alt="" />
             </div>
           </ion-content>
         </ion-modal>
       </div>
 
-      <div v-if="optimalDates">
-        short
-        <div v-for="date in optimalDates.tooShort" :key="date">{{ date }}</div>
-        normal
-        <div v-for="date in optimalDates.optimal" :key="date">{{ date }}</div>
-        long
-        <div v-for="date in optimalDates.tooLong" :key="date">{{ date }}</div>
-        inappropriate
-        <div v-for="date in optimalDates.inappropriate" :key="date">{{ date }}</div>
-      </div>
+      <slot v-if="optimalDates">
+        <WidgetTipInfo :color="SUB_THEME_COLOR">
+          Если употребляли <span :style="{color: SUB_THEME_COLOR}">алкоголь сравнительно недавно</span>, то помните, что процесс от деления первичной половой клетки (сперматогония) до полностью зрелого, готового к оплодотворению сперматозоида занимает в среднем от 70 до 90 дней. Поэтому, <span :style="{color: SUB_THEME_COLOR}">обратите внимание на месяц в рекомендованной дате</span> 😅<br />
+          <a @click.prevent="isAlcoholInfoModalOpen = true">Подробнее</a>
+        </WidgetTipInfo>
+
+        <ion-modal
+            :is-open="isAlcoholInfoModalOpen"
+            keep-contents-mounted="true"
+            @did-dismiss="isAlcoholInfoModalOpen = false"
+        >
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="end">
+                <ion-button @click="isAlcoholInfoModalOpen = false">Закрыть</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+
+          <ion-content class="ion-padding">
+            <div class="article">
+              <h2>🔬 Почему именно 3 месяца?</h2>
+              <P>
+                Этот срок обусловлен физиологическим циклом созревания мужских половых клеток:
+              </P>
+
+              <ol>
+                <li>
+              Полный цикл созревания сперматозоида: Процесс от деления первичной половой клетки (сперматогония) до полностью зрелого, готового к оплодотворению сперматозоида занимает в среднем от 70 до 90 дней.
+                </li>
+                <li>
+              Влияние алкоголя на всех этапах: Алкоголь и его токсичный метаболит ацетальдегид негативно воздействуют на сперматозоиды на всех стадиях их развития, повреждая их ДНК, снижая подвижность и увеличивая количество аномальных форм.
+                </li>
+                <li>
+              Длительность "восстановления": Исследования показывают, что простого прекращения употребления недостаточно, так как процесс вывода токсинов и восстановления нормальной работы организма (синдром отмены) также создает окислительный стресс, который может влиять на качество спермы на протяжении около месяца после отказа от алкоголя . Трехмесячный срок позволяет "сменить" всю популяцию сперматозоидов на новую, выросшую уже в здоровых условиях.
+                </li>
+              </ol>
+
+              <h2>📊 Что говорят исследования?</h2>
+
+              <ol>
+                <li>
+              Снижение качества: Даже умеренное, но регулярное употребление алкоголя (например, 3-4 банки пива несколько раз в неделю) может значительно ухудшить качество спермы.
+                </li>
+                <li>
+              Риск для ребенка: Употребление алкоголя отцом до зачатия связывают с повышенным риском врожденных дефектов у ребенка, включая дефекты лица и головного мозга, характерные для фетального алкогольного синдрома.
+                </li>
+                <li>
+              Положительная динамика: Клинические тесты показали, что у половины мужчин с низкой фертильностью, вызванной алкоголем, полное воздержание в течение трех месяцев нормализует процесс сперматогенеза.
+                </li>
+              </ol>
+            </div>
+          </ion-content>
+        </ion-modal>
+
+        <div :class="stylesOverflowSection.overflowSection">
+          <div :class="[
+              styles.mensCalendar__dates,
+              stylesOverflowSection.overflowSection__overflowWrapper
+          ]">
+            <div v-for="date in optimalDates.tooShort" :key="date">
+              <UiDayCard :date="new Date( date )" color="warning" />
+            </div>
+
+            <div v-for="date in optimalDates.optimal" :key="date">
+              <UiDayCard :date="new Date( date )" color="success" />
+            </div>
+
+            <div v-for="date in optimalDates.tooLong" :key="date">
+              <UiDayCard :date="new Date( date )" color="warning" />
+            </div>
+
+            <div v-for="date in optimalDates.inappropriate" :key="date">
+              <UiDayCard :date="new Date( date )" color="error" />
+            </div>
+          </div>
+        </div>
+      </slot>
     </ion-content>
 
     <AppFooter />

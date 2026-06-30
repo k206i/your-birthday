@@ -1,0 +1,51 @@
+@use "typography";
+
+.article {
+  color: var( --brd-color-font );
+  line-height: 1.4;
+
+  ol, ul {
+    margin-left: var( --brd-size-gap-l );
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: numbers;
+  }
+
+  li {
+    margin-bottom: var( --brd-size-gap-s );
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  p, ol, ul {
+    margin-bottom: var( --brd-size-gap );
+  }
+
+  h1 {
+    @extend .typography__h1;
+    margin: var( --brd-size-gap-l ) 0;
+  }
+
+  h2 {
+    @extend .typography__h2;
+    margin: var( --brd-size-gap-l ) 0 var( --brd-size-gap );
+  }
+
+  h3 {
+    @extend .typography__h3;
+    margin: var( --brd-size-gap ) 0 var( --brd-size-gap-s );
+  }
+
+  h4 {
+    @extend .typography__h4;
+    margin: var( --brd-size-gap ) 0 var( --brd-size-gap-s );
+  }
+
+}

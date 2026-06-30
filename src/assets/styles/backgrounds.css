@@ -30,6 +30,12 @@
     background-image: url( "../../assets/img/animals/cat-4.png" );
 }
 
+.cat-5 {
+    background-image: url( "../../assets/img/animals/cat-5.webp" );
+    background-size: 150px auto;
+    background-position: right 0 bottom 0;
+}
+
 .alpaka {
     background-image: url( "../../assets/img/animals/alpaka_art.png" );
 }

@@ -3,6 +3,11 @@ body {
   padding: 0;
   font-family: var( --brd-font-default );
   font-size: 16px;
-  line-height: 1.2;
+  line-height: 1.4;
   color: var( --brd-color-font );
+
+  a {
+    color: var( --brd-color-theme );
+    text-decoration: underline;
+  }
 }

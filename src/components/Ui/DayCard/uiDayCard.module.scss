@@ -1,0 +1,40 @@
+.uiDayCard {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  min-height: 70px;
+  padding: var( --brd-size-gap-xs );
+  font-family: var( --brd-font-default-alt );
+  font-size: 12px;
+  color: var( --brd-color-theme);
+  border-radius: var( --brd-size-border-radius-s );
+  border: 1px solid var( --brd-color-theme );
+  background-color: color-mix( in srgb, var( --brd-color-theme ), black var( --brd-color-mix-bg ));
+
+  &_success {
+    color: var( --brd-color-success );
+    border: 1px solid var( --brd-color-success );
+    background-color: color-mix( in srgb, var( --brd-color-success ), black var( --brd-color-mix-bg ));
+  }
+
+  &_warning {
+    color: var( --brd-color-warning );
+    border: 1px solid var( --brd-color-warning );
+    background-color: color-mix( in srgb, var( --brd-color-warning ), black var( --brd-color-mix-bg ));
+  }
+
+  &_error {
+    color: var( --brd-color-error );
+    border: 1px solid var( --brd-color-error );
+    background-color: color-mix( in srgb, var( --brd-color-error ), black var( --brd-color-mix-bg ));
+  }
+
+  &__day {
+    font-family: var( --brd-font-default );
+    font-size: 30px;
+    font-weight: bold;
+  }
+}

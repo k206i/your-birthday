@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="design/icon_full.png" alt="your birthday" width="160" />
+  <img src="src/assets/img/png/icon-logo.png" alt="your birthday" width="160" />
 
   # День рождения 🎂
 

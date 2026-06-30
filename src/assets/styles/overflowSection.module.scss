@@ -1,0 +1,34 @@
+.overflowSection {
+  position: relative;
+  z-index: var( --brd-z-index-layout );
+  width: 100vw;
+  margin-left: calc( -1 * var( --brd-size-gap ));
+
+  &__overflowWrapper {
+    max-width: 100vw;
+    overflow-x: auto;
+    padding: 0 var( --brd-size-gap );
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 100;
+    right: 0;
+    top: 0;
+    width: var( --brd-size-gap );
+    height: 100%;
+    background: linear-gradient( to right, transparent 0%, var( --brd-color-bg ) 60% );
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: var( --brd-size-gap );
+    height: 100%;
+    background: linear-gradient( to left, transparent 0%, var( --brd-color-bg ) 60% );
+  }
+}

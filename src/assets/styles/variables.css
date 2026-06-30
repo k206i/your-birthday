@@ -9,9 +9,11 @@ http://ionicframework.com/docs/theming/ */
 h1, h2, h3  {
     font-family: var( --brd-font-default-alt );
 }
+
 .accent {
     color: var( --brd-color-theme );
 }
+
 h1:first-child,
 h2:first-child,
 h3:first-child  {
@@ -52,13 +54,17 @@ ion-datetime {
     --brd-font-default: 'Roboto Condensed', sans-serif;
     --brd-font-default-alt: 'Roboto', sans-serif;
     --brd-font-default-alt2: 'Skyquake', sans-serif;
-    --brd-color-font: #8a8a97;
+    --brd-color-font: #aeaebb;
     --brd-color-font-accent: #fff;
     --brd-color-theme: #a876ec;
     --brd-color-theme_rgb: 168, 118, 236;
     --brd-color-theme-dark: #201a34;
     --brd-color-theme-dark_rgb: 32, 26, 52;
     --brd-color-theme-bg: var( --brd-color-theme-dark );
+    --brd-color-bg: #0c0f17;
+    --brd-color-success: #b0f79d;
+    --brd-color-warning: #f2b348;
+    --brd-color-error: #f76e69;
 
     --brd-custom-theme-color: var( --brd-color-theme );
 
@@ -96,21 +102,21 @@ ion-datetime {
     --ion-color-tertiary-shade: #542ae0;
     --ion-color-tertiary-tint: #7045ff;
 
-    --ion-color-success: #2dd55b;
+    --ion-color-success: var( --brd-color-success );
     --ion-color-success-rgb: 45,213,91;
     --ion-color-success-contrast: #000000;
     --ion-color-success-contrast-rgb: 0,0,0;
     --ion-color-success-shade: #28bb50;
     --ion-color-success-tint: #42d96b;
 
-    --ion-color-warning: #ffc409;
+    --ion-color-warning: var( --brd-color-warning );
     --ion-color-warning-rgb: 255,196,9;
     --ion-color-warning-contrast: #000000;
     --ion-color-warning-contrast-rgb: 0,0,0;
     --ion-color-warning-shade: #e0ac08;
     --ion-color-warning-tint: #ffca22;
 
-    --ion-color-danger: #c5000f;
+    --ion-color-danger: var( --brd-color-error );
     --ion-color-danger-rgb: 197,0,15;
     --ion-color-danger-contrast: #ffffff;
     --ion-color-danger-contrast-rgb: 255,255,255;
@@ -142,10 +148,10 @@ ion-datetime {
 
 /* Set text color of the entire app for iOS only */
 :root.ios {
-    --ion-background-color: #0c0f17;
+    --ion-background-color: var( --brd-color-bg );
 }
 
 /* Set text color of the entire app for Material Design only */
 :root.md {
-    --ion-background-color: #0c0f17;
+    --ion-background-color: var( --brd-color-bg );
 }

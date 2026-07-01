@@ -11,6 +11,7 @@ import {ref, watch, onMounted, computed} from 'vue';
 import {appVars} from '@/configApp';
 import UiDayCard from '@/components/Ui/DayCard/uiDayCard.vue';
 import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
+import WidgetLinksList from '@/components/Widgets/LinksList/widgetLinksList.vue';
 
 const SUB_THEME_COLOR = "#548fd6";
 
@@ -23,6 +24,8 @@ const isEjaculationDateModalOpen = ref(false);
 const selectedEjaculationDate = ref();
 const maxDate = ref();
 const isAlcoholInfoModalOpen = ref( false );
+const isEjaculationInfoModalOpen = ref( false );
+const tipType = ref< 'alco' | 'ejac' >( 'alco' );
 
 const openAlcoholDateModal = () => {
   isAlcoholDateModalOpen.value = true;
@@ -62,11 +65,14 @@ const optimalDates = computed(() => {
   readyDate.setDate( readyDate.getDate() + appVars.abstinenceAlcoholDuration.normal );
 
   const base: Date = readyDate > today ? readyDate : ejacDate;
+  tipType.value = readyDate > today ? 'alco' : 'ejac';
   const tooShort: string[] = [];
   const optimal: string[] = [];
   const tooLong: string[] = [];
   const inappropriate: string[] = [];
   let missing: number = 0;
+
+
 
   for ( let i = appVars.abstinenceEjaculationDuration.short; i <= appVars.abstinenceEjaculationDuration.long; i++ ) {
     const d: Date = new Date( base );
@@ -205,60 +211,22 @@ const optimalDates = computed(() => {
         </ion-modal>
       </div>
 
-      <slot v-if="optimalDates">
-        <WidgetTipInfo :color="SUB_THEME_COLOR">
-          Если употребляли <span :style="{color: SUB_THEME_COLOR}">алкоголь сравнительно недавно</span>, то помните, что процесс от деления первичной половой клетки (сперматогония) до полностью зрелого, готового к оплодотворению сперматозоида занимает в среднем от 70 до 90 дней. Поэтому, <span :style="{color: SUB_THEME_COLOR}">обратите внимание на месяц в рекомендованной дате</span> 😅<br />
-          <a @click.prevent="isAlcoholInfoModalOpen = true">Подробнее</a>
-        </WidgetTipInfo>
+      <div v-if="optimalDates"
+           :class="styles.mensCalendar__block"
+      >
+        <slot v-if="tipType === 'alco'">
+          <WidgetTipInfo :color="SUB_THEME_COLOR">
+            Если употребляли <span :style="{color: SUB_THEME_COLOR}">алкоголь сравнительно недавно</span>, то помните, что процесс от деления первичной половой клетки (сперматогония) до полностью зрелого, готового к оплодотворению сперматозоида занимает в среднем от 70 до 90 дней. Поэтому, <span :style="{color: SUB_THEME_COLOR}">обратите внимание на месяц в рекомендованной дате</span> 😅<br />
+            <a @click.prevent="isAlcoholInfoModalOpen = true">Подробнее</a>
+          </WidgetTipInfo>
+        </slot>
 
-        <ion-modal
-            :is-open="isAlcoholInfoModalOpen"
-            keep-contents-mounted="true"
-            @did-dismiss="isAlcoholInfoModalOpen = false"
-        >
-          <ion-header>
-            <ion-toolbar>
-              <ion-buttons slot="end">
-                <ion-button @click="isAlcoholInfoModalOpen = false">Закрыть</ion-button>
-              </ion-buttons>
-            </ion-toolbar>
-          </ion-header>
-
-          <ion-content class="ion-padding">
-            <div class="article">
-              <h2>🔬 Почему именно 3 месяца?</h2>
-              <P>
-                Этот срок обусловлен физиологическим циклом созревания мужских половых клеток:
-              </P>
-
-              <ol>
-                <li>
-              Полный цикл созревания сперматозоида: Процесс от деления первичной половой клетки (сперматогония) до полностью зрелого, готового к оплодотворению сперматозоида занимает в среднем от 70 до 90 дней.
-                </li>
-                <li>
-              Влияние алкоголя на всех этапах: Алкоголь и его токсичный метаболит ацетальдегид негативно воздействуют на сперматозоиды на всех стадиях их развития, повреждая их ДНК, снижая подвижность и увеличивая количество аномальных форм.
-                </li>
-                <li>
-              Длительность "восстановления": Исследования показывают, что простого прекращения употребления недостаточно, так как процесс вывода токсинов и восстановления нормальной работы организма (синдром отмены) также создает окислительный стресс, который может влиять на качество спермы на протяжении около месяца после отказа от алкоголя . Трехмесячный срок позволяет "сменить" всю популяцию сперматозоидов на новую, выросшую уже в здоровых условиях.
-                </li>
-              </ol>
-
-              <h2>📊 Что говорят исследования?</h2>
-
-              <ol>
-                <li>
-              Снижение качества: Даже умеренное, но регулярное употребление алкоголя (например, 3-4 банки пива несколько раз в неделю) может значительно ухудшить качество спермы.
-                </li>
-                <li>
-              Риск для ребенка: Употребление алкоголя отцом до зачатия связывают с повышенным риском врожденных дефектов у ребенка, включая дефекты лица и головного мозга, характерные для фетального алкогольного синдрома.
-                </li>
-                <li>
-              Положительная динамика: Клинические тесты показали, что у половины мужчин с низкой фертильностью, вызванной алкоголем, полное воздержание в течение трех месяцев нормализует процесс сперматогенеза.
-                </li>
-              </ol>
-            </div>
-          </ion-content>
-        </ion-modal>
+        <slot v-if="tipType === 'ejac'">
+          <WidgetTipInfo :color="SUB_THEME_COLOR">
+            Слишком редкое и слишком частое семяизвержение <span :style="{color: SUB_THEME_COLOR}">одинаково мешают зачатию</span>. В первом случае страдает качество и подвижность клеток, во втором — их концентрация. <span :style="{color: SUB_THEME_COLOR}">Золотая середина существует</span>: достаточно одного раза в 1–2 дня, чтобы поддерживать сперму в оптимальном состоянии для оплодотворения.<br />
+            <a @click.prevent="isEjaculationInfoModalOpen = true">Подробнее</a>
+          </WidgetTipInfo>
+        </slot>
 
         <div :class="stylesOverflowSection.overflowSection">
           <div :class="[
@@ -282,7 +250,118 @@ const optimalDates = computed(() => {
             </div>
           </div>
         </div>
-      </slot>
+      </div>
+
+      <WidgetLinksList :class="styles.mensCalendar__block">
+        <a @click.prevent="isEjaculationInfoModalOpen = true">
+          Влияние <span :style="{color: SUB_THEME_COLOR}">частоты семяизвержений</span> на сперматозоиды
+        </a>
+
+        <a @click.prevent="isAlcoholInfoModalOpen = true">
+          Почему алкоголь  <span :style="{color: SUB_THEME_COLOR}">так долго влияет</span> на качество спермы?
+        </a>
+      </WidgetLinksList>
+
+      <!-- про алкоголь -->
+      <ion-modal
+          :is-open="isAlcoholInfoModalOpen"
+          keep-contents-mounted="true"
+          @did-dismiss="isAlcoholInfoModalOpen = false"
+      >
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="end">
+              <ion-button @click="isAlcoholInfoModalOpen = false">Закрыть</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+
+        <ion-content class="ion-padding">
+          <div class="article">
+            <h2>🔬 Почему именно 3 месяца?</h2>
+            <P>
+              Этот срок обусловлен физиологическим циклом созревания мужских половых клеток:
+            </P>
+
+            <ol>
+              <li>
+                Полный цикл созревания сперматозоида: Процесс от деления первичной половой клетки (сперматогония) до полностью зрелого, готового к оплодотворению сперматозоида занимает в среднем от 70 до 90 дней.
+              </li>
+              <li>
+                Влияние алкоголя на всех этапах: Алкоголь и его токсичный метаболит ацетальдегид негативно воздействуют на сперматозоиды на всех стадиях их развития, повреждая их ДНК, снижая подвижность и увеличивая количество аномальных форм.
+              </li>
+              <li>
+                Длительность "восстановления": Исследования показывают, что простого прекращения употребления недостаточно, так как процесс вывода токсинов и восстановления нормальной работы организма (синдром отмены) также создает окислительный стресс, который может влиять на качество спермы на протяжении около месяца после отказа от алкоголя . Трехмесячный срок позволяет "сменить" всю популяцию сперматозоидов на новую, выросшую уже в здоровых условиях.
+              </li>
+            </ol>
+
+            <h2>📊 Что говорят исследования?</h2>
+
+            <ol>
+              <li>
+                Снижение качества: Даже умеренное, но регулярное употребление алкоголя (например, 3-4 банки пива несколько раз в неделю) может значительно ухудшить качество спермы.
+              </li>
+              <li>
+                Риск для ребенка: Употребление алкоголя отцом до зачатия связывают с повышенным риском врожденных дефектов у ребенка, включая дефекты лица и головного мозга, характерные для фетального алкогольного синдрома.
+              </li>
+              <li>
+                Положительная динамика: Клинические тесты показали, что у половины мужчин с низкой фертильностью, вызванной алкоголем, полное воздержание в течение трех месяцев нормализует процесс сперматогенеза.
+              </li>
+            </ol>
+          </div>
+        </ion-content>
+      </ion-modal>
+
+      <!-- про эякуляцию -->
+      <ion-modal
+          :is-open="isEjaculationInfoModalOpen"
+          keep-contents-mounted="true"
+          @did-dismiss="isEjaculationInfoModalOpen = false"
+      >
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="end">
+              <ion-button @click="isEjaculationInfoModalOpen = false">Закрыть</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+
+        <ion-content class="ion-padding">
+          <div class="article">
+            <h2>Секрет мужской силы: как частота семяизвержения влияет на здоровье и шансы стать отцом</h2>
+
+            <p>В вопросах мужского здоровья и планирования беременности существует множество мифов. Один из самых распространённых касается частоты семяизвержения. Многие уверены: чтобы зачать здорового ребёнка, нужно копить сперму неделями. Другие считают, что частая разрядка никак не влияет на качество семени. Истина, как всегда, посередине.</p>
+
+            <h2>Миф №1: чем дольше воздерживаться, тем лучше</h2>
+
+            <p>Длительное воздержание (свыше 7–10 дней) увеличивает объём эякулята, но ухудшает качество:</p>
+
+            <ul>
+              <li>сперматозоиды стареют;</li>
+              <li>в них накапливаются повреждения ДНК (фрагментация);</li>
+              <li>подвижность клеток резко падает.</li>
+            </ul>
+
+            <p><strong>Результат:</strong> много спермы, но она состоит из старых, повреждённых клеток. Это снижает шансы на зачатие и повышает риск выкидыша.</p>
+
+            <h2>Миф №2: чем чаще, тем выше фертильность</h2>
+
+            <p>Эякуляция несколько раз в день тоже приводит к проблемам:</p>
+
+            <ul>
+              <li>организм не успевает воспроизводить новые клетки;</li>
+              <li>эякулят становится слишком жидким;</li>
+              <li>падает концентрация сперматозоидов.</li>
+            </ul>
+
+            <p><strong>Результат:</strong> клетки молодые, но их слишком мало, чтобы оплодотворить яйцеклетку.</p>
+
+            <h2>Золотое правило</h2>
+
+            <p>Оптимальная частота для мужчины, планирующего беременность, — эякуляция <strong>1 раз в 1–2 дня</strong>.</p>
+          </div>
+        </ion-content>
+      </ion-modal>
     </ion-content>
 
     <AppFooter />

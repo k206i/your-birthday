@@ -53,7 +53,7 @@ npm run dev
 ### Android
 
 ```bash
-npm run build:andr
+npm run build:android
 ```
 
 > Требуется установленный Android Studio и настроенный Capacitor.

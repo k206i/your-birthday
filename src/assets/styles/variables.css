@@ -76,6 +76,8 @@ ion-datetime {
     --brd-color-white-80: rgba( 255, 255, 255, .8 );
     --brd-color-white-50: rgba( 255, 255, 255, .5 );
     --brd-color-white-20: rgba( 255, 255, 255, .2 );
+    --brd-color-white-10: rgba( 255, 255, 255, .1 );
+    --brd-color-white-5: rgba( 255, 255, 255, .05 );
 
     --ion-font-family: var( --brd-font-default );
     --ion-text-color: var( --brd-color-white );

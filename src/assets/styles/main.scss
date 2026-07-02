@@ -10,4 +10,9 @@ body {
     color: var( --brd-color-theme );
     text-decoration: underline;
   }
+
+  .overflow {
+    max-width: 100%;
+    overflow: auto;
+  }
 }

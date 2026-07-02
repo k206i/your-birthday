@@ -48,4 +48,23 @@
     margin: var( --brd-size-gap ) 0 var( --brd-size-gap-s );
   }
 
+  table {
+    border-collapse: separate;
+    border-spacing: 1px;
+
+    td {
+      padding: var( --brd-size-gap-s );
+      border-bottom: 1px solid var( --brd-color-white-5 );
+    }
+
+    th {
+      padding: var( --brd-size-gap );
+      margin: 1px;
+      color: var( --brd-color-font-accent );
+      background-color: var( --brd-color-white-5 );
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+
 }

@@ -20,6 +20,21 @@ h3:first-child  {
     margin-top: 0;
 }
 
+/* .picker-opts в shadow DOM растягивается по ширине опций (light DOM) */
+ion-picker-column-option {
+    min-width: calc( var( --brd-size-picker-min-width ) - 32px );
+}
+
+ion-picker {
+    min-width: var( --brd-size-picker-min-width );
+    overflow: hidden;
+    background: var( --brd-color-theme-dark );
+    border-radius: var( --brd-size-border-radius );
+
+    /* Затухание невыбранных пунктов — в цвет фона, как у барабана ion-datetime */
+    --fade-background-rgb: var( --brd-color-theme-dark_rgb );
+}
+
 ion-datetime {
     --background: var( --brd-color-theme-dark );
     --background-rgb: var( --brd-color-theme_rgb );
@@ -34,7 +49,7 @@ ion-datetime {
 }
 
 .show-month-and-year {
-    min-width: 350px;
+    min-width: var( --brd-size-picker-min-width );
 }
 
 .accordion-group-expand-inset {

@@ -70,9 +70,19 @@ onMounted(async () => {
             <WidgetPageLink
                 link="/mensCalendar"
                 title="Планирование для мужиков"
-                comment="Посчитаем сильные дни!"
-                bg-image="cat-1_art"
+                comment="Чо, как?"
+                bg-image="dog-4"
                 color="#548fd6"
+            />
+          </li>
+
+          <li>
+            <WidgetPageLink
+                link="/womensCalendar"
+                title="Планирование для девушек"
+                comment="Поищем идеальный день ❤️"
+                bg-image="cat-1_art"
+                color="#f796ff"
             />
           </li>
         </ul>

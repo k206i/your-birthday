@@ -4,6 +4,7 @@ import HomePage from '../views/HomePage.vue';
 import DayConception from '@/views/DayConception/dayConception.vue';
 import ChildBirthday from '@/views/ChildBirthday/childBirthday.vue';
 import MensCalendar from '@/views/MensCalendar/mensCalendar.vue';
+import WomensCalendar from '@/views/WomensCalendar/womensCalendar.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,6 +30,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/mensCalendar',
     name: 'MensCalendar',
     component: MensCalendar
+  },
+  {
+    path: '/womensCalendar',
+    name: 'WomensCalendar',
+    component: WomensCalendar
   }
 ]
 

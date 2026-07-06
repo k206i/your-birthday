@@ -81,9 +81,7 @@ onMounted(async () => {
 
         <h2>Для мужиков</h2>
         <p>
-          Мастурбация<br />
-          Алкоголь<br />
-          Спермограмма перед зачатием
+          Статья о вреде курения
         </p>
 
         <h2>Для девушек</h2>
@@ -94,8 +92,9 @@ onMounted(async () => {
           дни, когда зачатие маловероятно
         </p>
 
-        <strong>TEST app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+        <h2>
+          Визуализатор жизни
+        </h2>
       </div>
     </ion-content>
 

@@ -25,6 +25,8 @@ import WidgetDatesLists from '@/components/Widgets/DatesLists/widgetDatesLists.v
 const SUB_THEME_COLOR = "#ff63f0";
 
 const isDateModalOpen = ref( false );
+const isDateConfirmed = ref( false ); // Пользователь явно подтвердил дату кнопкой "Готово"
+const loadedDate = ref( '' ); // Для какой даты уже загружены данные (защита от повторной загрузки)
 
 const openDateModal = () => {
   if ( !selectedDate.value ) {
@@ -51,7 +53,12 @@ const formattedDate = computed(() => {
   return selectedDate.value.split('T')[0];
 });
 
-watch( formattedDate, async () => {
+const loadData = async () => {
+  if ( !formattedDate.value || formattedDate.value === loadedDate.value ) {
+    return;
+  }
+
+  loadedDate.value = formattedDate.value;
   const datePayload: Date = new Date( selectedDate.value );
 
   birthDay.value = new Date( formattedDate.value ).toLocaleDateString('ru-RU', {
@@ -71,7 +78,21 @@ watch( formattedDate, async () => {
     month: 'short',
     year: 'numeric'
   });
+};
+
+// Данные грузим только после явного подтверждения даты,
+// чтобы предустановка minDate при открытии модалки не запускала загрузку
+watch( formattedDate, () => {
+  if ( isDateConfirmed.value ) {
+    loadData();
+  }
 });
+
+const onDateConfirm = () => {
+  isDateConfirmed.value = true;
+  isDateModalOpen.value = false;
+  loadData();
+};
 
 onMounted(() => {
   minDate.value = new Date();
@@ -122,7 +143,7 @@ onMounted(() => {
                 done-text="Готово" cancel-text="Не, отмена"
                 :min="minDate" max="2050-01-01T23:59:59"
                 :first-day-of-week="1"
-                @ionChange="isDateModalOpen = false"
+                @ionChange="onDateConfirm"
                 @ionCancel="isDateModalOpen = false"
             ></ion-datetime>
 
@@ -151,8 +172,8 @@ onMounted(() => {
 
           <WidgetDayNamesList
               :class="styles.dayConception__block"
-              :name-date-male="namesDays?.nameDayNow[0].male_names"
-              :name-date-female="namesDays?.nameDayNow[0].female_names"
+              :name-date-male="namesDays?.nameDayNow[0]?.male_names"
+              :name-date-female="namesDays?.nameDayNow[0]?.female_names"
           />
 
           <WidgetZodiacNames

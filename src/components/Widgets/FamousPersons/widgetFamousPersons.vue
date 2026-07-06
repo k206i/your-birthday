@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import styles from './widgetFamousPersons.module.scss';
-import { appVars } from '@/configApp';
 import { computed } from 'vue';
 import type { TFamousPersonData, TGetFamousNamesResponse } from '@/api/getFamousNames';
 

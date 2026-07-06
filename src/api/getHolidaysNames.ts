@@ -49,7 +49,10 @@ export const getHolidaysNames = async ( datePayload: Date ): Promise< TGetHolida
   returnData.datesNow.push( ...getFilteredData( 0 ));
 
   // от расчётной даты зачатия, в пределах нормального срока беременности
-  for ( let i = -appVars.dayNormalPeriod; i < appVars.dayNormalPeriod; i++) {
+  for ( let i = -appVars.dayNormalPeriod; i <= appVars.dayNormalPeriod; i++) {
+    if ( i === 0 ) {
+      continue; // расчётный день уже лежит в datesNow
+    }
     returnData.datesNormal.push( ...getFilteredData( i ));
   }
 

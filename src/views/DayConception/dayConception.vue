@@ -143,8 +143,8 @@ watch(formattedDate, async () => {
 
           <WidgetDayNamesList
               :class="styles.dayConception__block"
-              :name-date-male="namesDays?.nameDayNow[0].male_names"
-              :name-date-female="namesDays?.nameDayNow[0].female_names"
+              :name-date-male="namesDays?.nameDayNow[0]?.male_names"
+              :name-date-female="namesDays?.nameDayNow[0]?.female_names"
           />
 
           <WidgetZodiacNames

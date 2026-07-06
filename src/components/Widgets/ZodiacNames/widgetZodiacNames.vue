@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import styles from './widgetZodiacNames.module.scss';
-import { appVars } from '@/configApp';
 import type { TZodiacSign } from '@/api/getZodiacName';
 
 const props = defineProps<{

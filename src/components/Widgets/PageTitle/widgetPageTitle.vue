@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import styles from './widgetPageTitle.module.scss';
-import {appVars} from '@/configApp';
 
 const props = defineProps<{
   title: string,

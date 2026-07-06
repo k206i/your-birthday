@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import styles from './widgetHolidaysList.module.scss';
-import { appVars } from '@/configApp';
 import type { THolidayData } from '@/api/getHolidaysNames';
 
 const props = defineProps<{

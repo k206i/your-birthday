@@ -9,6 +9,7 @@ import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue'
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {ref, watch, onMounted, computed} from 'vue';
 import {appVars} from '@/configApp';
+import {parseLocalDate, formatLocalDate} from '@/composables/localDate';
 import UiDayCard from '@/components/Ui/DayCard/uiDayCard.vue';
 import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 import WidgetLinksList from '@/components/Widgets/LinksList/widgetLinksList.vue';
@@ -28,6 +29,12 @@ const isEjaculationInfoModalOpen = ref( false );
 const isMasturbateInfoModalOpen = ref( false );
 const tipType = ref< 'alco' | 'ejac' >( 'alco' );
 
+const isAlcoholSkipped = ref( false );
+
+const toggleAlcoholSkip = () => {
+  isAlcoholSkipped.value = !isAlcoholSkipped.value;
+};
+
 const openAlcoholDateModal = () => {
   isAlcoholDateModalOpen.value = true;
 };
@@ -37,7 +44,7 @@ const openEjaculationDateModal = () => {
 };
 
 onMounted(() => {
-  maxDate.value = new Date().toISOString();
+  maxDate.value = formatLocalDate( new Date() ) + 'T23:59:59';
 });
 
 watch(selectedAlcoholDate, () => {
@@ -53,27 +60,35 @@ watch(selectedEjaculationDate, () => {
 });
 
 const optimalDates = computed(() => {
-  if ( !selectedAlcoholDate.value || !selectedEjaculationDate.value ) {
+  if ( !selectedEjaculationDate.value ) {
     return null;
   }
 
-  const alcDate: Date = new Date( selectedAlcoholDate.value.split('T')[0] );
-  const ejacDate: Date = new Date( selectedEjaculationDate.value.split('T')[0] );
+  if ( !isAlcoholSkipped.value && !selectedAlcoholDate.value ) {
+    return null;
+  }
+
+  const ejacDate: Date = parseLocalDate( selectedEjaculationDate.value.split('T')[0] );
   const today: Date = new Date();
   today.setHours( 0, 0, 0, 0 );
 
-  const readyDate: Date = new Date( alcDate );
-  readyDate.setDate( readyDate.getDate() + appVars.abstinenceAlcoholDuration.normal );
+  let readyDate: Date | null = null;
 
-  const base: Date = readyDate > today ? readyDate : ejacDate;
-  tipType.value = readyDate > today ? 'alco' : 'ejac';
+  if ( !isAlcoholSkipped.value && selectedAlcoholDate.value ) {
+    const alcDate: Date = parseLocalDate( selectedAlcoholDate.value.split('T')[0] );
+    readyDate = new Date( alcDate );
+    readyDate.setDate( readyDate.getDate() + appVars.abstinenceAlcoholDuration.normal );
+  }
+
+  const base: Date = readyDate && readyDate > today ? readyDate : ejacDate;
+  // Запись tipType прямо здесь лаконичнее и читается лучше, чем отдельный computed с дублированием всего расчёта base
+  // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+  tipType.value = readyDate && readyDate > today ? 'alco' : 'ejac';
   const tooShort: string[] = [];
   const optimal: string[] = [];
   const tooLong: string[] = [];
   const inappropriate: string[] = [];
   let missing: number = 0;
-
-
 
   for ( let i = appVars.abstinenceEjaculationDuration.short; i <= appVars.abstinenceEjaculationDuration.long; i++ ) {
     const d: Date = new Date( base );
@@ -84,7 +99,7 @@ const optimalDates = computed(() => {
       continue;
     }
 
-    const dateStr: string = d.toISOString().split('T')[0];
+    const dateStr: string = formatLocalDate( d );
 
     if ( i <= appVars.abstinenceEjaculationDuration.short ) {
       tooShort.push( dateStr );
@@ -95,10 +110,17 @@ const optimalDates = computed(() => {
     }
   }
 
+  // Добираем от конца окна или от сегодня (если окно целиком в прошлом),
+  // чтобы в inappropriate не попадали прошедшие даты
+  const lastWindowDate: Date = new Date( base );
+  lastWindowDate.setDate( lastWindowDate.getDate() + appVars.abstinenceEjaculationDuration.long );
+
+  const fillStart: Date = lastWindowDate > today ? lastWindowDate : new Date( today );
+
   for ( let j = 1; j <= missing; j++ ) {
-    const d: Date = new Date( base );
-    d.setDate( d.getDate() + appVars.abstinenceEjaculationDuration.long + j );
-    inappropriate.push( d.toISOString().split('T')[0] );
+    const d: Date = new Date( fillStart );
+    d.setDate( d.getDate() + j );
+    inappropriate.push( formatLocalDate( d ) );
   }
 
   return { tooShort, optimal, tooLong, inappropriate };
@@ -124,21 +146,46 @@ const optimalDates = computed(() => {
 
       <div :class="styles.mensCalendar__buttons">
         <div :class="stylesArtButton.artButton" @click="openAlcoholDateModal">
-          <div :class="stylesArtButton.artButton__art">
+          <div :class="[
+              stylesArtButton.artButton__art,
+              stylesArtButton.artButton__dimmable,
+              isAlcoholSkipped && stylesArtButton.artButton__dimmable_dimmed
+          ]">
             <img src="@/assets/img/animals/cat-alco.png" alt="" />
           </div>
 
           <div :class="stylesArtButton.artButton__content">
-            <div :class="stylesArtButton.artButton__title">
+            <div :class="[
+                stylesArtButton.artButton__title,
+                stylesArtButton.artButton__dimmable,
+                isAlcoholSkipped && stylesArtButton.artButton__dimmable_dimmed
+            ]">
               Когда последний раз употреб&shy;ляли алкоголь?
             </div>
 
-            <div :class="stylesArtButton.artButton__comment">
+            <div :class="[
+                stylesArtButton.artButton__comment,
+                stylesArtButton.artButton__dimmable,
+                isAlcoholSkipped && stylesArtButton.artButton__dimmable_dimmed
+            ]">
               {{ lastAlcoholDate ? `📅 ${lastAlcoholDate}` : 'Честность = точность расчётов' }}
+            </div>
+
+            <div :class="[
+                stylesArtButton.artButton__subButton,
+                isAlcoholSkipped && stylesArtButton.artButton__subButton_active
+            ]"
+                 @click.stop="toggleAlcoholSkip"
+            >
+              {{ isAlcoholSkipped ? 'Не учитывается 🙅' : 'Не учитывать' }}
             </div>
           </div>
 
-          <div :class="stylesArtButton.artButton__art">
+          <div :class="[
+              stylesArtButton.artButton__art,
+              stylesArtButton.artButton__dimmable,
+              isAlcoholSkipped && stylesArtButton.artButton__dimmable_dimmed
+          ]">
             <ion-icon :icon="chevronForwardCircleOutline" size="large"></ion-icon>
           </div>
         </div>
@@ -215,19 +262,19 @@ const optimalDates = computed(() => {
       <div v-if="optimalDates"
            :class="styles.mensCalendar__block"
       >
-        <slot v-if="tipType === 'alco'">
+        <template v-if="tipType === 'alco'">
           <WidgetTipInfo :color="SUB_THEME_COLOR">
             Если употребляли <span :style="{color: SUB_THEME_COLOR}">алкоголь сравнительно недавно</span>, то помните, что процесс от деления первичной половой клетки (сперматогония) до полностью зрелого, готового к оплодотворению сперматозоида занимает в среднем от 70 до 90 дней. Поэтому, <span :style="{color: SUB_THEME_COLOR}">обратите внимание на месяц в рекомендованной дате</span> 😅<br />
             <a @click.prevent="isAlcoholInfoModalOpen = true">Подробнее</a>
           </WidgetTipInfo>
-        </slot>
+        </template>
 
-        <slot v-if="tipType === 'ejac'">
+        <template v-if="tipType === 'ejac'">
           <WidgetTipInfo :color="SUB_THEME_COLOR">
             Слишком редкое и слишком частое семяизвержение <span :style="{color: SUB_THEME_COLOR}">одинаково мешают зачатию</span>. В первом случае страдает качество и подвижность клеток, во втором — их концентрация. <span :style="{color: SUB_THEME_COLOR}">Золотая середина существует</span>: достаточно одного раза в 1–2 дня, чтобы поддерживать сперму в оптимальном состоянии для оплодотворения.<br />
             <a @click.prevent="isEjaculationInfoModalOpen = true">Подробнее</a>
           </WidgetTipInfo>
-        </slot>
+        </template>
 
         <div :class="stylesOverflowSection.overflowSection">
           <div :class="[
@@ -235,19 +282,19 @@ const optimalDates = computed(() => {
               stylesOverflowSection.overflowSection__overflowWrapper
           ]">
             <div v-for="date in optimalDates.tooShort" :key="date">
-              <UiDayCard :date="new Date( date )" color="warning" />
+              <UiDayCard :date="parseLocalDate( date )" color="warning" />
             </div>
 
             <div v-for="date in optimalDates.optimal" :key="date">
-              <UiDayCard :date="new Date( date )" color="success" />
+              <UiDayCard :date="parseLocalDate( date )" color="success" />
             </div>
 
             <div v-for="date in optimalDates.tooLong" :key="date">
-              <UiDayCard :date="new Date( date )" color="warning" />
+              <UiDayCard :date="parseLocalDate( date )" color="warning" />
             </div>
 
             <div v-for="date in optimalDates.inappropriate" :key="date">
-              <UiDayCard :date="new Date( date )" color="error" />
+              <UiDayCard :date="parseLocalDate( date )" color="error" />
             </div>
           </div>
         </div>

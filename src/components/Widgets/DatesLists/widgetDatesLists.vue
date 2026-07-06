@@ -69,7 +69,7 @@ const politicsNormalList = computed<TPoliticEntry[]>(() => [
           </div>
 
           <ul :class="styles.widgetDatesLists__daysList">
-            <slot v-for="(item, index) in namesDays?.nameDayNormal"
+            <template v-for="(item, index) in namesDays?.nameDayNormal"
                   :key="item.date + index"
             >
               <li v-if="item.male_names.length"
@@ -86,7 +86,7 @@ const politicsNormalList = computed<TPoliticEntry[]>(() => [
                   {{ item.male_names.join( ', ' ) }}
                 </div>
               </li>
-            </slot>
+            </template>
           </ul>
 
           <div :class="styles.widgetDatesLists__subTitle">
@@ -94,7 +94,7 @@ const politicsNormalList = computed<TPoliticEntry[]>(() => [
           </div>
 
           <ul :class="styles.widgetDatesLists__daysList">
-            <slot v-for="(item, index) in namesDays?.nameDayNormal"
+            <template v-for="(item, index) in namesDays?.nameDayNormal"
                   :key="item.date + index"
             >
               <li v-if="item.female_names.length"
@@ -108,7 +108,7 @@ const politicsNormalList = computed<TPoliticEntry[]>(() => [
                   {{ item.female_names.join( ', ' ) }}
                 </div>
               </li>
-            </slot>
+            </template>
           </ul>
         </div>
       </ion-accordion>

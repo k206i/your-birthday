@@ -63,7 +63,10 @@ export const getFamousNames = async ( datePayload: Date ): Promise< TGetFamousNa
   returnData.deathNow.push( ...getFilteredByDeath( 0 ));
 
   // В диапазоне нормального течения беременности
-  for ( let i = -appVars.dayNormalPeriod; i < appVars.dayNormalPeriod; i++ ) {
+  for ( let i = -appVars.dayNormalPeriod; i <= appVars.dayNormalPeriod; i++ ) {
+    if ( i === 0 ) {
+      continue; // расчётный день уже лежит в birthNow / deathNow
+    }
     returnData.birthNormal.push( ...getFilteredByBirth( i ));
     returnData.deathNormal.push( ...getFilteredByDeath( i ));
   }

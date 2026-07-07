@@ -10,6 +10,7 @@ import {getZodiacName, TGetZodiacNameResponse} from '@/api/getZodiacName';
 import {getFamousNames, TGetFamousNamesResponse} from '@/api/getFamousNames';
 import {getFamousPolitics, TGetFamousPoliticsResponse} from '@/api/getFamousPolitics';
 import {appVars} from '@/configApp';
+import {formatDisplayDate} from '@/composables/localDate';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import WidgetPrimaryDate from '@/components/Widgets/PrimaryDate/widgetPrimaryDate.vue';
 import WidgetArtTitle from '@/components/Widgets/ArtTitle/widgetArtTitle.vue';
@@ -21,7 +22,7 @@ import WidgetFamousPolitics from '@/components/Widgets/FamousPolitics/widgetFamo
 import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 import WidgetDatesLists from '@/components/Widgets/DatesLists/widgetDatesLists.vue';
 
-const SUB_THEME_COLOR = "#a876ec";
+const SUB_THEME_COLOR = appVars.colors.dayConception;
 
 const isDateModalOpen = ref( false );
 const maxDate = ref();
@@ -55,16 +56,8 @@ watch(formattedDate, async () => {
   const datePayload: Date = new Date( selectedDate.value );
   datePayload.setDate( datePayload.getDate() - appVars.pregnancyDuration );
 
-  conceptionDay.value = datePayload.toLocaleDateString('ru-RU', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric'
-  });
-  birthDay.value = new Date( formattedDate.value ).toLocaleDateString('ru-RU', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric'
-  });
+  conceptionDay.value = formatDisplayDate( datePayload );
+  birthDay.value = formatDisplayDate( new Date( formattedDate.value ));
 
   holidaysNames.value = await getHolidaysNames( datePayload );
   namesDays.value = await getNamesDays( datePayload );

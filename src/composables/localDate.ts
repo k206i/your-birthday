@@ -15,3 +15,12 @@ export const formatLocalDate = ( dateObject: Date ): string => {
 
   return year + '-' + month + '-' + day;
 }
+
+// Дата для отображения пользователю: "7 апр. 2027 г."
+export const formatDisplayDate = ( dateObject: Date ): string => {
+  return dateObject.toLocaleDateString( 'ru-RU', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  });
+}

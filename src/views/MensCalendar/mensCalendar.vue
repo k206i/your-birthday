@@ -14,7 +14,7 @@ import UiDayCard from '@/components/Ui/DayCard/uiDayCard.vue';
 import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 import WidgetLinksList from '@/components/Widgets/LinksList/widgetLinksList.vue';
 
-const SUB_THEME_COLOR = "#548fd6";
+const SUB_THEME_COLOR = appVars.colors.mensCalendar;
 
 const lastAlcoholDate = ref();
 const lastEjaculationDate = ref();

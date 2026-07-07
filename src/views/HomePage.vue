@@ -7,6 +7,7 @@ import {onMounted, ref} from 'vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
+import {appVars} from '@/configApp';
 
 const userName = ref();
 
@@ -52,7 +53,7 @@ onMounted(async () => {
                 title="День зачатия"
                 comment="Какой был праздник в день зачатия?"
                 bg-image="dog-2_art"
-                color="#a876ec"
+                :color="appVars.colors.dayConception"
             />
           </li>
 
@@ -61,8 +62,8 @@ onMounted(async () => {
                 link="/childBirthday"
                 title="Планируем дату рождения ребёнка"
                 comment="Посмотрим, что будет в этот день?"
-                bg-image="cat-1_art"
-                color="#ff63f0"
+                bg-image="penguin_art"
+                :color="appVars.colors.childBirthday"
             />
           </li>
 
@@ -72,7 +73,7 @@ onMounted(async () => {
                 title="Планирование для мужиков"
                 comment="Чо, как?"
                 bg-image="dog-4"
-                color="#548fd6"
+                :color="appVars.colors.mensCalendar"
             />
           </li>
 
@@ -82,7 +83,7 @@ onMounted(async () => {
                 title="Планирование для девушек"
                 comment="Поищем идеальный день ❤️"
                 bg-image="cat-1_art"
-                color="#f796ff"
+                :color="appVars.colors.womensCalendar"
             />
           </li>
         </ul>

@@ -2,7 +2,6 @@ export const appVars = {
   dayAdditionalPeriod: 14, // Дни до и после нормального течения беременности
   dayNormalPeriod: 18, // Погрешность в днях, соответствующая нормальному течению беременности
   pregnancyDuration: 280, // Дней. Акушерский срок (от первого дня последних месячных)
-  colorMix: '79%', // На сколько затемнять подложки карточек, от основного цвета
   abstinenceEjaculationDuration: { // Воздержание от эякуляции в днях
     short: 0,
     normal: 3,
@@ -21,5 +20,11 @@ export const appVars = {
     cycleMin: 21, // Минимальная длина цикла в днях
     cycleMax: 40, // Максимальная длина цикла в днях
     cycleDefault: 28, // Длина цикла по умолчанию
+  },
+  colors: {
+    childBirthday: '#35b79b',
+    dayConception: '#a876ec',
+    mensCalendar: '#548fd6',
+    womensCalendar: '#f37da6',
   }
 }

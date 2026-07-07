@@ -11,9 +11,11 @@ import AppFooter from '@/components/AppFooter/appFooter.vue';
 import UiDayCard from '@/components/Ui/DayCard/uiDayCard.vue';
 import {ref, onMounted, computed} from 'vue';
 import {appVars} from '@/configApp';
-import {parseLocalDate, formatLocalDate} from '@/composables/localDate';
+import {parseLocalDate, formatLocalDate, formatDisplayDate} from '@/composables/localDate';
+import WidgetArtButton from '@/components/Widgets/ArtButton/widgetArtButton.vue';
+import penguinArt from '@/assets/img/animals/penguin_art.webp';
 
-const SUB_THEME_COLOR = "#f796ff";
+const SUB_THEME_COLOR = appVars.colors.womensCalendar;
 
 const isPeriodDateModalOpen = ref( false );
 const selectedPeriodDate = ref();
@@ -103,11 +105,16 @@ const ovulationDates = computed(() => {
     inappropriate.push( formatLocalDate( d ) );
   }
 
+  // Дата рождения при зачатии в день овуляции — для перехода на страницу дня рождения
+  const birthDate: Date = new Date( ovulationDate );
+  birthDate.setDate( birthDate.getDate() + appVars.pregnancyDuration );
+
   return {
     early,
     peak,
     after,
     inappropriate,
+    birthDate: formatLocalDate( birthDate ),
   };
 });
 </script>
@@ -123,7 +130,7 @@ const ovulationDates = computed(() => {
     <ion-content :fullscreen="true" class="ion-padding">
       <WidgetPageTitle
           :class="styles.womensCalendar__titleBlock"
-          bg-image="cat-6_art"
+          bg-image="cat-1"
           title="Пора искать идеальное совпадение! ❤️"
           lead="Давайте рассчитаем день овуляции и период, когда вероятность оплодотворения яйцеклетки будет наиболее высокой. ✨"
           comment="Но помните: природа любит удивлять, а лучший советчик — ваш лечащий врач 👩‍⚕️"
@@ -132,7 +139,7 @@ const ovulationDates = computed(() => {
       <div :class="styles.womensCalendar__buttons">
         <div :class="stylesArtButton.artButton" @click="openPeriodDateModal">
           <div :class="stylesArtButton.artButton__art">
-            <img src="@/assets/img/animals/panda.png" alt="" />
+            <img src="@/assets/img/animals/cat-6_art.webp" alt="" />
           </div>
 
           <div :class="stylesArtButton.artButton__content">
@@ -176,7 +183,7 @@ const ovulationDates = computed(() => {
 
         <div :class="stylesArtButton.artButton" @click="openCycleModal">
           <div :class="stylesArtButton.artButton__art">
-            <img src="@/assets/img/animals/cat-1.png" alt="" />
+            <img src="@/assets/img/animals/hamster_art.webp" alt="" />
           </div>
 
           <div :class="stylesArtButton.artButton__content">
@@ -258,6 +265,15 @@ const ovulationDates = computed(() => {
           </div>
         </div>
       </div>
+
+      <WidgetArtButton
+          v-if="ovulationDates"
+          :color="appVars.colors.childBirthday"
+          :title="`Малыш может родиться примерно <span style='color: ${SUB_THEME_COLOR}'>${ formatDisplayDate( parseLocalDate( ovulationDates.birthDate )) }</span> Давайте посмотрми, что интересного будет в этот день? 🐣`"
+          comment="Праздники, именины, знак зодиака и памятные даты"
+          :link="`/childBirthday?birthDate=${ovulationDates.birthDate}`"
+          :art-src="penguinArt"
+      />
     </ion-content>
 
     <AppFooter />

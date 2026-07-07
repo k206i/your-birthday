@@ -39,15 +39,20 @@
 .cat-5 {
     background-image: url( "../../assets/img/animals/cat-5.webp" );
     background-size: 150px auto;
-    background-position: right 0 bottom 0;
 }
 
 .cat-6_art {
     background-image: url( "../../assets/img/animals/cat-6_art.webp" );
-    background-size: 150px auto;
-    background-position: right 0 bottom 0;
 }
 
 .alpaka {
     background-image: url( "../../assets/img/animals/alpaka_art.png" );
+}
+
+.penguin {
+    background-image: url( "../../assets/img/animals/penguin.webp" );
+}
+
+.penguin_art {
+    background-image: url( "../../assets/img/animals/penguin_art.webp" );
 }

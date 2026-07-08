@@ -132,7 +132,8 @@ const ovulationDates = computed(() => {
           :class="styles.womensCalendar__titleBlock"
           bg-image="cat-1"
           title="Пора искать идеальное совпадение! ❤️"
-          lead="Давайте рассчитаем день овуляции и период, когда вероятность оплодотворения яйцеклетки будет наиболее высокой. ✨"
+          lead="
+          Выберите даты в двух карточках ниже 👇 и мы рассчитаем день овуляции и период, когда вероятность оплодотворения яйцеклетки будет наиболее высокой. ✨"
           comment="Но помните: природа любит удивлять, а лучший советчик — ваш лечащий врач 👩‍⚕️"
       />
 
@@ -169,14 +170,14 @@ const ovulationDates = computed(() => {
                   locale="ru-RU"
                   presentation="date"
                   :show-default-buttons="true"
-                  done-text="Готово" cancel-text="Не, отмена"
+                  done-text="Готово" cancel-text="Отмена"
                   :max="maxDate"
                   :first-day-of-week="1"
                   @ionChange="isPeriodDateModalOpen = false"
                   @ionCancel="isPeriodDateModalOpen = false"
               ></ion-datetime>
 
-              <img :class="styles.womensCalendar__modalArt" src="@/assets/img/animals/cat-3_art.png" alt="" />
+              <img :class="styles.womensCalendar__modalArt" src="@/assets/img/animals/cat-6_art.webp" alt="" />
             </div>
           </ion-content>
         </ion-modal>
@@ -229,7 +230,7 @@ const ovulationDates = computed(() => {
               </ion-button>
               </div>
 
-              <img :class="styles.womensCalendar__modalArt" src="@/assets/img/animals/cat-3_art.png" alt="" />
+              <img :class="styles.womensCalendar__modalArt" src="@/assets/img/animals/hamster_art.webp" alt="" />
             </div>
           </ion-content>
         </ion-modal>

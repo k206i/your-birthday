@@ -5,12 +5,8 @@
   position: relative;
   z-index: var( --brd-z-index-layout );
   min-height: var( --brd-size-widget-min-height );
-  overflow: hidden;
   text-decoration: none;
   border-radius: var( --brd-size-border-radius );
-  background-size: auto 150px;
-  background-repeat: no-repeat;
-  background-position: left 50% bottom 50px;
 
   &__comment {
     padding-right: 30px;
@@ -50,18 +46,31 @@
   &__content {
     position: relative;
     z-index: 100;
-    padding: var( --brd-size-gap );
-    border-radius: var( --brd-size-border-radius );
+    min-height: 100px;
+    padding: var( --brd-size-gap-s );
+    border-radius: var( --brd-size-border-radius-s );
     background-color: rgba( 0, 0, 0, .5 );
     backdrop-filter: blur( 5px );
   }
 
   &__gradient {
     position: absolute;
-    z-index: 50;
     left: 0;
-    bottom: 50px;
+    bottom: 0;
     width: 100%;
     height: 20%;
+  }
+
+  &__art {
+    pointer-events: none;
+    position: absolute;
+    z-index: 50;
+    left: 0;
+    top: 5px;
+    width: 100%;
+    height: 140px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: left 50% bottom 0;
   }
 }

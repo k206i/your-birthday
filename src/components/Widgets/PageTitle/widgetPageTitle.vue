@@ -22,10 +22,9 @@ const props = defineProps<{
       </h2>
 
       <div v-if="props.lead"
+           v-html="props.lead"
            :class="styles.widgetPageTitle__titleLead"
-      >
-        {{ lead }}
-      </div>
+      ></div>
 
       <div v-if="props.comment" :class="styles.widgetPageTitle__titleComment">
         {{ comment }}

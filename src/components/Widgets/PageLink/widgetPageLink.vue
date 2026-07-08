@@ -15,10 +15,7 @@ const props = defineProps<{
 
 <template>
   <div
-      :class="[
-          styles.widgetPageLink,
-          props.bgImage
-        ]"
+      :class="styles.widgetPageLink"
       :style="{
         backgroundColor: `color-mix( in srgb, ${ props.color }, black var( --brd-color-mix-bg ))`,
        }"
@@ -38,14 +35,20 @@ const props = defineProps<{
       </div>
     </div>
 
-    <div :class="styles.widgetPageLink__gradient"
-         :style="`background: linear-gradient( to bottom, transparent 0%, color-mix( in srgb, ${ props.color }, black var( --brd-color-mix-bg )) 100%);`"
-    ></div>
-
     <div :class="styles.widgetPageLink__arrow"
          :style="`background-color: ${ props.color };`"
     >
       <ion-icon :icon="arrowForwardOutline"></ion-icon>
+    </div>
+
+    <div :class="[
+          styles.widgetPageLink__art,
+          props.bgImage
+        ]"
+    >
+      <div :class="styles.widgetPageLink__gradient"
+           :style="`background: linear-gradient( to bottom, transparent 0%, color-mix( in srgb, ${ props.color }, black var( --brd-color-mix-bg )) 100%);`"
+      ></div>
     </div>
 
     <router-link :to="props.link" :class="styles.widgetPageLink__link"></router-link>

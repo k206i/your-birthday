@@ -4,7 +4,7 @@ import stylesArtButton from '@/assets/styles/artButton.module.scss';
 import stylesOverflowSection from '@/assets/styles/overflowSection.module.scss';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import {IonContent, IonPage, IonIcon, IonModal, IonDatetime, IonHeader, IonToolbar, IonButtons, IonButton} from '@ionic/vue';
-import { chevronForwardCircleOutline } from 'ionicons/icons';
+import { chevronForwardCircleOutline, closeCircle } from 'ionicons/icons';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {ref, watch, onMounted, computed} from 'vue';
@@ -327,8 +327,11 @@ const optimalDates = computed(() => {
       >
         <ion-header>
           <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button @click="isAlcoholInfoModalOpen = false">Закрыть</ion-button>
+            <ion-buttons slot="end">
+              <ion-button @click="isAlcoholInfoModalOpen = false">
+                Закрыть&nbsp;&nbsp;
+                <ion-icon :icon="closeCircle" size="large"></ion-icon>
+              </ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
@@ -377,8 +380,11 @@ const optimalDates = computed(() => {
       >
         <ion-header>
           <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button @click="isEjaculationInfoModalOpen = false">Закрыть</ion-button>
+            <ion-buttons slot="end">
+              <ion-button @click="isEjaculationInfoModalOpen = false">
+                Закрыть&nbsp;&nbsp;
+                <ion-icon :icon="closeCircle" size="large"></ion-icon>
+              </ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
@@ -428,8 +434,11 @@ const optimalDates = computed(() => {
       >
         <ion-header>
           <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button @click="isMasturbateInfoModalOpen = false">Закрыть</ion-button>
+            <ion-buttons slot="end">
+              <ion-button @click="isMasturbateInfoModalOpen = false">
+                Закрыть&nbsp;&nbsp;
+                <ion-icon :icon="closeCircle" size="large"></ion-icon>
+              </ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>
@@ -545,8 +554,11 @@ const optimalDates = computed(() => {
       >
         <ion-header>
           <ion-toolbar>
-            <ion-buttons slot="start">
-              <ion-button @click="isSmokeInfoModalOpen = false">Закрыть</ion-button>
+            <ion-buttons slot="end">
+              <ion-button @click="isSmokeInfoModalOpen = false">
+                Закрыть&nbsp;&nbsp;
+                <ion-icon :icon="closeCircle" size="large"></ion-icon>
+              </ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>

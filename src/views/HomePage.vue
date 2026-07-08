@@ -51,7 +51,7 @@ onMounted(async () => {
             <WidgetPageLink
                 link="/dayConception"
                 title="День зачатия"
-                comment="Какой был праздник в день зачатия?"
+                comment="Что было в тот день?"
                 bg-image="dog-2_art"
                 :color="appVars.colors.dayConception"
             />
@@ -60,8 +60,8 @@ onMounted(async () => {
           <li>
             <WidgetPageLink
                 link="/childBirthday"
-                title="Планируем дату рождения ребёнка"
-                comment="Посмотрим, что будет в этот день?"
+                title="Планируете ребёнка?"
+                comment="Выбираем дату рождения"
                 bg-image="penguin_art"
                 :color="appVars.colors.childBirthday"
             />
@@ -81,7 +81,7 @@ onMounted(async () => {
             <WidgetPageLink
                 link="/womensCalendar"
                 title="Планирование для девушек"
-                comment="Поищем идеальный день ❤️"
+                comment="Поищем идеальный день&nbsp;❤️"
                 bg-image="cat-1_art"
                 :color="appVars.colors.womensCalendar"
             />

@@ -7,7 +7,7 @@ import {IonContent, IonPage, IonIcon, IonModal, IonDatetime, IonHeader, IonToolb
 import { chevronForwardCircleOutline, closeCircle } from 'ionicons/icons';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
-import {ref, watch, onMounted, computed} from 'vue';
+import {ref, watch, onMounted, computed, nextTick} from 'vue';
 import {appVars} from '@/configApp';
 import {parseLocalDate, formatLocalDate} from '@/composables/localDate';
 import UiDayCard from '@/components/Ui/DayCard/uiDayCard.vue';
@@ -24,6 +24,7 @@ const selectedAlcoholDate = ref();
 const isEjaculationDateModalOpen = ref(false);
 const selectedEjaculationDate = ref();
 const maxDate = ref();
+const buttonsRef = ref< HTMLElement >();
 const isAlcoholInfoModalOpen = ref( false );
 const isEjaculationInfoModalOpen = ref( false );
 const isMasturbateInfoModalOpen = ref( false );
@@ -126,6 +127,20 @@ const optimalDates = computed(() => {
 
   return { tooShort, optimal, tooLong, inappropriate };
 });
+
+const scrollToButtons = () => {
+  buttonsRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+// После расчёта дат проматываем страницу к кнопкам выбора
+watch( optimalDates, async ( value ) => {
+  if ( !value ) {
+    return;
+  }
+
+  await nextTick();
+  scrollToButtons();
+});
 </script>
 
 <template>
@@ -140,12 +155,13 @@ const optimalDates = computed(() => {
       <WidgetPageTitle
           :class="styles.mensCalendar__titleBlock"
           bg-image="cat-5"
+          @click="scrollToButtons"
           title="Вы тоже можете планировать!"
           lead="Давайте рассчитаем оптимальный день, когда ваши сперматозоиды будут полны сил! 😎"
           comment="Но помните, лучший советчик &mdash; ваш лечащий врач&nbsp; 🤙"
       />
 
-      <div :class="styles.mensCalendar__buttons">
+      <div ref="buttonsRef" :class="styles.mensCalendar__buttons">
         <div :class="stylesArtButton.artButton" @click="openAlcoholDateModal">
           <div :class="[
               stylesArtButton.artButton__art,

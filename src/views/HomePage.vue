@@ -86,6 +86,16 @@ onMounted(async () => {
                 :color="appVars.colors.womensCalendar"
             />
           </li>
+
+          <li>
+            <WidgetPageLink
+                link="/lifeProgress"
+                title="🎮 Жизненный прогресс"
+                comment="███████░░░░░"
+                bg-image="cat-1_art"
+                :color="appVars.colors.lifeProgress"
+            />
+          </li>
         </ul>
 
         <h2>Календарь дат</h2>

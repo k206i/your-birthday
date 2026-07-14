@@ -21,10 +21,12 @@ export const appVars = {
     cycleMax: 40, // Максимальная длина цикла в днях
     cycleDefault: 28, // Длина цикла по умолчанию
   },
+  lifeExpectancyYears: 100, // Желаемая продолжительность жизни в годах (сетка LifeProgress)
   colors: {
     childBirthday: '#35b79b',
     dayConception: '#a876ec',
     mensCalendar: '#548fd6',
     womensCalendar: '#f37da6',
+    lifeProgress: '#3DFF07',
   }
 }

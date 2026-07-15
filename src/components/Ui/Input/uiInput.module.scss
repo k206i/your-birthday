@@ -1,0 +1,27 @@
+.uiInput {
+  display: flex;
+  flex-direction: column;
+  gap: var( --brd-size-gap-xs );
+
+  &__label {
+    font-size: 14px;
+    color: var( --brd-color-font );
+  }
+
+  &__input {
+    overflow: hidden;
+    border-radius: var( --brd-size-border-radius-s );
+    --highlight-color-focused: var( --brd-color-theme );
+    --highlight-color-valid: var( --brd-color-theme );
+    --highlight-color-invalid: var( --brd-color-error );
+    --background: var( --brd-color-theme-dark );
+    --color: var( --brd-color-font-accent );
+    --placeholder-color: var( --brd-color-white-50 );
+    --padding-end: var( --brd-size-gap );
+    --padding-start: var( --brd-size-gap );
+
+    :global( .label-text-wrapper ) {
+      color: var( --brd-color-white-50 ); // цвет лейбла в покое
+    }
+  }
+}

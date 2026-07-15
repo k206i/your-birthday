@@ -6,8 +6,9 @@ import AppHeader from '@/components/AppHeader/appHeader.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import {appVars} from '@/configApp';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
-import {ref, onMounted, computed} from 'vue';
+import {ref, onMounted, computed, watch} from 'vue';
 import {formatLocalDate, formatDisplayDate, parseLocalDate} from '@/composables/localDate';
+import {appStore} from '@/store/appStore';
 
 const isDateModalOpen = ref( false );
 const selectedDate = ref();
@@ -19,6 +20,19 @@ const openDateModal = () => {
 
 onMounted(() => {
   maxDate.value = formatLocalDate( new Date() ) + 'T23:59:59';
+});
+
+// Предзаполнение из профиля и обновление при его изменении
+// (страницы кэшируются ion-router-outlet, onMounted сработал бы только один раз)
+watch(() => appStore.userBirthDate, ( value ) => {
+  selectedDate.value = value || undefined;
+}, { immediate: true });
+
+// Выбор даты на этой странице обновляет профиль
+watch( selectedDate, () => {
+  if ( selectedDate.value ) {
+    appStore.userBirthDate = selectedDate.value.split('T')[0];
+  }
 });
 
 const birthDay = computed(() => {
@@ -111,7 +125,7 @@ const lifeDecades = computed(() => {
                 locale="ru-RU"
                 presentation="date"
                 :show-default-buttons="true"
-                done-text="Готово" cancel-text="Отмена"
+                done-text="Готово" cancel-text="Не, отмена"
                 :max="maxDate"
                 :first-day-of-week="1"
                 @ionChange="isDateModalOpen = false"

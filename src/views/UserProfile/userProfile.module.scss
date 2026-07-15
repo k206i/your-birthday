@@ -1,3 +1,7 @@
 .userProfile {
   position: relative;
+
+  &__field {
+    margin-bottom: var( --brd-size-gap );
+  }
 }

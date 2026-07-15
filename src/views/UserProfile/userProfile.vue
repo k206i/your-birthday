@@ -13,9 +13,18 @@ import {appStore} from '@/store/appStore';
 
     <ion-content :fullscreen="true" class="ion-padding">
       <UiInput
+          :class="styles.userProfile__field"
           v-model="appStore.userName"
           label="Как вас зовут?"
           placeholder="Введите имя"
+      />
+
+      <UiInput
+          :class="styles.userProfile__field"
+          v-model="appStore.userBirthDate"
+          type="date"
+          label="Когда у вас день рождения?"
+          placeholder="выберите дату"
       />
 
       --{{ appStore.userName }}--

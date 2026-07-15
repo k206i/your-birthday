@@ -3,6 +3,7 @@ import { Preferences } from '@capacitor/preferences';
 
 type TAppStore = {
   userName: string,
+  userBirthDate: string, // YYYY-MM-DD
 }
 
 const STORAGE_KEY = 'appStore';
@@ -10,6 +11,7 @@ const STORAGE_KEY = 'appStore';
 // Глобальный реактивный стор приложения: компоненты читают и пишут напрямую
 export const appStore: TAppStore = reactive({
   userName: '',
+  userBirthDate: '',
 });
 
 // Восстановление стора при запуске приложения

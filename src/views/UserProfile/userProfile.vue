@@ -18,7 +18,7 @@ import {appStore} from '@/store/appStore';
           placeholder="Введите имя"
       />
 
-      -->{{ appStore.userName }}<--
+      --{{ appStore.userName }}--
     </ion-content>
 
     <AppFooter />

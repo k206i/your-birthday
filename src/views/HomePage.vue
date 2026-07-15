@@ -1,34 +1,12 @@
 <script setup lang="ts">
 import styles from './homePage.module.scss';
 import { IonContent, IonPage } from '@ionic/vue';
-import { Preferences } from '@capacitor/preferences';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
-import {onMounted, ref} from 'vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import {appVars} from '@/configApp';
-
-const userName = ref();
-
-onMounted(async () => {
-  // await Preferences.set({
-  //   key: 'userName',
-  //   value: 'Павел'
-  // });
-
-  userName.value = (await Preferences.get({key: 'userName'})).value;
-
-  // Удаление
-    // await Preferences.remove({ key: 'userName' });
-
-  // Проверка существования
-  //   const { keys } = await Preferences.keys();
-  //   console.log(keys); // ['userName', ...]
-
-  // Очистка всех данных
-  //   await Preferences.clear();
-});
+import {appStore} from '@/store/appStore';
 </script>
 
 <template>
@@ -41,7 +19,7 @@ onMounted(async () => {
             :class="styles.homePage__titleWidget"
             bg-image="dog-1_art"
             color="#a876ec"
-            :title="`Здравствуйте${ userName ? ', ' + userName : '' }!`"
+            :title="`Здравствуйте${ appStore.userName ? ', ' + appStore.userName : '' }!`"
             lead="До вашего ДР: 365 дней ✨"
             comment="Все важные даты в одном месте 💜"
         />

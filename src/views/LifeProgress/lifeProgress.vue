@@ -59,15 +59,14 @@ const lifeWeeks = computed(() => {
 
 const lifeDecades = computed(() => {
   const decades = [];
-  const totalYears: number = appVars.lifeExpectancyYears;
+  const totalWeeks: number = appVars.lifeExpectancyWeeks;
+  const weeksPerDecade: number = 10 * 52;
 
-  for ( let d = 0; d < Math.ceil( totalYears / 10 ); d++ ) {
-    const yearsCount: number = Math.min( 10, totalYears - d * 10 );
-
+  for ( let d = 0; d < Math.ceil( totalWeeks / weeksPerDecade ); d++ ) {
     decades.push({
       label: d * 10,
-      startWeek: d * 10 * 52,
-      weeksCount: yearsCount * 52,
+      startWeek: d * weeksPerDecade,
+      weeksCount: Math.min( weeksPerDecade, totalWeeks - d * weeksPerDecade ),
     });
   }
 

@@ -2,6 +2,30 @@
   position: relative;
 
   &__field {
-    margin-bottom: var( --brd-size-gap );
+    margin-bottom: var( --brd-size-gap-s );
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__blockLabel {
+    margin-bottom: var( --brd-size-gap-xs );
+    font-family: var( --brd-font-default-alt );
+    font-size: 12px;
+    color: var( --brd-color-font-low );
+    text-transform: uppercase;
+    letter-spacing: .3px;
+  }
+
+  &__blockComment {
+    margin-bottom: var( --brd-size-gap-xs );
+    font-family: var( --brd-font-default-alt );
+    font-size: 11px;
+    color: var( --brd-color-font-low );
+  }
+
+  &__block {
+    margin-bottom: var( --brd-size-gap-l );
   }
 }

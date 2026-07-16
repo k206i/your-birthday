@@ -4,6 +4,7 @@
 
 .dog-1_art {
     background-image: url( "../../assets/img/animals/dog-1_art.png" );
+    background-size: 160px auto;
 }
 
 .dog-2 {

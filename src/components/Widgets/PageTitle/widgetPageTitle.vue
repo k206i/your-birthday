@@ -6,6 +6,7 @@ const props = defineProps<{
   lead?: string,
   comment?: string,
   bgImage?: string,
+  link?: string,
 }>();
 
 </script>
@@ -29,9 +30,18 @@ const props = defineProps<{
         </slot>
       </div>
 
-      <div v-if="props.comment" :class="styles.widgetPageTitle__titleComment">
-        {{ comment }}
+      <div v-if="props.comment || $slots.comment"
+           :class="styles.widgetPageTitle__titleComment"
+      >
+        <slot name="comment">
+          <span v-html="props.comment"></span>
+        </slot>
       </div>
+
+      <router-link v-if="props.link"
+                   :to="props.link"
+                   :class="styles.widgetPageTitle__link">
+      </router-link>
     </div>
   </div>
 </template>

@@ -22,5 +22,19 @@
     padding: 0;
   }
 
+  &__leadBlock {
+    padding: 8px;
+    border-radius: var( --brd-size-border-radius-s );
+    background-color: rgba( #9900ff, .5);
+    backdrop-filter: blur( 3px );
+  }
+
+  &__memoBlock {
+    margin: -8px 0 var( --brd-size-gap );
+    padding: 8px 16px;
+    border-radius: var( --brd-size-border-radius );
+    background-color: #6840ff;
+  }
+
 
 }

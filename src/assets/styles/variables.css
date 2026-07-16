@@ -70,6 +70,7 @@ ion-datetime {
     --brd-font-default-alt: 'Roboto', sans-serif;
     --brd-font-default-alt2: 'Skyquake', sans-serif;
     --brd-color-font: #aeaebb;
+    --brd-color-font-low: #898989;
     --brd-color-font-accent: #fff;
     --brd-color-theme: #a876ec;
     --brd-color-theme_rgb: 168, 118, 236;

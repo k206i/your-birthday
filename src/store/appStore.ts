@@ -4,6 +4,10 @@ import { Preferences } from '@capacitor/preferences';
 type TAppStore = {
   userName: string,
   userBirthDate: string, // YYYY-MM-DD
+  additionalName: string, // Важный человек, чей ДР нельзя забыть
+  additionalBirthDate: string, // YYYY-MM-DD
+  rememberedPersonTitle: string, // Кем приходится человек, чьё имя нельзя забыть (Тёща, Начальник...)
+  rememberedPersonName: string, // ...и его имя
 }
 
 const STORAGE_KEY = 'appStore';
@@ -12,6 +16,10 @@ const STORAGE_KEY = 'appStore';
 export const appStore: TAppStore = reactive({
   userName: '',
   userBirthDate: '',
+  additionalName: '',
+  additionalBirthDate: '',
+  rememberedPersonTitle: '',
+  rememberedPersonName: '',
 });
 
 // Восстановление стора при запуске приложения

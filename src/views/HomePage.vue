@@ -5,11 +5,12 @@ import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
+import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 import {appVars} from '@/configApp';
 import {appStore} from '@/store/appStore';
 import {computed} from 'vue';
-import {parseLocalDate} from '@/composables/localDate';
 import {declineDays} from '@/composables/declineDays';
+import {getDaysToDate} from '@/composables/getDaysToDate';
 import {currentDate} from '@/store/currentDate';
 
 const daysToBirthday = computed(() => {
@@ -17,19 +18,7 @@ const daysToBirthday = computed(() => {
     return null;
   }
 
-  const birth: Date = parseLocalDate( appStore.userBirthDate );
-  const today: Date = parseLocalDate( currentDate.value );
-
-  const nextBirthday: Date = new Date( birth );
-  nextBirthday.setFullYear( today.getFullYear() );
-
-  if ( nextBirthday < today ) {
-    nextBirthday.setFullYear( today.getFullYear() + 1 );
-  }
-
-  const MS_PER_DAY: number = 24 * 60 * 60 * 1000;
-
-  return Math.round(( nextBirthday.getTime() - today.getTime() ) / MS_PER_DAY );
+  return getDaysToDate( appStore.userBirthDate, currentDate.value );
 });
 
 const birthdayLead = computed(() => {
@@ -38,6 +27,20 @@ const birthdayLead = computed(() => {
   }
 
   return `До вашего ДР: ${ daysToBirthday.value }&nbsp;${ declineDays( daysToBirthday.value ?? 0 ) } ✨`;
+});
+
+const additionalLead = computed(() => {
+  if ( !appStore.additionalName || !appStore.additionalBirthDate ) {
+    return '';
+  }
+
+  const days: number = getDaysToDate( appStore.additionalBirthDate, currentDate.value );
+
+  if ( days === 0 ) {
+    return `Сегодня ${ appStore.additionalName } празднует свой ДР ! 🎉`;
+  }
+
+  return `${ appStore.additionalName } ждёт поздравлений через ${ days }&nbsp;${ declineDays( days ) } 🎁`;
 });
 </script>
 
@@ -51,13 +54,30 @@ const birthdayLead = computed(() => {
             :class="styles.homePage__titleWidget"
             bg-image="dog-1_art"
             color="#a876ec"
+            link="/userProfile"
             :title="`Здравствуйте${ appStore.userName ? ', ' + appStore.userName : '' }!`"
-            :lead="daysToBirthday !== null ? birthdayLead : ''"
-            comment="Все важные даты в одном месте 💜"
         >
           <template #lead>
             <template v-if="daysToBirthday === null">
               Укажите дату рождения <router-link to="/userProfile">в&nbsp;профиле</router-link> ✨
+            </template>
+            <div v-else
+                 v-html="birthdayLead"
+                 style="margin-bottom: var(--brd-size-gap-s);"
+            ></div>
+
+            <div v-if="additionalLead"
+                 v-html="additionalLead"
+                 style="color: #ff5ae7"
+            ></div>
+          </template>
+
+          <template #comment>
+            <template v-if="appStore.rememberedPersonTitle && appStore.rememberedPersonName">
+              P.S. {{ appStore.rememberedPersonTitle }} — <span class="accent">{{ appStore.rememberedPersonName }}</span>
+            </template>
+            <template v-else>
+              Все важные даты в одном месте 💜
             </template>
           </template>
         </WidgetPageTitle>

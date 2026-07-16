@@ -3,7 +3,7 @@ import styles from './dayConception.module.scss';
 import {IonContent, IonPage, IonDatetime, IonModal, IonButton} from '@ionic/vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
-import {ref, computed, watch, onMounted} from 'vue';
+import {ref, computed, watch} from 'vue';
 import {getHolidaysNames, TGetHolidaysNamesResponse} from '@/api/getHolidaysNames';
 import {getNamesDays, TGetNamesDaysResponse} from '@/api/getDayNames';
 import {getZodiacName, TGetZodiacNameResponse} from '@/api/getZodiacName';
@@ -11,6 +11,7 @@ import {getFamousNames, TGetFamousNamesResponse} from '@/api/getFamousNames';
 import {getFamousPolitics, TGetFamousPoliticsResponse} from '@/api/getFamousPolitics';
 import {appVars} from '@/configApp';
 import {formatDisplayDate} from '@/composables/localDate';
+import {currentDate} from '@/store/currentDate';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import WidgetPrimaryDate from '@/components/Widgets/PrimaryDate/widgetPrimaryDate.vue';
 import WidgetArtTitle from '@/components/Widgets/ArtTitle/widgetArtTitle.vue';
@@ -25,7 +26,7 @@ import WidgetDatesLists from '@/components/Widgets/DatesLists/widgetDatesLists.v
 const SUB_THEME_COLOR = appVars.colors.dayConception;
 
 const isDateModalOpen = ref( false );
-const maxDate = ref();
+const maxDate = computed(() => currentDate.value + 'T23:59:59');
 
 const openDateModal = () => {
   isDateModalOpen.value = true;
@@ -39,10 +40,6 @@ const famousNames = ref< TGetFamousNamesResponse >();
 const famousPolitics = ref< TGetFamousPoliticsResponse >();
 const conceptionDay = ref();
 const birthDay = ref();
-
-onMounted(() => {
-  maxDate.value = new Date().toISOString();
-});
 
 const formattedDate = computed(() => {
   if ( !selectedDate.value ) {

@@ -6,21 +6,19 @@ import AppHeader from '@/components/AppHeader/appHeader.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import {appVars} from '@/configApp';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
-import {ref, onMounted, computed, watch} from 'vue';
-import {formatLocalDate, formatDisplayDate, parseLocalDate} from '@/composables/localDate';
+import {ref, computed, watch} from 'vue';
+import {formatDisplayDate, parseLocalDate} from '@/composables/localDate';
 import {appStore} from '@/store/appStore';
+import {currentDate} from '@/store/currentDate';
 
 const isDateModalOpen = ref( false );
 const selectedDate = ref();
-const maxDate = ref();
 
 const openDateModal = () => {
   isDateModalOpen.value = true;
 };
 
-onMounted(() => {
-  maxDate.value = formatLocalDate( new Date() ) + 'T23:59:59';
-});
+const maxDate = computed(() => currentDate.value + 'T23:59:59');
 
 // Предзаполнение из профиля и обновление при его изменении
 watch(() => appStore.userBirthDate, ( value ) => {
@@ -48,8 +46,7 @@ const lifeWeeks = computed(() => {
   }
 
   const birth: Date = parseLocalDate( selectedDate.value.split('T')[0] );
-  const today: Date = new Date();
-  today.setHours( 0, 0, 0, 0 );
+  const today: Date = parseLocalDate( currentDate.value );
 
   // Возраст в полных годах
   let yearsLived: number = today.getFullYear() - birth.getFullYear();

@@ -6,7 +6,8 @@ import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import {computed, onMounted, ref, watch} from 'vue';
 import {useRoute} from 'vue-router';
-import {formatDisplayDate} from '@/composables/localDate';
+import {formatDisplayDate, formatLocalDate, parseLocalDate} from '@/composables/localDate';
+import {currentDate} from '@/store/currentDate';
 import {getHolidaysNames, TGetHolidaysNamesResponse} from '@/api/getHolidaysNames';
 import {getNamesDays, TGetNamesDaysResponse} from '@/api/getDayNames';
 import {appVars} from '@/configApp';
@@ -41,7 +42,12 @@ const openDateModal = () => {
 };
 const selectedDate = ref();
 const birthDay = ref();
-const minDate = ref();
+const minDate = computed(() => {
+  const date: Date = parseLocalDate( currentDate.value );
+  date.setDate( date.getDate() + appVars.pregnancyDuration );
+
+  return formatLocalDate( date ) + 'T00:00:00';
+});
 const conceptionDay = ref();
 const holidaysNames = ref< TGetHolidaysNamesResponse >();
 const namesDays = ref< TGetNamesDaysResponse >();
@@ -90,10 +96,6 @@ const onDateConfirm = () => {
 };
 
 onMounted(() => {
-  minDate.value = new Date();
-  minDate.value.setDate( minDate.value.getDate() + appVars.pregnancyDuration);
-  minDate.value = minDate.value.toISOString();
-
   // Дата рождения может прийти в урле — ведём себя так, как будто пользователь выбрал её сам
   const birthDateParam = route.query.birthDate;
 

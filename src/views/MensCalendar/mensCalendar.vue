@@ -7,9 +7,10 @@ import {IonContent, IonPage, IonIcon, IonModal, IonDatetime, IonHeader, IonToolb
 import { chevronForwardCircleOutline, closeCircle } from 'ionicons/icons';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
-import {ref, watch, onMounted, computed, nextTick} from 'vue';
+import {ref, watch, computed, nextTick} from 'vue';
 import {appVars} from '@/configApp';
 import {parseLocalDate, formatLocalDate} from '@/composables/localDate';
+import {currentDate} from '@/store/currentDate';
 import UiDayCard from '@/components/Ui/DayCard/uiDayCard.vue';
 import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 import WidgetLinksList from '@/components/Widgets/LinksList/widgetLinksList.vue';
@@ -23,7 +24,6 @@ const isAlcoholDateModalOpen = ref(false);
 const selectedAlcoholDate = ref();
 const isEjaculationDateModalOpen = ref(false);
 const selectedEjaculationDate = ref();
-const maxDate = ref();
 const buttonsRef = ref< HTMLElement >();
 const isAlcoholInfoModalOpen = ref( false );
 const isEjaculationInfoModalOpen = ref( false );
@@ -45,9 +45,7 @@ const openEjaculationDateModal = () => {
   isEjaculationDateModalOpen.value = true;
 };
 
-onMounted(() => {
-  maxDate.value = formatLocalDate( new Date() ) + 'T23:59:59';
-});
+const maxDate = computed(() => currentDate.value + 'T23:59:59');
 
 watch(selectedAlcoholDate, () => {
   if (selectedAlcoholDate.value) {
@@ -71,8 +69,7 @@ const optimalDates = computed(() => {
   }
 
   const ejacDate: Date = parseLocalDate( selectedEjaculationDate.value.split('T')[0] );
-  const today: Date = new Date();
-  today.setHours( 0, 0, 0, 0 );
+  const today: Date = parseLocalDate( currentDate.value );
 
   let readyDate: Date | null = null;
 

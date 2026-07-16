@@ -9,9 +9,10 @@ import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue'
 import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import UiDayCard from '@/components/Ui/DayCard/uiDayCard.vue';
-import {ref, onMounted, computed, watch, nextTick} from 'vue';
+import {ref, computed, watch, nextTick} from 'vue';
 import {appVars} from '@/configApp';
 import {parseLocalDate, formatLocalDate, formatDisplayDate} from '@/composables/localDate';
+import {currentDate} from '@/store/currentDate';
 import WidgetArtButton from '@/components/Widgets/ArtButton/widgetArtButton.vue';
 import penguinArt from '@/assets/img/animals/penguin_art.webp';
 import WidgetLinksList from '@/components/Widgets/LinksList/widgetLinksList.vue';
@@ -25,7 +26,6 @@ const isAlcoholInfoModalOpen = ref( false );
 const isSmokeInfoModalOpen = ref( false );
 const isOtherFactorsInfoModalOpen = ref( false );
 const cycleLength = ref< number >( appVars.ovulation.cycleDefault );
-const maxDate = ref();
 const buttonsRef = ref< HTMLElement >();
 
 const cycleOptions: number[] = [];
@@ -42,9 +42,7 @@ const openCycleModal = () => {
   isCycleModalOpen.value = true;
 };
 
-onMounted(() => {
-  maxDate.value = formatLocalDate( new Date() ) + 'T23:59:59';
-});
+const maxDate = computed(() => currentDate.value + 'T23:59:59');
 
 const lastPeriodDate = computed(() => {
   if ( !selectedPeriodDate.value ) {
@@ -64,8 +62,7 @@ const ovulationDates = computed(() => {
   }
 
   const periodStart: Date = parseLocalDate( selectedPeriodDate.value.split('T')[0] );
-  const today: Date = new Date();
-  today.setHours( 0, 0, 0, 0 );
+  const today: Date = parseLocalDate( currentDate.value );
 
   // Овуляция = начало последних месячных + длина цикла - лютеиновая фаза
   const ovulationDate: Date = new Date( periodStart );

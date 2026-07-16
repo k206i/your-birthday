@@ -21,10 +21,13 @@ const props = defineProps<{
         {{ props.title }}
       </h2>
 
-      <div v-if="props.lead"
-           v-html="props.lead"
+      <div v-if="props.lead || $slots.lead"
            :class="styles.widgetPageTitle__titleLead"
-      ></div>
+      >
+        <slot name="lead">
+          <span v-html="props.lead"></span>
+        </slot>
+      </div>
 
       <div v-if="props.comment" :class="styles.widgetPageTitle__titleComment">
         {{ comment }}

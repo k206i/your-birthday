@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
 import { restoreAppStore } from '@/store/appStore';
+import { initCurrentDateWatcher } from '@/store/currentDate';
 
 import { IonicVue } from '@ionic/vue';
 
@@ -46,6 +47,8 @@ import './assets/styles/article.scss';
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
+
+initCurrentDateWatcher();
 
 Promise.all([ router.isReady(), restoreAppStore() ]).then(() => {
   app.mount('#app');

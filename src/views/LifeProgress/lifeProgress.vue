@@ -23,7 +23,6 @@ onMounted(() => {
 });
 
 // Предзаполнение из профиля и обновление при его изменении
-// (страницы кэшируются ion-router-outlet, onMounted сработал бы только один раз)
 watch(() => appStore.userBirthDate, ( value ) => {
   selectedDate.value = value || undefined;
 }, { immediate: true });

@@ -11,6 +11,10 @@ h1, h2, h3  {
 }
 
 .accent {
+    color: #fff;
+}
+
+.accent-theme {
     color: var( --brd-color-theme );
 }
 
@@ -81,6 +85,8 @@ ion-datetime {
     --brd-color-success: #b0f79d;
     --brd-color-warning: #f2b348;
     --brd-color-error: #f76e69;
+    --brd-color-pink: #ff8bef;
+    --brd-color-pink_rgb: 255, 139, 239;
 
     --brd-custom-theme-color: var( --brd-color-theme );
 

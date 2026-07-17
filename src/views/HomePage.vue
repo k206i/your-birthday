@@ -5,7 +5,6 @@ import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
-import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 import {appVars} from '@/configApp';
 import {appStore} from '@/store/appStore';
 import {computed} from 'vue';
@@ -21,27 +20,17 @@ const daysToBirthday = computed(() => {
   return getDaysToDate( appStore.userBirthDate, currentDate.value );
 });
 
-const birthdayLead = computed(() => {
-  if ( daysToBirthday.value === 0 ) {
-    return 'Сегодня ваш день рождения! 🎉';
+const daysToAdditionalBirthday = computed(() => {
+  if ( !appStore.additionalName || !appStore.additionalBirthDate  ) {
+    return null;
   }
 
-  return `До вашего ДР: ${ daysToBirthday.value }&nbsp;${ declineDays( daysToBirthday.value ?? 0 ) } ✨`;
+  return getDaysToDate( appStore.additionalBirthDate, currentDate.value );
 });
 
-const additionalLead = computed(() => {
-  if ( !appStore.additionalName || !appStore.additionalBirthDate ) {
-    return '';
-  }
+const isBirthdayLead = computed(() => daysToBirthday.value === 0 );
+const isAdditionalBirthdayLead = computed(() => daysToAdditionalBirthday.value === 0 );
 
-  const days: number = getDaysToDate( appStore.additionalBirthDate, currentDate.value );
-
-  if ( days === 0 ) {
-    return `Сегодня ${ appStore.additionalName } празднует свой ДР ! 🎉`;
-  }
-
-  return `${ appStore.additionalName } ждёт поздравлений через ${ days }&nbsp;${ declineDays( days ) } 🎁`;
-});
 </script>
 
 <template>
@@ -58,18 +47,51 @@ const additionalLead = computed(() => {
             :title="`Здравствуйте${ appStore.userName ? ', ' + appStore.userName : '' }!`"
         >
           <template #lead>
-            <template v-if="daysToBirthday === null">
-              Укажите дату рождения <router-link to="/userProfile">в&nbsp;профиле</router-link> ✨
-            </template>
+            <div v-if="daysToBirthday === null"
+                 :class="styles.homePage__mainLead"
+            >
+              <span>
+                Укажите дату рождения <router-link to="/userProfile">в&nbsp;профиле</router-link> ✨
+              </span>
+            </div>
+            <div v-else-if="isBirthdayLead"
+                 :class="[
+                     styles.homePage__mainLead,
+                     styles.homePage__mainLead_accent
+                 ]"
+            >
+              Сегодня ваш день рождения!&nbsp;🎉
+            </div>
             <div v-else
-                 v-html="birthdayLead"
-                 style="margin-bottom: var(--brd-size-gap-s);"
-            ></div>
+                 :class="styles.homePage__mainLead"
+            >
+              <div :class="styles.homePage__mainDate">
+                {{ daysToBirthday }}
+              </div>
 
-            <div v-if="additionalLead"
-                 v-html="additionalLead"
-                 style="color: #ff5ae7"
-            ></div>
+              <div>
+                <div :class="styles.homePage__mainDateName">
+                  {{ declineDays( daysToBirthday ?? 0 ) }}
+                </div>
+
+                <div :class="styles.homePage__mainDateComment">
+                  До вашего дня рождения&nbsp;✨
+                </div>
+              </div>
+            </div>
+
+            <template v-if="daysToAdditionalBirthday !== null">
+              <div v-if="isAdditionalBirthdayLead"
+                   :class="styles.homePage__leadBlock"
+              >
+                Сегодня {{ appStore.additionalName }} празднует свой день рождения!&nbsp;🎉
+              </div>
+              <div v-else
+                   :class="styles.homePage__leadBlock"
+              >
+                {{ appStore.additionalName }} ждёт поздравлений через <span class="accent">{{ daysToAdditionalBirthday }}</span>&nbsp;{{ declineDays( daysToAdditionalBirthday ?? 0 ) }} 🎁
+              </div>
+            </template>
           </template>
 
           <template #comment>

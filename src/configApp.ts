@@ -26,7 +26,7 @@ export const appVars = {
     childBirthday: '#35b79b',
     dayConception: '#a876ec',
     mensCalendar: '#548fd6',
-    womensCalendar: '#f37da6',
+    womensCalendar: '#ff8bef',
     lifeProgress: '#3DFF07',
   }
 }

@@ -23,18 +23,42 @@
   }
 
   &__leadBlock {
-    padding: 8px;
-    border-radius: var( --brd-size-border-radius-s );
-    background-color: rgba( #9900ff, .5);
+    padding: var( --brd-size-gap-s ) var( --brd-size-gap );
+    color: var( --brd-color-pink );
+    border-radius: var( --brd-size-border-radius );
+    background-color: rgba( var( --brd-color-pink_rgb ), .1);
     backdrop-filter: blur( 3px );
   }
 
-  &__memoBlock {
-    margin: -8px 0 var( --brd-size-gap );
-    padding: 8px 16px;
-    border-radius: var( --brd-size-border-radius );
-    background-color: #6840ff;
+  &__mainDate {
+    font-size: 40px;
+    font-weight: bold;
+    color: var( --brd-color-font-accent );
   }
 
+  &__mainDateName {
+    margin: 2px 0 var( --brd-size-gap-xs );
+    font-family: var( --brd-font-default-alt );
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &__mainDateComment {
+    font-size: 12px;
+    color: var( --brd-color-font-low );
+  }
+
+  &__mainLead {
+    display: flex;
+    gap: var( --brd-size-gap-s );
+    margin: calc( -1 * var( --brd-size-gap-s )) 0 var( --brd-size-gap-s );
+    line-height: 1.2;
+
+    &_accent {
+      font-size: 18px;
+      font-weight: bold;
+      color: var( --brd-color-font-accent );
+    }
+  }
 
 }

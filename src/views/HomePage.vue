@@ -31,6 +31,12 @@ const daysToAdditionalBirthday = computed(() => {
 const isBirthdayLead = computed(() => daysToBirthday.value === 0 );
 const isAdditionalBirthdayLead = computed(() => daysToAdditionalBirthday.value === 0 );
 
+const isAdditionalBirthdaySoon = computed(() => {
+  return daysToAdditionalBirthday.value !== null
+      && daysToAdditionalBirthday.value > 0
+      && daysToAdditionalBirthday.value <= appVars.birthdaySoonDays;
+});
+
 </script>
 
 <template>
@@ -75,7 +81,7 @@ const isAdditionalBirthdayLead = computed(() => daysToAdditionalBirthday.value =
                 </div>
 
                 <div :class="styles.homePage__mainDateComment">
-                  До вашего дня рождения&nbsp;✨
+                  до вашего дня рождения&nbsp;✨
                 </div>
               </div>
             </div>
@@ -83,8 +89,14 @@ const isAdditionalBirthdayLead = computed(() => daysToAdditionalBirthday.value =
             <template v-if="daysToAdditionalBirthday !== null">
               <div v-if="isAdditionalBirthdayLead"
                    :class="styles.homePage__leadBlock"
+                   class="accent"
               >
                 Сегодня {{ appStore.additionalName }} празднует свой день рождения!&nbsp;🎉
+              </div>
+              <div v-else-if="isAdditionalBirthdaySoon"
+                   :class="styles.homePage__leadBlock"
+              >
+                🚨🚨🚨 <br />{{ appStore.additionalName }} уже репетирует задувание свечей — {{ daysToAdditionalBirthday === 1 ? 'остался' : 'осталось' }} <span class="accent">{{ daysToAdditionalBirthday }}</span>&nbsp;{{ declineDays( daysToAdditionalBirthday ?? 0 ) }} 🎂
               </div>
               <div v-else
                    :class="styles.homePage__leadBlock"

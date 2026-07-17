@@ -38,15 +38,11 @@ import {appStore} from '@/store/appStore';
           Не забыть поздравить
         </div>
 
-        <div :class="styles.userProfile__blockComment">
-          Напомним заранее, чтобы вы успели подготовиться 🎁
-        </div>
-
         <UiInput
             :class="styles.userProfile__field"
             v-model="appStore.additionalName"
-            label="Кого поздравить?"
-            placeholder="Введите имя"
+            label="Имя того, кого поздравить"
+            placeholder="Введите имя или солнышко, зайка 🥰"
         />
 
         <UiInput
@@ -54,17 +50,16 @@ import {appStore} from '@/store/appStore';
             v-model="appStore.additionalBirthDate"
             type="date"
             label="Когда день рождения?"
-            placeholder="выберите дату"
         />
+
+        <div :class="styles.userProfile__blockComment">
+          Напомним за 3 дня, чтобы вы успели подготовиться 🎁
+        </div>
       </div>
 
       <div :class="styles.userProfile__block">
         <div :class="styles.userProfile__blockLabel">
           На всякий случай, чтобы не забыть как зовут 🤭
-        </div>
-
-        <div :class="styles.userProfile__blockComment">
-          Чтобы не «э-э-э...» в ответственный момент 🥶
         </div>
 
         <UiInput
@@ -80,6 +75,10 @@ import {appStore} from '@/store/appStore';
             label="Как зовут?"
             placeholder="Лучше имя, и не прозвище 😅"
         />
+
+        <div :class="styles.userProfile__blockComment">
+          Чтобы не «э-э-э...» в ответственный момент 🥶
+        </div>
       </div>
     </ion-content>
 

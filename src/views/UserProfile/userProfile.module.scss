@@ -19,7 +19,7 @@
   }
 
   &__blockComment {
-    margin-bottom: var( --brd-size-gap-xs );
+    margin-top: calc( -1 * var( --brd-size-gap-xs ));
     font-family: var( --brd-font-default-alt );
     font-size: 11px;
     color: var( --brd-color-font-low );

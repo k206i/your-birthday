@@ -10,9 +10,11 @@ import {ref, computed, watch} from 'vue';
 import {formatDisplayDate, parseLocalDate} from '@/composables/localDate';
 import {appStore} from '@/store/appStore';
 import {currentDate} from '@/store/currentDate';
+import {shareElementAsImage} from '@/composables/shareElementAsImage';
 
 const isDateModalOpen = ref( false );
 const selectedDate = ref();
+const weeksGridRef = ref< HTMLElement >();
 
 const openDateModal = () => {
   isDateModalOpen.value = true;
@@ -133,7 +135,7 @@ const lifeDecades = computed(() => {
         </ion-content>
       </ion-modal>
 
-      <div v-if="lifeWeeks" :class="styles.lifeProgress__weeksGrid">
+      <div v-if="lifeWeeks" ref="weeksGridRef" :class="styles.lifeProgress__weeksGrid">
         <div v-for="decade in lifeDecades" :key="decade.label" :class="styles.lifeProgress__decade">
           <div :class="styles.lifeProgress__decadeLabel">{{ decade.label }}</div>
 
@@ -149,6 +151,14 @@ const lifeDecades = computed(() => {
           </div>
         </div>
       </div>
+
+      <ion-button
+          v-if="lifeWeeks"
+          expand="block"
+          @click="shareElementAsImage( weeksGridRef, 'life-progress.png' )"
+      >
+        Поделиться прогрессом 📤
+      </ion-button>
     </ion-content>
 
     <AppFooter />

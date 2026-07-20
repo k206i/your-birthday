@@ -11,10 +11,127 @@ import {formatDisplayDate, parseLocalDate} from '@/composables/localDate';
 import {appStore} from '@/store/appStore';
 import {currentDate} from '@/store/currentDate';
 import {shareElementAsImage} from '@/composables/shareElementAsImage';
+import famousData from '@/jsons/achievements_famous.json';
+import AchievementTooltip from '@/components/Achievement/Tooltip/achievementTooltip.vue';
+
+type TAchievement = {
+  icon: string,
+  person: string,
+  name: string,
+  comment: string,
+  weeks: number,
+  rarity: string,
+  wiki: string,
+}
+
+// Неделя жизни → ачивка. Пока только знаменитости, в будущем сюда могут лечь другие ачивки
+const achievementByWeek: Map< number, TAchievement > = new Map(
+  famousData.map( item => [ item.weeks, item ] )
+);
 
 const isDateModalOpen = ref( false );
 const selectedDate = ref();
 const weeksGridRef = ref< HTMLElement >();
+const hoveredAchievement = ref< TAchievement | null >( null );
+const tooltipStyle = ref< Record< string, string > >( {} );
+
+let lastTouchTime: number = 0;
+const TOUCH_HIT_RADIUS: number = 28; // px — радиус привязки пальца к ближайшей жёлтой клетке
+
+const showForCell = ( cell: Element ) => {
+  if ( !weeksGridRef.value ) {
+    return;
+  }
+
+  const achievement: TAchievement | undefined = achievementByWeek.get( Number(( cell as HTMLElement ).dataset.week ));
+
+  if ( !achievement ) {
+    return;
+  }
+
+  const gridRect: DOMRect = weeksGridRef.value.getBoundingClientRect();
+  const cellRect: DOMRect = cell.getBoundingClientRect();
+
+  tooltipStyle.value = {
+    position: 'absolute',
+    left: ( cellRect.left - gridRect.left + cellRect.width / 2 ) + 'px',
+    top: ( cellRect.top - gridRect.top ) + 'px',
+    transform: 'translate( -50%, -100% )',
+    pointerEvents: 'none',
+  };
+  hoveredAchievement.value = achievement;
+};
+
+const hideTooltip = () => {
+  hoveredAchievement.value = null;
+};
+
+const onGridOver = ( event: MouseEvent ) => {
+  // После касания браузер шлёт эмулированные mouse-события — игнорируем, чтобы тултип не залипал
+  if ( performance.now() - lastTouchTime < 700 ) {
+    return;
+  }
+
+  const cell = ( event.target as HTMLElement ).closest( '[data-week]' );
+
+  if ( cell ) {
+    showForCell( cell );
+  }
+};
+
+const onGridOut = () => {
+  if ( performance.now() - lastTouchTime < 700 ) {
+    return;
+  }
+
+  hideTooltip();
+};
+
+// Привязка к ближайшей жёлтой клетке в радиусе — точное попадание пальцем почти невозможно
+const showNearest = ( clientX: number, clientY: number ) => {
+  if ( !weeksGridRef.value ) {
+    return;
+  }
+
+  const cells: NodeListOf< Element > = weeksGridRef.value.querySelectorAll( '[data-week]' );
+  let bestCell: Element | null = null;
+  let bestDist: number = Infinity;
+
+  cells.forEach(( cell ) => {
+    const rect: DOMRect = cell.getBoundingClientRect();
+    const cx: number = rect.left + rect.width / 2;
+    const cy: number = rect.top + rect.height / 2;
+    const dist: number = ( clientX - cx ) ** 2 + ( clientY - cy ) ** 2;
+
+    if ( dist < bestDist ) {
+      bestDist = dist;
+      bestCell = cell;
+    }
+  });
+
+  if ( bestCell && bestDist <= TOUCH_HIT_RADIUS ** 2 ) {
+    showForCell( bestCell );
+  } else {
+    hideTooltip();
+  }
+};
+
+const onGridTouch = ( event: TouchEvent ) => {
+  lastTouchTime = performance.now();
+
+  const touch: Touch | undefined = event.touches[0];
+
+  if ( !touch ) {
+    return;
+  }
+
+  showNearest( touch.clientX, touch.clientY );
+};
+
+const onGridTouchEnd = () => {
+  lastTouchTime = performance.now();
+  hideTooltip();
+};
 
 const openDateModal = () => {
   isDateModalOpen.value = true;
@@ -135,21 +252,42 @@ const lifeDecades = computed(() => {
         </ion-content>
       </ion-modal>
 
-      <div v-if="lifeWeeks" ref="weeksGridRef" :class="styles.lifeProgress__weeksGrid">
+      <div v-if="lifeWeeks"
+           ref="weeksGridRef"
+           :class="styles.lifeProgress__weeksGrid"
+           @mouseover="onGridOver"
+           @mouseout="onGridOut"
+           @touchstart.passive="onGridTouch"
+           @touchmove.passive="onGridTouch"
+           @touchend="onGridTouchEnd"
+           @touchcancel="onGridTouchEnd"
+      >
         <div v-for="decade in lifeDecades" :key="decade.label" :class="styles.lifeProgress__decade">
           <div :class="styles.lifeProgress__decadeLabel">{{ decade.label }}</div>
 
           <div :class="styles.lifeProgress__decadeCells">
             <div v-for="week in decade.weeksCount"
                  :key="week"
+                 :data-week="achievementByWeek.has( decade.startWeek + week - 1 ) ? decade.startWeek + week - 1 : undefined"
                  :class="[
                     styles.lifeProgress__week,
                     decade.startWeek + week - 1 < lifeWeeks.currentWeekIndex && styles.lifeProgress__week_past,
-                    decade.startWeek + week - 1 === lifeWeeks.currentWeekIndex && styles.lifeProgress__week_current
+                    achievementByWeek.has( decade.startWeek + week - 1 ) && styles.lifeProgress__week_achievement,
+                    decade.startWeek + week - 1 === lifeWeeks.currentWeekIndex && styles.lifeProgress__week_current,
+                    hoveredAchievement?.weeks === ( decade.startWeek + week - 1 ) && styles.lifeProgress__week_hovered
                  ]"
             ></div>
           </div>
         </div>
+
+        <AchievementTooltip
+            v-if="hoveredAchievement"
+            :style="tooltipStyle"
+            :title="hoveredAchievement.name"
+            :lead="hoveredAchievement.person"
+            :comment="hoveredAchievement.comment"
+            :icon="hoveredAchievement.icon"
+        />
       </div>
 
       <ion-button

@@ -1,0 +1,7 @@
+.achievementTooltip {
+  position: relative;
+  padding: 10px;
+  color: #fff;
+  border: 1px solid var( --brd-custom-theme-color );
+  background-color: color-mix( in srgb, var( --brd-custom-theme-color ), black var( --brd-color-mix-bg ));
+}

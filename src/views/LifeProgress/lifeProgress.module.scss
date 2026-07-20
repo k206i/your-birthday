@@ -22,11 +22,12 @@
   }
 
   &__weeksGrid {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: var( --brd-size-gap-s );
     margin-bottom: var( --brd-size-gap );
-    contain: content;
+    contain: layout;
   }
 
   &__decade {
@@ -52,6 +53,7 @@
   }
 
   &__week {
+    position: relative;
     aspect-ratio: 1;
     background: var( --brd-color-white-10 );
 
@@ -59,10 +61,19 @@
       background: rgba(176, 247, 157, .32);
     }
 
+    &_achievement {
+      background: var( --brd-color-warning );
+    }
+
     &_current {
       background: var( --brd-custom-theme-color );
       opacity: 1;
       box-shadow: 0 0 6px var( --brd-custom-theme-color );
+      transform: scale( 1.6 );
+    }
+
+    &_hovered {
+      transform: scale( 2 );
     }
   }
 }

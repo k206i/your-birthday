@@ -21,7 +21,7 @@ export const appVars = {
     cycleMax: 40, // Максимальная длина цикла в днях
     cycleDefault: 28, // Длина цикла по умолчанию
   },
-  lifeExpectancyWeeks: 5200, // Желаемая продолжительность жизни в неделях (100 лет × 52; сетка LifeProgress)
+  lifeExpectancyWeeks: 5720, // Желаемая продолжительность жизни в неделях (110 лет × 52; сетка LifeProgress)
   birthdaySoonDays: 3, // За сколько дней начинать срочно напоминать о чужом ДР
   colors: {
     childBirthday: '#35b79b',

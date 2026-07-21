@@ -1,7 +1,37 @@
 .achievementTooltip {
   position: relative;
-  padding: 10px;
-  color: #fff;
-  border: 1px solid var( --brd-custom-theme-color );
-  background-color: color-mix( in srgb, var( --brd-custom-theme-color ), black var( --brd-color-mix-bg ));
+  display: flex;
+  gap: var( --brd-size-gap-s );
+  padding: var( --brd-size-gap-s);
+  border-radius: var( --brd-size-border-radius-s );
+  background-color: var( --brd-color-theme-dark );
+  box-shadow: 0 0 10px var( --brd-color-theme-dark );
+
+  &__content {
+    // Placeholder
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    border-radius: var( --brd-size-border-radius-xs );
+    background-color: color-mix( in srgb, var( --brd-custom-theme-color ), black var( --brd-color-mix-bg ));
+  }
+
+  &__title {
+    margin-bottom: var( --brd-size-gap-xs );
+    font-family: var( --brd-font-default-alt );
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  &__comment {
+    font-size: 12px;
+    color: var( --brd-color-font );
+  }
 }

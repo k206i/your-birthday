@@ -3,7 +3,6 @@ import styles from './achievementTooltip.module.scss';
 
 const props = defineProps<{
   title: string,
-  lead?: string,
   comment?: string,
   icon?: string,
 }>();
@@ -11,19 +10,22 @@ const props = defineProps<{
 
 <template>
   <div :class="styles.achievementTooltip">
-
-    {{ props.title }}
-
-    <div v-if="props.lead">
-      {{ props.lead }}
-    </div>
-
-    <div v-if="props.comment">
-      {{ props.comment }}
-    </div>
-
-    <div v-if="props.icon">
+    <div v-if="props.icon"
+         :class="styles.achievementTooltip__icon"
+    >
       {{ props.icon }}
+    </div>
+
+    <div>
+      <div :class="styles.achievementTooltip__title">
+        {{ props.title }}
+      </div>
+
+      <div v-if="props.comment"
+           :class="styles.achievementTooltip__comment"
+      >
+        {{ props.comment }}
+      </div>
     </div>
   </div>
 </template>

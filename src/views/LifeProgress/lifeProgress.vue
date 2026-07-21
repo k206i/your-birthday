@@ -54,8 +54,9 @@ const showForCell = ( cell: Element ) => {
 
   tooltipStyle.value = {
     position: 'absolute',
-    left: ( cellRect.left - gridRect.left + cellRect.width / 2 ) + 'px',
-    top: ( cellRect.top - gridRect.top ) + 'px',
+    left: '50vw',
+    top: ( cellRect.top - gridRect.top - 40 ) + 'px', // 40px - чтобы палец загораживал подсказку
+    width: '70vw',
     transform: 'translate( -50%, -100% )',
     pointerEvents: 'none',
   };
@@ -284,7 +285,6 @@ const lifeDecades = computed(() => {
             v-if="hoveredAchievement"
             :style="tooltipStyle"
             :title="hoveredAchievement.name"
-            :lead="hoveredAchievement.person"
             :comment="hoveredAchievement.comment"
             :icon="hoveredAchievement.icon"
         />

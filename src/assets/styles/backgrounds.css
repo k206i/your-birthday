@@ -39,7 +39,6 @@
 
 .cat-5 {
     background-image: url( "../../assets/img/animals/cat-5.webp" );
-    background-size: 150px auto;
 }
 
 .cat-6_art {
@@ -56,4 +55,8 @@
 
 .penguin_art {
     background-image: url( "../../assets/img/animals/penguin_art.webp" );
+}
+
+.otter_art {
+    background-image: url( "../../assets/img/animals/otter_art.webp" );
 }

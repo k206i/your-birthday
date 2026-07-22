@@ -215,10 +215,10 @@ const lifeDecades = computed(() => {
     <ion-content :fullscreen="true" class="ion-padding">
       <WidgetPageTitle
           :class="styles.lifeProgress__titleBlock"
-          bg-image="cat-5"
-          title="Загрузка жизненного пути 🎮"
-          lead="Узнайте, на сколько процентов уже загружена ваша жизненная карта, и посмотрите, сколько уровней ещё впереди."
-          comment="Посоревнуйтесь со знаменитостями и рекордсменами-долгожителями 📊"
+          bg-image="otter_art"
+          title="Визуализация жизненного пути 🎮"
+          lead="Посмотрите, где вы находитесь и кого вы уже обогнали"
+          comment="Попробуйте получить мистическую ачивку&nbsp;🧙‍♂️"
       />
 
       <ion-button
@@ -252,6 +252,18 @@ const lifeDecades = computed(() => {
           </div>
         </ion-content>
       </ion-modal>
+
+      <div :class="styles.lifeProgress__weekComment">
+        Каждый квадратик &ndash; неделя.
+        Каждая строка &ndash; год.<br />
+
+        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_past]"></span>&nbsp;прожито
+        &nbsp;&nbsp;&nbsp;
+        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_current]"></span>&nbsp;сейчас
+        &nbsp;&nbsp;&nbsp;
+        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_achievement]"></span>&nbsp;чей-то финал (нажмите, чтобы посмотреть)
+
+      </div>
 
       <div v-if="lifeWeeks"
            ref="weeksGridRef"

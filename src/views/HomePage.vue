@@ -162,7 +162,7 @@ const isAdditionalBirthdaySoon = computed(() => {
                 link="/lifeProgress"
                 title="🎮 Жизненный прогресс"
                 comment="███████░░░░░"
-                bg-image="cat-1_art"
+                bg-image="otter_art"
                 :color="appVars.colors.lifeProgress"
             />
           </li>

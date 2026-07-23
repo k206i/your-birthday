@@ -1,0 +1,26 @@
+[
+  {
+    "id": "resist-fries",
+    "rarity": "common",
+    "icon": "🍟",
+    "image": "",
+    "name": "Устояла перед фри",
+    "description": "Победа над конкретным искушением"
+  },
+  {
+    "id": "back-on-track",
+    "rarity": "rare",
+    "icon": "🥴",
+    "image": "",
+    "name": "Сорвалась, но вернулась",
+    "description": "Перезапуск стрика после провала"
+  },
+  {
+    "id": "ussr-born",
+    "rarity": "rare",
+    "icon": "☭",
+    "image": "",
+    "name": "Всегда готов!",
+    "description": "Родился в СССР"
+  }
+]

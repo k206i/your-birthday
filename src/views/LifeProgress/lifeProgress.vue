@@ -259,13 +259,6 @@ const lifeDecades = computed(() => {
       <div :class="styles.lifeProgress__weekComment">
         Каждый квадратик &ndash; неделя.
         Каждая строка &ndash; год.<br />
-
-        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_past]"></span>&nbsp;прожито
-        &nbsp;&nbsp;&nbsp;
-        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_current]"></span>&nbsp;сейчас
-        &nbsp;&nbsp;&nbsp;
-        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_achievement]"></span>&nbsp;чей-то финал (нажмите, чтобы посмотреть)
-
       </div>
 
       <div v-if="lifeWeeks"
@@ -303,6 +296,15 @@ const lifeDecades = computed(() => {
             :comment="hoveredAchievement.comment"
             :icon="hoveredAchievement.icon"
         />
+      </div>
+
+      <div :class="styles.lifeProgress__weekComment">
+        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_past]"></span>&nbsp;прожито
+        &nbsp;&nbsp;&nbsp;
+        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_current]"></span>&nbsp;сейчас
+        &nbsp;&nbsp;&nbsp;
+        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_achievement]"></span>&nbsp;чей-то финал (нажмите, чтобы посмотреть)
+
       </div>
 
       <ion-button

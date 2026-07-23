@@ -166,6 +166,16 @@ const isAdditionalBirthdaySoon = computed(() => {
                 :color="appVars.colors.lifeProgress"
             />
           </li>
+
+          <li>
+            <WidgetPageLink
+                link="/achievementsPage"
+                title="🎮 Достижения"
+                comment="Ачивки!"
+                bg-image="otter_art"
+                :color="appVars.colors.achievements"
+            />
+          </li>
         </ul>
 
 

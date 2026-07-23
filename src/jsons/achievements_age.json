@@ -1,5 +1,6 @@
 [
   {
+    "id": "age_1",
     "icon": "🍼",
     "image": "",
     "name": "Вход на сервер",
@@ -8,6 +9,7 @@
     "rarity": "common"
   },
   {
+    "id": "age_2",
     "icon": "🌱",
     "image": "",
     "name": "Туториал пройден",
@@ -16,6 +18,7 @@
     "rarity": "common"
   },
   {
+    "id": "age_3",
     "icon": "🧸",
     "image": "",
     "name": "Детский режим",
@@ -24,6 +27,7 @@
     "rarity": "common"
   },
   {
+    "id": "age_4",
     "icon": "🎒",
     "image": "",
     "name": "Первый сезон",
@@ -32,6 +36,7 @@
     "rarity": "common"
   },
   {
+    "id": "age_5",
     "icon": "📚",
     "image": "",
     "name": "Выжил в школе",
@@ -40,6 +45,7 @@
     "rarity": "common"
   },
   {
+    "id": "age_6",
     "icon": "🎮",
     "image": "",
     "name": "Подростковый патч",
@@ -48,6 +54,7 @@
     "rarity": "common"
   },
   {
+    "id": "age_7",
     "icon": "🔥",
     "image": "",
     "name": "Первый взрослый уровень",
@@ -56,6 +63,7 @@
     "rarity": "rare"
   },
   {
+    "id": "age_8",
     "icon": "💳",
     "image": "",
     "name": "Зарплата исчезла",
@@ -64,6 +72,7 @@
     "rarity": "rare"
   },
   {
+    "id": "age_9",
     "icon": "🧑‍💻",
     "image": "",
     "name": "Взрослый, но не уверен",
@@ -72,6 +81,7 @@
     "rarity": "rare"
   },
   {
+    "id": "age_10",
     "icon": "☕",
     "image": "",
     "name": "Кофе — топливо",
@@ -80,6 +90,7 @@
     "rarity": "rare"
   },
   {
+    "id": "age_11",
     "icon": "🧠",
     "image": "",
     "name": "Советчик открыт",
@@ -88,6 +99,7 @@
     "rarity": "rare"
   },
   {
+    "id": "age_12",
     "icon": "🦵",
     "image": "",
     "name": "Колени заговорили",
@@ -96,6 +108,7 @@
     "rarity": "rare"
   },
   {
+    "id": "age_13",
     "icon": "🛠",
     "image": "",
     "name": "Пора чинить персонажа",
@@ -104,6 +117,7 @@
     "rarity": "epic"
   },
   {
+    "id": "age_14",
     "icon": "🪑",
     "image": "",
     "name": "Вставание 2.0",
@@ -112,6 +126,7 @@
     "rarity": "epic"
   },
   {
+    "id": "age_15",
     "icon": "🔧",
     "image": "",
     "name": "Техническое обслуживание",
@@ -120,6 +135,7 @@
     "rarity": "epic"
   },
   {
+    "id": "age_16",
     "icon": "🛒",
     "image": "",
     "name": "Мастер покупок",
@@ -128,6 +144,7 @@
     "rarity": "epic"
   },
   {
+    "id": "age_17",
     "icon": "🥂",
     "image": "",
     "name": "Классика жанра",
@@ -136,6 +153,7 @@
     "rarity": "epic"
   },
   {
+    "id": "age_18",
     "icon": "🧾",
     "image": "",
     "name": "Повелитель чеков",
@@ -144,6 +162,7 @@
     "rarity": "epic"
   },
   {
+    "id": "age_19",
     "icon": "📼",
     "image": "",
     "name": "Живая энциклопедия",
@@ -152,6 +171,7 @@
     "rarity": "epic"
   },
   {
+    "id": "age_20",
     "icon": "👑",
     "image": "",
     "name": "Ветеран реальности",
@@ -160,6 +180,7 @@
     "rarity": "epic"
   },
   {
+    "id": "age_21",
     "icon": "🏆",
     "image": "",
     "name": "Старший игрок",
@@ -168,6 +189,7 @@
     "rarity": "epic"
   },
   {
+    "id": "age_22",
     "icon": "🏰",
     "image": "",
     "name": "Легендарный аккаунт",
@@ -176,6 +198,7 @@
     "rarity": "legendary"
   },
   {
+    "id": "age_23",
     "icon": "🧙",
     "image": "",
     "name": "Мастер жизни",
@@ -184,6 +207,7 @@
     "rarity": "legendary"
   },
   {
+    "id": "age_24",
     "icon": "📻",
     "image": "",
     "name": "Олдскул легенда",
@@ -192,6 +216,7 @@
     "rarity": "legendary"
   },
   {
+    "id": "age_25",
     "icon": "💎",
     "image": "",
     "name": "Коллекционное издание",
@@ -200,6 +225,7 @@
     "rarity": "legendary"
   },
   {
+    "id": "age_26",
     "icon": "🕰",
     "image": "",
     "name": "Машина времени",
@@ -208,6 +234,7 @@
     "rarity": "legendary"
   },
   {
+    "id": "age_27",
     "icon": "🦾",
     "image": "",
     "name": "Неубиваемый персонаж",
@@ -216,6 +243,7 @@
     "rarity": "legendary"
   },
   {
+    "id": "age_28",
     "icon": "💎",
     "image": "",
     "name": "Мифический игрок",
@@ -224,6 +252,7 @@
     "rarity": "mythic"
   },
   {
+    "id": "age_29",
     "icon": "👑",
     "image": "",
     "name": "Босс финального уровня",
@@ -232,6 +261,7 @@
     "rarity": "mythic"
   },
   {
+    "id": "age_30",
     "icon": "🚀",
     "image": "",
     "name": "Космический стаж",

@@ -29,6 +29,7 @@ export const appVars = {
     mensCalendar: '#548fd6',
     womensCalendar: '#ff8bef',
     lifeProgress: '#3DFF07',
+    achievements: '#F2B348',
   },
   achievementColors: {
     common: '#8B8FA3',

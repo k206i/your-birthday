@@ -1,0 +1,20 @@
+@use "@/assets/styles/typography";
+
+.widgetAddBirthday {
+  position: relative;
+  padding: var( --brd-size-gap-xl ) 50px;
+  border: 1px solid rgba( var( --brd-color-theme_rgb ), .3 );
+  border-radius: var( --brd-size-border-radius );
+  background: radial-gradient(circle at top, rgba( var( --brd-color-theme_rgb ), .3 ) 0, transparent 80%);
+
+  &__title {
+    @extend .typography__h2;
+    margin-bottom: var( --brd-size-gap-s );
+    text-align: center;
+  }
+
+  &__comment {
+    text-align: center;
+    color: var( --brd-color-theme );
+  }
+}

@@ -1,0 +1,71 @@
+.achievementsPage {
+  position: relative;
+
+  &__group {
+    margin-bottom: var( --brd-size-gap-l );
+  }
+
+  &__groupTitle {
+    margin-bottom: var( --brd-size-gap-s );
+    font-family: var( --brd-font-default-alt );
+    font-size: 18px;
+    font-weight: bold;
+    color: var( --brd-color-font-accent );
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: var( --brd-size-gap-s );
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: var( --brd-size-gap );
+    padding: var( --brd-size-gap );
+    border-radius: var( --brd-size-border-radius );
+    background-color: var( --brd-color-theme-dark );
+
+    &_locked {
+      opacity: .45;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    aspect-ratio: 1;
+    font-size: 26px;
+    border-radius: var( --brd-size-border-radius-s );
+    background-color: var( --brd-color-white-5 );
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: var( --brd-size-gap-xs );
+  }
+
+  &__name {
+    font-family: var( --brd-font-default-alt );
+    font-size: 16px;
+    font-weight: bold;
+    color: var( --brd-color-font-accent );
+  }
+
+  &__comment {
+    font-size: 12px;
+    color: var( --brd-color-font );
+  }
+
+  &__rarity {
+    align-self: flex-start;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+  }
+}

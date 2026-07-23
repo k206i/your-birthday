@@ -7,6 +7,7 @@ import MensCalendar from '@/views/MensCalendar/mensCalendar.vue';
 import WomensCalendar from '@/views/WomensCalendar/womensCalendar.vue';
 import LifeProgress from '@/views/LifeProgress/lifeProgress.vue';
 import UserProfile from '@/views/UserProfile/userProfile.vue';
+import AchievementsPage from '@/views/AchievementsPage/achievementsPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -47,6 +48,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/userProfile',
     name: 'UserProfile',
     component: UserProfile
+  },
+  {
+    path: '/achievementsPage',
+    name: 'AchievementsPage',
+    component: AchievementsPage
   }
 ]
 

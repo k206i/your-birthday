@@ -29,5 +29,19 @@ export const appVars = {
     mensCalendar: '#548fd6',
     womensCalendar: '#ff8bef',
     lifeProgress: '#3DFF07',
+  },
+  achievementColors: {
+    common: '#8B8FA3',
+    rare: '#57C5E3',
+    epic: '#A876EC',
+    legendary: '#F2B348',
+    mythic: '#FF6EC7',
+  },
+  achievementTranslates: {
+    common: 'Обычное',
+    rare: 'Редкое',
+    epic: 'Эпичное',
+    legendary: 'Легендарное',
+    mythic: 'Мифическое',
   }
 }

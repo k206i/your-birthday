@@ -13,6 +13,7 @@ import {currentDate} from '@/store/currentDate';
 import {shareElementAsImage} from '@/composables/shareElementAsImage';
 import famousData from '@/jsons/achievements_famous.json';
 import AchievementTooltip from '@/components/Achievement/Tooltip/achievementTooltip.vue';
+import AchievementLast from '@/components/Achievement/Last/achievementLast.vue';
 
 type TAchievement = {
   icon: string,
@@ -252,6 +253,8 @@ const lifeDecades = computed(() => {
           </div>
         </ion-content>
       </ion-modal>
+
+      <AchievementLast />
 
       <div :class="styles.lifeProgress__weekComment">
         Каждый квадратик &ndash; неделя.

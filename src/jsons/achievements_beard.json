@@ -1,182 +1,162 @@
-{
-  "streak": [
-    {
-      "days": 1,
-      "rarity": "common",
-      "icon": "🪒",
-      "image": "",
-      "name": "Свежая щетина",
-      "description": "Погладил подбородок — приятно колется"
-    },
-    {
-      "days": 2,
-      "rarity": "common",
-      "icon": "😏",
-      "image": "",
-      "name": "Лёгкий брутал",
-      "description": "Уже не мальчик, но ещё не Хемингуэй"
-    },
-    {
-      "days": 3,
-      "rarity": "common",
-      "icon": "✨",
-      "image": "",
-      "name": "Трёхдневная классика",
-      "description": "Та самая небритость из рекламы парфюма"
-    },
-    {
-      "days": 5,
-      "rarity": "common",
-      "icon": "🐺",
-      "image": "",
-      "name": "Волчий режим",
-      "description": "Начал коситься на луну"
-    },
-    {
-      "days": 7,
-      "rarity": "common",
-      "icon": "🪓",
-      "image": "",
-      "name": "Неделя без лезвия",
-      "description": "Бритва пылится и тихо обижается"
-    },
-    {
-      "days": 10,
-      "rarity": "rare",
-      "icon": "🌲",
-      "image": "",
-      "name": "Начинающий лесник",
-      "description": "Захотелось топор и клетчатую рубашку"
-    },
-    {
-      "days": 14,
-      "rarity": "rare",
-      "icon": "📖",
-      "image": "",
-      "name": "Молодой мудрец",
-      "description": "Люди стали спрашивать у тебя совета"
-    },
-    {
-      "days": 21,
-      "rarity": "rare",
-      "icon": "🔥",
-      "image": "",
-      "name": "Отшельник",
-      "description": "Связь с внешним миром теперь по желанию"
-    },
-    {
-      "days": 30,
-      "rarity": "rare",
-      "icon": "🦁",
-      "image": "",
-      "name": "Борода набирает XP",
-      "description": "Минус один подбородок"
-    },
-    {
-      "days": 45,
-      "rarity": "epic",
-      "icon": "🐻",
-      "image": "",
-      "name": "Медвежий режим",
-      "description": "Просыпаешься с желанием порычать"
-    },
-    {
-      "days": 60,
-      "rarity": "epic",
-      "icon": "👑",
-      "image": "",
-      "name": "Бородатый авторитет",
-      "description": "В очереди пропускают без лишних слов"
-    },
-    {
-      "days": 90,
-      "rarity": "epic",
-      "icon": "🧙",
-      "image": "",
-      "name": "Архимаг бороды",
-      "description": "Борода начала колдовать сама"
-    },
-    {
-      "days": 120,
-      "rarity": "epic",
-      "icon": "🌳",
-      "image": "",
-      "name": "Хранитель леса",
-      "description": "Рыбаки принимают тебя за своего"
-    },
-    {
-      "days": 180,
-      "rarity": "legendary",
-      "icon": "⚔️",
-      "image": "",
-      "name": "Викинг разблокирован",
-      "description": "Тянет к морю и в набег"
-    },
-    {
-      "days": 270,
-      "rarity": "legendary",
-      "icon": "👑",
-      "image": "",
-      "name": "Король бороды",
-      "description": "Корона держится на одной бороде"
-    },
-    {
-      "days": 365,
-      "rarity": "legendary",
-      "icon": "🪄",
-      "image": "",
-      "name": "Гэндальф одобряет",
-      "description": "Мимо парикмахерской ты не пройдёшь"
-    },
-    {
-      "days": 500,
-      "rarity": "legendary",
-      "icon": "🦅",
-      "image": "",
-      "name": "Повелитель бороды",
-      "description": "Борода живёт своей жизнью и платит за себя"
-    },
-    {
-      "days": 730,
-      "rarity": "legendary",
-      "icon": "💎",
-      "image": "",
-      "name": "Легенда растительности",
-      "description": "О твоей бороде слагают легенды у костра"
-    }
-  ],
-  "special": [
-    {
-      "id": "back-on-track",
-      "rarity": "rare",
-      "icon": "🔄",
-      "image": "",
-      "name": "Второе пришествие",
-      "description": "Сорвался и побрился, но борода не держит обид — начинаем заново"
-    },
-    {
-      "id": "survived-itch",
-      "rarity": "rare",
-      "icon": "😖",
-      "image": "",
-      "name": "Пережил зуд",
-      "description": "Прошёл через адскую чесотку первой недели и не сломался"
-    },
-    {
-      "id": "hidden-stash",
-      "rarity": "common",
-      "icon": "🍞",
-      "image": "",
-      "name": "Скрытые запасы",
-      "description": "Нашёл в бороде крошку от вчерашнего ужина"
-    },
-    {
-      "id": "unbreakable",
-      "rarity": "epic",
-      "icon": "💬",
-      "image": "",
-      "name": "Непоколебимый",
-      "description": "Пережил сакраментальное «Может, уже сбреешь?»"
-    }
-  ]
-}
+[
+  {
+    "days": 1,
+    "rarity": "common",
+    "icon": "🪒",
+    "image": "",
+    "name": "Свежая щетина",
+    "description": "Погладил подбородок — приятно колется"
+  },
+  {
+    "days": 2,
+    "rarity": "common",
+    "icon": "😏",
+    "image": "",
+    "name": "Лёгкий брутал",
+    "description": "Уже не мальчик, но ещё не Хемингуэй"
+  },
+  {
+    "days": 3,
+    "rarity": "common",
+    "icon": "✨",
+    "image": "",
+    "name": "Трёхдневная классика",
+    "description": "Та самая небритость из рекламы парфюма"
+  },
+  {
+    "days": 5,
+    "rarity": "common",
+    "icon": "🐺",
+    "image": "",
+    "name": "Волчий режим",
+    "description": "Начал коситься на луну"
+  },
+  {
+    "days": 7,
+    "rarity": "common",
+    "icon": "🪓",
+    "image": "",
+    "name": "Неделя без лезвия",
+    "description": "Бритва пылится и тихо обижается"
+  },
+  {
+    "days": 10,
+    "rarity": "rare",
+    "icon": "🌲",
+    "image": "",
+    "name": "Начинающий лесник",
+    "description": "Захотелось топор и клетчатую рубашку"
+  },
+  {
+    "days": 14,
+    "rarity": "rare",
+    "icon": "📖",
+    "image": "",
+    "name": "Молодой мудрец",
+    "description": "Люди стали спрашивать у тебя совета"
+  },
+  {
+    "days": 21,
+    "rarity": "rare",
+    "icon": "🔥",
+    "image": "",
+    "name": "Отшельник",
+    "description": "Связь с внешним миром теперь по желанию"
+  },
+  {
+    "days": 30,
+    "rarity": "rare",
+    "icon": "🦁",
+    "image": "",
+    "name": "Борода набирает XP",
+    "description": "Минус один подбородок"
+  },
+  {
+    "days": 34,
+    "rarity": "legendary",
+    "icon": "💬",
+    "image": "",
+    "name": "Непоколебимый",
+    "description": "Пережил сакраментальное «Может, уже сбреешь?»"
+  },
+  {
+    "days": 45,
+    "rarity": "epic",
+    "icon": "🐻",
+    "image": "",
+    "name": "Медвежий режим",
+    "description": "Просыпаешься с желанием порычать"
+  },
+  {
+    "days": 45,
+    "rarity": "legendary",
+    "icon": "🍞",
+    "image": "",
+    "name": "Скрытые запасы",
+    "description": "Нашёл в бороде крошку от вчерашнего ужина"
+  },
+  {
+    "days": 60,
+    "rarity": "epic",
+    "icon": "👑",
+    "image": "",
+    "name": "Бородатый авторитет",
+    "description": "В очереди пропускают без лишних слов"
+  },
+  {
+    "days": 90,
+    "rarity": "epic",
+    "icon": "🧙",
+    "image": "",
+    "name": "Архимаг бороды",
+    "description": "Борода начала колдовать сама"
+  },
+  {
+    "days": 120,
+    "rarity": "epic",
+    "icon": "🌳",
+    "image": "",
+    "name": "Хранитель леса",
+    "description": "Рыбаки принимают тебя за своего"
+  },
+  {
+    "days": 180,
+    "rarity": "legendary",
+    "icon": "⚔️",
+    "image": "",
+    "name": "Викинг разблокирован",
+    "description": "Тянет к морю и в набег"
+  },
+  {
+    "days": 270,
+    "rarity": "legendary",
+    "icon": "👑",
+    "image": "",
+    "name": "Король бороды",
+    "description": "Корона держится на одной бороде"
+  },
+  {
+    "days": 365,
+    "rarity": "legendary",
+    "icon": "🪄",
+    "image": "",
+    "name": "Гэндальф одобряет",
+    "description": "Мимо парикмахерской ты не пройдёшь"
+  },
+  {
+    "days": 500,
+    "rarity": "legendary",
+    "icon": "🦅",
+    "image": "",
+    "name": "Повелитель бороды",
+    "description": "Борода живёт своей жизнью и платит за себя"
+  },
+  {
+    "days": 730,
+    "rarity": "legendary",
+    "icon": "💎",
+    "image": "",
+    "name": "Легенда растительности",
+    "description": "О твоей бороде слагают легенды у костра"
+  }
+]

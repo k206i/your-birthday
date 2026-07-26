@@ -3,12 +3,25 @@ import styles from './achievementLast.module.scss';
 import {arrowForwardOutline} from 'ionicons/icons';
 import {IonIcon} from '@ionic/vue';
 import {appVars} from '@/configApp';
+import {appStore} from '@/store/appStore';
+import {computed} from 'vue';
+import AchievementImage from '@/components/Achievement/Image/achievementImage.vue';
+
+const rarityLabel = computed(() => {
+  const rarity = appStore.lastAchievement?.rarity;
+
+  if ( !rarity ) {
+    return '';
+  }
+
+  return ( appVars.achievementTranslates as Record< string, string > )[ rarity ] ?? '';
+});
 </script>
 
 <template>
-  <div :class="styles.achievementLast">
+  <div :class="styles.achievementLast" v-if="appStore.lastAchievement">
     <div :class="styles.achievementLast__icon">
-      🧤
+      <AchievementImage :achievement="appStore.lastAchievement" />
     </div>
 
     <div :class="styles.achievementLast__contentWrapper">
@@ -17,12 +30,12 @@ import {appVars} from '@/configApp';
       </div>
 
       <div :class="styles.achievementLast__title">
-        Обуздал жизнь
+        {{ appStore.lastAchievement?.name }}
       </div>
 
       <div :class="styles.achievementLast__comment">
         <span :class="styles.achievementLast__rarity">
-          {{ appVars.achievementTranslates.mythic }}
+          {{ rarityLabel }}
         </span>
       </div>
     </div>
@@ -30,5 +43,9 @@ import {appVars} from '@/configApp';
     <div :class="styles.achievementLast__linkButton">
       <ion-icon :icon="arrowForwardOutline"></ion-icon>
     </div>
+
+    <router-link to="/achievementsPage"
+                 :class="styles.achievementLast__link">
+    </router-link>
   </div>
 </template>

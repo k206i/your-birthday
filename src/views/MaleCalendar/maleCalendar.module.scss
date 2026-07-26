@@ -1,4 +1,5 @@
-.womensCalendar {
+
+.maleCalendar {
   position: relative;
 
   &__titleBlock {
@@ -13,7 +14,7 @@
   &__buttons {
     display: flex;
     flex-direction: column;
-    gap: var( --brd-size-gap-s );
+    gap: var( --brd-size-gap-s);
     scroll-margin-top: var( --brd-scroll-margin-top );
   }
 
@@ -23,7 +24,7 @@
     bottom: 0;
     left: 50%;
     transform: translateX( -50% );
-    height: 150px;
+    max-height: 150px;
   }
 
   &__dates {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import styles from './mensCalendar.module.scss';
+import styles from './maleCalendar.module.scss';
 import stylesArtButton from '@/assets/styles/artButton.module.scss';
 import stylesOverflowSection from '@/assets/styles/overflowSection.module.scss';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
@@ -15,7 +15,7 @@ import UiDayCard from '@/components/Ui/DayCard/uiDayCard.vue';
 import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 import WidgetLinksList from '@/components/Widgets/LinksList/widgetLinksList.vue';
 
-const SUB_THEME_COLOR = appVars.colors.mensCalendar;
+const SUB_THEME_COLOR = appVars.colors.maleCalendar;
 
 const lastAlcoholDate = ref();
 const lastEjaculationDate = ref();
@@ -141,7 +141,7 @@ watch( optimalDates, async ( value ) => {
 </script>
 
 <template>
-  <ion-page :class="styles.mensCalendar"
+  <ion-page :class="styles.maleCalendar"
             :style="{
               '--brd-custom-theme-color': SUB_THEME_COLOR,
             }"
@@ -150,7 +150,7 @@ watch( optimalDates, async ( value ) => {
 
     <ion-content :fullscreen="true" class="ion-padding">
       <WidgetPageTitle
-          :class="styles.mensCalendar__titleBlock"
+          :class="styles.maleCalendar__titleBlock"
           bg-image="cat-5"
           @click="scrollToButtons"
           title="Вы тоже можете планировать!"
@@ -158,7 +158,7 @@ watch( optimalDates, async ( value ) => {
           comment="Но помните, лучший советчик &mdash; ваш лечащий врач&nbsp; 🤙"
       />
 
-      <div ref="buttonsRef" :class="styles.mensCalendar__buttons">
+      <div ref="buttonsRef" :class="styles.maleCalendar__buttons">
         <div :class="stylesArtButton.artButton" @click="openAlcoholDateModal">
           <div :class="[
               stylesArtButton.artButton__art,
@@ -223,7 +223,7 @@ watch( optimalDates, async ( value ) => {
                   @ionCancel="isAlcoholDateModalOpen = false"
               ></ion-datetime>
 
-              <img :class="styles.mensCalendar__modalArt" src="@/assets/img/animals/cat-alco.png" alt="" />
+              <img :class="styles.maleCalendar__modalArt" src="@/assets/img/animals/cat-alco.png" alt="" />
             </div>
           </ion-content>
         </ion-modal>
@@ -267,14 +267,14 @@ watch( optimalDates, async ( value ) => {
                   @ionCancel="isEjaculationDateModalOpen = false"
               ></ion-datetime>
 
-              <img :class="styles.mensCalendar__modalArt" src="@/assets/img/animals/cat-4.png" alt="" />
+              <img :class="styles.maleCalendar__modalArt" src="@/assets/img/animals/cat-4.png" alt="" />
             </div>
           </ion-content>
         </ion-modal>
       </div>
 
       <div v-if="optimalDates"
-           :class="styles.mensCalendar__block"
+           :class="styles.maleCalendar__block"
       >
         <template v-if="tipType === 'alco'">
           <WidgetTipInfo :color="SUB_THEME_COLOR">
@@ -292,7 +292,7 @@ watch( optimalDates, async ( value ) => {
 
         <div :class="stylesOverflowSection.overflowSection">
           <div :class="[
-              styles.mensCalendar__dates,
+              styles.maleCalendar__dates,
               stylesOverflowSection.overflowSection__overflowWrapper
           ]">
             <div v-for="date in optimalDates.tooShort" :key="date">
@@ -314,7 +314,7 @@ watch( optimalDates, async ( value ) => {
         </div>
       </div>
 
-      <WidgetLinksList :class="styles.mensCalendar__block">
+      <WidgetLinksList :class="styles.maleCalendar__block">
         <a @click.prevent="isEjaculationInfoModalOpen = true">
           Влияние <span :style="{color: SUB_THEME_COLOR}">частоты семяизвержений</span> на сперматозоиды
         </a>

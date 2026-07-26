@@ -5,6 +5,8 @@ import {IonContent, IonPage} from '@ionic/vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {appVars} from '@/configApp';
 import WidgetAddBirthday from '@/components/Widgets/AddBirthday/widgetAddBirthday.vue';
+import {appStore} from '@/store/appStore';
+import AchievementLastFull from '@/components/Achievement/LastFull/achievementLastFull.vue';
 </script>
 
 <template>
@@ -16,7 +18,12 @@ import WidgetAddBirthday from '@/components/Widgets/AddBirthday/widgetAddBirthda
     <AppHeader />
 
     <ion-content :fullscreen="true" class="ion-padding">
-      <WidgetAddBirthday />
+      <template v-if="!appStore.userBirthDate">
+        <WidgetAddBirthday />
+      </template>
+      <template v-else>
+        <AchievementLastFull />
+      </template>
     </ion-content>
 
     <AppFooter />

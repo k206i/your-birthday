@@ -1,5 +1,6 @@
 import { reactive, watch } from 'vue';
 import { Preferences } from '@capacitor/preferences';
+import type { TAchievementCombined } from '@/api/getAchievementById';
 
 type TAppStore = {
   userName: string,
@@ -8,6 +9,8 @@ type TAppStore = {
   additionalBirthDate: string, // YYYY-MM-DD
   rememberedPersonTitle: string, // Кем приходится человек, чьё имя нельзя забыть (Тёща, Начальник...)
   rememberedPersonName: string, // ...и его имя
+  lastAchievement: TAchievementCombined | null, // Последняя полученная ачивка
+  nextAchievement: TAchievementCombined | null, // Следующая, которую получит пользователь
 }
 
 const STORAGE_KEY = 'appStore';
@@ -20,6 +23,8 @@ export const appStore: TAppStore = reactive({
   additionalBirthDate: '',
   rememberedPersonTitle: '',
   rememberedPersonName: '',
+  lastAchievement: null,
+  nextAchievement: null,
 });
 
 // Восстановление стора при запуске приложения

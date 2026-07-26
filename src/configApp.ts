@@ -26,8 +26,8 @@ export const appVars = {
   colors: {
     childBirthday: '#35b79b',
     dayConception: '#a876ec',
-    mensCalendar: '#548fd6',
-    womensCalendar: '#ff8bef',
+    maleCalendar: '#548fd6',
+    femaleCalendar: '#ff8bef',
     lifeProgress: '#3DFF07',
     achievements: '#F2B348',
   },

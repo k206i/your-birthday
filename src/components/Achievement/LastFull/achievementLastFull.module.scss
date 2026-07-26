@@ -3,9 +3,18 @@
 .achievementLastFull {
   position: relative;
   padding: var( --brd-size-gap-xl );
-  border: 1px solid rgba( var( --brd-color-theme_rgb ), .3 );
+  overflow: hidden;
   border-radius: var( --brd-size-border-radius );
-  background: radial-gradient(circle at top, rgba( var( --brd-color-theme_rgb ), .3 ) 0, transparent 80%);
+
+  &__bg {
+    opacity: .3;
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    border: 1px solid var( --brd-custom-theme-color );
+    border-radius: var( --brd-size-border-radius );
+    background: radial-gradient(circle at top, var( --brd-custom-theme-color ) 0, transparent 80%);
+  }
 
   &__title {
     @extend .typography__h2;

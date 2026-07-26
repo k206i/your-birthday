@@ -3,8 +3,8 @@ import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue';
 import DayConception from '@/views/DayConception/dayConception.vue';
 import ChildBirthday from '@/views/ChildBirthday/childBirthday.vue';
-import MensCalendar from '@/views/MensCalendar/mensCalendar.vue';
-import WomensCalendar from '@/views/WomensCalendar/womensCalendar.vue';
+import maleCalendar from '@/views/maleCalendar/maleCalendar.vue';
+import femaleCalendar from '@/views/femaleCalendar/femaleCalendar.vue';
 import LifeProgress from '@/views/LifeProgress/lifeProgress.vue';
 import UserProfile from '@/views/UserProfile/userProfile.vue';
 import AchievementsPage from '@/views/AchievementsPage/achievementsPage.vue';
@@ -30,14 +30,14 @@ const routes: Array<RouteRecordRaw> = [
     component: ChildBirthday
   },
   {
-    path: '/mensCalendar',
-    name: 'MensCalendar',
-    component: MensCalendar
+    path: '/maleCalendar',
+    name: 'maleCalendar',
+    component: maleCalendar
   },
   {
-    path: '/womensCalendar',
-    name: 'WomensCalendar',
-    component: WomensCalendar
+    path: '/femaleCalendar',
+    name: 'femaleCalendar',
+    component: femaleCalendar
   },
   {
     path: '/lifeProgress',

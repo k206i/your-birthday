@@ -10,6 +10,7 @@
     background-position: right var( --brd-size-border-radius ) bottom;
   }
 
+  &__block,
   &__titleWidget {
     margin-bottom: var( --brd-size-gap );
   }

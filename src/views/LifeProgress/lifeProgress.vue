@@ -7,7 +7,8 @@ import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue'
 import {appVars} from '@/configApp';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {ref, computed, watch} from 'vue';
-import {formatDisplayDate, parseLocalDate} from '@/composables/localDate';
+import {formatDisplayDate} from '@/composables/localDate';
+import {getCurrentWeekIndex} from '@/composables/getCurrentWeekIndex';
 import {appStore} from '@/store/appStore';
 import {currentDate} from '@/store/currentDate';
 import {shareElementAsImage} from '@/composables/shareElementAsImage';
@@ -166,25 +167,14 @@ const lifeWeeks = computed(() => {
     return null;
   }
 
-  const birth: Date = parseLocalDate( selectedDate.value.split('T')[0] );
-  const today: Date = parseLocalDate( currentDate.value );
+  const currentWeekIndex: number | null = getCurrentWeekIndex( selectedDate.value.split('T')[0], currentDate.value );
 
-  // Возраст в полных годах
-  let yearsLived: number = today.getFullYear() - birth.getFullYear();
-  const lastBirthday: Date = new Date( birth );
-  lastBirthday.setFullYear( birth.getFullYear() + yearsLived );
-
-  if ( lastBirthday > today ) {
-    yearsLived--;
-    lastBirthday.setFullYear( birth.getFullYear() + yearsLived );
+  if ( currentWeekIndex === null ) {
+    return null;
   }
 
-  // Неделя внутри текущего года жизни (0-51, 53-я неделя прижимается к 52-й)
-  const MS_PER_WEEK: number = 7 * 24 * 60 * 60 * 1000;
-  const weeksSinceBirthday: number = Math.min( 51, Math.floor(( today.getTime() - lastBirthday.getTime() ) / MS_PER_WEEK ));
-
   return {
-    currentWeekIndex: yearsLived * 52 + weeksSinceBirthday,
+    currentWeekIndex,
   };
 });
 
@@ -253,8 +243,6 @@ const lifeDecades = computed(() => {
           </div>
         </ion-content>
       </ion-modal>
-
-      <AchievementLast />
 
       <div :class="styles.lifeProgress__weekComment">
         Каждый квадратик &ndash; неделя.

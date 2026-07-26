@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import styles from './womensCalendar.module.scss';
+import styles from './femaleCalendar.module.scss';
 import stylesArtButton from '@/assets/styles/artButton.module.scss';
 import stylesOverflowSection from '@/assets/styles/overflowSection.module.scss';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
@@ -17,7 +17,7 @@ import WidgetArtButton from '@/components/Widgets/ArtButton/widgetArtButton.vue'
 import penguinArt from '@/assets/img/animals/penguin_art.webp';
 import WidgetLinksList from '@/components/Widgets/LinksList/widgetLinksList.vue';
 
-const SUB_THEME_COLOR = appVars.colors.womensCalendar;
+const SUB_THEME_COLOR = appVars.colors.femaleCalendar;
 
 const isPeriodDateModalOpen = ref( false );
 const selectedPeriodDate = ref();
@@ -136,7 +136,7 @@ watch( ovulationDates, async ( value ) => {
 </script>
 
 <template>
-  <ion-page :class="styles.womensCalendar"
+  <ion-page :class="styles.femaleCalendar"
             :style="{
               '--brd-custom-theme-color': SUB_THEME_COLOR,
             }"
@@ -145,7 +145,7 @@ watch( ovulationDates, async ( value ) => {
 
     <ion-content :fullscreen="true" class="ion-padding">
       <WidgetPageTitle
-          :class="styles.womensCalendar__titleBlock"
+          :class="styles.femaleCalendar__titleBlock"
           bg-image="cat-1"
           @click="scrollToButtons"
           title="Пора искать идеальное совпадение! ❤️"
@@ -154,7 +154,7 @@ watch( ovulationDates, async ( value ) => {
           comment="Но помните: природа любит удивлять, а лучший советчик — ваш лечащий врач 👩‍⚕️"
       />
 
-      <div ref="buttonsRef" :class="styles.womensCalendar__buttons">
+      <div ref="buttonsRef" :class="styles.femaleCalendar__buttons">
         <div :class="stylesArtButton.artButton" @click="openPeriodDateModal">
           <div :class="stylesArtButton.artButton__art">
             <img src="@/assets/img/animals/cat-6_art.webp" alt="" />
@@ -194,7 +194,7 @@ watch( ovulationDates, async ( value ) => {
                   @ionCancel="isPeriodDateModalOpen = false"
               ></ion-datetime>
 
-              <img :class="styles.womensCalendar__modalArt" src="@/assets/img/animals/cat-6_art.webp" alt="" />
+              <img :class="styles.femaleCalendar__modalArt" src="@/assets/img/animals/cat-6_art.webp" alt="" />
             </div>
           </ion-content>
         </ion-modal>
@@ -247,14 +247,14 @@ watch( ovulationDates, async ( value ) => {
               </ion-button>
               </div>
 
-              <img :class="styles.womensCalendar__modalArt" src="@/assets/img/animals/hamster_art.webp" alt="" />
+              <img :class="styles.femaleCalendar__modalArt" src="@/assets/img/animals/hamster_art.webp" alt="" />
             </div>
           </ion-content>
         </ion-modal>
       </div>
 
       <div v-if="ovulationDates"
-           :class="styles.womensCalendar__block"
+           :class="styles.femaleCalendar__block"
       >
         <WidgetTipInfo :color="SUB_THEME_COLOR">
           Календарный метод даёт <span :style="{color: SUB_THEME_COLOR}">оценку, а не гарантию</span>: при нерегулярном цикле погрешность растёт. Зелёные дни — <span :style="{color: SUB_THEME_COLOR}">наибольшая вероятность зачатия</span> (пик — за 1–2 дня до овуляции), жёлтые — остальное фертильное окно, а все дни до и после окна — красные, зачатие в них маловероятно 😉
@@ -262,7 +262,7 @@ watch( ovulationDates, async ( value ) => {
 
         <div :class="stylesOverflowSection.overflowSection">
           <div :class="[
-              styles.womensCalendar__dates,
+              styles.femaleCalendar__dates,
               stylesOverflowSection.overflowSection__overflowWrapper
           ]">
             <div v-for="date in ovulationDates.early" :key="date">
@@ -293,7 +293,7 @@ watch( ovulationDates, async ( value ) => {
           :art-src="penguinArt"
       />
 
-      <WidgetLinksList :class="styles.womensCalendar__block">
+      <WidgetLinksList :class="styles.femaleCalendar__block">
         <a @click.prevent="isAlcoholInfoModalOpen = true">
           Влияние <span :style="{color: SUB_THEME_COLOR}">алкоголя</span> на яйцеклетки
         </a>

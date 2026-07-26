@@ -11,6 +11,7 @@ import {computed} from 'vue';
 import {declineDays} from '@/composables/declineDays';
 import {getDaysToDate} from '@/composables/getDaysToDate';
 import {currentDate} from '@/store/currentDate';
+import AchievementLast from '@/components/Achievement/Last/achievementLast.vue';
 
 const daysToBirthday = computed(() => {
   if ( !appStore.userBirthDate ) {
@@ -116,6 +117,8 @@ const isAdditionalBirthdaySoon = computed(() => {
           </template>
         </WidgetPageTitle>
 
+        <AchievementLast :class="styles.homePage__block" />
+
         <ul :class="styles.homePage__servicesList">
           <li>
             <WidgetPageLink
@@ -139,21 +142,21 @@ const isAdditionalBirthdaySoon = computed(() => {
 
           <li>
             <WidgetPageLink
-                link="/mensCalendar"
+                link="/maleCalendar"
                 title="Планирование для мужиков"
                 comment="Чо, как?"
                 bg-image="dog-4"
-                :color="appVars.colors.mensCalendar"
+                :color="appVars.colors.maleCalendar"
             />
           </li>
 
           <li>
             <WidgetPageLink
-                link="/womensCalendar"
+                link="/femaleCalendar"
                 title="Планирование для девушек"
                 comment="Поищем идеальный день&nbsp;❤️"
                 bg-image="cat-1_art"
-                :color="appVars.colors.womensCalendar"
+                :color="appVars.colors.femaleCalendar"
             />
           </li>
 

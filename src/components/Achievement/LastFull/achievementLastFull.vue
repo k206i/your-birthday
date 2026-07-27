@@ -8,7 +8,16 @@ import AchievementImage from '@/components/Achievement/Image/achievementImage.vu
   <div :class="styles.achievementLastFull" v-if="appStore.lastAchievement">
     <div :class="styles.achievementLastFull__bg"></div>
 
-    <AchievementImage :achievement="appStore.lastAchievement" />
+    <div>
+      Последнее достижение 🎉
+    </div>
+
+    <AchievementImage
+        :class="styles.achievementLastFull__image"
+        :achievement="appStore.lastAchievement"
+    />
+
+    -{{ appStore.lastAchievement?.image }}-<br />
 
     {{ appStore.lastAchievement?.name }}
 

@@ -60,7 +60,8 @@ export const setLastAchievement = (): void => {
   }
 
   // Поля ещё не заданы — полный поиск обоих
-  if ( appStore.lastAchievement === null || appStore.nextAchievement === null ) {
+  // TODO: Не забыть тут поменять условие !== --> ===
+  if ( appStore.lastAchievement !== null || appStore.nextAchievement === null ) {
     appStore.lastAchievement = findLast( weekIndex );
     appStore.nextAchievement = findNext( weekIndex );
 

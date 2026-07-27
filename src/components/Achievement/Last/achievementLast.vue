@@ -16,13 +16,29 @@ const rarityLabel = computed(() => {
 
   return ( appVars.achievementTranslates as Record< string, string > )[ rarity ] ?? '';
 });
+
+const rarityColor = computed(() => {
+  const rarity = appStore.lastAchievement?.rarity;
+
+  if ( !rarity ) {
+    return '';
+  }
+
+  return ( appVars.achievementColors as Record< string, string > )[ rarity ] ?? '';
+});
 </script>
 
 <template>
-  <div :class="styles.achievementLast" v-if="appStore.lastAchievement">
-    <div :class="styles.achievementLast__icon">
-      <AchievementImage :achievement="appStore.lastAchievement" />
-    </div>
+  <div :class="styles.achievementLast"
+       v-if="appStore.lastAchievement"
+       :style="{
+              '--brd-achievement-theme-color': appVars.colors.achievements,
+            }"
+  >
+    <AchievementImage
+        :class="styles.achievementLast__icon"
+        :achievement="appStore.lastAchievement"
+    />
 
     <div :class="styles.achievementLast__contentWrapper">
       <div :class="styles.achievementLast__label">
@@ -34,7 +50,9 @@ const rarityLabel = computed(() => {
       </div>
 
       <div :class="styles.achievementLast__comment">
-        <span :class="styles.achievementLast__rarity">
+        <span :class="styles.achievementLast__rarity"
+              :style="{ color: rarityColor }"
+        >
           {{ rarityLabel }}
         </span>
       </div>

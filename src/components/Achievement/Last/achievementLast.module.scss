@@ -8,27 +8,16 @@
   background-color: var( --brd-color-theme-dark );
 
   &__icon {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    aspect-ratio: 1;
-    font-size: 30px;
-    border-radius: var( --brd-size-border-radius-s );
-    background-color: var( --brd-color-theme );
+    width: 70px;
   }
 
   &__contentWrapper {
-    display: flex;
-    flex-direction: column;
-    gap: var( --brd-size-gap-xs );
   }
 
   &__label {
     font-size: 10px;
     text-transform: uppercase;
-    color: var( --brd-color-theme );
+    color: var( --brd-achievement-theme-color );
     letter-spacing: .3px;
   }
 
@@ -48,6 +37,26 @@
     padding: 2px 4px;
     border-radius: var( --brd-size-border-radius-xs );
     background-color: var( --brd-color-white-5 );
+
+    &_common {
+      // background-image: url( "" );
+    }
+
+    &_rare {
+
+    }
+
+    &_epic {
+      // background-image: url( "" );
+    }
+
+    &_legendary {
+      // background-image: url( "" );
+    }
+
+    &_mythic {
+      // background-image: url( "" );
+    }
   }
 
   &__counter {
@@ -56,6 +65,8 @@
 
   &__linkButton {
     margin-left: auto;
+    font-size: 20px;
+    color: var( --brd-achievement-theme-color );
   }
 
   &__link {

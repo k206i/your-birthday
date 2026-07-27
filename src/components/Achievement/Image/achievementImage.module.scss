@@ -1,3 +1,50 @@
 .achievementImage {
   position: relative;
+  z-index: var( --brd-z-index-layout );
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  font-size: 30px;
+  line-height: 1;
+  border-radius: 17%;
+  overflow: hidden;
+  background-color: var( --brd-color-theme-dark );
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &__frame {
+    position: absolute;
+    z-index: 200;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+
+    &_common {
+      // background-image: url( "" );
+    }
+
+    &_rare {
+      background-image: url( "../../../assets/img/achievements/frame-rare_1.webp" );
+    }
+
+    &_epic {
+      // background-image: url( "" );
+    }
+
+    &_legendary {
+      // background-image: url( "" );
+    }
+
+    &_mythic {
+      // background-image: url( "" );
+    }
+  }
 }

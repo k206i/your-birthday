@@ -2,6 +2,9 @@
 
 .achievementLastFull {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: var( --brd-size-gap-xl );
   overflow: hidden;
   border-radius: var( --brd-size-border-radius );
@@ -14,6 +17,11 @@
     border: 1px solid var( --brd-custom-theme-color );
     border-radius: var( --brd-size-border-radius );
     background: radial-gradient(circle at top, var( --brd-custom-theme-color ) 0, transparent 80%);
+  }
+
+  &__image {
+    width: 150px;
+    height: 150px;
   }
 
   &__title {

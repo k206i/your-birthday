@@ -14,7 +14,6 @@ import {currentDate} from '@/store/currentDate';
 import {shareElementAsImage} from '@/composables/shareElementAsImage';
 import famousData from '@/jsons/achievements_famous.json';
 import AchievementTooltip from '@/components/Achievement/Tooltip/achievementTooltip.vue';
-import AchievementLast from '@/components/Achievement/Last/achievementLast.vue';
 
 type TAchievement = {
   icon: string,

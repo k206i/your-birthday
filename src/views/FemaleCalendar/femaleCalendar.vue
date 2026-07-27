@@ -287,7 +287,7 @@ watch( ovulationDates, async ( value ) => {
       <WidgetArtButton
           v-if="ovulationDates"
           :color="appVars.colors.childBirthday"
-          :title="`Малыш может родиться примерно <span style='color: ${SUB_THEME_COLOR}'>${ formatDisplayDate( parseLocalDate( ovulationDates.birthDate )) }</span> Давайте посмотрми, что интересного будет в этот день? 🐣`"
+          :title="`Малыш может родиться примерно <span style='color: ${SUB_THEME_COLOR}'>${ formatDisplayDate( parseLocalDate( ovulationDates.birthDate )) }</span>. Давайте посмотрми, что интересного будет в этот день? 🐣`"
           comment="Праздники, именины, знак зодиака и памятные даты"
           :link="`/childBirthday?birthDate=${ovulationDates.birthDate}`"
           :art-src="penguinArt"

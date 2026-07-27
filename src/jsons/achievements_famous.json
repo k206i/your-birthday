@@ -1,7 +1,7 @@
 [
   {
     "id": "famous_1",
-    "image": "",
+    "image": "famous_1.webp",
     "icon": "🚗",
     "person": "Джеймс Дин",
     "name": "Назад в будущее",
@@ -12,7 +12,7 @@
   },
   {
     "id": "famous_2",
-    "image": "",
+    "image": "famous_2.webp",
     "icon": "🌙",
     "person": "Михаил Лермонтов",
     "name": "Герой нашего времени",
@@ -23,7 +23,7 @@
   },
   {
     "id": "famous_3",
-    "image": "",
+    "image": "famous_3.webp",
     "icon": "🎸",
     "person": "Курт Кобейн",
     "name": "Нирвана продолжается",
@@ -34,7 +34,7 @@
   },
   {
     "id": "famous_4",
-    "image": "",
+    "image": "famous_4.webp",
     "icon": "🍷",
     "person": "Эми Уайнхаус",
     "name": "Рок-н-ролл жив",
@@ -45,7 +45,7 @@
   },
   {
     "id": "famous_5",
-    "image": "",
+    "image": "famous_5.webp",
     "icon": "🎸",
     "person": "Виктор Цой",
     "name": "Группа крови",
@@ -56,7 +56,7 @@
   },
   {
     "id": "famous_6",
-    "image": "",
+    "image": "famous_6.webp",
     "icon": "🃏",
     "person": "Хит Леджер",
     "name": "Тёмный рыцарь",
@@ -67,7 +67,7 @@
   },
   {
     "id": "famous_7",
-    "image": "",
+    "image": "famous_7.webp",
     "icon": "🌌",
     "person": "Сергей Есенин",
     "name": "Серебряный век разблокирован",
@@ -78,7 +78,7 @@
   },
   {
     "id": "famous_8",
-    "image": "",
+    "image": "famous_8.webp",
     "icon": "🚬",
     "person": "Сергей Бодров-младший",
     "name": "Брат 2.0",
@@ -89,7 +89,7 @@
   },
   {
     "id": "famous_9",
-    "image": "",
+    "image": "famous_9.webp",
     "icon": "🐉",
     "person": "Брюс Ли",
     "name": "Мастер дракона",
@@ -100,7 +100,7 @@
   },
   {
     "id": "famous_10",
-    "image": "",
+    "image": "famous_10.webp",
     "icon": "✝️",
     "person": "Иисус Христос",
     "name": "Точка отсчёта",
@@ -111,7 +111,7 @@
   },
   {
     "id": "famous_11",
-    "image": "",
+    "image": "famous_11.webp",
     "icon": "🎼",
     "person": "Моцарт",
     "name": "Музыкальный гений",
@@ -122,7 +122,7 @@
   },
   {
     "id": "famous_12",
-    "image": "",
+    "image": "famous_12.webp",
     "icon": "⚡",
     "person": "Юрий Клинских",
     "name": "Хой!",
@@ -133,7 +133,7 @@
   },
   {
     "id": "famous_13",
-    "image": "",
+    "image": "famous_13.webp",
     "icon": "🎬",
     "person": "Мэрилин Монро",
     "name": "Голливуд позади",
@@ -144,7 +144,7 @@
   },
   {
     "id": "famous_14",
-    "image": "",
+    "image": "famous_14.webp",
     "icon": "🌴",
     "person": "Боб Марли",
     "name": "Ритм свободы",
@@ -155,7 +155,7 @@
   },
   {
     "id": "famous_15",
-    "image": "",
+    "image": "famous_15.webp",
     "icon": "🖋",
     "person": "Владимир Маяковский",
     "name": "Писательский режим",
@@ -166,7 +166,7 @@
   },
   {
     "id": "famous_16",
-    "image": "",
+    "image": "famous_16.webp",
     "icon": "🌻",
     "person": "Винсент Ван Гог",
     "name": "После Ван Гога",
@@ -177,7 +177,7 @@
   },
   {
     "id": "famous_17",
-    "image": "",
+    "image": "famous_17.webp",
     "icon": "⚔️",
     "person": "Александр Пушкин",
     "name": "Дуэль отменяется",
@@ -188,7 +188,7 @@
   },
   {
     "id": "famous_18",
-    "image": "",
+    "image": "famous_18.webp",
     "icon": "🕵️",
     "person": "Аркадий Гайдар",
     "name": "Русский детектив",
@@ -199,7 +199,7 @@
   },
   {
     "id": "famous_19",
-    "image": "",
+    "image": "famous_19.webp",
     "icon": "🎭",
     "person": "Михаил Горшенёв",
     "name": "Последний герой",
@@ -210,7 +210,7 @@
   },
   {
     "id": "famous_20",
-    "image": "",
+    "image": "famous_20.webp",
     "icon": "🎤",
     "person": "Джон Леннон",
     "name": "Imagine",
@@ -221,7 +221,7 @@
   },
   {
     "id": "famous_21",
-    "image": "",
+    "image": "famous_21.webp",
     "icon": "🚗",
     "person": "Пол Уокер",
     "name": "Форсаж продолжается",
@@ -232,7 +232,7 @@
   },
   {
     "id": "famous_22",
-    "image": "",
+    "image": "famous_22.webp",
     "icon": "🕵️",
     "person": "Владимир Высоцкий",
     "name": "Место встречи",
@@ -243,7 +243,7 @@
   },
   {
     "id": "famous_23",
-    "image": "",
+    "image": "famous_23.webp",
     "icon": "🎸",
     "person": "Элвис Пресли",
     "name": "Король рок-н-ролла",
@@ -254,7 +254,7 @@
   },
   {
     "id": "famous_24",
-    "image": "",
+    "image": "famous_24.webp",
     "icon": "🌳",
     "person": "Николай Гоголь",
     "name": "Мёртвые души не считаются",
@@ -265,7 +265,7 @@
   },
   {
     "id": "famous_25",
-    "image": "",
+    "image": "famous_25.webp",
     "icon": "🎸",
     "person": "Егор Летов",
     "name": "Рок жив",
@@ -276,7 +276,7 @@
   },
   {
     "id": "famous_26",
-    "image": "",
+    "image": "famous_26.webp",
     "icon": "🎩",
     "person": "Антон Чехов",
     "name": "Человек в футляре",
@@ -287,7 +287,7 @@
   },
   {
     "id": "famous_27",
-    "image": "",
+    "image": "famous_27.webp",
     "icon": "🦇",
     "person": "Фредди Меркьюри",
     "name": "Голос Queen",
@@ -298,7 +298,7 @@
   },
   {
     "id": "famous_28",
-    "image": "",
+    "image": "famous_28.webp",
     "icon": "🎩",
     "person": "Андрей Миронов",
     "name": "Великий артист",
@@ -309,7 +309,7 @@
   },
   {
     "id": "famous_29",
-    "image": "",
+    "image": "famous_29.webp",
     "icon": "🌹",
     "person": "Уитни Хьюстон",
     "name": "Голос поколения",
@@ -320,7 +320,7 @@
   },
   {
     "id": "famous_30",
-    "image": "",
+    "image": "famous_30.webp",
     "icon": "🧙",
     "person": "Михаил Булгаков",
     "name": "Мастер и его недели",
@@ -331,7 +331,7 @@
   },
   {
     "id": "famous_31",
-    "image": "",
+    "image": "famous_31.webp",
     "icon": "🎤",
     "person": "Майкл Джексон",
     "name": "Король поп-музыки",
@@ -342,7 +342,7 @@
   },
   {
     "id": "famous_32",
-    "image": "",
+    "image": "famous_32.webp",
     "icon": "🦸",
     "person": "Кристофер Рив",
     "name": "Супермен отдыхает",
@@ -353,7 +353,7 @@
   },
   {
     "id": "famous_33",
-    "image": "",
+    "image": "famous_33.webp",
     "icon": "🍏",
     "person": "Стив Джобс",
     "name": "Основатель будущего",
@@ -364,7 +364,7 @@
   },
   {
     "id": "famous_34",
-    "image": "",
+    "image": "famous_34.webp",
     "icon": "🕺",
     "person": "Патрик Суэйзи",
     "name": "Танец с легендой",
@@ -375,7 +375,7 @@
   },
   {
     "id": "famous_35",
-    "image": "",
+    "image": "famous_35.webp",
     "icon": "💀",
     "person": "Фёдор Достоевский",
     "name": "Преступление и наказание",
@@ -386,7 +386,7 @@
   },
   {
     "id": "famous_36",
-    "image": "",
+    "image": "famous_36.webp",
     "icon": "⭐",
     "person": "Кэрри Фишер",
     "name": "Далёкая галактика",
@@ -397,7 +397,7 @@
   },
   {
     "id": "famous_37",
-    "image": "",
+    "image": "famous_37.webp",
     "icon": "🎭",
     "person": "Робин Уильямс",
     "name": "Король улыбок",
@@ -408,7 +408,7 @@
   },
   {
     "id": "famous_38",
-    "image": "",
+    "image": "famous_38.webp",
     "icon": "🎭",
     "person": "Александр Островский",
     "name": "Театр жизни",
@@ -419,7 +419,7 @@
   },
   {
     "id": "famous_39",
-    "image": "",
+    "image": "famous_39.webp",
     "icon": "🦉",
     "person": "Иван Тургенев",
     "name": "Вечный классик",
@@ -430,7 +430,7 @@
   },
   {
     "id": "famous_40",
-    "image": "",
+    "image": "famous_40.webp",
     "icon": "🏠",
     "person": "Максим Горький",
     "name": "Дом с историей",
@@ -441,7 +441,7 @@
   },
   {
     "id": "famous_41",
-    "image": "",
+    "image": "famous_41.webp",
     "icon": "⚡",
     "person": "Дэвид Боуи",
     "name": "Герой из космоса",
@@ -452,7 +452,7 @@
   },
   {
     "id": "famous_42",
-    "image": "",
+    "image": "famous_42.webp",
     "icon": "🔥",
     "person": "Борис Пастернак",
     "name": "Доктор Живаго жив",
@@ -463,7 +463,7 @@
   },
   {
     "id": "famous_43",
-    "image": "",
+    "image": "famous_43.webp",
     "icon": "🥊",
     "person": "Джеймс Браун",
     "name": "Рокки навсегда",
@@ -474,7 +474,7 @@
   },
   {
     "id": "famous_44",
-    "image": "",
+    "image": "famous_44.webp",
     "icon": "🎹",
     "person": "Рэй Чарльз",
     "name": "Король блюза",
@@ -485,7 +485,7 @@
   },
   {
     "id": "famous_45",
-    "image": "",
+    "image": "famous_45.webp",
     "icon": "🥊",
     "person": "Мухаммед Али",
     "name": "Чемпион раундов",
@@ -496,7 +496,7 @@
   },
   {
     "id": "famous_46",
-    "image": "",
+    "image": "famous_46.webp",
     "icon": "🎬",
     "person": "Юрий Никулин",
     "name": "Великий комик",
@@ -507,7 +507,7 @@
   },
   {
     "id": "famous_47",
-    "image": "",
+    "image": "famous_47.webp",
     "icon": "🧠",
     "person": "Альберт Эйнштейн",
     "name": "Гений",
@@ -518,7 +518,7 @@
   },
   {
     "id": "famous_48",
-    "image": "",
+    "image": "famous_48.webp",
     "icon": "🚂",
     "person": "Анна Ахматова",
     "name": "Поезд жизни",
@@ -529,7 +529,7 @@
   },
   {
     "id": "famous_49",
-    "image": "",
+    "image": "famous_49.webp",
     "icon": "🐎",
     "person": "Михаил Шолохов",
     "name": "Тихий Дон, громкая жизнь",
@@ -540,7 +540,7 @@
   },
   {
     "id": "famous_50",
-    "image": "",
+    "image": "famous_50.webp",
     "icon": "🌊",
     "person": "Иван Гончаров",
     "name": "Обломов всё ещё спит",
@@ -551,7 +551,7 @@
   },
   {
     "id": "famous_51",
-    "image": "",
+    "image": "famous_51.webp",
     "icon": "📖",
     "person": "Лев Толстой",
     "name": "Война и ещё много недель",
@@ -562,7 +562,7 @@
   },
   {
     "id": "famous_52",
-    "image": "",
+    "image": "famous_52.webp",
     "icon": "⚡",
     "person": "Никола Тесла",
     "name": "Электрический разум",
@@ -573,7 +573,7 @@
   },
   {
     "id": "famous_53",
-    "image": "",
+    "image": "famous_53.webp",
     "icon": "📚",
     "person": "Корней Чуковский",
     "name": "Классика не стареет",
@@ -584,7 +584,7 @@
   },
   {
     "id": "famous_54",
-    "image": "",
+    "image": "famous_54.webp",
     "icon": "🎭",
     "person": "Чарли Чаплин",
     "name": "Оскар за выживание",
@@ -595,7 +595,7 @@
   },
   {
     "id": "famous_55",
-    "image": "",
+    "image": "famous_55.webp",
     "icon": "🕶",
     "person": "Шон Коннери",
     "name": "Агент времени",
@@ -606,7 +606,7 @@
   },
   {
     "id": "famous_56",
-    "image": "",
+    "image": "famous_56.webp",
     "icon": "👑",
     "person": "Елизавета II",
     "name": "Корона терпения",
@@ -617,7 +617,7 @@
   },
   {
     "id": "famous_57",
-    "image": "",
+    "image": "famous_57.webp",
     "icon": "🎤",
     "person": "Тони Беннетт",
     "name": "Encore!",
@@ -628,7 +628,7 @@
   },
   {
     "id": "famous_58",
-    "image": "",
+    "image": "famous_58.webp",
     "icon": "⚖️",
     "person": "Джон Пол Стивенс",
     "name": "Верховный рекорд",
@@ -639,7 +639,7 @@
   },
   {
     "id": "famous_59",
-    "image": "",
+    "image": "famous_59.webp",
     "icon": "🎖️",
     "person": "Боб Хоуп",
     "name": "Сто лет на сцене",
@@ -650,7 +650,7 @@
   },
   {
     "id": "famous_60",
-    "image": "",
+    "image": "famous_60.webp",
     "icon": "🎥",
     "person": "Лени Рифеншталь",
     "name": "Камера не выключается",
@@ -661,7 +661,7 @@
   },
   {
     "id": "famous_61",
-    "image": "",
+    "image": "famous_61.webp",
     "icon": "🎬",
     "person": "Кирк Дуглас",
     "name": "Последний Спартак",
@@ -672,7 +672,7 @@
   },
   {
     "id": "famous_62",
-    "image": "",
+    "image": "famous_62.webp",
     "icon": "📖",
     "person": "Оливия де Хэвилленд",
     "name": "Финальные титры откладываются",
@@ -683,7 +683,7 @@
   },
   {
     "id": "famous_63",
-    "image": "",
+    "image": "famous_63.webp",
     "icon": "🎨",
     "person": "Кармен Эррера",
     "name": "Сто лет вдохновения",
@@ -694,7 +694,7 @@
   },
   {
     "id": "famous_64",
-    "image": "",
+    "image": "famous_64.webp",
     "icon": "👑",
     "person": "Алиса Герц-Зоммер",
     "name": "Обуздал жизнь",

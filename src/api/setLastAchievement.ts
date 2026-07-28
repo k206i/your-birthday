@@ -48,6 +48,9 @@ const findNext = ( weekIndex: number ): TAchievementCombined | null => {
   return result;
 }
 
+// Дата рождения, для которой last/next были посчитаны — для детекта смены даты
+let computedForBirthDate: string | null = null;
+
 export const setLastAchievement = (): void => {
   const weekIndex: number | null = getCurrentWeekIndex( appStore.userBirthDate, currentDate.value );
 
@@ -55,12 +58,22 @@ export const setLastAchievement = (): void => {
   if ( weekIndex === null ) {
     appStore.lastAchievement = null;
     appStore.nextAchievement = null;
+    computedForBirthDate = appStore.userBirthDate;
+
+    return;
+  }
+
+  // Дата рождения изменилась (или первый расчёт) — полный пересчёт
+  if ( computedForBirthDate !== appStore.userBirthDate ) {
+    appStore.lastAchievement = findLast( weekIndex );
+    appStore.nextAchievement = findNext( weekIndex );
+    computedForBirthDate = appStore.userBirthDate;
 
     return;
   }
 
   // Поля ещё не заданы — полный поиск обоих
-  // TODO: Не забыть тут поменять условие !== --> ===
+  // TODO: Не забыть тут поменять условие !== --> ===, чтобы включился кэш расчётов
   if ( appStore.lastAchievement !== null || appStore.nextAchievement === null ) {
     appStore.lastAchievement = findLast( weekIndex );
     appStore.nextAchievement = findNext( weekIndex );

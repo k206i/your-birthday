@@ -1,5 +1,6 @@
 .achievementLast {
   position: relative;
+  z-index: var( --brd-z-index-layout );
   display: flex;
   align-items: center;
   gap: var( --brd-size-gap );
@@ -8,6 +9,8 @@
   background-color: var( --brd-color-theme-dark );
 
   &__icon {
+    position: relative;
+    z-index: 100;
     width: 70px;
   }
 
@@ -37,26 +40,6 @@
     padding: 2px 4px;
     border-radius: var( --brd-size-border-radius-xs );
     background-color: var( --brd-color-white-5 );
-
-    &_common {
-      // background-image: url( "" );
-    }
-
-    &_rare {
-
-    }
-
-    &_epic {
-      // background-image: url( "" );
-    }
-
-    &_legendary {
-      // background-image: url( "" );
-    }
-
-    &_mythic {
-      // background-image: url( "" );
-    }
   }
 
   &__counter {
@@ -71,6 +54,7 @@
 
   &__link {
     position: absolute;
+    z-index: 200;
     inset: 0;
   }
 }

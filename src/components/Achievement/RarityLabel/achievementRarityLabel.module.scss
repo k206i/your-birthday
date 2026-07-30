@@ -1,0 +1,18 @@
+.achievementRarityLabel {
+  position: relative;
+  display: inline-block;
+  padding: 8px 16px 7px;
+  border-radius: var( --brd-size-border-radius-xs );
+  font-family: var( --brd-font-default-alt );
+  font-size: 16px;
+  color: var( --brd-achievement-rarity-color );
+  text-transform: uppercase;
+  letter-spacing: 2px;
+
+  &_compact {
+    padding: 2px 6px;
+    font-size: 12px;
+    letter-spacing: 0;
+    background-color: var( --brd-color-white-5 ) !important;
+  }
+}

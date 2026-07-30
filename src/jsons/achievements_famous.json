@@ -1,16 +1,5 @@
 [
   {
-    "id": "famous_1",
-    "image": "famous_1.webp",
-    "icon": "🚗",
-    "person": "Джеймс Дин",
-    "name": "Назад в будущее",
-    "comment": "Джеймс Дин стал легендой в 24. Ты уже обогнал этот сюжетный поворот.",
-    "weeks": 1281,
-    "rarity": "common",
-    "wiki": "https://ru.wikipedia.org/wiki/Дин,_Джеймс"
-  },
-  {
     "id": "famous_2",
     "image": "famous_2.webp",
     "icon": "🌙",
@@ -150,7 +139,7 @@
     "name": "Ритм свободы",
     "comment": "Боб Марли подарил миру музыку. Ты подарил себе ещё один уровень жизни.",
     "weeks": 1885,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Марли,_Боб"
   },
   {
@@ -205,7 +194,7 @@
     "name": "Последний герой",
     "comment": "Михаил Горшенёв ушёл в легенды. А ты пока продолжаешь свой панк-квест.",
     "weeks": 2077,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Горшенёв,_Михаил_Юрьевич"
   },
   {
@@ -216,7 +205,7 @@
     "name": "Imagine",
     "comment": "Джон Леннон мечтал о мире. Твои мечты ждут воплощения.",
     "weeks": 2088,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Леннон,_Джон"
   },
   {
@@ -227,7 +216,7 @@
     "name": "Форсаж продолжается",
     "comment": "Пол Уокер завершил свой путь. А твой двигатель всё ещё работает.",
     "weeks": 2091,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Уокер,_Пол"
   },
   {
@@ -238,7 +227,7 @@
     "name": "Место встречи",
     "comment": "Владимир Высоцкий искал правду в песнях. Ты ищешь правду в новых неделях жизни.",
     "weeks": 2210,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Высоцкий,_Владимир_Семёнович"
   },
   {
@@ -249,7 +238,7 @@
     "name": "Король рок-н-ролла",
     "comment": "Элвис Пресли уже покинул сцену, но твой рок-концерт ещё не закончен.",
     "weeks": 2215,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Пресли,_Элвис"
   },
   {
@@ -260,7 +249,7 @@
     "name": "Мёртвые души не считаются",
     "comment": "Николай Гоголь создал бессмертных персонажей. А ты пока собираешь бессмертные недели.",
     "weeks": 2232,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Гоголь,_Николай_Васильевич"
   },
   {
@@ -271,7 +260,7 @@
     "name": "Рок жив",
     "comment": "Егор Летов ушёл в историю. А твой личный альбом ещё не дописан.",
     "weeks": 2259,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Летов,_Егор"
   },
   {
@@ -282,7 +271,7 @@
     "name": "Человек в футляре",
     "comment": "Антон Чехов писал коротко. А твой жизненный рассказ уже вышел в несколько томов.",
     "weeks": 2312,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Чехов,_Антон_Павлович"
   },
   {
@@ -293,7 +282,7 @@
     "name": "Голос Queen",
     "comment": "Фредди Меркьюри зажёг сцену. Теперь твоя очередь сиять.",
     "weeks": 2351,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Меркьюри,_Фредди"
   },
   {
@@ -304,7 +293,7 @@
     "name": "Великий артист",
     "comment": "Андрей Миронов ушёл со сцены, но твой главный спектакль ещё идёт.",
     "weeks": 2415,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Миронов,_Андрей_Александрович"
   },
   {
@@ -315,7 +304,7 @@
     "name": "Голос поколения",
     "comment": "Уитни Хьюстон закончила свой концерт слишком рано. Твой ещё идёт.",
     "weeks": 2522,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Хьюстон,_Уитни"
   },
   {
@@ -326,7 +315,7 @@
     "name": "Мастер и его недели",
     "comment": "Михаил Булгаков создал Воланда. А у тебя появился собственный демон времени.",
     "weeks": 2538,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Булгаков,_Михаил_Афанасьевич"
   },
   {
@@ -337,19 +326,8 @@
     "name": "Король поп-музыки",
     "comment": "Майкл Джексон сделал лунную походку. Ты сделал марафон длиной в тысячи недель.",
     "weeks": 2642,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Джексон,_Майкл"
-  },
-  {
-    "id": "famous_32",
-    "image": "famous_32.webp",
-    "icon": "🦸",
-    "person": "Кристофер Рив",
-    "name": "Супермен отдыхает",
-    "comment": "Кристофер Рив спасал мир на экране. А ты продолжаешь свою супергеройскую миссию.",
-    "weeks": 2706,
-    "rarity": "rare",
-    "wiki": "https://ru.wikipedia.org/wiki/Рив,_Кристофер"
   },
   {
     "id": "famous_33",
@@ -359,7 +337,7 @@
     "name": "Основатель будущего",
     "comment": "Стив Джобс изменил технологии. Ты изменил свой счётчик недель.",
     "weeks": 2943,
-    "rarity": "rare",
+    "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Джобс,_Стив"
   },
   {
@@ -460,28 +438,6 @@
     "weeks": 3655,
     "rarity": "epic",
     "wiki": "https://ru.wikipedia.org/wiki/Пастернак,_Борис_Леонидович"
-  },
-  {
-    "id": "famous_43",
-    "image": "famous_43.webp",
-    "icon": "🥊",
-    "person": "Джеймс Браун",
-    "name": "Рокки навсегда",
-    "comment": "Джеймс Браун создал свой ритм. Теперь твой организм играет свой собственный хит.",
-    "weeks": 3829,
-    "rarity": "epic",
-    "wiki": "https://ru.wikipedia.org/wiki/Браун,_Джеймс"
-  },
-  {
-    "id": "famous_44",
-    "image": "famous_44.webp",
-    "icon": "🎹",
-    "person": "Рэй Чарльз",
-    "name": "Король блюза",
-    "comment": "Рэй Чарльз играл сердцем. А ты продолжаешь свою длинную музыкальную партию.",
-    "weeks": 3833,
-    "rarity": "epic",
-    "wiki": "https://ru.wikipedia.org/wiki/Чарльз,_Рэй"
   },
   {
     "id": "famous_45",

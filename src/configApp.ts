@@ -40,9 +40,9 @@ export const appVars = {
   },
   achievementTranslates: {
     common: 'Обычное',
-    rare: 'Редкое',
-    epic: 'Эпичное',
-    legendary: 'Легендарное',
-    mythic: 'Мифическое',
+    rare: '★ Редкое',
+    epic: '★★ Эпичное',
+    legendary: '★★★ Легендарное',
+    mythic: '★★★★ Мифическое',
   }
 }

@@ -20,11 +20,12 @@
   &__label {
     font-size: 10px;
     text-transform: uppercase;
-    color: var( --brd-achievement-theme-color );
+    color: var( --brd-last-achievement-theme-color );
     letter-spacing: .3px;
   }
 
   &__title {
+    margin-bottom: var( --brd-size-gap-xs );
     font-family: var( --brd-font-default-alt );
     font-size: 18px;
     font-weight: bold;
@@ -35,13 +36,6 @@
 
   }
 
-  &__rarity {
-    display: inline-block;
-    padding: 2px 4px;
-    border-radius: var( --brd-size-border-radius-xs );
-    background-color: var( --brd-color-white-5 );
-  }
-
   &__counter {
 
   }
@@ -49,7 +43,7 @@
   &__linkButton {
     margin-left: auto;
     font-size: 20px;
-    color: var( --brd-achievement-theme-color );
+    color: var( --brd-last-achievement-theme-color );
   }
 
   &__link {

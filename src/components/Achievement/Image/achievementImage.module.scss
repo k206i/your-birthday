@@ -1,16 +1,19 @@
 .achievementImage {
   position: relative;
   z-index: var( --brd-z-index-layout );
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 1;
-  font-size: 30px;
-  line-height: 1;
-  border-radius: 17%;
-  overflow: hidden;
-  background-color: var( --brd-color-theme-dark );
+
+  &__wrapper {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    font-size: 30px;
+    line-height: 1;
+    overflow: hidden;
+    background-color: var( --brd-color-theme-dark );
+  }
 
   &__img {
     display: block;
@@ -19,16 +22,43 @@
     object-fit: contain;
   }
 
+  &__innerShine {
+    position: absolute;
+    z-index: 150;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+    animation: achShine 3.4s ease-in-out infinite;
+
+    @keyframes achShine {
+      0%        { transform: translateX(-120%) skewX(-18deg); }
+      55%, 100% { transform: translateX(320%)  skewX(-18deg); }
+    }
+  }
+
+  &__framePadding {
+    padding: 17px;
+  }
+
+  &__frameBorder {
+    overflow: hidden;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: var( --brd-size-border-radius-xs );
+  }
+
   &__frame {
     position: absolute;
     z-index: 200;
     inset: 0;
     background-repeat: no-repeat;
     background-position: 0 0;
-    background-size: cover;
+    background-size: 100% 100%;
 
     &_common {
-      // background-image: url( "" );
+      background-image: url( "../../../assets/img/achievements/frame-common_1.webp" );
     }
 
     &_rare {
@@ -36,11 +66,13 @@
     }
 
     &_epic {
-      // background-image: url( "" );
+      top: -8px;
+      background-image: url( "../../../assets/img/achievements/frame-epic_1.webp" );
     }
 
     &_legendary {
-      // background-image: url( "" );
+      inset: -12px -6px 0;
+      background-image: url( "../../../assets/img/achievements/frame-legendary_1.webp" );
     }
 
     &_mythic {

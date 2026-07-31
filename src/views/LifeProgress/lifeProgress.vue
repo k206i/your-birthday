@@ -14,26 +14,17 @@ import {currentDate} from '@/store/currentDate';
 import {shareElementAsImage} from '@/composables/shareElementAsImage';
 import famousData from '@/jsons/achievements_famous.json';
 import AchievementTooltip from '@/components/Achievement/Tooltip/achievementTooltip.vue';
-
-type TAchievement = {
-  icon: string,
-  person: string,
-  name: string,
-  comment: string,
-  weeks: number,
-  rarity: string,
-  wiki: string,
-}
+import {TAchievementCombined} from '@/api/getAchievementById';
 
 // Неделя жизни → ачивка. Пока только знаменитости, в будущем сюда могут лечь другие ачивки
-const achievementByWeek: Map< number, TAchievement > = new Map(
+const achievementByWeek: Map< number, TAchievementCombined > = new Map(
   famousData.map( item => [ item.weeks, item ] )
 );
 
 const isDateModalOpen = ref( false );
 const selectedDate = ref();
 const weeksGridRef = ref< HTMLElement >();
-const hoveredAchievement = ref< TAchievement | null >( null );
+const hoveredAchievement = ref< TAchievementCombined | null >( null );
 const tooltipStyle = ref< Record< string, string > >( {} );
 
 let lastTouchTime: number = 0;
@@ -44,7 +35,7 @@ const showForCell = ( cell: Element ) => {
     return;
   }
 
-  const achievement: TAchievement | undefined = achievementByWeek.get( Number(( cell as HTMLElement ).dataset.week ));
+  const achievement: TAchievementCombined | undefined = achievementByWeek.get( Number(( cell as HTMLElement ).dataset.week ));
 
   if ( !achievement ) {
     return;
@@ -208,7 +199,7 @@ const lifeDecades = computed(() => {
           bg-image="otter_art"
           title="Визуализация жизненного пути 🎮"
           lead="Посмотрите, где вы находитесь и кого вы уже обогнали"
-          comment="Попробуйте получить мистическую ачивку&nbsp;🧙‍♂️"
+          comment="Попробуйте получить мифическую ачивку&nbsp;🧙‍♂️"
       />
 
       <ion-button
@@ -279,6 +270,7 @@ const lifeDecades = computed(() => {
         <AchievementTooltip
             v-if="hoveredAchievement"
             :style="tooltipStyle"
+            :achievement="hoveredAchievement"
             :title="hoveredAchievement.name"
             :comment="hoveredAchievement.comment"
             :icon="hoveredAchievement.icon"

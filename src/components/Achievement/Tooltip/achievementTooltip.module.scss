@@ -16,15 +16,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
-    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
     border-radius: var( --brd-size-border-radius-xs );
     background-color: color-mix( in srgb, var( --brd-custom-theme-color ), black var( --brd-color-mix-bg ));
   }
 
+  &__ageText {
+    font-size: 11px;
+    color: var( --brd-color-font );
+  }
+
   &__title {
-    margin-bottom: var( --brd-size-gap-xs );
     font-family: var( --brd-font-default-alt );
     font-weight: bold;
     font-size: 14px;

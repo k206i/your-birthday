@@ -1,30 +1,35 @@
 <script setup lang="ts">
 import styles from './achievementTooltip.module.scss';
+import {TAchievementCombined} from '@/api/getAchievementById';
+import AchievementImage from '@/components/Achievement/Image/achievementImage.vue';
 
 const props = defineProps<{
-  title: string,
-  comment?: string,
-  icon?: string,
+  achievement: TAchievementCombined,
 }>();
 </script>
 
 <template>
   <div :class="styles.achievementTooltip">
-    <div v-if="props.icon"
+    <div v-if="props.achievement.icon"
          :class="styles.achievementTooltip__icon"
     >
-      {{ props.icon }}
+      <AchievementImage :achievement="props.achievement" is-simple />
     </div>
 
     <div>
-      <div :class="styles.achievementTooltip__title">
-        {{ props.title }}
+      <div v-if="achievement.ageText"
+           :class="styles.achievementTooltip__ageText">
+        {{ achievement.ageText }}
       </div>
 
-      <div v-if="props.comment"
+      <div :class="styles.achievementTooltip__title">
+        {{ props.achievement.name }}
+      </div>
+
+      <div v-if="props.achievement.comment"
            :class="styles.achievementTooltip__comment"
       >
-        {{ props.comment }}
+        {{ props.achievement.comment }}
       </div>
     </div>
   </div>

@@ -39,6 +39,12 @@ const rarityColor = computed(() => {
       Последнее достижение 🎉
     </div>
 
+    <div v-if="appStore.lastAchievement.ageText"
+         :class="styles.achievementLastFull__ageText"
+    >
+      {{ appStore.lastAchievement.ageText }}
+    </div>
+
     <AchievementImage
         :class="styles.achievementLastFull__image"
         :achievement="appStore.lastAchievement"
@@ -53,7 +59,10 @@ const rarityColor = computed(() => {
       {{ appStore.lastAchievement.comment }}
     </div>
 
-    <AchievementRarityLabel :achievement="appStore.lastAchievement" />
+    <AchievementRarityLabel
+        :class="styles.achievementLastFull__block"
+        :achievement="appStore.lastAchievement"
+    />
 
     <div v-if="appStore.lastAchievement.person && appStore.lastAchievement.wiki"
          :class="styles.achievementLastFull__subComment"

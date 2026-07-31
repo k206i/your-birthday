@@ -19,28 +19,33 @@
     background: radial-gradient(circle at top, var( --brd-achievement-rarity-color ) 0, transparent 80%);
   }
 
-  &__image {
-    width: 150px;
-    height: 150px;
-    margin-bottom: var( --brd-size-gap );
-  }
-
-  &__title {
-    @extend .typography__h1;
-    margin-bottom: var( --brd-size-gap-s );
-    color: var( --brd-custom-theme-color );
-    text-align: center;
-  }
-
   &__label {
-    margin-bottom: var( --brd-size-gap );
     font-family: var( --brd-font-default-alt );
     font-size: 14px;
     color: var( --brd-custom-theme-color );
   }
 
+  &__image {
+    width: 150px;
+    height: 150px;
+    margin-top: var( --brd-size-gap );
+  }
+
+  &__title {
+    @extend .typography__h1;
+    margin-top: var( --brd-size-gap-s );
+    color: var( --brd-custom-theme-color );
+    text-align: center;
+  }
+
+  &__ageText {
+    margin-top: var( --brd-size-gap-xs );
+    font-size: 14px;
+    color: var( --brd-color-font );
+  }
+
   &__comment {
-    margin-bottom: var( --brd-size-gap );
+    margin-top: var( --brd-size-gap-s );
     text-align: center;
     color: var( --brd-color-font-accent );
   }
@@ -49,5 +54,9 @@
     margin-top: var( --brd-size-gap );
     font-size: 12px;
     color: var( --brd-color-font );
+  }
+
+  &__block {
+    margin-top: var( --brd-size-gap );
   }
 }

@@ -45,7 +45,7 @@
   &__frameBorder {
     overflow: hidden;
     border-style: solid;
-    border-width: 3px;
+    border-width: 2px;
     border-radius: var( --brd-size-border-radius-xs );
   }
 
@@ -76,7 +76,8 @@
     }
 
     &_mythic {
-      // background-image: url( "" );
+      inset: -16px -12px -9px;
+      background-image: url( "../../../assets/img/achievements/frame_mythic_1.webp" );
     }
   }
 }

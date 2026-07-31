@@ -11,6 +11,7 @@ export type TAchievementCombined = {
   rarity: string,
   comment?: string,
   weeks?: number,
+  ageText?: string,
   person?: string,
   wiki?: string,
 }

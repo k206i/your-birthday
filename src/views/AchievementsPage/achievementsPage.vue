@@ -6,7 +6,7 @@ import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {appVars} from '@/configApp';
 import WidgetAddBirthday from '@/components/Widgets/AddBirthday/widgetAddBirthday.vue';
 import {appStore} from '@/store/appStore';
-import AchievementLastFull from '@/components/Achievement/LastFull/achievementLastFull.vue';
+import AchievementFull from '@/components/Achievement/Full/achievementFull.vue';
 </script>
 
 <template>
@@ -21,8 +21,12 @@ import AchievementLastFull from '@/components/Achievement/LastFull/achievementLa
       <template v-if="!appStore.userBirthDate">
         <WidgetAddBirthday />
       </template>
-      <template v-else>
-        <AchievementLastFull />
+      <template v-else-if="appStore.lastAchievement">
+        <div :class="styles.achievementsPage__lastLabel">
+          Последнее достижение 🎉
+        </div>
+
+        <AchievementFull :achievement="appStore.lastAchievement" />
       </template>
     </ion-content>
 

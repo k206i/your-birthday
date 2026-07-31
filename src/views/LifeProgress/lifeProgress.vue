@@ -18,7 +18,7 @@ import {TAchievementCombined} from '@/api/getAchievementById';
 
 // Неделя жизни → ачивка. Пока только знаменитости, в будущем сюда могут лечь другие ачивки
 const achievementByWeek: Map< number, TAchievementCombined > = new Map(
-  famousData.map( item => [ item.weeks, item ] )
+  ( famousData as TAchievementCombined[] ).map( item => [ item.weeks as number, item ] )
 );
 
 const isDateModalOpen = ref( false );

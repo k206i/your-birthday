@@ -8,7 +8,7 @@ export type TAchievementCombined = {
   icon: string,
   image: string,
   name: string,
-  rarity: string,
+  rarity: 'common' | 'rare' | 'epic' | 'legendary' | 'mythic',
   comment?: string,
   weeks?: number,
   ageText?: string,

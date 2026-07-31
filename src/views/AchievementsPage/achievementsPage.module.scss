@@ -1,6 +1,14 @@
 .achievementsPage {
   position: relative;
 
+  &__lastLabel {
+    margin-bottom: var( --brd-size-gap-s );
+    font-family: var( --brd-font-default-alt );
+    font-size: 14px;
+    color: var( --brd-custom-theme-color );
+    text-align: center;
+  }
+
   &__group {
     margin-bottom: var( --brd-size-gap-l );
   }

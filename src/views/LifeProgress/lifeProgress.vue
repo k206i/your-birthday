@@ -15,6 +15,7 @@ import {shareElementAsImage} from '@/composables/shareElementAsImage';
 import famousData from '@/jsons/achievements_famous.json';
 import AchievementTooltip from '@/components/Achievement/Tooltip/achievementTooltip.vue';
 import {TAchievementCombined} from '@/api/getAchievementById';
+import AchievementLast from '@/components/Achievement/Last/achievementLast.vue';
 
 // Неделя жизни → ачивка. Пока только знаменитости, в будущем сюда могут лечь другие ачивки
 const achievementByWeek: Map< number, TAchievementCombined > = new Map(
@@ -202,41 +203,54 @@ const lifeDecades = computed(() => {
           comment="Попробуйте получить мифическую ачивку&nbsp;🧙‍♂️"
       />
 
-      <ion-button
-          :class="styles.lifeProgress__dateButton"
-          expand="block"
-          @click="openDateModal"
-      >
-        {{ birthDay ? `📅 ${birthDay}` : 'Выбрать дату рождения' }}
-      </ion-button>
+      <template v-if="appStore.userBirthDate">
+        <AchievementLast :class="styles.lifeProgress__block" />
+      </template>
+      <template v-else>
+        <ion-button
+            :class="styles.lifeProgress__dateButton"
+            expand="block"
+            @click="openDateModal"
+        >
+          {{ birthDay ? `📅 ${birthDay}` : 'Указать дату рождения' }}
+        </ion-button>
 
-      <ion-modal
-          :is-open="isDateModalOpen"
-          keep-contents-mounted="true"
-          @did-dismiss="isDateModalOpen = false"
-      >
-        <ion-content>
-          <div class="center-content">
-            <ion-datetime
-                v-model="selectedDate"
-                locale="ru-RU"
-                presentation="date"
-                :show-default-buttons="true"
-                done-text="Готово" cancel-text="Не, отмена"
-                :max="maxDate"
-                :first-day-of-week="1"
-                @ionChange="isDateModalOpen = false"
-                @ionCancel="isDateModalOpen = false"
-            ></ion-datetime>
+        <ion-modal
+            :is-open="isDateModalOpen"
+            keep-contents-mounted="true"
+            @did-dismiss="isDateModalOpen = false"
+        >
+          <ion-content>
+            <div class="center-content">
+              <ion-datetime
+                  v-model="selectedDate"
+                  locale="ru-RU"
+                  presentation="date"
+                  :show-default-buttons="true"
+                  done-text="Готово" cancel-text="Не, отмена"
+                  :max="maxDate"
+                  :first-day-of-week="1"
+                  @ionChange="isDateModalOpen = false"
+                  @ionCancel="isDateModalOpen = false"
+              ></ion-datetime>
 
-            <img :class="styles.lifeProgress__modalArt" src="@/assets/img/animals/cat-3_art.png" alt="" />
-          </div>
-        </ion-content>
-      </ion-modal>
+              <img :class="styles.lifeProgress__modalArt" src="@/assets/img/animals/cat-3_art.png" alt="" />
+            </div>
+          </ion-content>
+        </ion-modal>
+      </template>
 
-      <div :class="styles.lifeProgress__weekComment">
-        Каждый квадратик &ndash; неделя.
-        Каждая строка &ndash; год.<br />
+      <div v-if="lifeWeeks" :class="styles.lifeProgress__weekComment">
+        Каждый квадратик &mdash; неделя.
+        Каждая строка &mdash; год.<br />
+      </div>
+
+      <div v-if="lifeWeeks" :class="styles.lifeProgress__weekComment">
+        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_past]"></span>&nbsp;прожито
+        &nbsp;&nbsp;&nbsp;
+        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_current]"></span>&nbsp;сейчас
+        &nbsp;&nbsp;&nbsp;
+        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_achievement]"></span>&nbsp;чей-то финал (нажмите, чтобы посмотреть)
       </div>
 
       <div v-if="lifeWeeks"
@@ -275,15 +289,6 @@ const lifeDecades = computed(() => {
             :comment="hoveredAchievement.comment"
             :icon="hoveredAchievement.icon"
         />
-      </div>
-
-      <div :class="styles.lifeProgress__weekComment">
-        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_past]"></span>&nbsp;прожито
-        &nbsp;&nbsp;&nbsp;
-        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_current]"></span>&nbsp;сейчас
-        &nbsp;&nbsp;&nbsp;
-        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_achievement]"></span>&nbsp;чей-то финал (нажмите, чтобы посмотреть)
-
       </div>
 
       <ion-button

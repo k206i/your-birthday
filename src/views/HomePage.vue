@@ -11,7 +11,7 @@ import {computed} from 'vue';
 import {declineDays} from '@/composables/declineDays';
 import {getDaysToDate} from '@/composables/getDaysToDate';
 import {currentDate} from '@/store/currentDate';
-import AchievementLast from '@/components/Achievement/Last/achievementLast.vue';
+import AchievementShort from '@/components/Achievement/Short/achievementShort.vue';
 
 const daysToBirthday = computed(() => {
   if ( !appStore.userBirthDate ) {
@@ -117,7 +117,12 @@ const isAdditionalBirthdaySoon = computed(() => {
           </template>
         </WidgetPageTitle>
 
-        <AchievementLast :class="styles.homePage__block" />
+        <AchievementShort
+            v-if="appStore.lastAchievement"
+            :class="styles.homePage__block"
+            :achievement="appStore.lastAchievement"
+            is-last
+        />
 
         <ul :class="styles.homePage__servicesList">
           <li>

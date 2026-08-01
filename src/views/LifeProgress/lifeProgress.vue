@@ -15,7 +15,8 @@ import {shareElementAsImage} from '@/composables/shareElementAsImage';
 import famousData from '@/jsons/achievements_famous.json';
 import AchievementTooltip from '@/components/Achievement/Tooltip/achievementTooltip.vue';
 import {TAchievementCombined} from '@/api/getAchievementById';
-import AchievementLast from '@/components/Achievement/Last/achievementLast.vue';
+import AchievementShort from '@/components/Achievement/Short/achievementShort.vue';
+import WidgetLifeTime from '@/components/Widgets/LifeTime/widgetLifeTime.vue';
 
 // Неделя жизни → ачивка. Пока только знаменитости, в будущем сюда могут лечь другие ачивки
 const achievementByWeek: Map< number, TAchievementCombined > = new Map(
@@ -199,12 +200,12 @@ const lifeDecades = computed(() => {
           :class="styles.lifeProgress__titleBlock"
           bg-image="otter_art"
           title="Визуализация жизненного пути 🎮"
-          lead="Посмотрите, где вы находитесь и кого вы уже обогнали"
+          lead="Посмотрите свой пройденный путь, получайте ачивки, стройте планы и живите!"
           comment="Попробуйте получить мифическую ачивку&nbsp;🧙‍♂️"
       />
 
       <template v-if="appStore.userBirthDate">
-        <AchievementLast :class="styles.lifeProgress__block" />
+        <WidgetLifeTime />
       </template>
       <template v-else>
         <ion-button

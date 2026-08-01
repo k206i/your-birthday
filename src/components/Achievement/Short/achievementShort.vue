@@ -1,0 +1,75 @@
+<script setup lang="ts">
+import styles from './achievementShort.module.scss';
+import {arrowForwardOutline, chevronUpOutline} from 'ionicons/icons';
+import {IonIcon} from '@ionic/vue';
+import {appVars} from '@/configApp';
+import AchievementImage from '@/components/Achievement/Image/achievementImage.vue';
+import AchievementRarityLabel from '@/components/Achievement/RarityLabel/achievementRarityLabel.vue';
+import {TAchievementCombined} from '@/api/getAchievementById';
+import {computed} from 'vue';
+
+const props = defineProps<{
+  achievement: TAchievementCombined,
+  isLast?: boolean,
+}>();
+
+const rarityColor = computed(() => {
+  const rarity = props.achievement?.rarity;
+
+  if ( !rarity ) {
+    return '';
+  }
+
+  return ( appVars.achievementColors as Record< string, string > )[ rarity ] ?? '';
+});
+
+</script>
+
+<template>
+  <div :class="styles.achievementShort"
+       :style="{
+              '--brd-achievement-theme-color': appVars.colors.achievements,
+              backgroundColor: `color-mix( in srgb, ${ rarityColor }, black var( --brd-color-mix-bg ))`,
+            }"
+  >
+    <AchievementImage
+        :class="styles.achievementShort__icon"
+        :achievement="props.achievement"
+        is-simple
+    />
+
+    <div :class="styles.achievementShort__contentWrapper">
+      <div v-if="props.isLast" :class="styles.achievementShort__label">
+        Последнее достижение
+      </div>
+
+      <div :class="styles.achievementShort__title">
+        {{ props.achievement.name }}
+      </div>
+
+      <div :class="styles.achievementShort__comment">
+        <AchievementRarityLabel
+            :achievement="props.achievement"
+            is-compact
+        />
+      </div>
+    </div>
+
+    <div v-if="props.isLast"
+         :class="styles.achievementShort__linkButton"
+    >
+      <ion-icon :icon="arrowForwardOutline"></ion-icon>
+    </div>
+    <div v-else
+         :class="styles.achievementShort__linkButton"
+    >
+      <ion-icon :icon="chevronUpOutline"></ion-icon>
+    </div>
+
+    <router-link
+        v-if="props.isLast"
+        to="/achievementsPage"
+        :class="styles.achievementShort__link">
+    </router-link>
+  </div>
+</template>

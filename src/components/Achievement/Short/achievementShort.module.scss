@@ -1,4 +1,4 @@
-.achievementLast {
+.achievementShort {
   position: relative;
   z-index: var( --brd-z-index-layout );
   display: flex;
@@ -6,7 +6,6 @@
   gap: var( --brd-size-gap );
   padding: var( --brd-size-gap );
   border-radius: var( --brd-size-border-radius );
-  background-color: var( --brd-color-theme-dark );
 
   &__icon {
     position: relative;
@@ -20,7 +19,7 @@
   &__label {
     font-size: 10px;
     text-transform: uppercase;
-    color: var( --brd-last-achievement-theme-color );
+    color: var( --brd-achievement-theme-color );
     letter-spacing: .3px;
   }
 
@@ -43,7 +42,7 @@
   &__linkButton {
     margin-left: auto;
     font-size: 20px;
-    color: var( --brd-last-achievement-theme-color );
+    color: var( --brd-achievement-theme-color );
   }
 
   &__link {

@@ -13,14 +13,17 @@ import {appStore} from '@/store/appStore';
 import {currentDate} from '@/store/currentDate';
 import {shareElementAsImage} from '@/composables/shareElementAsImage';
 import famousData from '@/jsons/achievements_famous.json';
+import ageData from '@/jsons/achievements_age.json';
 import AchievementTooltip from '@/components/Achievement/Tooltip/achievementTooltip.vue';
 import {TAchievementCombined} from '@/api/getAchievementById';
-import AchievementShort from '@/components/Achievement/Short/achievementShort.vue';
 import WidgetLifeTime from '@/components/Widgets/LifeTime/widgetLifeTime.vue';
 
-// Неделя жизни → ачивка. Пока только знаменитости, в будущем сюда могут лечь другие ачивки
+// Неделя жизни → ачивка: возрастные вехи и знаменитости
 const achievementByWeek: Map< number, TAchievementCombined > = new Map(
-  ( famousData as TAchievementCombined[] ).map( item => [ item.weeks as number, item ] )
+  [
+    ...( ageData as TAchievementCombined[] ),
+    ...( famousData as TAchievementCombined[] ),
+  ].map( item => [ item.weeks as number, item ] )
 );
 
 const isDateModalOpen = ref( false );
@@ -49,7 +52,7 @@ const showForCell = ( cell: Element ) => {
   tooltipStyle.value = {
     position: 'absolute',
     left: '50vw',
-    top: ( cellRect.top - gridRect.top - 40 ) + 'px', // 40px - чтобы палец загораживал подсказку
+    top: ( cellRect.top - gridRect.top - 40 ) + 'px', // 40px - чтобы палец не загораживал подсказку
     width: '70vw',
     transform: 'translate( -50%, -100% )',
     pointerEvents: 'none',
@@ -251,7 +254,7 @@ const lifeDecades = computed(() => {
         &nbsp;&nbsp;&nbsp;
         <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_current]"></span>&nbsp;сейчас
         &nbsp;&nbsp;&nbsp;
-        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_achievement]"></span>&nbsp;чей-то финал (нажмите, чтобы посмотреть)
+        <span :class="[styles.lifeProgress__weekLegendItem, styles.lifeProgress__weekLegendItem_achievement]"></span>&nbsp;достижение! (нажмите, чтобы посмотреть)
       </div>
 
       <div v-if="lifeWeeks"

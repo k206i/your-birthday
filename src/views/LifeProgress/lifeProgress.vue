@@ -205,7 +205,7 @@ const lifeDecades = computed(() => {
       />
 
       <template v-if="appStore.userBirthDate">
-        <WidgetLifeTime />
+        <WidgetLifeTime :class="styles.lifeProgress__block" />
       </template>
       <template v-else>
         <ion-button

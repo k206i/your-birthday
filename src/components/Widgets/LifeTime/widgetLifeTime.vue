@@ -4,9 +4,25 @@ import {ref, computed, onMounted, onUnmounted} from 'vue';
 import {appStore} from '@/store/appStore';
 import {appVars} from '@/configApp';
 import {parseLocalDate} from '@/composables/localDate';
+import {declineUnit} from '@/composables/declineUnit';
 
 const now = ref( Date.now() );
 let timerId: ReturnType< typeof setInterval > | null = null;
+
+// Пасхалка: по двойному тапу переключаемся между прожитым временем и остатком.
+// Считаем тапы вручную — на тач-устройствах нативный dblclick срабатывает нестабильно
+const isRestShown = ref( false );
+let lastTapTime: number = 0;
+
+const onTap = () => {
+  const tapTime: number = performance.now();
+
+  if ( tapTime - lastTapTime < 300 ) {
+    isRestShown.value = !isRestShown.value;
+  }
+
+  lastTapTime = tapTime;
+};
 
 onMounted(() => {
   timerId = setInterval(() => {
@@ -110,16 +126,125 @@ const restTime = computed(() => {
 </script>
 
 <template>
-  <div v-if="lifeTime" :class="styles.widgetLifeTime">
-    <div :class="styles.widgetLifeTime__counter">
-      {{ lifeTime.years }}г:{{ lifeTime.months }}мес:{{ lifeTime.weeks }}нед:{{ lifeTime.days }}д:{{ lifeTime.hours }}час:{{ lifeTime.minutes }}мин:{{ lifeTime.seconds }}сек
-    </div>
+  <div v-if="lifeTime" :class="styles.widgetLifeTime" @click="onTap">
+    <template v-if="!isRestShown">
+      <div :class="styles.widgetLifeTime__title">
+        Вы живёте уже
+      </div>
 
-    <div v-if="restTime" :class="styles.widgetLifeTime__counter">
-      {{ restTime.years }}г:{{ restTime.months }}мес:{{ restTime.weeks }}нед:{{ restTime.days }}д:{{ restTime.hours }}час:{{ restTime.minutes }}мин:{{ restTime.seconds }}сек
-    </div>
-    <div v-else :class="styles.widgetLifeTime__counter">
-      🎉 Вы превзошли расчётный лимит! Бонусный уровень открыт
-    </div>
+      <div :class="styles.widgetLifeTime__accentText">
+        <span :class="styles.widgetLifeTime__accentNum">
+          {{ lifeTime.years }}
+        </span>
+        {{ declineUnit( lifeTime.years, 'year') }}
+        &nbsp;
+
+        <span :class="styles.widgetLifeTime__accentNum">
+          {{ lifeTime.months }}
+        </span>
+        {{ declineUnit( lifeTime.months, 'month') }}
+        &nbsp;
+
+        <span :class="styles.widgetLifeTime__accentNum">
+          {{ lifeTime.weeks }}
+        </span>
+        {{ declineUnit( lifeTime.weeks, 'week') }}
+        &nbsp;
+
+        <span :class="styles.widgetLifeTime__accentNum">
+          {{ lifeTime.days }}
+        </span>
+        {{ declineUnit( lifeTime.days, 'day') }}
+      </div>
+
+      <div :class="styles.widgetLifeTime__divider"></div>
+
+      <div :class="styles.widgetLifeTime__subText">
+        <span :class="styles.widgetLifeTime__subNum">
+          {{ lifeTime.hours }}
+        </span>
+        {{ declineUnit( lifeTime.hours, 'hour') }}
+        &nbsp;
+
+        <span :class="styles.widgetLifeTime__subNum">
+          {{ lifeTime.minutes }}
+        </span>
+        {{ declineUnit( lifeTime.minutes, 'minute') }}
+        &nbsp;
+
+        <span :class="styles.widgetLifeTime__subNum">
+          {{ lifeTime.seconds }}
+        </span>
+        {{ declineUnit( lifeTime.seconds, 'second') }}
+        &nbsp;
+      </div>
+
+      <div :class="styles.widgetLifeTime__comment">
+        Точно, как в аптеке 🤭
+      </div>
+    </template>
+    <template v-else>
+      <div v-if="restTime" :class="styles.widgetLifeTime__counter">
+        <div :class="styles.widgetLifeTime__title">
+          Осталось прожить
+        </div>
+
+        <div :class="styles.widgetLifeTime__accentText">
+          <span :class="styles.widgetLifeTime__accentNum">
+            {{ restTime.years }}
+          </span>
+          {{ declineUnit( restTime.years, 'year') }}
+          &nbsp;
+
+          <span :class="styles.widgetLifeTime__accentNum">
+            {{ restTime.months }}
+          </span>
+          {{ declineUnit( restTime.months, 'month') }}
+          &nbsp;
+
+          <span :class="styles.widgetLifeTime__accentNum">
+            {{ restTime.weeks }}
+          </span>
+          {{ declineUnit( restTime.weeks, 'week') }}
+          &nbsp;
+
+          <span :class="styles.widgetLifeTime__accentNum">
+            {{ restTime.days }}
+          </span>
+          {{ declineUnit( restTime.days, 'day') }}
+        </div>
+
+        <div :class="styles.widgetLifeTime__divider"></div>
+
+        <div :class="styles.widgetLifeTime__subText">
+          <span :class="styles.widgetLifeTime__subNum">
+            {{ restTime.hours }}
+          </span>
+          {{ declineUnit( restTime.hours, 'hour') }}
+          &nbsp;
+
+          <span :class="styles.widgetLifeTime__subNum">
+            {{ restTime.minutes }}
+          </span>
+          {{ declineUnit( restTime.minutes, 'minute') }}
+          &nbsp;
+
+          <span :class="styles.widgetLifeTime__subNum">
+            {{ restTime.seconds }}
+          </span>
+          {{ declineUnit( restTime.seconds, 'second') }}
+          &nbsp;
+        </div>
+
+        <div :class="styles.widgetLifeTime__comment">
+          Поздравляем! Ваша любознательность позволила увидеть спрятанное 🤭
+        </div>
+      </div>
+
+      <div v-else :class="styles.widgetLifeTime__accentText">
+        🎉 Вы превзошли расчётный лимит!<br />
+        <span style="color: var( --brd-custom-theme-color )">Вы открыли новую главу в долголетии!!!</span>
+      </div>
+    </template>
   </div>
 </template>

@@ -8,7 +8,7 @@ import AppHeader from '@/components/AppHeader/appHeader.vue';
 import {appVars} from '@/configApp';
 import {appStore} from '@/store/appStore';
 import {computed} from 'vue';
-import {declineDays} from '@/composables/declineDays';
+import {declineUnit} from '@/composables/declineUnit';
 import {getDaysToDate} from '@/composables/getDaysToDate';
 import {currentDate} from '@/store/currentDate';
 import AchievementShort from '@/components/Achievement/Short/achievementShort.vue';
@@ -78,7 +78,7 @@ const isAdditionalBirthdaySoon = computed(() => {
 
               <div>
                 <div :class="styles.homePage__mainDateName">
-                  {{ declineDays( daysToBirthday ?? 0 ) }}
+                  {{ declineUnit( daysToBirthday ?? 0 ) }}
                 </div>
 
                 <div :class="styles.homePage__mainDateComment">
@@ -97,12 +97,12 @@ const isAdditionalBirthdaySoon = computed(() => {
               <div v-else-if="isAdditionalBirthdaySoon"
                    :class="styles.homePage__leadBlock"
               >
-                🚨🚨🚨 <br />{{ appStore.additionalName }} уже репетирует задувание свечей — {{ daysToAdditionalBirthday === 1 ? 'остался' : 'осталось' }} <span class="accent">{{ daysToAdditionalBirthday }}</span>&nbsp;{{ declineDays( daysToAdditionalBirthday ?? 0 ) }} 🎂
+                🚨🚨🚨 <br />{{ appStore.additionalName }} уже репетирует задувание свечей — {{ daysToAdditionalBirthday === 1 ? 'остался' : 'осталось' }} <span class="accent">{{ daysToAdditionalBirthday }}</span>&nbsp;{{ declineUnit( daysToAdditionalBirthday ?? 0 ) }} 🎂
               </div>
               <div v-else
                    :class="styles.homePage__leadBlock"
               >
-                {{ appStore.additionalName }} ждёт поздравлений через <span class="accent">{{ daysToAdditionalBirthday }}</span>&nbsp;{{ declineDays( daysToAdditionalBirthday ?? 0 ) }} 🎁
+                {{ appStore.additionalName }} ждёт поздравлений через <span class="accent">{{ daysToAdditionalBirthday }}</span>&nbsp;{{ declineUnit( daysToAdditionalBirthday ?? 0 ) }} 🎁
               </div>
             </template>
           </template>

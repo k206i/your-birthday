@@ -1,5 +1,5 @@
 {
-  "name": "your-birthday",
+  "name": "birthday-date",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -49,5 +49,5 @@
     "vitest": "^4.1.5",
     "vue-tsc": "^2.1.10"
   },
-  "description": "An Ionic project"
+  "description": "Birthday date app"
 }

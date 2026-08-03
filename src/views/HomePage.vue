@@ -112,7 +112,7 @@ const isAdditionalBirthdaySoon = computed(() => {
               P.S. {{ appStore.rememberedPersonTitle }} — <span class="accent">{{ appStore.rememberedPersonName }}</span>
             </template>
             <template v-else>
-              Все важные даты в одном месте 💜
+              Всё спланируем, всё рассчитаем 💜
             </template>
           </template>
         </WidgetPageTitle>

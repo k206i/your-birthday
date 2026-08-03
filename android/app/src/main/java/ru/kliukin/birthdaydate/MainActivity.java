@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package ru.kliukin.birthdaydate;
 
 import com.getcapacitor.BridgeActivity;
 

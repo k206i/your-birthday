@@ -22,5 +22,13 @@
     "image": "",
     "name": "Всегда готов!",
     "description": "Родился в СССР"
+  },
+  {
+    "id": "curious-user",
+    "rarity": "rare",
+    "icon": "☭",
+    "image": "",
+    "name": "Всегда готов!",
+    "description": "Родился в СССР"
   }
 ]

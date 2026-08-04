@@ -128,7 +128,7 @@ const isAdditionalBirthdaySoon = computed(() => {
           <li>
             <WidgetPageLink
                 link="/dayConception"
-                title="День зачатия"
+                title="Когда был день зачатия?"
                 comment="Что было в тот день?"
                 bg-image="dog-2_art"
                 :color="appVars.colors.dayConception"

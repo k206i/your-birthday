@@ -1,4 +1,5 @@
 .uiDayCard {
+  $root: &;
   position: relative;
   display: inline-flex;
   flex-direction: column;
@@ -13,6 +14,7 @@
   border-radius: var( --brd-size-border-radius-s );
   border: 1px solid var( --brd-color-theme );
   background-color: color-mix( in srgb, var( --brd-color-theme ), black var( --brd-color-mix-bg ));
+  transition: min-width .3s ease;
 
   &_success {
     color: var( --brd-color-success );
@@ -32,9 +34,21 @@
     background-color: color-mix( in srgb, var( --brd-color-error ), black var( --brd-color-mix-bg ));
   }
 
+  &_active {
+    min-width: 15vw;
+    box-shadow:
+            inset 0 0 0 1px color-mix( in srgb, currentColor, transparent 72% ),
+            inset 0 0 16px color-mix( in srgb, currentColor, transparent 55% );
+  }
+
   &__day {
     font-family: var( --brd-font-default );
     font-size: 30px;
     font-weight: bold;
+    transition: var( --brd-transition-all );
+
+    #{$root}_active & {
+      text-shadow: 0 0 12px currentColor;
+    }
   }
 }

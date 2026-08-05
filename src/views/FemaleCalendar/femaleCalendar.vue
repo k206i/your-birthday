@@ -27,6 +27,7 @@ const isSmokeInfoModalOpen = ref( false );
 const isOtherFactorsInfoModalOpen = ref( false );
 const cycleLength = ref< number >( appVars.ovulation.cycleDefault );
 const buttonsRef = ref< HTMLElement >();
+const selectedConceptionDate = ref< string | null >( null );
 
 const cycleOptions: number[] = [];
 
@@ -107,25 +108,40 @@ const ovulationDates = computed(() => {
     inappropriate.push( formatLocalDate( d ) );
   }
 
-  // Дата рождения при зачатии в день овуляции — для перехода на страницу дня рождения
-  const birthDate: Date = new Date( ovulationDate );
-  birthDate.setDate( birthDate.getDate() + appVars.pregnancyDuration );
-
   return {
     early,
     peak,
     after,
     inappropriate,
-    birthDate: formatLocalDate( birthDate ),
+    ovulation: formatLocalDate( ovulationDate ),
   };
+});
+
+const onDayCardClick = ( date: string ) => {
+  selectedConceptionDate.value = date;
+};
+
+// Дата рождения при зачатии в выбранный день (по умолчанию — день овуляции)
+const birthDate = computed(() => {
+  if ( !selectedConceptionDate.value ) {
+    return null;
+  }
+
+  const date: Date = parseLocalDate( selectedConceptionDate.value );
+  date.setDate( date.getDate() + appVars.pregnancyDuration );
+
+  return formatLocalDate( date );
 });
 
 const scrollToButtons = () => {
   buttonsRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
-// После расчёта дат проматываем страницу к кнопкам выбора
+// После расчёта дат проматываем страницу к кнопкам выбора,
+// а выбранной датой ставим день овуляции — прежней даты в новом списке может не быть
 watch( ovulationDates, async ( value ) => {
+  selectedConceptionDate.value = value ? value.ovulation : null;
+
   if ( !value ) {
     return;
   }
@@ -266,30 +282,50 @@ watch( ovulationDates, async ( value ) => {
               stylesOverflowSection.overflowSection__overflowWrapper
           ]">
             <div v-for="date in ovulationDates.early" :key="date">
-              <UiDayCard :date="parseLocalDate( date )" color="warning" />
+              <UiDayCard
+                  :date="parseLocalDate( date )"
+                  color="warning"
+                  :is-active="selectedConceptionDate === date"
+                  @click="onDayCardClick( date )"
+              />
             </div>
 
             <div v-for="date in ovulationDates.peak" :key="date">
-              <UiDayCard :date="parseLocalDate( date )" color="success" />
+              <UiDayCard
+                  :date="parseLocalDate( date )"
+                  color="success"
+                  :is-active="selectedConceptionDate === date"
+                  @click="onDayCardClick( date )"
+              />
             </div>
 
             <div v-for="date in ovulationDates.after" :key="date">
-              <UiDayCard :date="parseLocalDate( date )" color="warning" />
+              <UiDayCard
+                  :date="parseLocalDate( date )"
+                  color="warning"
+                  :is-active="selectedConceptionDate === date"
+                  @click="onDayCardClick( date )"
+              />
             </div>
 
             <div v-for="date in ovulationDates.inappropriate" :key="date">
-              <UiDayCard :date="parseLocalDate( date )" color="error" />
+              <UiDayCard
+                  :date="parseLocalDate( date )"
+                  color="error"
+                  :is-active="selectedConceptionDate === date"
+                  @click="onDayCardClick( date )"
+              />
             </div>
           </div>
         </div>
       </div>
 
       <WidgetArtButton
-          v-if="ovulationDates"
+          v-if="birthDate"
           :color="appVars.colors.childBirthday"
-          :title="`Малыш может родиться примерно <span style='color: ${SUB_THEME_COLOR}'>${ formatDisplayDate( parseLocalDate( ovulationDates.birthDate )) }</span>. Давайте посмотрми, что интересного будет в этот день? 🐣`"
+          :title="`Малыш может родиться примерно <div style='color: ${SUB_THEME_COLOR}; font-size: 1.2em; font-weight: bold'>${ formatDisplayDate( parseLocalDate( birthDate )) }</div> Давайте посмотрми, что интересного будет в этот день? 🐣`"
           comment="Праздники, именины, знак зодиака и памятные даты"
-          :link="`/childBirthday?birthDate=${ovulationDates.birthDate}`"
+          :link="`/childBirthday?birthDate=${birthDate}`"
           :art-src="penguinArt"
       />
 

@@ -9,11 +9,13 @@ import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue'
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {ref, watch, computed, nextTick} from 'vue';
 import {appVars} from '@/configApp';
-import {parseLocalDate, formatLocalDate} from '@/composables/localDate';
+import {parseLocalDate, formatLocalDate, formatDisplayDate} from '@/composables/localDate';
 import {currentDate} from '@/store/currentDate';
 import UiDayCard from '@/components/Ui/DayCard/uiDayCard.vue';
 import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 import WidgetLinksList from '@/components/Widgets/LinksList/widgetLinksList.vue';
+import WidgetArtButton from '@/components/Widgets/ArtButton/widgetArtButton.vue';
+import penguinArt from '@/assets/img/animals/penguin_art.webp';
 
 const SUB_THEME_COLOR = appVars.colors.maleCalendar;
 
@@ -25,6 +27,7 @@ const selectedAlcoholDate = ref();
 const isEjaculationDateModalOpen = ref(false);
 const selectedEjaculationDate = ref();
 const buttonsRef = ref< HTMLElement >();
+const selectedConceptionDate = ref< string | null >( null );
 const isAlcoholInfoModalOpen = ref( false );
 const isEjaculationInfoModalOpen = ref( false );
 const isMasturbateInfoModalOpen = ref( false );
@@ -122,15 +125,38 @@ const optimalDates = computed(() => {
     inappropriate.push( formatLocalDate( d ) );
   }
 
-  return { tooShort, optimal, tooLong, inappropriate };
+  // По умолчанию рекомендуем ближайший оптимальный день,
+  // а если оптимальное окно уже прошло — первую доступную дату
+  const recommended: string = optimal[0] ?? tooShort[0] ?? tooLong[0] ?? inappropriate[0];
+
+  return { tooShort, optimal, tooLong, inappropriate, recommended };
+});
+
+const onDayCardClick = ( date: string ) => {
+  selectedConceptionDate.value = date;
+};
+
+// Дата рождения при зачатии в выбранный день (по умолчанию — ближайший оптимальный)
+const birthDate = computed(() => {
+  if ( !selectedConceptionDate.value ) {
+    return null;
+  }
+
+  const date: Date = parseLocalDate( selectedConceptionDate.value );
+  date.setDate( date.getDate() + appVars.pregnancyDuration );
+
+  return formatLocalDate( date );
 });
 
 const scrollToButtons = () => {
   buttonsRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
-// После расчёта дат проматываем страницу к кнопкам выбора
+// После расчёта дат проматываем страницу к кнопкам выбора,
+// а выбранной датой ставим рекомендованный день — прежней даты в новом списке может не быть
 watch( optimalDates, async ( value ) => {
+  selectedConceptionDate.value = value ? value.recommended : null;
+
   if ( !value ) {
     return;
   }
@@ -296,23 +322,52 @@ watch( optimalDates, async ( value ) => {
               stylesOverflowSection.overflowSection__overflowWrapper
           ]">
             <div v-for="date in optimalDates.tooShort" :key="date">
-              <UiDayCard :date="parseLocalDate( date )" color="warning" />
+              <UiDayCard
+                  :date="parseLocalDate( date )"
+                  color="warning"
+                  :is-active="selectedConceptionDate === date"
+                  @click="onDayCardClick( date )"
+              />
             </div>
 
             <div v-for="date in optimalDates.optimal" :key="date">
-              <UiDayCard :date="parseLocalDate( date )" color="success" />
+              <UiDayCard
+                  :date="parseLocalDate( date )"
+                  color="success"
+                  :is-active="selectedConceptionDate === date"
+                  @click="onDayCardClick( date )"
+              />
             </div>
 
             <div v-for="date in optimalDates.tooLong" :key="date">
-              <UiDayCard :date="parseLocalDate( date )" color="warning" />
+              <UiDayCard
+                  :date="parseLocalDate( date )"
+                  color="warning"
+                  :is-active="selectedConceptionDate === date"
+                  @click="onDayCardClick( date )"
+              />
             </div>
 
             <div v-for="date in optimalDates.inappropriate" :key="date">
-              <UiDayCard :date="parseLocalDate( date )" color="error" />
+              <UiDayCard
+                  :date="parseLocalDate( date )"
+                  color="error"
+                  :is-active="selectedConceptionDate === date"
+                  @click="onDayCardClick( date )"
+              />
             </div>
           </div>
         </div>
       </div>
+
+      <WidgetArtButton
+          v-if="birthDate"
+          :color="appVars.colors.childBirthday"
+          :title="`Малыш может родиться примерно <div style='color: ${SUB_THEME_COLOR}; font-size: 1.2em; font-weight: bold'>${ formatDisplayDate( parseLocalDate( birthDate )) }</div> Давайте посмотрми, что интересного будет в этот день? 🐣`"
+          comment="Праздники, именины, знак зодиака и памятные даты"
+          :link="`/childBirthday?birthDate=${birthDate}`"
+          :art-src="penguinArt"
+      />
 
       <WidgetLinksList :class="styles.maleCalendar__block">
         <a @click.prevent="isEjaculationInfoModalOpen = true">

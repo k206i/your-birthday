@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import styles from './dayConception.module.scss';
-import {IonContent, IonPage, IonDatetime, IonModal, IonButton} from '@ionic/vue';
+import {IonContent, IonPage, IonButton} from '@ionic/vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {ref, computed, watch} from 'vue';
@@ -10,7 +10,7 @@ import {getZodiacName, TGetZodiacNameResponse} from '@/api/getZodiacName';
 import {getFamousNames, TGetFamousNamesResponse} from '@/api/getFamousNames';
 import {getFamousPolitics, TGetFamousPoliticsResponse} from '@/api/getFamousPolitics';
 import {appVars} from '@/configApp';
-import {formatDisplayDate} from '@/composables/localDate';
+import {formatDisplayDate, formatLocalDate, parseLocalDate} from '@/composables/localDate';
 import {currentDate} from '@/store/currentDate';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import WidgetPrimaryDate from '@/components/Widgets/PrimaryDate/widgetPrimaryDate.vue';
@@ -22,17 +22,34 @@ import WidgetFamousPersons from '@/components/Widgets/FamousPersons/widgetFamous
 import WidgetFamousPolitics from '@/components/Widgets/FamousPolitics/widgetFamousPolitics.vue';
 import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 import WidgetDatesLists from '@/components/Widgets/DatesLists/widgetDatesLists.vue';
+import {appStore} from '@/store/appStore';
 
 const SUB_THEME_COLOR = appVars.colors.dayConception;
 
-const isDateModalOpen = ref( false );
-const maxDate = computed(() => currentDate.value + 'T23:59:59');
+// Нативный календарь принимает границы в формате YYYY-MM-DD, без времени
+const maxDate = computed(() => currentDate.value );
 
-const openDateModal = () => {
-  isDateModalOpen.value = true;
-};
+const minDate = computed(() => {
+  const date: Date = parseLocalDate( currentDate.value );
+  date.setFullYear( date.getFullYear() - 120 );
+
+  return formatLocalDate( date );
+});
 
 const selectedDate = ref();
+
+const onNativeDateChange = ( event: Event ) => {
+  const value: string = ( event.target as HTMLInputElement ).value;
+
+  if ( value ) {
+    selectedDate.value = value;
+  }
+};
+
+// Расчёт по дате рождения из профиля
+const showOwnDate = () => {
+  selectedDate.value = appStore.userBirthDate;
+};
 const holidaysNames = ref< TGetHolidaysNamesResponse >();
 const namesDays = ref< TGetNamesDaysResponse >();
 const zodiacNames = ref< TGetZodiacNameResponse >();
@@ -82,36 +99,32 @@ watch(formattedDate, async () => {
           comment="И посмотрим, какое событие было в этот день 🤭"
       />
 
-      <ion-button
-          :class="styles.dayConception__dateButton"
-          expand="block"
-          @click="openDateModal"
-      >
-        {{ birthDay ? `📅 ${birthDay}` : 'Выбрать дату рождения' }}
-      </ion-button>
+      <div :class="styles.dayConception__dateButtonWrap">
+        <ion-button
+            :class="styles.dayConception__dateButton"
+            expand="block"
+        >
+          {{ birthDay ? `📅 ${birthDay}` : 'Выбрать дату рождения' }}
+        </ion-button>
 
-      <ion-modal
-          :is-open="isDateModalOpen"
-          keep-contents-mounted="true"
-          @did-dismiss="isDateModalOpen = false"
+        <input
+            :class="styles.dayConception__nativeDate"
+            type="date"
+            :value="formattedDate"
+            :min="minDate"
+            :max="maxDate"
+            @change="onNativeDateChange"
+        />
+      </div>
+
+
+      <div v-if="!conceptionDay && appStore.userBirthDate"
+           :class="styles.dayConception__standaloneLink"
       >
-        <ion-content>
-          <div class="center-content">
-            <ion-datetime
-                v-model="selectedDate"
-                locale="ru-RU"
-                presentation="date"
-                :show-default-buttons="true"
-                done-text="Готово" cancel-text="Не, отмена"
-                :max="maxDate"
-                :first-day-of-week="1"
-                @ionChange="isDateModalOpen = false"
-                @ionCancel="isDateModalOpen = false"
-            ></ion-datetime>
-            <img :class="styles.dayConception__modalArt" src="@/assets/img/animals/cat-3_art.png" alt="" />
-          </div>
-        </ion-content>
-      </ion-modal>
+        <a href="#" @click.prevent="showOwnDate">
+          Узнать про себя
+        </a>
+      </div>
 
       <Transition name="brd-fade">
         <WidgetPrimaryDate

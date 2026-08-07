@@ -11,7 +11,6 @@ import {formatDisplayDate} from '@/composables/localDate';
 import {getCurrentWeekIndex} from '@/composables/getCurrentWeekIndex';
 import {appStore} from '@/store/appStore';
 import {currentDate} from '@/store/currentDate';
-import {shareElementAsImage} from '@/composables/shareElementAsImage';
 import famousData from '@/jsons/achievements_famous.json';
 import ageData from '@/jsons/achievements_age.json';
 import AchievementTooltip from '@/components/Achievement/Tooltip/achievementTooltip.vue';
@@ -294,14 +293,6 @@ const lifeDecades = computed(() => {
             :icon="hoveredAchievement.icon"
         />
       </div>
-
-      <ion-button
-          v-if="lifeWeeks"
-          expand="block"
-          @click="shareElementAsImage( weeksGridRef, 'life-progress.png' )"
-      >
-        Поделиться прогрессом 📤
-      </ion-button>
     </ion-content>
 
     <AppFooter />

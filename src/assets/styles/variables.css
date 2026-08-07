@@ -70,37 +70,6 @@ ion-datetime {
 
 
 :root {
-    --brd-font-default: 'Roboto Condensed', sans-serif;
-    --brd-font-default-alt: 'Roboto', sans-serif;
-    --brd-font-default-alt2: 'Skyquake', sans-serif;
-    --brd-color-font: #aeaebb;
-    --brd-color-font-low: #898989;
-    --brd-color-font-accent: #fff;
-    --brd-color-theme: #a876ec;
-    --brd-color-theme_rgb: 168, 118, 236;
-    --brd-color-theme-dark: #201a34;
-    --brd-color-theme-dark_rgb: 32, 26, 52;
-    --brd-color-theme-bg: var( --brd-color-theme-dark );
-    --brd-color-bg: #0c0f17;
-    --brd-color-success: #b0f79d;
-    --brd-color-warning: #f2b348;
-    --brd-color-error: #f76e69;
-    --brd-color-pink: #ff8bef;
-    --brd-color-pink_rgb: 255, 139, 239;
-
-    --brd-custom-theme-color: var( --brd-color-theme );
-
-    --brd-color-female_rgb: 168, 118, 236;
-    --brd-color-male: #40629e;
-    --brd-color-male_rgb: 64, 98, 158;
-
-    --brd-color-white: #fff;
-    --brd-color-white-80: rgba( 255, 255, 255, .8 );
-    --brd-color-white-50: rgba( 255, 255, 255, .5 );
-    --brd-color-white-20: rgba( 255, 255, 255, .2 );
-    --brd-color-white-10: rgba( 255, 255, 255, .1 );
-    --brd-color-white-5: rgba( 255, 255, 255, .05 );
-
     --ion-font-family: var( --brd-font-default );
     --ion-text-color: var( --brd-color-white );
     

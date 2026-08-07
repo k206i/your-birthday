@@ -1,19 +1,19 @@
 :root {
   --brd-size-gap-base: 8px;
   --brd-size-gap-mobile: 8px;
-  --brd-size-gap-xxs: calc( var( --brd-size-gap-base ) / 4 );
-  --brd-size-gap-xs: calc( var( --brd-size-gap-base ) / 2 );
-  --brd-size-gap-s: var( --brd-size-gap-base );
-  --brd-size-gap: calc( var( --brd-size-gap-base ) * 2 );
-  --brd-size-gap-l: calc( var( --brd-size-gap-base ) * 3 );
-  --brd-size-gap-xl: calc( var( --brd-size-gap-base ) * 4 );
+  --brd-size-gap-xxs: calc( var( --brd-size-gap-base ) / 4 ); // 2px
+  --brd-size-gap-xs: calc( var( --brd-size-gap-base ) / 2 ); // 4px
+  --brd-size-gap-s: var( --brd-size-gap-base ); // 8px
+  --brd-size-gap: calc( var( --brd-size-gap-base ) * 2 ); // 16px
+  --brd-size-gap-l: calc( var( --brd-size-gap-base ) * 3 ); // 24px
+  --brd-size-gap-xl: calc( var( --brd-size-gap-base ) * 4 ); // 32px
 
   --brd-size-widget-min-height: 200px;
 
   --brd-size-border-radius-base: 8px;
-  --brd-size-border-radius-xs: calc( var( --brd-size-border-radius-base ) / 2 );
-  --brd-size-border-radius-s: var( --brd-size-border-radius-base );
-  --brd-size-border-radius: calc( var( --brd-size-border-radius-base ) * 2 );
+  --brd-size-border-radius-xs: calc( var( --brd-size-border-radius-base ) / 2 ); // 4px
+  --brd-size-border-radius-s: var( --brd-size-border-radius-base ); // 8px
+  --brd-size-border-radius: calc( var( --brd-size-border-radius-base ) * 2 ); // 16px
 
   --brd-size-picker-min-width: 350px;
   --brd-scroll-margin-top: 130px;
@@ -37,4 +37,36 @@
   --brd-transition-filter: filter ease var( --brd-transition-duration );
   --brd-transition-color: color ease var( --brd-transition-duration );
   --brd-transition-transform: transform ease var( --brd-transition-duration );
+
+  // Defaults
+  --brd-font-default: 'Roboto Condensed', sans-serif;
+  --brd-font-default-alt: 'Roboto', sans-serif;
+  --brd-font-default-alt2: 'Skyquake', sans-serif;
+  --brd-color-font: #aeaebb;
+  --brd-color-font-low: #898989;
+  --brd-color-font-accent: #fff;
+  --brd-color-theme: #a876ec;
+  --brd-color-theme_rgb: 168, 118, 236;
+  --brd-color-theme-dark: #201a34;
+  --brd-color-theme-dark_rgb: 32, 26, 52;
+  --brd-color-theme-bg: var( --brd-color-theme-dark );
+  --brd-color-bg: #0c0f17;
+  --brd-color-success: #b0f79d;
+  --brd-color-warning: #f2b348;
+  --brd-color-error: #f76e69;
+  --brd-color-pink: #ff8bef;
+  --brd-color-pink_rgb: 255, 139, 239;
+
+  --brd-custom-theme-color: var( --brd-color-theme );
+
+  --brd-color-female_rgb: 168, 118, 236;
+  --brd-color-male: #40629e;
+  --brd-color-male_rgb: 64, 98, 158;
+
+  --brd-color-white: #fff;
+  --brd-color-white-80: rgba( 255, 255, 255, .8 );
+  --brd-color-white-50: rgba( 255, 255, 255, .5 );
+  --brd-color-white-20: rgba( 255, 255, 255, .2 );
+  --brd-color-white-10: rgba( 255, 255, 255, .1 );
+  --brd-color-white-5: rgba( 255, 255, 255, .05 );
 }

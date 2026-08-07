@@ -63,7 +63,7 @@ $cannon-count: 60;
   &__blurWrapper {
     position: relative;
     z-index: 200;
-    padding: var( --brd-size-gap-xl ) var( --brd-size-gap ) var( --brd-size-gap );
+    padding: 50px var( --brd-size-gap ) var( --brd-size-gap );
     border-radius: var( --brd-size-border-radius );
     backdrop-filter: blur( 5px );
   }

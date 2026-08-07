@@ -1,5 +1,9 @@
 .appFooter {
-  &__accent {
-    color: var( --brd-color-theme );
+  font-family: var( --brd-font-default-alt );
+  font-size: 14px;
+  text-align: center;
+
+  &__link {
+    color: var( --brd-color-font-low );
   }
 }

@@ -1,0 +1,247 @@
+@use 'sass:list';
+@use 'sass:math';
+
+// Падающее конфетти. $confetti-count должен совпадать с confettiCount в modalBirthday.vue
+$confetti-count: 40;
+$confetti-colors: var( --brd-color-theme ), var( --brd-color-pink ), var( --brd-color-warning ), var( --brd-color-success ), #57c5e3, #fff;
+// Падающее конфетти подключается после залпа хлопушек
+$confetti-delay: .8s;
+// Хлопушки из нижних углов. $cannon-count должен совпадать с cannonCount в modalBirthday.vue
+$cannon-count: 60;
+
+.modalBirthday {
+  &__title {
+    position: relative;
+    z-index: 200;
+    margin-bottom: var( --brd-size-gap-l );
+    font-size: 62px;
+    font-weight: bold;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  &__contentWrapper {
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
+    background: radial-gradient(ellipse 100% 70% at bottom, var( --brd-color-theme ) -80%, transparent 90%);
+  }
+
+  &__accent {
+    color: var( --brd-color-theme );
+  }
+
+  &__blurWrapper {
+    position: relative;
+    z-index: 200;
+    padding: 50px var( --brd-size-gap ) var( --brd-size-gap );
+    border-radius: var( --brd-size-border-radius );
+    backdrop-filter: blur( 5px );
+  }
+
+  &__wish,
+  &__text {
+    position: relative;
+    z-index: 200;
+    margin-bottom: var( --brd-size-gap );
+    font-family: var( --brd-font-default-alt );
+    font-size: 24px;
+    color: var( --brd-color-font-accent );
+  }
+
+  &__wish {
+    font-size: 20px;
+  }
+
+  &__art {
+    position: absolute;
+    z-index: 100;
+    bottom: 0;
+    left: 50%;
+    transform: translateX( -50% );
+    width: 65%;
+  }
+
+  &__confetti {
+    position: absolute;
+    z-index: 150;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+
+    @media ( prefers-reduced-motion: reduce ) {
+      display: none;
+    }
+  }
+
+  // Сама частица — прозрачный столбик во всю высоту блока, поэтому translate3d( 0, 105%, 0 )
+  // в анимации падения равен высоте контейнера независимо от его размера.
+  // Видимая крупинка рисуется в ::after и крутится своей анимацией
+  &__confettiItem {
+    position: absolute;
+    top: -20px;
+    width: 8px;
+    height: 100%;
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: modalBirthdayConfettiFall linear infinite;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 14px;
+      border-radius: 2px;
+      background-color: var( --confetti-color );
+      animation: modalBirthdayConfettiSpin linear infinite;
+    }
+
+    // Разброс частиц считается на этапе сборки, в рантайме ничего не вычисляется.
+    // Отрицательная задержка нужна, чтобы конфетти уже летело в момент открытия модалки
+    @for $i from 1 through $confetti-count {
+      &:nth-child( #{ $i } ) {
+        --confetti-color: #{ list.nth( $confetti-colors, ( $i - 1 ) % list.length( $confetti-colors ) + 1 ) };
+        --confetti-drift: #{ ( math.random( 80 ) - 40 ) * 1px };
+
+        left: math.random( 96 ) * 1%;
+        animation-duration: ( 30 + math.random( 40 )) * .1s;
+        animation-delay: $confetti-delay + math.random( 300 ) * .01s;
+
+        &::after {
+          animation-duration: ( 6 + math.random( 14 )) * .1s;
+        }
+      }
+    }
+  }
+
+  &__cannon {
+    position: absolute;
+    z-index: 250;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+
+    @media ( prefers-reduced-motion: reduce ) {
+      display: none;
+    }
+  }
+
+  // Одиночный залп при открытии: внешний span летит из угла вверх и тает в верхней точке (forwards).
+  // Как и у падающего конфетти, сам span — прозрачный столбик во всю высоту блока, поэтому
+  // --cannon-peak задаётся в процентах и не зависит от высоты экрана.
+  // Крупинка рисуется в ::after у нижнего края столбика и крутится своей анимацией
+  &__cannonItem {
+    position: absolute;
+    bottom: 0;
+    width: 8px;
+    height: 100%;
+    opacity: 0;
+    will-change: transform, opacity;
+    animation: modalBirthdayCannon cubic-bezier( .2, .6, .5, 1 ) forwards;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      display: block;
+      width: 100%;
+      background-color: var( --cannon-color );
+      animation: modalBirthdayConfettiSpin linear infinite;
+    }
+
+    // Первая половина — левая хлопушка, вторая — правая. Каждая третья частица — мелкий кружок.
+    // Разброс считается на этапе сборки, в рантайме ничего не вычисляется
+    @for $i from 1 through $cannon-count {
+      &:nth-child( #{ $i } ) {
+        $dir: -1;
+        $left: 106%;
+        $size: 15px;
+        $radius: 2px;
+
+        @if $i <= math.div( $cannon-count, 2 ) {
+          $dir: 1;
+          $left: -6%;
+        }
+
+        @if $i % 3 == 0 {
+          $size: 8px;
+          $radius: 50%;
+        }
+
+        --cannon-color: #{ list.nth( $confetti-colors, ( $i - 1 ) % list.length( $confetti-colors ) + 1 ) };
+        --cannon-x: #{ $dir * ( 120 + math.random( 310 )) * 1px };
+        --cannon-peak: #{ ( 88 + math.random( 9 )) * -1% };
+        --cannon-drop: #{ ( 5 + math.random( 6 )) * 1% };
+
+        left: $left;
+        animation-duration: ( 18 + math.random( 8 )) * .1s;
+        animation-delay: math.random( 22 ) * .01s;
+
+        &::after {
+          height: $size;
+          border-radius: $radius;
+          animation-duration: ( 9 + math.random( 14 )) * .1s;
+        }
+      }
+    }
+  }
+}
+
+@keyframes modalBirthdayConfettiFall {
+  0% {
+    opacity: 0;
+    transform: translate3d( 0, 0, 0 );
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d( var( --confetti-drift ), 105%, 0 );
+  }
+}
+
+@keyframes modalBirthdayConfettiSpin {
+  0% {
+    transform: rotate3d( 1, .6, .4, 0deg );
+  }
+
+  100% {
+    transform: rotate3d( 1, .6, .4, 360deg );
+  }
+}
+
+@keyframes modalBirthdayCannon {
+  0% {
+    opacity: 0;
+    transform: translate3d( 0, 0, 0 );
+  }
+
+  6% {
+    opacity: 1;
+  }
+
+  // Верхняя точка. Дальше частица немного проседает вниз, пока тает.
+  // linear переопределяет разгонную кривую только на этом отрезке, иначе падение
+  // выходит дёрганым: рывок вниз и почти полная остановка
+  60% {
+    opacity: 1;
+    transform: translate3d( var( --cannon-x ), var( --cannon-peak ), 0 );
+    animation-timing-function: linear;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d( var( --cannon-x ), calc( var( --cannon-peak ) + var( --cannon-drop ) ), 0 );
+  }
+}

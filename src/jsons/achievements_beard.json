@@ -2,7 +2,7 @@
   {
     "days": 1,
     "rarity": "common",
-    "icon": "🪒",
+    "icon": "🌱",
     "image": "",
     "name": "Свежая щетина",
     "description": "Погладил подбородок — приятно колется"
@@ -34,7 +34,7 @@
   {
     "days": 7,
     "rarity": "common",
-    "icon": "🪓",
+    "icon": "✂️",
     "image": "",
     "name": "Неделя без лезвия",
     "description": "Бритва пылится и тихо обижается"
@@ -138,7 +138,7 @@
   {
     "days": 365,
     "rarity": "legendary",
-    "icon": "🪄",
+    "icon": "🔮",
     "image": "",
     "name": "Гэндальф одобряет",
     "description": "Мимо парикмахерской ты не пройдёшь"

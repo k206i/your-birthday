@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import styles from './homePage.module.scss';
-import { IonContent, IonPage } from '@ionic/vue';
+import {IonContent, IonPage, } from '@ionic/vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import {appVars} from '@/configApp';
 import {appStore} from '@/store/appStore';
-import {computed} from 'vue';
+import {computed, ref} from 'vue';
 import {declineUnit} from '@/composables/declineUnit';
 import {getDaysToDate} from '@/composables/getDaysToDate';
 import {currentDate} from '@/store/currentDate';
 import AchievementShort from '@/components/Achievement/Short/achievementShort.vue';
+import ModalBirthday from '@/components/Modals/Birthday/modalBirthday.vue';
 
+const isBirthdayWishOpen = ref( false );
 const daysToBirthday = computed(() => {
   if ( !appStore.userBirthDate ) {
     return null;
@@ -117,6 +119,11 @@ const isAdditionalBirthdaySoon = computed(() => {
           </template>
         </WidgetPageTitle>
 
+        <a href="#"
+           @click.prevent = "isBirthdayWishOpen = true">
+          Поздравление
+        </a>
+
         <AchievementShort
             v-if="appStore.lastAchievement"
             :class="styles.homePage__block"
@@ -187,17 +194,10 @@ const isAdditionalBirthdaySoon = computed(() => {
         </ul>
 
 
-        <p>
-          📈 XP жизненного опыта
-
-          Каждая прожитая неделя приносит немного опыта.
-
-          Посмотрим, сколько XP вы уже заработали.
-
-          🏅 Сравните свой уровень с другими игроками.
-        </p>
       </div>
     </ion-content>
+
+    <ModalBirthday v-model:is-open="isBirthdayWishOpen" />
 
     <AppFooter />
   </ion-page>

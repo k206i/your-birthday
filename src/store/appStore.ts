@@ -11,6 +11,7 @@ type TAppStore = {
   rememberedPersonName: string, // ...и его имя
   lastAchievement: TAchievementCombined | null, // Последняя полученная ачивка
   nextAchievement: TAchievementCombined | null, // Следующая, которую получит пользователь
+  usedWishIds: string[], // Уже показанные поздравления — чтобы не повторяться
 }
 
 const STORAGE_KEY = 'appStore';
@@ -25,6 +26,7 @@ export const appStore: TAppStore = reactive({
   rememberedPersonName: '',
   lastAchievement: null,
   nextAchievement: null,
+  usedWishIds: [],
 });
 
 // Восстановление стора при запуске приложения

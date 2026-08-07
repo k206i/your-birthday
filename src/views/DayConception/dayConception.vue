@@ -104,7 +104,7 @@ watch(formattedDate, async () => {
             :class="styles.dayConception__dateButton"
             expand="block"
         >
-          {{ birthDay ? `📅 ${birthDay}` : 'Выбрать дату рождения' }}
+          {{ birthDay ? `📅 ${birthDay}` : 'Указать дату рождения' }}
         </ion-button>
 
         <input

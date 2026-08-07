@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import styles from './homePage.module.scss';
-import {IonContent, IonPage, } from '@ionic/vue';
+import {IonContent, IonIcon, IonPage,} from '@ionic/vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
@@ -13,6 +13,7 @@ import {getDaysToDate} from '@/composables/getDaysToDate';
 import {currentDate} from '@/store/currentDate';
 import AchievementShort from '@/components/Achievement/Short/achievementShort.vue';
 import ModalBirthday from '@/components/Modals/Birthday/modalBirthday.vue';
+import {chevronForward} from 'ionicons/icons';
 
 const isBirthdayWishOpen = ref( false );
 const daysToBirthday = computed(() => {
@@ -119,10 +120,13 @@ const isAdditionalBirthdaySoon = computed(() => {
           </template>
         </WidgetPageTitle>
 
-        <a href="#"
-           @click.prevent = "isBirthdayWishOpen = true">
-          Поздравление
-        </a>
+        <div :class="styles.homePage__silentButton"
+             @click.prevent = "isBirthdayWishOpen = true"
+        >
+          🎉 Не хочу ждать ДР, поздравьте сейчас!
+
+          <ion-icon :icon="chevronForward" size="small"></ion-icon>
+        </div>
 
         <AchievementShort
             v-if="appStore.lastAchievement"
@@ -134,11 +138,11 @@ const isAdditionalBirthdaySoon = computed(() => {
         <ul :class="styles.homePage__servicesList">
           <li>
             <WidgetPageLink
-                link="/dayConception"
-                title="Когда был день зачатия?"
-                comment="Что было в тот день?"
-                bg-image="dog-2_art"
-                :color="appVars.colors.dayConception"
+                link="/lifeProgress"
+                title="🎮 Жизненный прогресс"
+                comment="███████░░░░░"
+                bg-image="otter_art"
+                :color="appVars.colors.lifeProgress"
             />
           </li>
 
@@ -174,11 +178,11 @@ const isAdditionalBirthdaySoon = computed(() => {
 
           <li>
             <WidgetPageLink
-                link="/lifeProgress"
-                title="🎮 Жизненный прогресс"
-                comment="███████░░░░░"
-                bg-image="otter_art"
-                :color="appVars.colors.lifeProgress"
+                link="/dayConception"
+                title="Когда был день зачатия?"
+                comment="Что было в тот день?"
+                bg-image="dog-2_art"
+                :color="appVars.colors.dayConception"
             />
           </li>
 

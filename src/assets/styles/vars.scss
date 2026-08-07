@@ -9,6 +9,8 @@
   --brd-size-gap-xl: calc( var( --brd-size-gap-base ) * 4 ); // 32px
 
   --brd-size-widget-min-height: 200px;
+  --brd-size-input-height: 56px;
+  --brd-size-input-height-s: 48px;
 
   --brd-size-border-radius-base: 8px;
   --brd-size-border-radius-xs: calc( var( --brd-size-border-radius-base ) / 2 ); // 4px

@@ -62,4 +62,22 @@
     }
   }
 
+  &__silentButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var( --brd-size-input-height-s );
+    margin-bottom: var( --brd-size-gap );
+    padding: 0 var( --brd-size-gap );
+    font-family: var( --brd-font-default-alt );
+    font-size: 14px;
+    color: var( --brd-color-theme );
+    border: 1px dashed var( --brd-color-theme );
+    border-radius: var( --brd-size-border-radius );
+
+    ion-icon {
+      margin-left: auto;
+    }
+  }
+
 }

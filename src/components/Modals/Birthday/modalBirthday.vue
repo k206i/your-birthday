@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import styles from "./modalBirthday.module.scss";
-import {closeCircle} from 'ionicons/icons';
-import {IonButton, IonButtons, IonContent, IonFooter, IonIcon, IonModal, IonToolbar} from '@ionic/vue';
+import {shareSocial} from 'ionicons/icons';
+import { IonButtons, IonContent, IonFooter, IonIcon, IonModal } from '@ionic/vue';
 import {appStore} from '@/store/appStore';
 import {currentDate} from '@/store/currentDate';
 import {parseLocalDate} from '@/composables/localDate';
@@ -9,6 +9,7 @@ import {declineUnit} from '@/composables/declineUnit';
 import {getBirthdayWish, TBirthdayWish} from '@/api/getBirthdayWish';
 import {getModalBottomArt} from '@/composables/getModalBottomArt';
 import {ref, computed, watch} from 'vue';
+import {shareElementAsImage} from '@/composables/shareElementAsImage';
 
 const props = defineProps<{
   isOpen: boolean
@@ -22,6 +23,7 @@ const confettiCount: number = 40;
 const cannonCount: number = 60;
 // Хлопушки стреляют один раз, поэтому слой пересоздаётся при каждом открытии
 const cannonKey = ref( 0 );
+const toShareBlock = ref();
 
 const wish = ref< TBirthdayWish | null >( null );
 const art = ref< string >( getModalBottomArt() );
@@ -67,7 +69,9 @@ const close = () => {
       :class="styles.modalBirthday"
   >
     <ion-content>
-      <div :class="styles.modalBirthday__contentWrapper">
+      <div :class="styles.modalBirthday__contentWrapper"
+           ref="toShareBlock"
+      >
         <div :class="styles.modalBirthday__confetti" aria-hidden="true">
           <span
               v-for="index in confettiCount"
@@ -121,14 +125,17 @@ const close = () => {
     </ion-content>
 
     <ion-footer>
-      <ion-toolbar>
-        <ion-buttons slot="end">
-          <ion-button @click="close">
-            Закрыть&nbsp;&nbsp;
-            <ion-icon :icon="closeCircle" size="large"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
+      <ion-buttons>
+        <div :class="styles.modalBirthday__button" @click="close">
+          Ну ок, спасибо 😎
+        </div>
+
+        <div :class="styles.modalBirthday__share"
+             @click="shareElementAsImage( toShareBlock, 'birthday-wish.png' )"
+        >
+          <ion-icon :icon="shareSocial" size="large"></ion-icon>
+        </div>
+      </ion-buttons>
     </ion-footer>
   </ion-modal>
 </template>

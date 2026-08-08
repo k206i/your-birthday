@@ -30,6 +30,7 @@ export const appVars = {
     femaleCalendar: '#ff8bef',
     lifeProgress: '#3DFF07',
     achievements: '#F2B348',
+    donations: '#FF8BEF',
   },
   achievementColors: {
     common: '#8B8FA3',
@@ -44,5 +45,8 @@ export const appVars = {
     epic: '★★ Эпичное',
     legendary: '★★★ Легендарное',
     mythic: '★★★★ Мифическое',
+  },
+  donations: {
+    onceUrl: 'https://pay.cloudtips.ru/p/460b7ab7',
   }
 }

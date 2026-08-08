@@ -8,6 +8,7 @@ import femaleCalendar from '@/views/FemaleCalendar/femaleCalendar.vue';
 import LifeProgress from '@/views/LifeProgress/lifeProgress.vue';
 import UserProfile from '@/views/UserProfile/userProfile.vue';
 import AchievementsPage from '@/views/AchievementsPage/achievementsPage.vue';
+import DonationsPage from '@/views/DonationsPage/donationsPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -53,6 +54,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/achievementsPage',
     name: 'AchievementsPage',
     component: AchievementsPage
+  },
+  {
+    path: '/donationsPage',
+    name: 'DonationsPage',
+    component: DonationsPage
   }
 ]
 

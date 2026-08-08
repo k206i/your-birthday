@@ -18,9 +18,9 @@ const props = defineProps<{
       ]"
   >
     <div :class="styles.widgetPageTitle__wrapper">
-      <h2 :class="styles.widgetPageTitle__title">
-        {{ props.title }}
-      </h2>
+      <h2 :class="styles.widgetPageTitle__title"
+          v-html="props.title"
+      ></h2>
 
       <div v-if="props.lead || $slots.lead"
            :class="styles.widgetPageTitle__titleLead"

@@ -1,0 +1,60 @@
+@use "@/assets/styles/typography";
+
+.donationsPage {
+  position: relative;
+
+  &__block {
+    margin-bottom: var( --brd-size-gap );
+  }
+
+  &__donatorsList {
+    display: flex;
+    flex-direction: column;
+    gap: var( --brd-size-gap-s );
+  }
+
+  &__donator {
+    font-family: var( --brd-font-default-alt );
+    font-size: 16px;
+    color: var( --brd-color-font-accent );
+  }
+
+  &__modal {
+    padding-top: var( --brd-size-gap );
+  }
+
+  &__modalTitle {
+    @extend .typography__h2;
+    margin-bottom: var( --brd-size-gap );
+    text-align: center;
+  }
+
+  &__modalComment {
+    font-size: 16px;
+    color: var( --brd-color-font );
+    text-align: center;
+  }
+
+  &__modalArtWrapper {
+    position: relative;
+    width: 100vw;
+    margin: 0 calc( -1 * var( --brd-size-gap )) var( --brd-size-gap );
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+          linear-gradient( to right, var( --ion-background-color ), transparent 10px ),
+          linear-gradient( to left, var( --ion-background-color ), transparent 10px ),
+          linear-gradient( to bottom, var( --ion-background-color ), transparent 10px ),
+          linear-gradient( to top, var( --ion-background-color ), transparent 10px );
+    }
+  }
+
+  &__modalArt {
+    display: block;
+    width: 100%;
+  }
+}

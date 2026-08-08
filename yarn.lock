@@ -856,6 +856,11 @@
     tslib "2.6.2"
     yargs "17.7.2"
 
+"@capacitor/browser@^8.0.4":
+  version "8.0.4"
+  resolved "https://registry.npmjs.org/@capacitor/browser/-/browser-8.0.4.tgz"
+  integrity sha512-ORZ4u/y+7aMuu6yVuk6SP529fUZyqcbnuHB1q5McpA3o2SYfVoi28iB8rsQjI2ad1qlKJd29ZUuGtspXLBDlWg==
+
 "@capacitor/cli@^5.3.0":
   version "5.7.8"
   resolved "https://registry.npmjs.org/@capacitor/cli/-/cli-5.7.8.tgz"

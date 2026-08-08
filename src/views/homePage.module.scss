@@ -80,4 +80,9 @@
     }
   }
 
+  &__lifeProgress {
+    width: 70%;
+    margin-top: var( --brd-size-gap );
+  }
+
 }

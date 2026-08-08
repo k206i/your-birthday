@@ -27,11 +27,11 @@ const props = defineProps<{
         {{ props.title }}
       </div>
 
-      <div v-if="props.comment"
+      <div v-if="props.comment || $slots.comment"
            :class="styles.widgetPageLink__comment"
            :style="`color: ${ props.color };`"
       >
-        {{ props.comment }}
+        <slot name="comment"><span v-html="props.comment"></span></slot>
       </div>
     </div>
 

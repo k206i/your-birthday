@@ -13,6 +13,8 @@ import {getDaysToDate} from '@/composables/getDaysToDate';
 import {currentDate} from '@/store/currentDate';
 import AchievementShort from '@/components/Achievement/Short/achievementShort.vue';
 import ModalBirthday from '@/components/Modals/Birthday/modalBirthday.vue';
+import UiProgressBar from '@/components/Ui/ProgressBar/uiProgressBar.vue';
+import {getCurrentWeekIndex} from '@/composables/getCurrentWeekIndex';
 import {chevronForward} from 'ionicons/icons';
 
 const isBirthdayWishOpen = ref( false );
@@ -31,6 +33,9 @@ const daysToAdditionalBirthday = computed(() => {
 
   return getDaysToDate( appStore.additionalBirthDate, currentDate.value );
 });
+
+// Прожитые недели для прогресс-бара жизни; null, пока не задана дата рождения
+const livedWeeks = computed(() => getCurrentWeekIndex( appStore.userBirthDate, currentDate.value ));
 
 const isBirthdayLead = computed(() => daysToBirthday.value === 0 );
 const isAdditionalBirthdayLead = computed(() => daysToAdditionalBirthday.value === 0 );
@@ -140,10 +145,19 @@ const isAdditionalBirthdaySoon = computed(() => {
             <WidgetPageLink
                 link="/lifeProgress"
                 title="🎮 Жизненный прогресс"
-                comment="███████░░░░░"
+                comment="Укажите дату рождения"
                 bg-image="otter_art"
                 :color="appVars.colors.lifeProgress"
-            />
+            >
+              <template v-if="livedWeeks !== null" #comment>
+                <div :class="styles.homePage__lifeProgress">
+                  <UiProgressBar
+                      :total="appVars.lifeExpectancyWeeks"
+                      :value="livedWeeks"
+                  />
+                </div>
+              </template>
+            </WidgetPageLink>
           </li>
 
           <li>

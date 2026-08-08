@@ -1,0 +1,26 @@
+.uiProgressBar {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 20px;
+  border-radius: var( --brd-size-border-radius-xs );
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: currentColor;
+    opacity: .25;
+  }
+
+  &__fill {
+    position: relative;
+    height: 100%;
+    border-radius: inherit;
+    background-color: currentColor;
+    transition: width ease var( --brd-transition-duration );
+  }
+}

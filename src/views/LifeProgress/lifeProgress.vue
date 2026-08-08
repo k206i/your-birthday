@@ -1,13 +1,13 @@
 <script setup lang="ts">
 
 import styles from './lifeProgress.module.scss';
-import {IonContent, IonPage, IonButton, IonModal, IonDatetime} from '@ionic/vue';
+import {IonContent, IonPage, IonButton} from '@ionic/vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import {appVars} from '@/configApp';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {ref, computed, watch} from 'vue';
-import {formatDisplayDate} from '@/composables/localDate';
+import {formatDisplayDate, formatLocalDate, parseLocalDate} from '@/composables/localDate';
 import {getCurrentWeekIndex} from '@/composables/getCurrentWeekIndex';
 import {appStore} from '@/store/appStore';
 import {currentDate} from '@/store/currentDate';
@@ -25,7 +25,6 @@ const achievementByWeek: Map< number, TAchievementCombined > = new Map(
   ].map( item => [ item.weeks as number, item ] )
 );
 
-const isDateModalOpen = ref( false );
 const selectedDate = ref();
 const weeksGridRef = ref< HTMLElement >();
 const hoveredAchievement = ref< TAchievementCombined | null >( null );
@@ -130,11 +129,23 @@ const onGridTouchEnd = () => {
   hideTooltip();
 };
 
-const openDateModal = () => {
-  isDateModalOpen.value = true;
+const onNativeDateChange = ( event: Event ) => {
+  const value: string = ( event.target as HTMLInputElement ).value;
+
+  if ( value ) {
+    selectedDate.value = value;
+  }
 };
 
-const maxDate = computed(() => currentDate.value + 'T23:59:59');
+// Нативный календарь принимает границы в формате YYYY-MM-DD, без времени
+const maxDate = computed(() => currentDate.value );
+
+const minDate = computed(() => {
+  const date: Date = parseLocalDate( currentDate.value );
+  date.setFullYear( date.getFullYear() - 120 );
+
+  return formatLocalDate( date );
+});
 
 // Предзаполнение из профиля и обновление при его изменении
 watch(() => appStore.userBirthDate, ( value ) => {
@@ -144,7 +155,7 @@ watch(() => appStore.userBirthDate, ( value ) => {
 // Выбор даты на этой странице обновляет профиль
 watch( selectedDate, () => {
   if ( selectedDate.value ) {
-    appStore.userBirthDate = selectedDate.value.split('T')[0];
+    appStore.userBirthDate = selectedDate.value;
   }
 });
 
@@ -153,7 +164,7 @@ const birthDay = computed(() => {
     return '';
   }
 
-  return formatDisplayDate( new Date( selectedDate.value.split('T')[0] ));
+  return formatDisplayDate( parseLocalDate( selectedDate.value ));
 });
 
 const lifeWeeks = computed(() => {
@@ -161,7 +172,7 @@ const lifeWeeks = computed(() => {
     return null;
   }
 
-  const currentWeekIndex: number | null = getCurrentWeekIndex( selectedDate.value.split('T')[0], currentDate.value );
+  const currentWeekIndex: number | null = getCurrentWeekIndex( selectedDate.value, currentDate.value );
 
   if ( currentWeekIndex === null ) {
     return null;
@@ -210,37 +221,23 @@ const lifeDecades = computed(() => {
         <WidgetLifeTime :class="styles.lifeProgress__block" />
       </template>
       <template v-else>
-        <ion-button
-            :class="styles.lifeProgress__dateButton"
-            expand="block"
-            @click="openDateModal"
-        >
-          {{ birthDay ? `📅 ${birthDay}` : 'Указать дату рождения' }}
-        </ion-button>
+        <div :class="styles.lifeProgress__dateButtonWrap">
+          <ion-button
+              :class="styles.lifeProgress__dateButton"
+              expand="block"
+          >
+            {{ birthDay ? `📅 ${birthDay}` : 'Указать дату рождения' }}
+          </ion-button>
 
-        <ion-modal
-            :is-open="isDateModalOpen"
-            keep-contents-mounted="true"
-            @did-dismiss="isDateModalOpen = false"
-        >
-          <ion-content>
-            <div class="center-content">
-              <ion-datetime
-                  v-model="selectedDate"
-                  locale="ru-RU"
-                  presentation="date"
-                  :show-default-buttons="true"
-                  done-text="Готово" cancel-text="Не, отмена"
-                  :max="maxDate"
-                  :first-day-of-week="1"
-                  @ionChange="isDateModalOpen = false"
-                  @ionCancel="isDateModalOpen = false"
-              ></ion-datetime>
-
-              <img :class="styles.lifeProgress__modalArt" src="@/assets/img/animals/cat-3_art.png" alt="" />
-            </div>
-          </ion-content>
-        </ion-modal>
+          <input
+              :class="styles.lifeProgress__nativeDate"
+              type="date"
+              :value="selectedDate || ''"
+              :min="minDate"
+              :max="maxDate"
+              @change="onNativeDateChange"
+          />
+        </div>
       </template>
 
       <div v-if="lifeWeeks" :class="styles.lifeProgress__weekComment">

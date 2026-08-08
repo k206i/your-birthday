@@ -10,16 +10,28 @@
     margin-bottom: var( --brd-size-gap );
   }
 
-  &__dateButton {
+  // margin именно на обёртке: у последнего ребёнка он мог бы выйти за её границу,
+  // и тогда inset: 0 у инпута перестал бы совпадать с кнопкой
+  &__dateButtonWrap {
+    position: relative;
     margin-bottom: var( --brd-size-gap );
   }
 
-  &__modalArt {
+  &__nativeDate {
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX( -50% );
-    width: 200px;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+
+    // По умолчанию кликабельна только иконка календаря у правого края — растягиваем её на весь блок
+    &::-webkit-calendar-picker-indicator {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
   }
 
   &__weeksGrid {

@@ -7,7 +7,7 @@ import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue'
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import {appVars} from '@/configApp';
 import {appStore} from '@/store/appStore';
-import {computed, ref} from 'vue';
+import {computed, ref, watch} from 'vue';
 import {declineUnit} from '@/composables/declineUnit';
 import {getDaysToDate} from '@/composables/getDaysToDate';
 import {currentDate} from '@/store/currentDate';
@@ -45,6 +45,14 @@ const isAdditionalBirthdaySoon = computed(() => {
       && daysToAdditionalBirthday.value > 0
       && daysToAdditionalBirthday.value <= appVars.birthdaySoonDays;
 });
+
+// Автопоказ поздравления один раз, в день рождения
+watch( isBirthdayLead, ( value ) => {
+  if ( value && appStore.lastBirthdayGreetedDate !== currentDate.value ) {
+    isBirthdayWishOpen.value = true;
+    appStore.lastBirthdayGreetedDate = currentDate.value;
+  }
+}, { immediate: true });
 
 </script>
 

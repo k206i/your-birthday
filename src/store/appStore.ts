@@ -12,6 +12,7 @@ type TAppStore = {
   lastAchievement: TAchievementCombined | null, // Последняя полученная ачивка
   nextAchievement: TAchievementCombined | null, // Следующая, которую получит пользователь
   usedWishIds: string[], // Уже показанные поздравления — чтобы не повторяться
+  lastBirthdayGreetedDate: string, // YYYY-MM-DD последнего автопоказа поздравления
 }
 
 const STORAGE_KEY = 'appStore';
@@ -27,6 +28,7 @@ export const appStore: TAppStore = reactive({
   lastAchievement: null,
   nextAchievement: null,
   usedWishIds: [],
+  lastBirthdayGreetedDate: '',
 });
 
 // Восстановление стора при запуске приложения

@@ -1,22 +1,22 @@
 .dog-1 {
-    background-image: url( "../../assets/img/animals/dog-1.png" );
+    background-image: url( "../../assets/img/animals/dog-1.webp" );
 }
 
 .dog-1_art {
-    background-image: url( "../../assets/img/animals/dog-1_art.png" );
+    background-image: url( "../../assets/img/animals/dog-1_art.webp" );
     background-size: 160px auto;
 }
 
 .dog-2 {
-    background-image: url( "../../assets/img/animals/dog-2.png" );
+    background-image: url( "../../assets/img/animals/dog-2.webp" );
 }
 
 .dog-2_art {
-    background-image: url( "../../assets/img/animals/dog-2_art.png" );
+    background-image: url( "../../assets/img/animals/dog-2_art.webp" );
 }
 
 .dog-3_art {
-    background-image: url( "../../assets/img/animals/dog-3_art.png" );
+    background-image: url( "../../assets/img/animals/dog-3_art.webp" );
 }
 
 .dog-4 {
@@ -26,15 +26,15 @@
 
 
 .cat-1 {
-    background-image: url( "../../assets/img/animals/cat-1.png" );
+    background-image: url( "../../assets/img/animals/cat-1.webp" );
 }
 
 .cat-1_art {
-    background-image: url( "../../assets/img/animals/cat-1_art.png" );
+    background-image: url( "../../assets/img/animals/cat-1_art.webp" );
 }
 
 .cat-4 {
-    background-image: url( "../../assets/img/animals/cat-4.png" );
+    background-image: url( "../../assets/img/animals/cat-4.webp" );
 }
 
 .cat-5 {
@@ -46,7 +46,7 @@
 }
 
 .alpaka {
-    background-image: url( "../../assets/img/animals/alpaka_art.png" );
+    background-image: url( "../../assets/img/animals/alpaka_art.webp" );
 }
 
 .penguin {
@@ -62,5 +62,5 @@
 }
 
 .panda_art {
-    background-image: url( "../../assets/img/animals/panda_art.png" );
+    background-image: url( "../../assets/img/animals/panda_art.webp" );
 }

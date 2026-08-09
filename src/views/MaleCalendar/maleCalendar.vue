@@ -191,7 +191,7 @@ watch( optimalDates, async ( value ) => {
               stylesArtButton.artButton__dimmable,
               isAlcoholSkipped && stylesArtButton.artButton__dimmable_dimmed
           ]">
-            <img src="@/assets/img/animals/cat-alco.png" alt="" />
+            <img src="@/assets/img/animals/cat-alco.webp" alt="" />
           </div>
 
           <div :class="stylesArtButton.artButton__content">
@@ -249,14 +249,14 @@ watch( optimalDates, async ( value ) => {
                   @ionCancel="isAlcoholDateModalOpen = false"
               ></ion-datetime>
 
-              <img :class="styles.maleCalendar__modalArt" src="@/assets/img/animals/cat-alco.png" alt="" />
+              <img :class="styles.maleCalendar__modalArt" src="@/assets/img/animals/cat-alco.webp" alt="" />
             </div>
           </ion-content>
         </ion-modal>
 
         <div :class="stylesArtButton.artButton" @click="openEjaculationDateModal">
           <div :class="stylesArtButton.artButton__art">
-            <img src="@/assets/img/animals/cat-4.png" alt="" />
+            <img src="@/assets/img/animals/cat-4.webp" alt="" />
           </div>
 
           <div :class="stylesArtButton.artButton__content">
@@ -293,7 +293,7 @@ watch( optimalDates, async ( value ) => {
                   @ionCancel="isEjaculationDateModalOpen = false"
               ></ion-datetime>
 
-              <img :class="styles.maleCalendar__modalArt" src="@/assets/img/animals/cat-4.png" alt="" />
+              <img :class="styles.maleCalendar__modalArt" src="@/assets/img/animals/cat-4.webp" alt="" />
             </div>
           </ion-content>
         </ion-modal>

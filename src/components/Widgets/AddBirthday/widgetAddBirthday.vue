@@ -38,7 +38,7 @@ const birthDay = computed(() => {
 
 <template>
   <div :class="styles.widgetAddBirthday">
-    <img :class="styles.widgetAddBirthday__art" src="@/assets/img/animals/cat-astro_art.png" alt="" />
+    <img :class="styles.widgetAddBirthday__art" src="@/assets/img/animals/cat-astro_art.webp" alt="" />
 
     <div :class="styles.widgetAddBirthday__title">
       Здесь появятся ваши достижения
@@ -75,7 +75,7 @@ const birthDay = computed(() => {
               @ionCancel="isDateModalOpen = false"
           ></ion-datetime>
 
-          <img :class="styles.widgetAddBirthday__modalArt" src="@/assets/img/animals/cat-astro_art.png" alt="" />
+          <img :class="styles.widgetAddBirthday__modalArt" src="@/assets/img/animals/cat-astro_art.webp" alt="" />
         </div>
       </ion-content>
     </ion-modal>

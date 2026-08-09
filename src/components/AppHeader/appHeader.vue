@@ -3,7 +3,7 @@ import {IonHeader, IonToolbar, IonButtons, IonBackButton } from '@ionic/vue';
 import { arrowBack } from 'ionicons/icons';
 import { useRoute } from 'vue-router';
 import styles from './appHeader.module.scss';
-import UserAvatar from '@/components/UserAvatar/userAvatar.vue';
+import AvatarShort from '@/components/Avatar/Short/avatarShort.vue';
 
 const route = useRoute();
 </script>
@@ -25,7 +25,7 @@ const route = useRoute();
         </div>
       </div>
       <ion-buttons :collapse="true" slot="end">
-        <UserAvatar />
+        <AvatarShort :class="styles.appHeader__avatar" />
       </ion-buttons>
     </ion-toolbar>
   </ion-header>

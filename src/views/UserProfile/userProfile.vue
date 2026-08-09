@@ -5,6 +5,7 @@ import AppHeader from '@/components/AppHeader/appHeader.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import UiInput from '@/components/Ui/Input/uiInput.vue';
 import {appStore} from '@/store/appStore';
+import AvatarSetup from '@/components/Avatar/Setup/avatarSetup.vue';
 </script>
 
 <template>
@@ -12,6 +13,10 @@ import {appStore} from '@/store/appStore';
     <AppHeader />
 
     <ion-content :fullscreen="true" class="ion-padding">
+      <div :class="styles.userProfile__block">
+        <AvatarSetup />
+      </div>
+
       <div :class="styles.userProfile__block">
         <div :class="styles.userProfile__blockLabel">
           Обо мне

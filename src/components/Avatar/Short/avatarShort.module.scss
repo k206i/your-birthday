@@ -1,0 +1,43 @@
+.avatarShort {
+  position: relative;
+  z-index: var( --brd-z-index-layout );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 200px;
+  aspect-ratio: 1;
+  border-radius: 100%;
+  background-color: color-mix( in srgb, var( --brd-color-theme ), black var( --brd-color-mix-bg ));
+  font-size: 22px;
+
+  &__link {
+    position: absolute;
+    z-index: 200;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__artClip {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: 100%;
+  }
+
+  // Арт рисуется дважды: нижняя копия обрезается кругом, верхняя торчит наружу.
+  // Обе позиционируются одинаково, поэтому стык между слоями не виден
+  &__art {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    transform: translateX( -50% );
+  }
+
+  &__art_top {
+    clip-path: inset( 0 0 50% 0 );
+  }
+}

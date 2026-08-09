@@ -1,0 +1,29 @@
+.avatarSetup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var( --brd-size-gap );
+  padding: var( --brd-size-gap );
+  border-radius: var( --brd-size-border-radius );
+  background-color: var( --ion-background-color-step-50 );
+
+  &__arrow {
+    margin-left: auto;
+  }
+
+  &__name {
+    margin-bottom: var( --brd-size-gap-xs );
+    font-family: var( --brd-font-default-alt );
+    font-size: 18px;
+    color: var( --brd-color-font-accent );
+  }
+
+  &__link {
+    font-size: 14px;
+    color: var( --brd-color-theme );
+  }
+
+  &__avatar {
+    width: 80px;
+  }
+}

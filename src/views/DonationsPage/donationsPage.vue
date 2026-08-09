@@ -9,11 +9,15 @@ import {Browser} from '@capacitor/browser';
 import donatorsData from '@/jsons/donators.json';
 import {ref} from 'vue';
 
-const isDonationModalOpen = ref( true );
+const isDonationModalOpen = ref( false );
 
 // Внешнюю ссылку открываю системным браузером, чтобы пользователь мог вернуться в приложение
 const openOnceDonation = async (): Promise< void > => {
   await Browser.open({ url: appVars.donations.onceUrl });
+};
+
+const openSubscribeDonation = async (): Promise< void > => {
+  await Browser.open({ url: appVars.donations.subscribeDonation });
 };
 </script>
 
@@ -34,16 +38,20 @@ const openOnceDonation = async (): Promise< void > => {
           comment="С благодарностью каждому ❤️"
       />
 
-      <ion-button
-          :class="styles.donationsPage__block"
-          expand="block"
-          @click="isDonationModalOpen = true"
+      <div :class="[
+              styles.donationsPage__button,
+              styles.donationsPage__block
+            ]"
+            @click="isDonationModalOpen = true"
       >
         🎀 Тоже хочу помочь
-      </ion-button>
+      </div>
 
       <ul :class="styles.donationsPage__donatorsList">
-        <li v-for="(donator, index) in donatorsData" :key="index + donator.name">
+        <li v-for="(donator, index) in donatorsData"
+            :key="index + donator.name"
+            :class="styles.donationsPage__donator"
+        >
           💜 {{ donator.name }}
         </li>
       </ul>
@@ -66,7 +74,12 @@ const openOnceDonation = async (): Promise< void > => {
         </ion-toolbar>
       </ion-header>
 
-      <ion-content class="ion-padding">
+      <ion-content
+          class="ion-padding"
+          :style="{
+              '--brd-custom-theme-color': appVars.colors.donations,
+            }"
+      >
         <div :class="styles.donationsPage__modal">
           <div :class="styles.donationsPage__modalArtWrapper">
             <img :class="styles.donationsPage__modalArt"
@@ -83,11 +96,21 @@ const openOnceDonation = async (): Promise< void > => {
             Сумму выберете на следующем шаге — хомяк будет рад любой. Захотите подписать перевод именем — список благодарностей живёт внутри приложения, так что имя приедет с ближайшим обновлением.
           </div>
 
-          <a :href="appVars.donations.onceUrl"
-             @click.prevent="openOnceDonation"
-          >
-            Tips
-          </a>
+          <div :class="styles.donationsPage__modalButtonWrapper">
+            <a :class="styles.donationsPage__button"
+               :href="appVars.donations.onceUrl"
+               @click.prevent="openOnceDonation"
+            >
+              Разово
+            </a>
+
+            <a :class="styles.donationsPage__button"
+               :href="appVars.donations.subscribeDonation"
+               @click.prevent="openSubscribeDonation"
+            >
+              Каждый месяц
+            </a>
+          </div>
         </div>
       </ion-content>
     </ion-modal>

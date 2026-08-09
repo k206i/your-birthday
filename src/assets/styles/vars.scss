@@ -7,6 +7,7 @@
   --brd-size-gap: calc( var( --brd-size-gap-base ) * 2 ); // 16px
   --brd-size-gap-l: calc( var( --brd-size-gap-base ) * 3 ); // 24px
   --brd-size-gap-xl: calc( var( --brd-size-gap-base ) * 4 ); // 32px
+  --brd-size-side-indent: var( --brd-size-gap ); // 16px
 
   --brd-size-widget-min-height: 200px;
   --brd-size-input-height: 56px;

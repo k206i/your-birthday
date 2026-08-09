@@ -15,11 +15,14 @@
 
   &__donator {
     font-family: var( --brd-font-default-alt );
-    font-size: 16px;
+    font-size: 18px;
     color: var( --brd-color-font-accent );
   }
 
   &__modal {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
     padding-top: var( --brd-size-gap );
   }
 
@@ -30,6 +33,7 @@
   }
 
   &__modalComment {
+    margin-bottom: var( --brd-size-gap );
     font-size: 16px;
     color: var( --brd-color-font );
     text-align: center;
@@ -38,7 +42,7 @@
   &__modalArtWrapper {
     position: relative;
     width: 100vw;
-    margin: 0 calc( -1 * var( --brd-size-gap )) var( --brd-size-gap );
+    margin: 0 calc( -1 * var( --brd-size-side-indent )) var( --brd-size-gap );
 
     &::after {
       content: '';
@@ -56,5 +60,29 @@
   &__modalArt {
     display: block;
     width: 100%;
+  }
+
+  &__modalButtonWrapper {
+    display: flex;
+    flex-flow: column;
+    gap: var( --brd-size-gap-s );
+    margin-top: auto;
+    padding-bottom: var( --brd-size-gap-xl );
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var( --brd-size-input-height );
+    padding: 4px var( --brd-size-gap );
+    font-family: var( --brd-font-default-alt );
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: var( --brd-custom-theme-color );
+    border: 1px solid var( --brd-custom-theme-color );
+    border-radius: var( --brd-size-border-radius );
+    background-color: color-mix( in srgb, var( --brd-custom-theme-color ), black var( --brd-color-mix-bg ));
   }
 }

@@ -72,6 +72,7 @@ ion-datetime {
 :root {
     --ion-font-family: var( --brd-font-default );
     --ion-text-color: var( --brd-color-white );
+    --ion-padding: var( --brd-size-side-indent );
     
     
     --ion-color-primary: #a876ec;

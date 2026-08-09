@@ -48,5 +48,6 @@ export const appVars = {
   },
   donations: {
     onceUrl: 'https://pay.cloudtips.ru/p/460b7ab7',
+    subscribeDonation: 'https://boosty.to/k206i',
   }
 }

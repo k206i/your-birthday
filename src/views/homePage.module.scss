@@ -75,6 +75,12 @@
     border: 1px dashed var( --brd-color-theme );
     border-radius: var( --brd-size-border-radius );
 
+    &_birthdayToday {
+      font-weight: bold;
+      color: var( --brd-color-theme-bg );
+      background-color: var( --brd-color-theme );
+    }
+
     ion-icon {
       margin-left: auto;
     }

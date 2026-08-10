@@ -37,7 +37,7 @@ const daysToAdditionalBirthday = computed(() => {
 // Прожитые недели для прогресс-бара жизни; null, пока не задана дата рождения
 const livedWeeks = computed(() => getCurrentWeekIndex( appStore.userBirthDate, currentDate.value ));
 
-const isBirthdayLead = computed(() => daysToBirthday.value === 0 );
+const isBirthdayToday = computed(() => daysToBirthday.value === 0 );
 const isAdditionalBirthdayLead = computed(() => daysToAdditionalBirthday.value === 0 );
 
 const isAdditionalBirthdaySoon = computed(() => {
@@ -47,7 +47,7 @@ const isAdditionalBirthdaySoon = computed(() => {
 });
 
 // Автопоказ поздравления один раз, в день рождения
-watch( isBirthdayLead, ( value ) => {
+watch( isBirthdayToday, ( value ) => {
   if ( value && appStore.lastBirthdayGreetedDate !== currentDate.value ) {
     isBirthdayWishOpen.value = true;
     appStore.lastBirthdayGreetedDate = currentDate.value;
@@ -77,7 +77,7 @@ watch( isBirthdayLead, ( value ) => {
                 Укажите дату рождения <router-link to="/userProfile">в&nbsp;профиле</router-link> ✨
               </span>
             </div>
-            <div v-else-if="isBirthdayLead"
+            <div v-else-if="isBirthdayToday"
                  :class="[
                      styles.homePage__mainLead,
                      styles.homePage__mainLead_accent
@@ -133,10 +133,18 @@ watch( isBirthdayLead, ( value ) => {
           </template>
         </WidgetPageTitle>
 
-        <div :class="styles.homePage__silentButton"
+        <div :class="[
+              styles.homePage__silentButton,
+              isBirthdayToday && styles.homePage__silentButton_birthdayToday
+            ]"
              @click.prevent = "isBirthdayWishOpen = true"
         >
-          🎉 Не хочу ждать ДР, поздравьте сейчас!
+          <template v-if="isBirthdayToday">
+            🎂 Хочу ещё одно поздравление!
+          </template>
+          <template v-else>
+            🎉 Не хочу ждать ДР, поздравьте сейчас!
+          </template>
 
           <ion-icon :icon="chevronForward" size="small"></ion-icon>
         </div>

@@ -15,16 +15,18 @@
   }
 
   &__titleLead {
-    padding-right: 130px;
+    padding-right: 115px;
     margin-bottom: var( --brd-size-gap-s );
     font-size: 16px;
     color: var( --brd-custom-theme-color );
+    text-shadow: 1px 1px 6px #000;
   }
 
   &__titleComment {
     padding-right: 130px;
     font-size: 12px;
     color: var( --brd-color-font );
+    text-shadow: 1px 1px 6px #000;
   }
 
   &__link {

@@ -47,6 +47,7 @@
   &__mainDateComment {
     font-size: 12px;
     color: var( --brd-color-font-low );
+    white-space: nowrap;
   }
 
   &__mainLead {

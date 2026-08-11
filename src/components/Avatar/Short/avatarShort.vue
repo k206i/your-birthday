@@ -2,20 +2,29 @@
 import styles from './avatarShort.module.scss';
 import {personOutline} from 'ionicons/icons';
 import {IonIcon} from '@ionic/vue';
+import {computed} from 'vue';
+import {appStore} from '@/store/appStore';
+import {getAvatarUrl} from '@/composables/getAvatarsList';
+
+// undefined, если аватарка не выбрана или сохранённого файла больше нет в сборке —
+// в обоих случаях показываем иконку вместо битой картинки
+const avatarUrl = computed(() => appStore.userAvatar ? getAvatarUrl( appStore.userAvatar ) : undefined );
 </script>
 
 <template>
   <div :class="styles.avatarShort">
-    <ion-icon :icon="personOutline"></ion-icon>
+    <template v-if="avatarUrl">
+      <div :class="styles.avatarShort__artClip">
+        <img :class="styles.avatarShort__art" :src="avatarUrl" alt="" />
+      </div>
 
-    <div :class="styles.avatarShort__artClip">
-      <img :class="styles.avatarShort__art" src="@/assets/img/animals/panda_art.webp" alt="" />
-    </div>
+      <img :class="[ styles.avatarShort__art, styles.avatarShort__art_top ]"
+           :src="avatarUrl"
+           alt=""
+      />
+    </template>
 
-    <img :class="[ styles.avatarShort__art, styles.avatarShort__art_top ]"
-         src="@/assets/img/animals/panda_art.webp"
-         alt=""
-    />
+    <ion-icon v-else :icon="personOutline"></ion-icon>
 
     <router-link to="/userProfile" :class="styles.avatarShort__link"></router-link>
   </div>

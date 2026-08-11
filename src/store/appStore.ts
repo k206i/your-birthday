@@ -5,6 +5,7 @@ import type { TAchievementCombined } from '@/api/getAchievementById';
 type TAppStore = {
   userName: string,
   userBirthDate: string, // YYYY-MM-DD
+  userAvatar: string, // имя файла выбранной аватарки, напр. alpaka_art.webp
   additionalName: string, // Важный человек, чей ДР нельзя забыть
   additionalBirthDate: string, // YYYY-MM-DD
   rememberedPersonTitle: string, // Кем приходится человек, чьё имя нельзя забыть (Тёща, Начальник...)
@@ -21,6 +22,7 @@ const STORAGE_KEY = 'appStore';
 export const appStore: TAppStore = reactive({
   userName: '',
   userBirthDate: '',
+  userAvatar: '',
   additionalName: '',
   additionalBirthDate: '',
   rememberedPersonTitle: '',

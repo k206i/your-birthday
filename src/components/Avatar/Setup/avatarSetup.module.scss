@@ -1,3 +1,5 @@
+@use "@/assets/styles/typography";
+
 .avatarSetup {
   position: relative;
   display: flex;
@@ -25,5 +27,105 @@
 
   &__avatar {
     width: 80px;
+  }
+
+  &__modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 640px;
+    padding-top: var( --brd-size-gap-xl );
+
+  }
+
+  &__modalAvatar {
+    position: relative;
+    width: 150px;
+    margin: 0 auto var( --brd-size-gap );
+    transition:
+            var( --brd-transition-transform ),
+            var( --brd-transition-filter );
+
+    &_zoomIn {
+      transform: scale( 1.05 );
+      //filter: blur( 10px );
+    }
+  }
+
+  &__modalTitle {
+    @extend .typography__h2;
+
+    margin-bottom: var( --brd-size-gap-xs );
+    text-align: center;
+  }
+
+  &__modalComment {
+    margin-bottom: var( --brd-size-gap-l );
+    padding: 0 50px;
+    font-size: 14px;
+    color: var( --brd-color-font );
+    text-align: center;
+  }
+
+  &__lightButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var( --brd-size-input-height-s );
+    margin: 0 auto var( --brd-size-gap );
+    padding: 4px var( --brd-size-gap );
+    font-family: var( --brd-font-default-alt );
+    color: var( --brd-color-theme );
+    border: 1px solid var( --brd-color-theme );
+    border-radius: var( --brd-size-border-radius-s );
+    background-color: color-mix( in srgb, var( --brd-color-theme ), black var( --brd-color-mix-bg ));
+  }
+
+  &__avatarsListWrapper {
+    position: relative;
+    z-index: var( --brd-z-index-layout );
+    height: 100%;
+    min-height: 300px;
+    overflow: auto;
+
+    // Затенение краёв маской, а не псевдоэлементом: absolute внутри скроллера
+    // прокручивается вместе с содержимым и уезжает вверх вместе с ним
+    -webkit-mask-image: linear-gradient( to bottom, transparent 0, #000 20px, #000 calc( 100% - 20px ), transparent 100% );
+    mask-image: linear-gradient( to bottom, transparent 0, #000 20px, #000 calc( 100% - 20px ), transparent 100% );
+  }
+
+  &__avatarsList {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var( --brd-size-gap-s );
+    padding: 20px var( --brd-size-gap-s );
+  }
+
+  &__avatarItem {
+    position: relative;
+    width: 80px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: var( --brd-transition-border );
+    background-color: color-mix( in srgb, var( --brd-color-theme ), black var( --brd-color-mix-bg ));
+
+    &_active {
+      border-color: var( --brd-color-theme );
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: bottom;
+    }
   }
 }

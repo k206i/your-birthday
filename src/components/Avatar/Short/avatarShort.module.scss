@@ -7,6 +7,7 @@
   max-width: 200px;
   aspect-ratio: 1;
   border-radius: 100%;
+  border: 1px solid var( --brd-color-theme );
   background-color: color-mix( in srgb, var( --brd-color-theme ), black var( --brd-color-mix-bg ));
   font-size: 22px;
 

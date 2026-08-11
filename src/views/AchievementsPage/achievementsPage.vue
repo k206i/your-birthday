@@ -21,12 +21,17 @@ import AchievementFull from '@/components/Achievement/Full/achievementFull.vue';
       <template v-if="!appStore.userBirthDate">
         <WidgetAddBirthday />
       </template>
-      <template v-else-if="appStore.lastAchievement">
+      <template v-else>
         <div :class="styles.achievementsPage__lastLabel">
           Последнее достижение 🎉
         </div>
 
-        <AchievementFull :achievement="appStore.lastAchievement" />
+        <AchievementFull
+            v-if="appStore.lastAchievement"
+            :achievement="appStore.lastAchievement"
+        />
+
+
       </template>
     </ion-content>
 

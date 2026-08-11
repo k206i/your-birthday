@@ -1,19 +1,30 @@
 <script setup lang="ts">
 import styles from './widgetAddBirthday.module.scss';
-import {IonButton, IonModal, IonDatetime, IonContent} from '@ionic/vue';
+import {IonButton} from '@ionic/vue';
 import {ref, computed, watch} from 'vue';
 import {appStore} from '@/store/appStore';
 import {currentDate} from '@/store/currentDate';
-import {formatDisplayDate} from '@/composables/localDate';
+import {formatDisplayDate, formatLocalDate, parseLocalDate} from '@/composables/localDate';
 
-const isDateModalOpen = ref( false );
 const selectedDate = ref();
 
-const openDateModal = () => {
-  isDateModalOpen.value = true;
+const onNativeDateChange = ( event: Event ) => {
+  const value: string = ( event.target as HTMLInputElement ).value;
+
+  if ( value ) {
+    selectedDate.value = value;
+  }
 };
 
-const maxDate = computed(() => currentDate.value + 'T23:59:59');
+// Нативный календарь принимает границы в формате YYYY-MM-DD, без времени
+const maxDate = computed(() => currentDate.value );
+
+const minDate = computed(() => {
+  const date: Date = parseLocalDate( currentDate.value );
+  date.setFullYear( date.getFullYear() - 120 );
+
+  return formatLocalDate( date );
+});
 
 // Предзаполнение из профиля и обновление при его изменении
 watch(() => appStore.userBirthDate, ( value ) => {
@@ -23,7 +34,7 @@ watch(() => appStore.userBirthDate, ( value ) => {
 // Выбор даты обновляет профиль
 watch( selectedDate, () => {
   if ( selectedDate.value ) {
-    appStore.userBirthDate = selectedDate.value.split('T')[0];
+    appStore.userBirthDate = selectedDate.value;
   }
 });
 
@@ -32,7 +43,7 @@ const birthDay = computed(() => {
     return '';
   }
 
-  return formatDisplayDate( new Date( selectedDate.value.split('T')[0] ));
+  return formatDisplayDate( parseLocalDate( selectedDate.value ));
 });
 </script>
 
@@ -48,36 +59,22 @@ const birthDay = computed(() => {
       Укажите дату рождения — и мы откроем ачивки по прожитым неделям: за возраст, эпоху и кумиров, которых вы обогнали ✨
     </div>
 
-    <ion-button
-        :class="styles.widgetAddBirthday__button"
-        expand="block"
-        @click="openDateModal"
-    >
-      {{ birthDay ? `📅 ${birthDay}` : 'Выбрать дату рождения' }}
-    </ion-button>
+    <div :class="styles.widgetAddBirthday__dateButtonWrap">
+      <ion-button
+          :class="styles.widgetAddBirthday__button"
+          expand="block"
+      >
+        {{ birthDay ? `📅 ${birthDay}` : 'Выбрать дату рождения' }}
+      </ion-button>
 
-    <ion-modal
-        :is-open="isDateModalOpen"
-        keep-contents-mounted="true"
-        @did-dismiss="isDateModalOpen = false"
-    >
-      <ion-content>
-        <div class="center-content">
-          <ion-datetime
-              v-model="selectedDate"
-              locale="ru-RU"
-              presentation="date"
-              :show-default-buttons="true"
-              done-text="Готово" cancel-text="Не, отмена"
-              :max="maxDate"
-              :first-day-of-week="1"
-              @ionChange="isDateModalOpen = false"
-              @ionCancel="isDateModalOpen = false"
-          ></ion-datetime>
-
-          <img :class="styles.widgetAddBirthday__modalArt" src="@/assets/img/animals/cat-astro_art.webp" alt="" />
-        </div>
-      </ion-content>
-    </ion-modal>
+      <input
+          :class="styles.widgetAddBirthday__nativeDate"
+          type="date"
+          :value="selectedDate || ''"
+          :min="minDate"
+          :max="maxDate"
+          @change="onNativeDateChange"
+      />
+    </div>
   </div>
 </template>

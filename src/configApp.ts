@@ -41,10 +41,10 @@ export const appVars = {
   },
   achievementTranslates: {
     common: 'Обычное',
-    rare: '★ Редкое',
-    epic: '★★ Эпичное',
-    legendary: '★★★ Легендарное',
-    mythic: '★★★★ Мифическое',
+    rare: 'Редкое',
+    epic: 'Эпичное',
+    legendary: 'Легендарное',
+    mythic: 'Мифическое',
   },
   donations: {
     onceUrl: 'https://pay.cloudtips.ru/p/460b7ab7',

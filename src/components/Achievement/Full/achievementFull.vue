@@ -29,35 +29,37 @@ const rarityColor = computed(() => {
   >
     <div :class="styles.achievementFull__bg"></div>
 
-    <AchievementImage
-        :class="styles.achievementFull__image"
-        :achievement="props.achievement"
-        is-animate
-    />
+    <div :class="styles.achievementFull__contentWrapper">
+      <AchievementImage
+          :class="styles.achievementFull__image"
+          :achievement="props.achievement"
+          is-animate
+      />
 
-    <div :class="styles.achievementFull__title">
-      {{ props.achievement?.name }}
-    </div>
+      <div :class="styles.achievementFull__title">
+        {{ props.achievement?.name }}
+      </div>
 
-    <div :class="styles.achievementFull__comment">
-      {{ props.achievement.comment }}
-    </div>
+      <div :class="styles.achievementFull__comment">
+        {{ props.achievement.comment }}
+      </div>
 
-    <div v-if="props.achievement.ageText"
-         :class="styles.achievementFull__ageText"
-    >
-      {{ props.achievement.ageText }}
-    </div>
+      <div v-if="props.achievement.ageText"
+           :class="styles.achievementFull__ageText"
+      >
+        {{ props.achievement.ageText }}
+      </div>
 
-    <AchievementRarityLabel
-        :class="styles.achievementFull__block"
-        :achievement="props.achievement"
-    />
+      <AchievementRarityLabel
+          :class="styles.achievementFull__block"
+          :achievement="props.achievement"
+      />
 
-    <div v-if="props.achievement.person && props.achievement.wiki"
-         :class="styles.achievementFull__subComment"
-    >
-      {{ props.achievement.person }} на <a :href="props.achievement.wiki">Википедии</a>
+      <div v-if="props.achievement.person && props.achievement.wiki"
+           :class="styles.achievementFull__subComment"
+      >
+        {{ props.achievement.person }} на <a :href="props.achievement.wiki">Википедии</a>
+      </div>
     </div>
   </div>
 </template>

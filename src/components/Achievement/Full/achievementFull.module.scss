@@ -2,20 +2,27 @@
 
 .achievementFull {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var( --brd-size-gap ) var( --brd-size-gap-xl ) var( --brd-size-gap-l );
+  z-index: var( --brd-z-index-layout );
   border-radius: var( --brd-size-border-radius );
+  background-color: var( --brd-color-bg );
 
   &__bg {
     opacity: .3;
     position: absolute;
-    z-index: -1;
+    z-index: 100;
     inset: 0;
     border: 1px solid var( --brd-achievement-rarity-color );
     border-radius: var( --brd-size-border-radius );
     background: radial-gradient(circle at top, var( --brd-achievement-rarity-color ) 0, transparent 80%);
+  }
+
+  &__contentWrapper {
+    position: relative;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var( --brd-size-gap ) var( --brd-size-gap-xl ) var( --brd-size-gap-l );
   }
 
   &__image {

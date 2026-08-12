@@ -14,7 +14,8 @@ type TAppStore = {
   nextAchievement: TAchievementCombined | null, // Следующая, которую получит пользователь
   usedWishIds: string[], // Уже показанные поздравления — чтобы не повторяться
   lastBirthdayGreetedDate: string, // YYYY-MM-DD последнего автопоказа поздравления
-  beardStreakStart: string, // YYYY-MM-DD начала стрика; пусто = стрик не запущен
+  beardStreakStart: string, // YYYY-MM-DD начала стрика бороды; пусто = не запущен
+  dietStreakStart: string, // YYYY-MM-DD начала стрика диеты; пусто = не запущен
 }
 
 const STORAGE_KEY = 'appStore';
@@ -33,6 +34,7 @@ export const appStore: TAppStore = reactive({
   usedWishIds: [],
   lastBirthdayGreetedDate: '',
   beardStreakStart: '',
+  dietStreakStart: '',
 });
 
 // Восстановление стора при запуске приложения

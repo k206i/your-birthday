@@ -1,89 +1,111 @@
 [
   {
+    "id": "diet_1",
     "days": 1,
+    "ageText": "1 день",
     "rarity": "common",
     "icon": "🥦",
-    "image": "",
+    "image": "diet_1.webp",
     "name": "Салатовый старт",
     "comment": "Съела брокколи и не заплакала"
   },
   {
+    "id": "diet_2",
     "days": 3,
+    "ageText": "3 дня",
     "rarity": "common",
     "icon": "🔥",
-    "image": "",
+    "image": "diet_2.webp",
     "name": "Три дня — не шутки",
     "comment": "Подруги уже спрашивают, что за свечение"
   },
   {
+    "id": "diet_3",
     "days": 7,
+    "ageText": "7 дней",
     "rarity": "common",
     "icon": "🗿",
-    "image": "",
+    "image": "diet_3.webp",
     "name": "Кремень недели",
     "comment": "Неделя! Весы решили перепровериться"
   },
   {
+    "id": "diet_4",
     "days": 10,
+    "ageText": "10 дней",
     "rarity": "rare",
     "icon": "🍕",
-    "image": "",
+    "image": "diet_4.webp",
     "name": "Пицца — во френд-зоне",
     "comment": "Она всё ещё в твоей жизни, но теперь между вами только дружба. Ничего личного, просто так надо"
   },
   {
+    "id": "diet_5",
     "days": 14,
+    "ageText": "14 дней",
     "rarity": "rare",
     "icon": "🧘",
-    "image": "",
+    "image": "diet_5.webp",
     "name": "Две недели дзена",
     "comment": "Официант уже знает твой заказ наизусть"
   },
   {
+    "id": "diet_6",
     "days": 21,
+    "ageText": "21 день",
     "rarity": "rare",
     "icon": "🧠",
-    "image": "",
+    "image": "diet_6.webp",
     "name": "Почти привычка",
     "comment": "21 день. Рука сама тянется к огурцу"
   },
   {
+    "id": "diet_7",
     "days": 30,
+    "ageText": "30 дней",
     "rarity": "epic",
     "icon": "🏅",
-    "image": "",
+    "image": "diet_7.webp",
     "name": "Месяц титана",
     "comment": "Джинсы шепчут спасибо"
   },
   {
+    "id": "diet_8",
     "days": 66,
+    "ageText": "66 дней",
     "rarity": "epic",
     "icon": "🔬",
-    "image": "",
+    "image": "diet_8.webp",
     "name": "Наука не врёт",
     "comment": "66 дней — учёные подтвердили: теперь это ты"
   },
   {
+    "id": "diet_9",
     "days": 90,
+    "ageText": "90 дней",
     "rarity": "epic",
     "icon": "🔄",
-    "image": "",
+    "image": "diet_9.webp",
     "name": "Полный перезапуск",
     "comment": "90 дней — обновилась до 2.0. Патчноут: сияешь"
   },
   {
+    "id": "diet_10",
     "days": 180,
+    "ageText": "180 дней",
     "rarity": "legendary",
     "icon": "👑",
-    "image": "",
+    "image": "diet_10.webp",
     "name": "Полгода — легенда",
     "comment": "Тортики плачут в углу"
   },
   {
+    "id": "diet_11",
     "days": 365,
+    "ageText": "365 дней",
     "rarity": "legendary",
     "icon": "🎂",
-    "image": "",
+    "image": "diet_11.webp",
     "name": "Год силы воли",
     "comment": "С днём рождения. Один кусочек ты заслужила 😌"
   }

@@ -13,11 +13,13 @@ import type { TAchievementCombined } from '@/api/getAchievementById';
 import famousAchievements from '@/jsons/achievements_famous.json';
 import ageAchievements from '@/jsons/achievements_age.json';
 import beardAchievements from '@/jsons/achievements_beard.json';
+import dietAchievements from '@/jsons/achievements_diet.json';
 
 const SOURCES: TAchievementCombined[] = [
   ...( famousAchievements as TAchievementCombined[] ),
   ...( ageAchievements as TAchievementCombined[] ),
   ...( beardAchievements as TAchievementCombined[] ),
+  ...( dietAchievements as TAchievementCombined[] ),
 ];
 
 export const setLastAchievement = (): void => {

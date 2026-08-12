@@ -13,8 +13,9 @@ watch(() => appStore.userBirthDate, () => setLastAchievement());
 // Смена суток: без этого стрик не растёт при открытом приложении
 watch( currentDate, () => setLastAchievement());
 
-// Запуск и сброс стрика
+// Запуск и сброс стриков
 watch(() => appStore.beardStreakStart, () => setLastAchievement());
+watch(() => appStore.dietStreakStart, () => setLastAchievement());
 
 </script>
 

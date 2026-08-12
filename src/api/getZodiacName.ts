@@ -21,25 +21,27 @@ export type TGetZodiacNameResponse = {
   period: TZodiacSign[],  // Знаки для диапазона ±dayNormalPeriod/2 дней
 }
 
-const toDateNumber = ( ddMm: string, year: number ): number => {
+// Сравниваем даты как числа MMDD: время и часовой пояс в логику не попадают.
+// Иначе последний день каждого знака выпадал — дата с временем не проходила time <= end
+const toDayNumber = ( ddMm: string ): number => {
   const [ day, month ] = ddMm.split( '-' ).map( Number );
-  return new Date( year, month - 1, day ).getTime();
+
+  return month * 100 + day;
 };
 
 const findZodiacByDate = ( date: Date ): TZodiacSign | null => {
-  const year = date.getFullYear();
-  const time = date.getTime();
+  const key: number = ( date.getMonth() + 1 ) * 100 + date.getDate();
 
   const result = zodiacData.find(( sign ) => {
-    const start = toDateNumber( sign.date_start, year );
-    const end = toDateNumber( sign.date_end, year );
+    const start: number = toDayNumber( sign.date_start );
+    const end: number = toDayNumber( sign.date_end );
 
     // Козерог: диапазон переходит через новый год (22-12 → 20-01)
     if ( start > end ) {
-      return time >= start || time <= end;
+      return key >= start || key <= end;
     }
 
-    return time >= start && time <= end;
+    return key >= start && key <= end;
   });
 
   return result ?? null;

@@ -11,28 +11,47 @@ import type { TAchievementCombined } from '@/api/getAchievementById';
 
 export type TStreakName = 'beard' | 'diet';
 
+type TStreakAccess = {
+  get: () => string,
+  set: ( value: string ) => void,
+}
+
 const MS_PER_DAY: number = 24 * 60 * 60 * 1000;
+
+// Единственное место, где стрик привязан к полю стора. Record по TStreakName даёт
+// гарантию компилятора: добавили имя в тип — vue-tsc потребует запись и здесь,
+// поэтому новый стрик нельзя случайно оставить на чужой дате
+const STREAK_ACCESS: Record< TStreakName, TStreakAccess > = {
+  beard: {
+    get: () => appStore.beardStreakStart,
+    set: ( value ) => { appStore.beardStreakStart = value; },
+  },
+  diet: {
+    get: () => appStore.dietStreakStart,
+    set: ( value ) => { appStore.dietStreakStart = value; },
+  },
+};
 
 // Стрик ачивки определяется префиксом id (beard_1 -> beard, diet_1 -> diet) —
 // тот же контракт, что у getAchievementById
 const getStreakName = ( achievementId: string ): TStreakName | null => {
   const prefix: string = achievementId.split( '_' )[0];
 
-  return prefix === 'beard' || prefix === 'diet' ? prefix : null;
+  return prefix in STREAK_ACCESS ? prefix as TStreakName : null;
 };
 
 const getStreakStart = ( streakName: TStreakName ): string => {
-  return streakName === 'beard' ? appStore.beardStreakStart : appStore.dietStreakStart;
+  return STREAK_ACCESS[ streakName ].get();
 };
 
 export const setStreakStart = ( streakName: TStreakName, value: string ): void => {
-  if ( streakName === 'beard' ) {
-    appStore.beardStreakStart = value;
+  STREAK_ACCESS[ streakName ].set( value );
+};
 
-    return;
-  }
-
-  appStore.dietStreakStart = value;
+// Даты старта всех стриков — чтобы следить за ними одним вотчером,
+// не перечисляя поля стора при добавлении нового стрика
+export const getStreakStarts = (): string[] => {
+  return Object.values( STREAK_ACCESS ).map( item => item.get() );
 };
 
 // Пройденные дни стрика; null, если стрик не запущен.

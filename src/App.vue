@@ -4,6 +4,7 @@ import {watch} from 'vue';
 import {appStore} from '@/store/appStore';
 import {currentDate} from '@/store/currentDate';
 import {setLastAchievement} from '@/api/setLastAchievement';
+import {getStreakStarts} from '@/api/getAchievementDate';
 
 setLastAchievement();
 
@@ -13,9 +14,8 @@ watch(() => appStore.userBirthDate, () => setLastAchievement());
 // Смена суток: без этого стрик не растёт при открытом приложении
 watch( currentDate, () => setLastAchievement());
 
-// Запуск и сброс стриков
-watch(() => appStore.beardStreakStart, () => setLastAchievement());
-watch(() => appStore.dietStreakStart, () => setLastAchievement());
+// Запуск и сброс любого стрика
+watch( getStreakStarts, () => setLastAchievement());
 
 </script>
 

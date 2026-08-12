@@ -1,162 +1,192 @@
 [
   {
+    "id": "beard_1",
     "days": 1,
+    "ageText": "1 день",
     "rarity": "common",
     "icon": "🌱",
-    "image": "",
+    "image": "beard_1.webp",
     "name": "Свежая щетина",
-    "description": "Погладил подбородок — приятно колется"
+    "comment": "Погладил подбородок — приятно колется"
   },
   {
+    "id": "beard_2",
     "days": 2,
+    "ageText": "2 дня",
     "rarity": "common",
     "icon": "😏",
-    "image": "",
+    "image": "beard_2.webp",
     "name": "Лёгкий брутал",
-    "description": "Уже не мальчик, но ещё не Хемингуэй"
+    "comment": "Уже не мальчик, но ещё не Хемингуэй"
   },
   {
+    "id": "beard_3",
     "days": 3,
+    "ageText": "3 дня",
     "rarity": "common",
     "icon": "✨",
-    "image": "",
+    "image": "beard_3.webp",
     "name": "Трёхдневная классика",
-    "description": "Та самая небритость из рекламы парфюма"
+    "comment": "Та самая небритость из рекламы парфюма"
   },
   {
+    "id": "beard_4",
     "days": 5,
+    "ageText": "5 дней",
     "rarity": "common",
     "icon": "🐺",
-    "image": "",
+    "image": "beard_4.webp",
     "name": "Волчий режим",
-    "description": "Начал коситься на луну"
+    "comment": "Начал коситься на луну"
   },
   {
+    "id": "beard_5",
     "days": 7,
+    "ageText": "7 дней",
     "rarity": "common",
     "icon": "✂️",
-    "image": "",
+    "image": "beard_5.webp",
     "name": "Неделя без лезвия",
-    "description": "Бритва пылится и тихо обижается"
+    "comment": "Бритва пылится и тихо обижается"
   },
   {
+    "id": "beard_6",
     "days": 10,
+    "ageText": "10 дней",
     "rarity": "rare",
     "icon": "🌲",
-    "image": "",
+    "image": "beard_6.webp",
     "name": "Начинающий лесник",
-    "description": "Захотелось топор и клетчатую рубашку"
+    "comment": "Захотелось топор и клетчатую рубашку"
   },
   {
+    "id": "beard_7",
     "days": 14,
+    "ageText": "14 дней",
     "rarity": "rare",
     "icon": "📖",
-    "image": "",
+    "image": "beard_7.webp",
     "name": "Молодой мудрец",
-    "description": "Люди стали спрашивать у тебя совета"
+    "comment": "Люди стали спрашивать у тебя совета"
   },
   {
+    "id": "beard_8",
     "days": 21,
+    "ageText": "21 день",
     "rarity": "rare",
     "icon": "🔥",
-    "image": "",
+    "image": "beard_8.webp",
     "name": "Отшельник",
-    "description": "Связь с внешним миром теперь по желанию"
+    "comment": "Связь с внешним миром теперь по желанию"
   },
   {
+    "id": "beard_9",
     "days": 30,
+    "ageText": "30 дней",
     "rarity": "rare",
     "icon": "🦁",
-    "image": "",
+    "image": "beard_9.webp",
     "name": "Борода набирает XP",
-    "description": "Минус один подбородок"
+    "comment": "Минус один подбородок"
   },
   {
+    "id": "beard_10",
     "days": 34,
+    "ageText": "34 дня",
     "rarity": "legendary",
     "icon": "💬",
-    "image": "",
+    "image": "beard_10.webp",
     "name": "Непоколебимый",
-    "description": "Пережил сакраментальное «Может, уже сбреешь?»"
+    "comment": "Пережил сакраментальное «Может, уже сбреешь?»"
   },
   {
+    "id": "beard_11",
     "days": 45,
-    "rarity": "epic",
-    "icon": "🐻",
-    "image": "",
-    "name": "Медвежий режим",
-    "description": "Просыпаешься с желанием порычать"
-  },
-  {
-    "days": 45,
+    "ageText": "45 дней",
     "rarity": "legendary",
     "icon": "🍞",
-    "image": "",
+    "image": "beard_11.webp",
     "name": "Скрытые запасы",
-    "description": "Нашёл в бороде крошку от вчерашнего ужина"
+    "comment": "Нашёл в бороде крошку от вчерашнего ужина"
   },
   {
+    "id": "beard_12",
     "days": 60,
+    "ageText": "60 дней",
     "rarity": "epic",
     "icon": "👑",
-    "image": "",
+    "image": "beard_12.webp",
     "name": "Бородатый авторитет",
-    "description": "В очереди пропускают без лишних слов"
+    "comment": "В очереди пропускают без лишних слов"
   },
   {
+    "id": "beard_13",
     "days": 90,
+    "ageText": "90 дней",
     "rarity": "epic",
     "icon": "🧙",
-    "image": "",
+    "image": "beard_13.webp",
     "name": "Архимаг бороды",
-    "description": "Борода начала колдовать сама"
+    "comment": "Борода начала колдовать сама"
   },
   {
+    "id": "beard_14",
     "days": 120,
+    "ageText": "120 дней",
     "rarity": "epic",
     "icon": "🌳",
-    "image": "",
+    "image": "beard_14.webp",
     "name": "Хранитель леса",
-    "description": "Рыбаки принимают тебя за своего"
+    "comment": "Рыбаки принимают тебя за своего"
   },
   {
+    "id": "beard_15",
     "days": 180,
+    "ageText": "180 дней",
     "rarity": "legendary",
     "icon": "⚔️",
-    "image": "",
+    "image": "beard_15.webp",
     "name": "Викинг разблокирован",
-    "description": "Тянет к морю и в набег"
+    "comment": "Тянет к морю и в набег"
   },
   {
+    "id": "beard_16",
     "days": 270,
+    "ageText": "270 дней",
     "rarity": "legendary",
     "icon": "👑",
-    "image": "",
+    "image": "beard_16.webp",
     "name": "Король бороды",
-    "description": "Корона держится на одной бороде"
+    "comment": "Корона держится на одной бороде"
   },
   {
+    "id": "beard_17",
     "days": 365,
+    "ageText": "365 дней",
     "rarity": "legendary",
     "icon": "🔮",
-    "image": "",
+    "image": "beard_17.webp",
     "name": "Гэндальф одобряет",
-    "description": "Мимо парикмахерской ты не пройдёшь"
+    "comment": "Мимо парикмахерской ты не пройдёшь"
   },
   {
+    "id": "beard_18",
     "days": 500,
+    "ageText": "500 дней",
     "rarity": "legendary",
     "icon": "🦅",
-    "image": "",
+    "image": "beard_18.webp",
     "name": "Повелитель бороды",
-    "description": "Борода живёт своей жизнью и платит за себя"
+    "comment": "Борода живёт своей жизнью и платит за себя"
   },
   {
+    "id": "beard_19",
     "days": 730,
+    "ageText": "730 дней",
     "rarity": "legendary",
     "icon": "💎",
-    "image": "",
+    "image": "beard_19.webp",
     "name": "Легенда растительности",
-    "description": "О твоей бороде слагают легенды у костра"
+    "comment": "О твоей бороде слагают легенды у костра"
   }
 ]

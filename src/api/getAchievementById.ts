@@ -11,6 +11,7 @@ export type TAchievementCombined = {
   rarity: 'common' | 'rare' | 'epic' | 'legendary' | 'mythic',
   comment?: string,
   weeks?: number,
+  days?: number, // Дни стрика — для ачивок, основанных на дневной шкале
   ageText?: string,
   person?: string,
   wiki?: string,

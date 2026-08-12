@@ -11,8 +11,10 @@ import stylesOverflowSection from '@/assets/styles/overflowSection.module.scss';
 import AchievementImage from '@/components/Achievement/Image/achievementImage.vue';
 import ageData from '@/jsons/achievements_age.json';
 import famousData from '@/jsons/achievements_famous.json';
+import beardData from '@/jsons/achievements_beard.json';
 import {TAchievementCombined} from '@/api/getAchievementById';
-import {getCurrentWeekIndex} from '@/composables/getCurrentWeekIndex';
+import {getStreakDays, isAchievementReceived} from '@/api/getAchievementDate';
+import {declineUnit} from '@/composables/declineUnit';
 import {currentDate} from '@/store/currentDate';
 import ModalAchievement from '@/components/Modals/Achievement/modalAchievement.vue';
 import {ref, computed} from 'vue';
@@ -27,6 +29,7 @@ type TAchievementGroup = {
 const groups: TAchievementGroup[] = [
   { id: 'age', icon: '🎂', title: 'Возраст', achievements: ageData as TAchievementCombined[] },
   { id: 'famous', icon: '🤘', title: 'Знаменитости', achievements: famousData as TAchievementCombined[] },
+  { id: 'beard', icon: '✂️', title: 'Борода', achievements: beardData as TAchievementCombined[] },
 ];
 
 const selectedGroupId = ref< string >( groups[ 0 ].id );
@@ -35,13 +38,21 @@ const onSelectGroup = ( id: string ) => {
   selectedGroupId.value = id;
 };
 
-// Прожитые недели — по ним определяем, получена ачивка или ещё нет
-const livedWeeks = computed(() => getCurrentWeekIndex( appStore.userBirthDate, currentDate.value ));
-
+// Получена ли ачивка — считаем той же функцией, что и lastAchievement,
+// иначе подсветка в списке и «последнее достижение» могли бы разойтись
 const isReceived = ( achievement: TAchievementCombined ): boolean => {
-  return livedWeeks.value !== null
-      && achievement.weeks !== undefined
-      && achievement.weeks <= livedWeeks.value;
+  return isAchievementReceived( achievement );
+};
+
+// Пройденные дни стрика; null — стрик не запущен
+const streakDays = computed(() => getStreakDays());
+
+const onStartStreak = () => {
+  appStore.beardStreakStart = currentDate.value;
+};
+
+const onResetStreak = () => {
+  appStore.beardStreakStart = '';
 };
 
 const isAchievementModalOpen = ref( false );
@@ -98,6 +109,21 @@ const onSelectAchievement = ( achievement: TAchievementCombined ) => {
               </div>
             </li>
           </ul>
+        </div>
+
+        <div v-if="selectedGroupId === 'beard'">
+          <template v-if="streakDays !== null">
+            Стрик: {{ streakDays }} {{ declineUnit( streakDays, 'day' ) }}
+
+            <div @click="onResetStreak">
+              Сбросить стрик
+            </div>
+          </template>
+          <template v-else>
+            <div @click="onStartStreak">
+              Начать стрик
+            </div>
+          </template>
         </div>
 
         <ul v-for="group in groups"

@@ -5,6 +5,9 @@ import {appVars} from '@/configApp';
 import {computed} from 'vue';
 import AchievementRarityLabel from '@/components/Achievement/RarityLabel/achievementRarityLabel.vue';
 import {TAchievementCombined} from '@/api/getAchievementById';
+import {isAchievementReceived} from '@/api/getAchievementDate';
+import {lockClosedOutline} from 'ionicons/icons';
+import {IonIcon} from '@ionic/vue';
 
 const props = defineProps<{
   achievement: TAchievementCombined,
@@ -35,6 +38,13 @@ const rarityColor = computed(() => {
           :achievement="props.achievement"
           is-animate
       />
+
+      <div v-if="!isAchievementReceived( props.achievement )"
+           :class="styles.achievementFull__notReceived"
+      >
+        <ion-icon :icon="lockClosedOutline"></ion-icon>
+        Не получена
+      </div>
 
       <div :class="styles.achievementFull__title">
         {{ props.achievement?.name }}

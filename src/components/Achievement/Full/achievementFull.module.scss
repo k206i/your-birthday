@@ -59,4 +59,19 @@
   &__block {
     margin-top: var( --brd-size-gap );
   }
+
+  &__notReceived {
+    display: inline-flex;
+    align-items: center;
+    gap: var( --brd-size-gap-xs );
+    margin-top: var( --brd-size-gap );
+    padding: 3px var( --brd-size-gap-s ) 2px;
+    font-family: var( --brd-font-default-alt );
+    font-size: 12px;
+    color: var( --brd-color-font );
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: var( --brd-size-border-radius-xs );
+    background-color: var( --brd-color-white-5 );
+  }
 }

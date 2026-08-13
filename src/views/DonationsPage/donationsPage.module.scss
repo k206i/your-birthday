@@ -17,12 +17,12 @@
     font-family: var( --brd-font-default-alt );
     font-size: 18px;
     color: var( --brd-color-font-accent );
+    white-space: nowrap;
   }
 
   &__modal {
     display: flex;
     flex-flow: column;
-    height: 100%;
     padding-top: var( --brd-size-gap );
   }
 
@@ -62,12 +62,19 @@
     width: 100%;
   }
 
+  // Ionic сам добавляет safe-area только к ion-toolbar внутри футера, поэтому задаём вручную
+  &__modalFooter {
+    padding-right: var( --brd-size-side-indent );
+    padding-bottom: var( --ion-safe-area-bottom, 0 );
+    padding-left: var( --brd-size-side-indent );
+    background-color: var( --ion-background-color );
+  }
+
   &__modalButtonWrapper {
     display: flex;
     flex-flow: column;
     gap: var( --brd-size-gap-s );
-    margin-top: auto;
-    padding-bottom: var( --brd-size-gap-xl );
+    padding-bottom: var( --brd-size-gap );
   }
 
   &__button {

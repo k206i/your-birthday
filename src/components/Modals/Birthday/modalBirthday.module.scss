@@ -31,6 +31,10 @@ $cannon-count: 60;
     color: var( --brd-color-theme );
   }
 
+  &__footerWrapper {
+    padding-bottom: var( --brd-size-gap );
+  }
+
   &__button {
     display: flex;
     flex-basis: 100%;

@@ -24,7 +24,6 @@ h3:first-child  {
     margin-top: 0;
 }
 
-/* .picker-opts в shadow DOM растягивается по ширине опций (light DOM) */
 ion-picker-column-option {
     min-width: calc( var( --brd-size-picker-min-width ) - 32px );
 }
@@ -37,6 +36,16 @@ ion-picker {
 
     /* Затухание невыбранных пунктов — в цвет фона, как у барабана ion-datetime */
     --fade-background-rgb: var( --brd-color-theme-dark_rgb );
+}
+
+:root.ios ion-modal,
+:root.md ion-modal {
+    --ion-background-color: var( --brd-color-bg-modal );
+}
+
+:root.ios ion-modal.picker-modal,
+:root.md ion-modal.picker-modal {
+    --ion-background-color: var( --brd-color-bg-picker-modal );
 }
 
 ion-datetime {

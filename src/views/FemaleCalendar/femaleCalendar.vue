@@ -192,6 +192,7 @@ watch( ovulationDates, async ( value ) => {
         </div>
 
         <ion-modal
+            class="picker-modal"
             :is-open="isPeriodDateModalOpen"
             keep-contents-mounted="true"
             @did-dismiss="isPeriodDateModalOpen = false"
@@ -236,6 +237,7 @@ watch( ovulationDates, async ( value ) => {
         </div>
 
         <ion-modal
+            class="picker-modal"
             :is-open="isCycleModalOpen"
             @did-dismiss="isCycleModalOpen = false"
         >

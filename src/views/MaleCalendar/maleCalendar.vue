@@ -231,6 +231,7 @@ watch( optimalDates, async ( value ) => {
         </div>
 
         <ion-modal
+            class="picker-modal"
             :is-open="isAlcoholDateModalOpen"
             keep-contents-mounted="true"
             @did-dismiss="isAlcoholDateModalOpen = false"
@@ -275,6 +276,7 @@ watch( optimalDates, async ( value ) => {
         </div>
 
         <ion-modal
+            class="picker-modal"
             :is-open="isEjaculationDateModalOpen"
             keep-contents-mounted="true"
             @did-dismiss="isEjaculationDateModalOpen = false"

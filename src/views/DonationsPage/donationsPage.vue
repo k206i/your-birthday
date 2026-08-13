@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import styles from "./donationsPage.module.scss";
-import {IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonModal, IonPage, IonToolbar} from '@ionic/vue';
+import {IonButton, IonButtons, IonContent, IonFooter, IonHeader, IonIcon, IonModal, IonPage, IonToolbar} from '@ionic/vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import {appVars} from '@/configApp';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
@@ -34,7 +34,7 @@ const openSubscribeDonation = async (): Promise< void > => {
           :class="styles.donationsPage__block"
           bg-image="panda_art"
           title="Спасибо этим людям"
-          lead="Благодаря вам проект живёт и развивается ✨"
+          lead="Благодаря вам проект живёт и&nbsp;развивается ✨"
           comment="С благодарностью каждому ❤️"
       />
 
@@ -95,24 +95,26 @@ const openSubscribeDonation = async (): Promise< void > => {
           <div :class="styles.donationsPage__modalComment">
             Сумму выберете на следующем шаге — хомяк будет рад любой. Захотите подписать перевод именем — список благодарностей живёт внутри приложения, так что имя приедет с ближайшим обновлением.
           </div>
-
-          <div :class="styles.donationsPage__modalButtonWrapper">
-            <a :class="styles.donationsPage__button"
-               :href="appVars.donations.onceUrl"
-               @click.prevent="openOnceDonation"
-            >
-              Разово
-            </a>
-
-            <a :class="styles.donationsPage__button"
-               :href="appVars.donations.subscribeDonation"
-               @click.prevent="openSubscribeDonation"
-            >
-              Каждый месяц
-            </a>
-          </div>
         </div>
       </ion-content>
+
+      <ion-footer :class="styles.donationsPage__modalFooter">
+        <div :class="styles.donationsPage__modalButtonWrapper">
+          <a :class="styles.donationsPage__button"
+             :href="appVars.donations.onceUrl"
+             @click.prevent="openOnceDonation"
+          >
+            Разово
+          </a>
+
+          <a :class="styles.donationsPage__button"
+             :href="appVars.donations.subscribeDonation"
+             @click.prevent="openSubscribeDonation"
+          >
+            Каждый месяц
+          </a>
+        </div>
+      </ion-footer>
     </ion-modal>
   </ion-page>
 </template>

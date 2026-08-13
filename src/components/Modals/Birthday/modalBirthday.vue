@@ -125,7 +125,7 @@ const close = () => {
     </ion-content>
 
     <ion-footer>
-      <ion-buttons>
+      <ion-buttons :class="styles.modalBirthday__footerWrapper">
         <div :class="styles.modalBirthday__button" @click="close">
           Ну ок, спасибо 😎
         </div>

@@ -135,6 +135,7 @@ onMounted(() => {
       </ion-button>
 
       <ion-modal
+          class="picker-modal"
           :is-open="isDateModalOpen"
           keep-contents-mounted="true"
           @did-dismiss="isDateModalOpen = false"

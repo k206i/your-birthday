@@ -56,8 +56,15 @@
     color: var( --brd-color-font );
   }
 
+  &__shareWrapper,
   &__block {
     margin-top: var( --brd-size-gap );
+  }
+
+  &__shareWrapper {
+    display: flex;
+    align-items: center;
+    gap: var( --brd-size-gap-s );
   }
 
   &__notReceived {
@@ -73,5 +80,21 @@
     text-transform: uppercase;
     border-radius: var( --brd-size-border-radius-xs );
     background-color: var( --brd-color-white-5 );
+  }
+
+  &__share,
+  &__rarityLabel {
+    height: 40px;
+  }
+
+  &__share {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    font-size: 26px;
+    color: var( --brd-achievement-rarity-color );
+    border-radius: var( --brd-size-border-radius-xs );
+    background-color: color-mix( in srgb, var( --brd-achievement-rarity-color ), black var( --brd-color-mix-bg ));
   }
 }

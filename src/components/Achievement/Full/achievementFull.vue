@@ -6,7 +6,7 @@ import {computed} from 'vue';
 import AchievementRarityLabel from '@/components/Achievement/RarityLabel/achievementRarityLabel.vue';
 import {TAchievementCombined} from '@/api/getAchievementById';
 import {isAchievementReceived} from '@/api/getAchievementDate';
-import {lockClosedOutline} from 'ionicons/icons';
+import {lockClosedOutline, shareSocial} from 'ionicons/icons';
 import {IonIcon} from '@ionic/vue';
 
 const props = defineProps<{
@@ -60,10 +60,16 @@ const rarityColor = computed(() => {
         {{ props.achievement.ageText }}
       </div>
 
-      <AchievementRarityLabel
-          :class="styles.achievementFull__block"
-          :achievement="props.achievement"
-      />
+      <div :class="styles.achievementFull__shareWrapper">
+        <AchievementRarityLabel
+            :class="styles.achievementFull__rarityLabel"
+            :achievement="props.achievement"
+        />
+
+        <div :class="styles.achievementFull__share">
+          <ion-icon :icon="shareSocial"></ion-icon>
+        </div>
+      </div>
 
       <div v-if="props.achievement.person && props.achievement.wiki"
            :class="styles.achievementFull__subComment"

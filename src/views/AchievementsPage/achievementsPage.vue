@@ -79,7 +79,7 @@ const onSelectAchievement = ( achievement: TAchievementCombined ) => {
               '--brd-custom-theme-color': appVars.colors.achievements,
             }"
   >
-    <AppHeader />
+    <AppHeader page-name="Ваши <span class='accent-theme'>достижения</span>" />
 
     <ion-content :fullscreen="true" class="ion-padding">
       <template v-if="!appStore.userBirthDate">

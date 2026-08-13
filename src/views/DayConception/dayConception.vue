@@ -87,7 +87,7 @@ watch(formattedDate, async () => {
               '--brd-custom-theme-color': SUB_THEME_COLOR,
             }"
   >
-    <AppHeader />
+    <AppHeader page-name="Дата <span class='accent-theme'>зачатия</span>" />
 
     <ion-content :fullscreen="true" class="ion-padding">
 

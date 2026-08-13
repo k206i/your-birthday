@@ -67,7 +67,7 @@ watch( isBirthdayToday, ( value ) => {
             bg-image="dog-1_art"
             color="#a876ec"
             link="/userProfile"
-            :title="`Здравствуйте${ appStore.userName ? ', ' + appStore.userName : '' }!`"
+            :title="`Здравствуйте${ appStore.userName ? `, ${ appStore.userName }` : '' }!`"
         >
           <template #lead>
             <div v-if="daysToBirthday === null"

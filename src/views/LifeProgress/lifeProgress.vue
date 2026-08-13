@@ -206,7 +206,7 @@ const lifeDecades = computed(() => {
               '--brd-custom-theme-color': appVars.colors.lifeProgress,
             }"
   >
-    <AppHeader />
+    <AppHeader page-name="Жизненный <span class='accent-theme'>прогресс</span>" />
 
     <ion-content :fullscreen="true" class="ion-padding">
       <WidgetPageTitle

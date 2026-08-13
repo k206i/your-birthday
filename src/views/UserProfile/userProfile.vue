@@ -10,7 +10,7 @@ import AvatarSetup from '@/components/Avatar/Setup/avatarSetup.vue';
 
 <template>
   <ion-page :class="styles.userProfile">
-    <AppHeader />
+    <AppHeader page-name="Ваши <span class='accent-theme'>настройки</span>" />
 
     <ion-content :fullscreen="true" class="ion-padding">
       <div :class="styles.userProfile__block">

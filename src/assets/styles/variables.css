@@ -38,6 +38,11 @@ ion-picker {
     --fade-background-rgb: var( --brd-color-theme-dark_rgb );
 }
 
+.translucent-bar ion-toolbar {
+    --background: rgba( var( --brd-color-bg-modal_rgb ), .9 );
+    backdrop-filter: blur( 10px );
+}
+
 :root.ios ion-modal,
 :root.md ion-modal {
     --ion-background-color: var( --brd-color-bg-modal );

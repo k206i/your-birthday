@@ -27,7 +27,7 @@ const openSubscribeDonation = async (): Promise< void > => {
               '--brd-custom-theme-color': appVars.colors.donations,
             }"
   >
-    <AppHeader />
+    <AppHeader page-name="Ваша <span class='accent-theme'>помощь</span>" />
 
     <ion-content :fullscreen="true" class="ion-padding">
       <WidgetPageTitle

@@ -172,7 +172,7 @@ watch( optimalDates, async ( value ) => {
               '--brd-custom-theme-color': SUB_THEME_COLOR,
             }"
   >
-    <AppHeader />
+    <AppHeader page-name="Планирование <span class='accent-theme'>для мужиков</span>" />
 
     <ion-content :fullscreen="true" class="ion-padding">
       <WidgetPageTitle

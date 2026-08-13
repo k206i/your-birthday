@@ -157,7 +157,7 @@ watch( ovulationDates, async ( value ) => {
               '--brd-custom-theme-color': SUB_THEME_COLOR,
             }"
   >
-    <AppHeader />
+    <AppHeader page-name="Планирование <span class='accent-theme'>для девушек</span>" />
 
     <ion-content :fullscreen="true" class="ion-padding">
       <WidgetPageTitle

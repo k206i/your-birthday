@@ -4,25 +4,34 @@ import { arrowBack } from 'ionicons/icons';
 import { useRoute } from 'vue-router';
 import styles from './appHeader.module.scss';
 import AvatarShort from '@/components/Avatar/Short/avatarShort.vue';
+import type {TGetFamousNamesResponse} from '@/api/getFamousNames';
 
 const route = useRoute();
+const props = defineProps<{
+  pageName?: string,
+}>();
 </script>
 
 <template>
-  <ion-header :class="styles.appHeader" :translucent="true">
+  <ion-header :class="styles.appHeader" class="translucent-bar">
     <ion-toolbar>
-      <ion-buttons slot="start" class="ion-padding">
-        <ion-back-button :style="{
-          visibility: route.path === '/home' ? 'hidden' : 'visible',
-        }" text="" defaultHref="/" :icon="arrowBack" ></ion-back-button>
+      <ion-buttons slot="start" :class="styles.appHeader__leftPlaceholder">
+        <ion-back-button
+            v-if="route.path !== '/home'"
+            text="" defaultHref="/" :icon="arrowBack"
+        ></ion-back-button>
+        <img v-else src="@/assets/img/webp/icon-logo.webp" alt="" />
       </ion-buttons>
 
       <div :class="styles.appHeader__title">
-        <div>
-          <slot>
-            День <span class="accent">рождения</span>
-          </slot>
-        </div>
+          <div v-if="props.pageName"
+               v-html="props.pageName"
+          />
+          <img v-else
+               :class="styles.appHeader__titleImg"
+               src="@/assets/img/titles/title2.webp"
+               alt="День рождения"
+          />
       </div>
       <ion-buttons :collapse="true" slot="end">
         <AvatarShort :class="styles.appHeader__avatar" />

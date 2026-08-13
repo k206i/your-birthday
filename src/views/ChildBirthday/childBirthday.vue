@@ -114,7 +114,7 @@ onMounted(() => {
               '--brd-custom-theme-color': SUB_THEME_COLOR,
             }"
   >
-    <AppHeader />
+    <AppHeader page-name="Планирование <span class='accent-theme'>рождения</span>" />
 
     <ion-content :fullscreen="true" class="ion-padding">
 

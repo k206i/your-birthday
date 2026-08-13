@@ -16,6 +16,7 @@ type TAppStore = {
   lastBirthdayGreetedDate: string, // YYYY-MM-DD последнего автопоказа поздравления
   beardStreakStart: string, // YYYY-MM-DD начала стрика бороды; пусто = не запущен
   dietStreakStart: string, // YYYY-MM-DD начала стрика диеты; пусто = не запущен
+  sportStreakStart: string, // YYYY-MM-DD начала стрика спорта; пусто = не запущен
 }
 
 const STORAGE_KEY = 'appStore';
@@ -35,6 +36,7 @@ export const appStore: TAppStore = reactive({
   lastBirthdayGreetedDate: '',
   beardStreakStart: '',
   dietStreakStart: '',
+  sportStreakStart: '',
 });
 
 // Восстановление стора при запуске приложения

@@ -13,6 +13,7 @@ import ageData from '@/jsons/achievements_age.json';
 import famousData from '@/jsons/achievements_famous.json';
 import beardData from '@/jsons/achievements_beard.json';
 import dietData from '@/jsons/achievements_diet.json';
+import sportData from '@/jsons/achievements_sport.json';
 import {TAchievementCombined} from '@/api/getAchievementById';
 import {getStreakDays, isAchievementReceived, setStreakStart, TStreakName} from '@/api/getAchievementDate';
 import {declineUnit} from '@/composables/declineUnit';
@@ -31,8 +32,9 @@ type TAchievementGroup = {
 const groups: TAchievementGroup[] = [
   { id: 'age', icon: '🎂', title: 'Возраст', achievements: ageData as TAchievementCombined[] },
   { id: 'famous', icon: '🤘', title: 'Знаменитости', achievements: famousData as TAchievementCombined[] },
-  { id: 'beard', icon: '✂️', title: 'Борода', achievements: beardData as TAchievementCombined[], streakName: 'beard' },
+  { id: 'beard', icon: '🧙‍♂️', title: 'Борода', achievements: beardData as TAchievementCombined[], streakName: 'beard' },
   { id: 'diet', icon: '🍎', title: 'Диета', achievements: dietData as TAchievementCombined[], streakName: 'diet' },
+  { id: 'sport', icon: '🏃', title: 'Спорт', achievements: sportData as TAchievementCombined[], streakName: 'sport' },
 ];
 
 const selectedGroupId = ref< string >( groups[ 0 ].id );
@@ -43,8 +45,6 @@ const onSelectGroup = ( id: string ) => {
   selectedGroupId.value = id;
 };
 
-// Получена ли ачивка — считаем той же функцией, что и lastAchievement,
-// иначе подсветка в списке и «последнее достижение» могли бы разойтись
 const isReceived = ( achievement: TAchievementCombined ): boolean => {
   return isAchievementReceived( achievement );
 };
@@ -129,8 +129,24 @@ const onSelectAchievement = ( achievement: TAchievementCombined ) => {
             </div>
           </template>
           <template v-else>
-            <div @click="onStartStreak( selectedGroup.streakName )">
-              Начать стрик
+            <div :class="styles.achievementsPage__lightButton"
+                 @click="onStartStreak( selectedGroup.streakName )"
+            >
+              {{selectedGroup.icon}}
+
+              <template v-if="selectedGroup.streakName === 'diet'">
+                Начать соблюдать диету!
+              </template>
+              <template v-else-if="selectedGroup.streakName === 'beard'">
+                Принять бородатый вызов!
+              </template>
+              <template v-else-if="selectedGroup.streakName === 'sport'">
+                Начать заниматься спортом!
+              </template>
+              <template v-else>
+                Принять вызов!
+              </template>
+
             </div>
           </template>
         </div>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import styles from './appFooter.module.scss';
-import {IonFooter, IonTitle, IonToolbar} from '@ionic/vue';
+import {IonFooter, IonToolbar} from '@ionic/vue';
 </script>
 
 <template>

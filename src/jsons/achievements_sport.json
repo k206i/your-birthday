@@ -1,0 +1,142 @@
+[
+  {
+    "id": "sport_1",
+    "days": 1,
+    "ageText": "1 день",
+    "rarity": "common",
+    "icon": "👟",
+    "image": "sport_1.webp",
+    "name": "Бирка срезана",
+    "comment": "Кроссовки распакованы, пути назад нет"
+  },
+  {
+    "id": "sport_2",
+    "days": 2,
+    "ageText": "2 дня",
+    "rarity": "common",
+    "icon": "😤",
+    "image": "sport_2.webp",
+    "name": "Болит всё",
+    "comment": "Даже то, о существовании чего ты не знал"
+  },
+  {
+    "id": "sport_3",
+    "days": 3,
+    "ageText": "3 дня",
+    "rarity": "common",
+    "icon": "🚶",
+    "image": "sport_3.webp",
+    "name": "Лестница — противник",
+    "comment": "Второй этаж теперь берётся с боем"
+  },
+  {
+    "id": "sport_4",
+    "days": 5,
+    "ageText": "5 дней",
+    "rarity": "common",
+    "icon": "💪",
+    "image": "sport_4.webp",
+    "name": "Зеркало заинтересовалось",
+    "comment": "Разглядываешь себя чуть дольше обычного"
+  },
+  {
+    "id": "sport_5",
+    "days": 7,
+    "ageText": "7 дней",
+    "rarity": "common",
+    "icon": "🔥",
+    "image": "sport_5.webp",
+    "name": "Неделя в железе",
+    "comment": "Организм понял, что это не шутка"
+  },
+  {
+    "id": "sport_6",
+    "days": 10,
+    "ageText": "10 дней",
+    "rarity": "rare",
+    "icon": "⏱",
+    "image": "sport_6.webp",
+    "name": "Секундомер уважает",
+    "comment": "Раньше эти минуты казались вечностью"
+  },
+  {
+    "id": "sport_7",
+    "days": 14,
+    "ageText": "14 дней",
+    "rarity": "rare",
+    "icon": "🎽",
+    "image": "sport_7.webp",
+    "name": "Форма пахнет спортом",
+    "comment": "Стирка теперь событие календаря"
+  },
+  {
+    "id": "sport_8",
+    "days": 21,
+    "ageText": "21 день",
+    "rarity": "rare",
+    "icon": "📅",
+    "image": "sport_8.webp",
+    "name": "Предпосылки к привычке",
+    "comment": "Пропустить стало неуютнее, чем пойти"
+  },
+  {
+    "id": "sport_9",
+    "days": 30,
+    "ageText": "30 дней",
+    "rarity": "epic",
+    "icon": "🏅",
+    "image": "sport_9.webp",
+    "name": "Месяц без отмазок",
+    "comment": "Погода, дела и настроение больше не аргументы"
+  },
+  {
+    "id": "sport_10",
+    "days": 45,
+    "ageText": "45 дней",
+    "rarity": "epic",
+    "icon": "🚴",
+    "image": "sport_10.webp",
+    "name": "Второе дыхание",
+    "comment": "Появилось там, где раньше кончалось первое"
+  },
+  {
+    "id": "sport_11",
+    "days": 60,
+    "ageText": "60 дней",
+    "rarity": "epic",
+    "icon": "⚡",
+    "image": "sport_11.webp",
+    "name": "Энергия из ниоткуда",
+    "comment": "Тратишь силы и почему-то их становится больше"
+  },
+  {
+    "id": "sport_12",
+    "days": 90,
+    "ageText": "90 дней",
+    "rarity": "legendary",
+    "icon": "🏋",
+    "image": "sport_12.webp",
+    "name": "Три месяца стали",
+    "comment": "Тело перестало спорить и начало слушаться"
+  },
+  {
+    "id": "sport_13",
+    "days": 120,
+    "ageText": "120 дней",
+    "rarity": "legendary",
+    "icon": "🎯",
+    "image": "sport_13.webp",
+    "name": "Цель на горизонте",
+    "comment": "Та самая, из-за которой всё начиналось"
+  },
+  {
+    "id": "sport_14",
+    "days": 180,
+    "ageText": "180 дней",
+    "rarity": "mythic",
+    "icon": "🏆",
+    "image": "sport_14.webp",
+    "name": "День рождения привычки",
+    "comment": "Упорство и труд всё перетёрли!"
+  }
+]

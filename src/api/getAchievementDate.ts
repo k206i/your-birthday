@@ -9,7 +9,7 @@ import { currentDate } from '@/store/currentDate';
 import { parseLocalDate } from '@/composables/localDate';
 import type { TAchievementCombined } from '@/api/getAchievementById';
 
-export type TStreakName = 'beard' | 'diet';
+export type TStreakName = 'beard' | 'diet' | 'sport';
 
 type TStreakAccess = {
   get: () => string,
@@ -29,6 +29,10 @@ const STREAK_ACCESS: Record< TStreakName, TStreakAccess > = {
   diet: {
     get: () => appStore.dietStreakStart,
     set: ( value ) => { appStore.dietStreakStart = value; },
+  },
+  sport: {
+    get: () => appStore.sportStreakStart,
+    set: ( value ) => { appStore.sportStreakStart = value; },
   },
 };
 

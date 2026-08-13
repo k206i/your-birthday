@@ -4,12 +4,14 @@ import { arrowBack } from 'ionicons/icons';
 import { useRoute } from 'vue-router';
 import styles from './appHeader.module.scss';
 import AvatarShort from '@/components/Avatar/Short/avatarShort.vue';
-import type {TGetFamousNamesResponse} from '@/api/getFamousNames';
+import {getTitleImage} from '@/composables/getTitleImage';
 
 const route = useRoute();
 const props = defineProps<{
   pageName?: string,
 }>();
+
+const titleImage: string = getTitleImage();
 </script>
 
 <template>
@@ -29,7 +31,7 @@ const props = defineProps<{
           />
           <img v-else
                :class="styles.appHeader__titleImg"
-               src="@/assets/img/titles/title2.webp"
+               :src="titleImage"
                alt="День рождения"
           />
       </div>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import styles from './homePage.module.scss';
-import {IonContent, IonIcon, IonPage,} from '@ionic/vue';
+import {IonContent, IonPage,} from '@ionic/vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
@@ -15,7 +15,6 @@ import AchievementShort from '@/components/Achievement/Short/achievementShort.vu
 import ModalBirthday from '@/components/Modals/Birthday/modalBirthday.vue';
 import UiProgressBar from '@/components/Ui/ProgressBar/uiProgressBar.vue';
 import {getCurrentWeekIndex} from '@/composables/getCurrentWeekIndex';
-import {chevronForward} from 'ionicons/icons';
 
 const isBirthdayWishOpen = ref( false );
 const daysToBirthday = computed(() => {
@@ -58,7 +57,7 @@ watch( isBirthdayToday, ( value ) => {
 
 <template>
   <ion-page :class="styles.homePage">
-    <AppHeader />
+    <AppHeader is-home-page />
 
     <ion-content :fullscreen="true" class="ion-padding">
       <div id="container">

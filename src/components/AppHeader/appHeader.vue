@@ -9,6 +9,7 @@ import {getTitleImage} from '@/composables/getTitleImage';
 const route = useRoute();
 const props = defineProps<{
   pageName?: string,
+  isHomePage?: boolean,
 }>();
 
 const titleImage: string = getTitleImage();
@@ -18,11 +19,11 @@ const titleImage: string = getTitleImage();
   <ion-header :class="styles.appHeader" class="translucent-bar">
     <ion-toolbar>
       <ion-buttons slot="start" :class="styles.appHeader__leftPlaceholder">
+        <img v-if="props.isHomePage" src="@/assets/img/webp/icon-logo.webp" alt="" />
         <ion-back-button
-            v-if="route.path !== '/home'"
+            v-else
             text="" defaultHref="/" :icon="arrowBack"
         ></ion-back-button>
-        <img v-else src="@/assets/img/webp/icon-logo.webp" alt="" />
       </ion-buttons>
 
       <div :class="styles.appHeader__title">

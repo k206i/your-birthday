@@ -16,7 +16,7 @@ type TStreakAccess = {
   set: ( value: string ) => void,
 }
 
-const MS_PER_DAY: number = 24 * 60 * 60 * 1000;
+export const MS_PER_DAY: number = 24 * 60 * 60 * 1000;
 
 // Единственное место, где стрик привязан к полю стора. Record по TStreakName даёт
 // гарантию компилятора: добавили имя в тип — vue-tsc потребует запись и здесь,

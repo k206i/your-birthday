@@ -16,10 +16,12 @@ import dietData from '@/jsons/achievements_diet.json';
 import sportData from '@/jsons/achievements_sport.json';
 import {TAchievementCombined} from '@/api/getAchievementById';
 import {getStreakDays, isAchievementReceived, setStreakStart, TStreakName} from '@/api/getAchievementDate';
+import {getAchievementsProgress} from '@/api/getAchievementsProgress';
 import {declineUnit} from '@/composables/declineUnit';
 import {currentDate} from '@/store/currentDate';
 import ModalAchievement from '@/components/Modals/Achievement/modalAchievement.vue';
 import {ref, computed} from 'vue';
+import UiProgressBar from '@/components/Ui/ProgressBar/uiProgressBar.vue';
 
 type TAchievementGroup = {
   id: string,
@@ -55,6 +57,8 @@ const streakDays = computed(() => {
 
   return streakName ? getStreakDays( streakName ) : null;
 });
+
+const progress = computed(() => getAchievementsProgress( selectedGroup.value.achievements ));
 
 const onStartStreak = ( streakName: TStreakName ) => {
   setStreakStart( streakName, currentDate.value );
@@ -174,6 +178,28 @@ const onSelectAchievement = ( achievement: TAchievementCombined ) => {
 
             </div>
           </template>
+        </div>
+
+        <div v-if="progress.daysFromLast !== null && progress.daysToNext"
+             :class="styles.achievementsPage__progressBar"
+        >
+          <div :class="styles.achievementsPage__progressBarTitleWrapper">
+            <div :class="styles.achievementsPage__progressBarTitle">
+              До следующего достижения
+            </div>
+
+            <div :class="styles.achievementsPage__progressBarDays">
+              {{ progress.daysToNext - progress.daysFromLast }}
+
+              {{ declineUnit(( progress.daysToNext - progress.daysFromLast ), 'day' )}}
+            </div>
+          </div>
+
+          <UiProgressBar
+              :class="styles.achievementsPage__progressBarBar"
+              :total="progress.daysToNext"
+              :value="progress.daysFromLast"
+          />
         </div>
 
         <ul v-for="group in groups"

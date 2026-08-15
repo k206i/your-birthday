@@ -7,8 +7,6 @@ const props = defineProps<{
   value: number | null,
 }>();
 
-// Ноль и отрицательный total отсекаем, иначе получили бы деление на ноль.
-// Значение за пределами total упирается в границы, а не уезжает за них
 const percent = computed(() => {
   if ( !props.total || props.total <= 0 || props.value === null ) {
     return 0;

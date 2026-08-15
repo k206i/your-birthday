@@ -2,7 +2,8 @@
 import styles from './achievementFull.module.scss';
 import AchievementImage from '@/components/Achievement/Image/achievementImage.vue';
 import {appVars} from '@/configApp';
-import {computed} from 'vue';
+import {shareElementAsImage} from '@/composables/shareElementAsImage';
+import {computed, ref} from 'vue';
 import AchievementRarityLabel from '@/components/Achievement/RarityLabel/achievementRarityLabel.vue';
 import {TAchievementCombined} from '@/api/getAchievementById';
 import {isAchievementReceived} from '@/api/getAchievementDate';
@@ -22,10 +23,22 @@ const rarityColor = computed(() => {
 
   return ( appVars.achievementColors as Record< string, string > )[ rarity ] ?? '';
 });
+
+const shareRoot = ref< HTMLElement >();
+
+// Селекторы берём из styles: CSS Modules хеширует имена, руками их не собрать
+const onShare = () => {
+  shareElementAsImage(
+    shareRoot.value,
+    `achievement-${ props.achievement.id }.png`,
+    [ `.${ styles.achievementFull__share }`, `.${ styles.achievementFull__subComment }` ]
+  );
+};
 </script>
 
 <template>
   <div :class="styles.achievementFull" v-if="props.achievement"
+       ref="shareRoot"
        :style="{
               '--brd-achievement-rarity-color': rarityColor,
             }"
@@ -66,7 +79,9 @@ const rarityColor = computed(() => {
             :achievement="props.achievement"
         />
 
-        <div :class="styles.achievementFull__share">
+        <div :class="styles.achievementFull__share"
+             @click="onShare"
+        >
           <ion-icon :icon="shareSocial"></ion-icon>
         </div>
       </div>

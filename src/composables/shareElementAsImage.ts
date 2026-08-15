@@ -4,7 +4,11 @@ import { Share } from '@capacitor/share';
 import { Capacitor } from '@capacitor/core';
 
 // Снимает DOM-элемент в PNG и открывает системный диалог "Поделиться"
-export const shareElementAsImage = async ( element: HTMLElement | undefined, fileName: string = 'share.png' ): Promise< void > => {
+export const shareElementAsImage = async (
+  element: HTMLElement | undefined,
+  fileName: string = 'share.png',
+  excludeSelectors: string[] = []
+): Promise< void > => {
   if ( !element ) {
     return;
   }
@@ -16,6 +20,13 @@ export const shareElementAsImage = async ( element: HTMLElement | undefined, fil
   const dataUrl: string = await toPng( element, {
     pixelRatio: 2,
     backgroundColor,
+    filter: ( node: HTMLElement ): boolean => {
+      if ( typeof node.matches !== 'function' ) {
+        return true;
+      }
+
+      return !excludeSelectors.some( selector => node.matches( selector ));
+    },
   });
 
   if ( Capacitor.getPlatform() === 'web' ) {

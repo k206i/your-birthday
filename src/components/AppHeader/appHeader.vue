@@ -35,6 +35,7 @@ const titleImage: string = getTitleImage();
                alt="День рождения"
           />
       </div>
+
       <ion-buttons :collapse="true" slot="end">
         <AvatarShort :class="styles.appHeader__avatar" />
       </ion-buttons>

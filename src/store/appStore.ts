@@ -12,7 +12,7 @@ type TAppStore = {
   rememberedPersonName: string, // ...и его имя
   lastAchievement: TAchievementCombined | null, // Последняя полученная ачивка
   nextAchievement: TAchievementCombined | null, // Следующая, которую получит пользователь
-  usedWishIds: string[], // Уже показанные поздравления — чтобы не повторяться
+  usedWishIds: string[], // Уже показанные поздравления
   lastBirthdayGreetedDate: string, // YYYY-MM-DD последнего автопоказа поздравления
   beardStreakStart: string, // YYYY-MM-DD начала стрика бороды; пусто = не запущен
   dietStreakStart: string, // YYYY-MM-DD начала стрика диеты; пусто = не запущен
@@ -21,7 +21,6 @@ type TAppStore = {
 
 const STORAGE_KEY = 'appStore';
 
-// Глобальный реактивный стор приложения: компоненты читают и пишут напрямую
 export const appStore: TAppStore = reactive({
   userName: '',
   userBirthDate: '',
@@ -39,7 +38,6 @@ export const appStore: TAppStore = reactive({
   sportStreakStart: '',
 });
 
-// Восстановление стора при запуске приложения
 export const restoreAppStore = async (): Promise< void > => {
   const { value } = await Preferences.get({ key: STORAGE_KEY });
 

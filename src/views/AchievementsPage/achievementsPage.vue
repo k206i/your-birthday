@@ -93,9 +93,14 @@ const onSelectAchievement = ( achievement: TAchievementCombined ) => {
         <AchievementFull
             v-if="appStore.lastAchievement"
             :achievement="appStore.lastAchievement"
+            :class="styles.achievementsPage__block"
         />
 
-        <div :class="stylesOverflowSection.overflowSection">
+        <div :class="[
+              stylesOverflowSection.overflowSection,
+              styles.achievementsPage__block
+            ]"
+        >
           <ul :class="[
                 stylesOverflowSection.overflowSection__overflowWrapper,
                 styles.achievementsPage__tabsList
@@ -122,10 +127,30 @@ const onSelectAchievement = ( achievement: TAchievementCombined ) => {
 
         <div v-if="selectedGroup.streakName">
           <template v-if="streakDays !== null">
-            Стрик: {{ streakDays }} {{ declineUnit( streakDays, 'day' ) }}
+            <div :class="styles.achievementsPage__streakInfo">
+              <div>
+                <span :class="styles.achievementsPage__streakInfoDays">
+                  {{ streakDays }}
+                </span>
 
-            <div @click="onResetStreak( selectedGroup.streakName )">
-              Сбросить стрик
+                {{ declineUnit( streakDays, 'day' ) }}
+
+                <span v-if="selectedGroup.streakName === 'diet'">
+                  на диете
+                </span>
+                <span v-else-if="selectedGroup.streakName === 'beard'">
+                  без бритвы
+                </span>
+                <span v-else>
+                  терпения и труда
+                </span>
+              </div>
+
+              <div :class="styles.achievementsPage__streakReset"
+                   @click="onResetStreak( selectedGroup.streakName )"
+              >
+                Сбросить
+              </div>
             </div>
           </template>
           <template v-else>

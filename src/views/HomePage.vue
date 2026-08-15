@@ -145,8 +145,6 @@ watch( isBirthdayToday, ( value ) => {
           <template v-else>
             🎉 Не хочу ждать ДР, поздравьте сейчас!
           </template>
-
-          <ion-icon :icon="chevronForward" size="small"></ion-icon>
         </div>
 
         <AchievementShort

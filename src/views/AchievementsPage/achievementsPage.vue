@@ -200,17 +200,20 @@ onIonViewWillEnter(() => {
             </div>
 
             <div :class="styles.achievementsPage__progressBarDays">
-              {{ progress.daysToNext - progress.daysFromLast }}
+              {{ progress.daysToNext }}
 
-              {{ declineUnit(( progress.daysToNext - progress.daysFromLast ), 'day' )}}
+              {{ declineUnit( progress.daysToNext, 'day' )}}
             </div>
           </div>
 
           <UiProgressBar
               :class="styles.achievementsPage__progressBarBar"
-              :total="progress.daysToNext"
+              :total="progress.daysFromLast + progress.daysToNext"
               :value="progress.daysFromLast"
           />
+        </div>
+        <div v-else-if="progress.daysFromLast !== null">
+          Всё пройдено
         </div>
 
         <ul v-for="group in groups"

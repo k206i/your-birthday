@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import styles from './achievementsPage.module.scss';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
-import {IonContent, IonPage} from '@ionic/vue';
+import {IonContent, IonPage, onIonViewWillEnter} from '@ionic/vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {appVars} from '@/configApp';
 import WidgetAddBirthday from '@/components/Widgets/AddBirthday/widgetAddBirthday.vue';
@@ -28,7 +28,7 @@ type TAchievementGroup = {
   icon: string,
   title: string,
   achievements: TAchievementCombined[],
-  streakName?: TStreakName, // Задан у групп со стриком — только у них показываем кнопки
+  streakName?: TStreakName,
 }
 
 const groups: TAchievementGroup[] = [
@@ -39,7 +39,14 @@ const groups: TAchievementGroup[] = [
   { id: 'sport', icon: '🏃', title: 'Спорт', achievements: sportData as TAchievementCombined[], streakName: 'sport' },
 ];
 
-const selectedGroupId = ref< string >( groups[ 0 ].id );
+const getGroupIdByLastAchievement = (): string => {
+  const lastId: string | undefined = appStore.lastAchievement?.id;
+  const groupId: string = lastId ? lastId.split( '_' )[ 0 ] : '';
+
+  return groups.some( item => item.id === groupId ) ? groupId : groups[ 0 ].id;
+};
+
+const selectedGroupId = ref< string >( getGroupIdByLastAchievement() );
 
 const selectedGroup = computed(() => groups.find( item => item.id === selectedGroupId.value ) ?? groups[ 0 ] );
 
@@ -75,6 +82,10 @@ const onSelectAchievement = ( achievement: TAchievementCombined ) => {
   selectedAchievement.value = achievement;
   isAchievementModalOpen.value = true;
 };
+
+onIonViewWillEnter(() => {
+  selectedGroupId.value = getGroupIdByLastAchievement();
+});
 </script>
 
 <template>

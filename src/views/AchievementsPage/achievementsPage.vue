@@ -19,6 +19,7 @@ import {getStreakDays, isAchievementReceived, setStreakStart, TStreakName} from 
 import {getAchievementsProgress} from '@/api/getAchievementsProgress';
 import {declineUnit} from '@/composables/declineUnit';
 import {currentDate} from '@/store/currentDate';
+import {formatLocalDate, parseLocalDate} from '@/composables/localDate';
 import ModalAchievement from '@/components/Modals/Achievement/modalAchievement.vue';
 import {ref, computed} from 'vue';
 import UiProgressBar from '@/components/Ui/ProgressBar/uiProgressBar.vue';
@@ -73,6 +74,23 @@ const onStartStreak = ( streakName: TStreakName ) => {
 
 const onResetStreak = ( streakName: TStreakName ) => {
   setStreakStart( streakName, '' );
+};
+
+const maxDate = computed(() => currentDate.value );
+
+const minDate = computed(() => {
+  const date: Date = parseLocalDate( currentDate.value );
+  date.setFullYear( date.getFullYear() - 10 );
+
+  return formatLocalDate( date );
+});
+
+const onStreakDateChange = ( event: Event, streakName: TStreakName ) => {
+  const value: string = ( event.target as HTMLInputElement ).value;
+
+  if ( value ) {
+    setStreakStart( streakName, value );
+  }
 };
 
 const isAchievementModalOpen = ref( false );
@@ -186,7 +204,24 @@ onIonViewWillEnter(() => {
               <template v-else>
                 Принять вызов!
               </template>
+            </div>
 
+            <div :class="styles.achievementsPage__shartDivider">
+              или
+            </div>
+
+            <div :class="styles.achievementsPage__streakDateWrap">
+              <div :class="styles.achievementsPage__streakAddDate">
+                📅 Укажите дату, если уже начали
+              </div>
+
+              <input
+                  :class="styles.achievementsPage__nativeDate"
+                  type="date"
+                  :min="minDate"
+                  :max="maxDate"
+                  @change="onStreakDateChange( $event, selectedGroup.streakName )"
+              />
             </div>
           </template>
         </div>

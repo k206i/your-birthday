@@ -1,5 +1,6 @@
 import { reactive, watch } from 'vue';
 import { Preferences } from '@capacitor/preferences';
+import { appVars } from '@/configApp';
 import type { TAchievementCombined } from '@/api/getAchievementById';
 
 type TAppStore = {
@@ -17,6 +18,7 @@ type TAppStore = {
   beardStreakStart: string, // YYYY-MM-DD начала стрика бороды; пусто = не запущен
   dietStreakStart: string, // YYYY-MM-DD начала стрика диеты; пусто = не запущен
   sportStreakStart: string, // YYYY-MM-DD начала стрика спорта; пусто = не запущен
+  femaleCycleLength: number, // Средняя длина цикла в днях, femaleCalendar
 }
 
 const STORAGE_KEY = 'appStore';
@@ -36,6 +38,7 @@ export const appStore: TAppStore = reactive({
   beardStreakStart: '',
   dietStreakStart: '',
   sportStreakStart: '',
+  femaleCycleLength: appVars.ovulation.cycleDefault,
 });
 
 export const restoreAppStore = async (): Promise< void > => {

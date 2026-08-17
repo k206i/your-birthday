@@ -13,6 +13,7 @@ import {ref, computed, watch, nextTick} from 'vue';
 import {appVars} from '@/configApp';
 import {parseLocalDate, formatLocalDate, formatDisplayDate} from '@/composables/localDate';
 import {currentDate} from '@/store/currentDate';
+import {appStore} from '@/store/appStore';
 import WidgetArtButton from '@/components/Widgets/ArtButton/widgetArtButton.vue';
 import penguinArt from '@/assets/img/animals/penguin_art.webp';
 import WidgetLinksList from '@/components/Widgets/LinksList/widgetLinksList.vue';
@@ -28,7 +29,6 @@ const isSpermSurviveModalOpen = ref( false );
 const isOvulationInfoModalOpen = ref( false );
 const isPregnancySignsModalOpen = ref( false );
 const isOtherFactorsInfoModalOpen = ref( false );
-const cycleLength = ref< number >( appVars.ovulation.cycleDefault );
 const buttonsRef = ref< HTMLElement >();
 const selectedConceptionDate = ref< string | null >( null );
 
@@ -57,7 +57,7 @@ const lastPeriodDate = computed(() => {
 });
 
 const onCycleChange = ( event: CustomEvent ) => {
-  cycleLength.value = Number( event.detail.value );
+  appStore.femaleCycleLength = Number( event.detail.value );
 };
 
 const ovulationDates = computed(() => {
@@ -70,11 +70,11 @@ const ovulationDates = computed(() => {
 
   // Овуляция = начало последних месячных + длина цикла - лютеиновая фаза
   const ovulationDate: Date = new Date( periodStart );
-  ovulationDate.setDate( ovulationDate.getDate() + cycleLength.value - appVars.ovulation.lutealPhase );
+  ovulationDate.setDate( ovulationDate.getDate() + appStore.femaleCycleLength - appVars.ovulation.lutealPhase );
 
   // Если овуляция уже прошла — прогнозируем следующий цикл
   while ( ovulationDate < today ) {
-    ovulationDate.setDate( ovulationDate.getDate() + cycleLength.value );
+    ovulationDate.setDate( ovulationDate.getDate() + appStore.femaleCycleLength );
   }
 
   const early: string[] = [];
@@ -230,7 +230,7 @@ watch( ovulationDates, async ( value ) => {
             </div>
 
             <div :class="stylesArtButton.artButton__comment">
-              {{ `⏳ ${cycleLength} дн.` }}
+              {{ `⏳ ${appStore.femaleCycleLength} дн.` }}
             </div>
           </div>
 
@@ -248,7 +248,7 @@ watch( ovulationDates, async ( value ) => {
             <div class="center-content">
               <div>
               <ion-picker>
-                <ion-picker-column :value="cycleLength" @ionChange="onCycleChange">
+                <ion-picker-column :value="appStore.femaleCycleLength" @ionChange="onCycleChange">
                   <ion-picker-column-option
                       v-for="option in cycleOptions"
                       :key="option"

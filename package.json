@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "build:android": "ionic capacitor build android",
+    "build:apk": "npm run build && npx cap sync android && cd android && .\\gradlew.bat assembleDebug",
     "preview": "vite preview",
     "test:e2e": "cypress run",
     "test:unit": "vitest",

@@ -184,6 +184,24 @@ npm run build:android
 
 > Требуется установленный Android Studio и настроенный Capacitor.
 
+### Сборка APK
+
+```bash
+npm run build:apk
+```
+
+Собирает debug-версию: `vue-tsc` → `vite build` → `cap sync android` → `assembleDebug`.
+Готовый файл — `android/app/build/outputs/apk/debug/app-debug.apk`.
+
+> Нужен `JAVA_HOME` с путём к JDK 21 — подойдёт встроенный в Android Studio,
+> на Windows это `C:\Program Files\Android\Android Studio\jbr`.
+> Скрипт вызывает `.\gradlew.bat`, то есть рассчитан на Windows.
+
+### Готовые сборки
+
+APK каждой версии лежит в [релизах](https://github.com/k206i/your-birthday/releases).
+Их собирает GitHub Actions по пушу тега `v*` — workflow в `.github/workflows/release.yml`.
+
 ---
 
 ## 🧪 Тесты и проверки

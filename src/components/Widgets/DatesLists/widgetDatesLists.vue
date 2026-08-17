@@ -57,17 +57,13 @@ const politicsNormalList = computed<TPoliticEntry[]>(() => [
         </div>
       </ion-accordion>
 
-      <ion-accordion v-if="namesDays?.nameDayNormal" value="nameDayNormal">
+      <ion-accordion v-if="namesDays?.nameDayNormal" value="maleNameDayNormal">
         <ion-item slot="header" color="dark">
           <ion-label>
-            Именины 🎀
+            Именины (мужские имена) 💈
           </ion-label>
         </ion-item>
         <div :class="styles.widgetDatesLists__spoilerContent" slot="content">
-          <div :class="styles.widgetDatesLists__subTitle">
-            Мужские имена
-          </div>
-
           <ul :class="styles.widgetDatesLists__daysList">
             <template v-for="(item, index) in namesDays?.nameDayNormal"
                   :key="item.date + index"
@@ -88,14 +84,19 @@ const politicsNormalList = computed<TPoliticEntry[]>(() => [
               </li>
             </template>
           </ul>
+        </div>
+      </ion-accordion>
 
-          <div :class="styles.widgetDatesLists__subTitle">
-            Женские имена
-          </div>
-
+      <ion-accordion v-if="namesDays?.nameDayNormal" value="femaleNameDayNormal">
+        <ion-item slot="header" color="dark">
+          <ion-label>
+            Именины (женские имена) 🎀
+          </ion-label>
+        </ion-item>
+        <div :class="styles.widgetDatesLists__spoilerContent" slot="content">
           <ul :class="styles.widgetDatesLists__daysList">
             <template v-for="(item, index) in namesDays?.nameDayNormal"
-                  :key="item.date + index"
+                      :key="item.date + index"
             >
               <li v-if="item.female_names.length"
                   :class="styles.widgetDatesLists__dayItem"

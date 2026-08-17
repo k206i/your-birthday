@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import styles from './childBirthday.module.scss';
-import { IonContent, IonDatetime, IonPage, IonModal, IonButton } from '@ionic/vue';
+import { IonContent, IonDatetime, IonPage, IonModal, IonButton, onIonViewDidEnter } from '@ionic/vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
-import {computed, onMounted, ref, watch} from 'vue';
+import {computed, ref, watch} from 'vue';
 import {useRoute} from 'vue-router';
 import {formatDisplayDate, formatLocalDate, parseLocalDate} from '@/composables/localDate';
 import {currentDate} from '@/store/currentDate';
@@ -29,8 +29,8 @@ const SUB_THEME_COLOR = appVars.colors.childBirthday;
 
 const route = useRoute();
 const isDateModalOpen = ref( false );
-const isDateConfirmed = ref( false ); // Пользователь явно подтвердил дату кнопкой "Готово"
-const loadedDate = ref( '' ); // Для какой даты уже загружены данные (защита от повторной загрузки)
+const isDateConfirmed = ref( false );
+const loadedDate = ref( '' );
 
 const openDateModal = () => {
   if ( !selectedDate.value ) {
@@ -95,15 +95,28 @@ const onDateConfirm = () => {
   loadData();
 };
 
-onMounted(() => {
-  // Дата рождения может прийти в урле — ведём себя так, как будто пользователь выбрал её сам
-  const birthDateParam = route.query.birthDate;
+const primaryDateRef = ref< InstanceType< typeof WidgetPrimaryDate > >();
+let shouldScrollToDate: boolean = false;
 
-  if ( typeof birthDateParam === 'string' && /^\d{4}-\d{2}-\d{2}$/.test( birthDateParam ) ) {
-    selectedDate.value = birthDateParam;
-    isDateConfirmed.value = true;
-    loadData();
+// Дата рождения может прийти в урле — ведём себя так, как будто пользователь выбрал её сам.
+watch(() => route.query.birthDate, ( value ) => {
+  if ( typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test( value )) {
+    return;
   }
+
+  selectedDate.value = value;
+  isDateConfirmed.value = true;
+  shouldScrollToDate = true;
+  loadData();
+}, { immediate: true });
+
+onIonViewDidEnter(() => {
+  if ( !shouldScrollToDate ) {
+    return;
+  }
+
+  shouldScrollToDate = false;
+  primaryDateRef.value?.$el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 });
 
 </script>
@@ -162,6 +175,7 @@ onMounted(() => {
       <Transition name="brd-fade">
         <WidgetPrimaryDate
             v-if="conceptionDay"
+            ref="primaryDateRef"
             :class="styles.dayConception__block"
             title="Примерная дата зачатия"
             comment="Примерно 280 дней, акушерский срок 👀"

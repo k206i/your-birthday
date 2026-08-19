@@ -2,20 +2,39 @@
   position: relative;
   z-index: var( --brd-z-index-layout );
   min-height: 100px;
+  overflow: hidden;
   padding: var( --brd-size-gap );
   border-radius: var( --brd-size-border-radius );
-  background-size: 150px auto;
-  background-repeat: no-repeat;
-  background-position: right bottom;
   background-color: color-mix( in srgb, var( --brd-custom-theme-color ), black var( --brd-color-mix-bg ));
 
+  &__wrapper {
+    position: relative;
+    z-index: 100;
+  }
+
+  &__titleWrapper {
+    display: flex;
+    align-items: center;
+    gap: var( --brd-size-gap );
+    margin-bottom: var( --brd-size-gap );
+  }
+
   &__title {
-    margin: 0 0 var( --brd-size-gap );
+    margin: 0;
     text-shadow: 1px 1px 6px #000;
   }
 
+  &__titleImage {
+    width: 130px;
+    aspect-ratio: 1;
+    border-radius: 100%;
+    border: 1px solid var( --brd-custom-theme-color );
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: bottom center;
+  }
+
   &__titleLead {
-    padding-right: 115px;
     margin-bottom: var( --brd-size-gap-s );
     font-size: 16px;
     color: var( --brd-custom-theme-color );
@@ -23,10 +42,21 @@
   }
 
   &__titleComment {
-    padding-right: 130px;
     font-size: 12px;
     color: var( --brd-color-font );
     text-shadow: 1px 1px 6px #000;
+  }
+
+  &__bgArt {
+    opacity: .4;
+    position: absolute;
+    z-index: 50;
+    inset: 0;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: auto 130%;
+    background-position: -50% center;
+    filter: blur( 20px );
   }
 
   &__link {

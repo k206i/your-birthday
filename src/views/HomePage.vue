@@ -15,6 +15,7 @@ import AchievementShort from '@/components/Achievement/Short/achievementShort.vu
 import ModalBirthday from '@/components/Modals/Birthday/modalBirthday.vue';
 import UiProgressBar from '@/components/Ui/ProgressBar/uiProgressBar.vue';
 import {getCurrentWeekIndex} from '@/composables/getCurrentWeekIndex';
+import WidgetPageTitleHome from '@/components/Widgets/PageTitleHome/widgetPageTitleHome.vue';
 
 const isBirthdayWishOpen = ref( false );
 const daysToBirthday = computed(() => {
@@ -61,7 +62,7 @@ watch( isBirthdayToday, ( value ) => {
 
     <ion-content :fullscreen="true" class="ion-padding">
       <div id="container">
-        <WidgetPageTitle
+        <WidgetPageTitleHome
             :class="styles.homePage__titleWidget"
             bg-image="dog-1_art"
             color="#a876ec"
@@ -130,7 +131,7 @@ watch( isBirthdayToday, ( value ) => {
               Всё спланируем, всё рассчитаем 💜
             </template>
           </template>
-        </WidgetPageTitle>
+        </WidgetPageTitleHome>
 
         <div :class="[
               styles.homePage__silentButton,

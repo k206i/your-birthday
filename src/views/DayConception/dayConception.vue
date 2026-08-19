@@ -95,8 +95,8 @@ watch(formattedDate, async () => {
           :class="styles.dayConception__titleBlock"
           bg-image="dog-2"
           title="Вы знаете дату рождения?"
-          lead="Давайте посчитаем примерную дату зачатия 💫"
-          comment="И посмотрим, какое событие было в этот день 🤭"
+          lead="Давайте посчитаем примерную дату зачатия&nbsp;💫"
+          comment="И посмотрим, какое событие было в этот день&nbsp;🤭"
       />
 
       <div :class="styles.dayConception__dateButtonWrap">
@@ -141,7 +141,7 @@ watch(formattedDate, async () => {
         <div v-if="conceptionDay">
           <WidgetArtTitle :class="styles.dayConception__artTitle">
             Что особенного было
-            <span :style="{color: SUB_THEME_COLOR}">в день зачатия</span>?
+            <span :style="{color: SUB_THEME_COLOR}">в&nbsp;день зачатия</span>?
           </WidgetArtTitle>
 
           <WidgetDayNamesList

@@ -1,6 +1,8 @@
 @use "@/assets/styles/typography";
 
 .widgetArtTitle {
+  @extend .typography__h3;
+
   position: relative;
   display: flex;
   align-items: center;
@@ -10,9 +12,4 @@
           url( "../../../assets/img/png/art_3.png" ) no-repeat 0 50%,
           url( "../../../assets/img/png/art_1.png" ) no-repeat 100% 50%;
   background-size: 50px auto, 50px auto;
-
-  h1 {
-    @extend .typography__h1;
-    margin: 0;
-  }
 }

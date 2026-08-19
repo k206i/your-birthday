@@ -4,8 +4,8 @@ import styles from './widgetArtTitle.module.scss';
 
 <template>
   <div :class="styles.widgetArtTitle">
-    <h1>
+    <div>
       <slot />
-    </h1>
+    </div>
   </div>
 </template>

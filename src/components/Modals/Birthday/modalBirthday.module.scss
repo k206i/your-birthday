@@ -14,17 +14,31 @@ $cannon-count: 60;
     position: relative;
     z-index: 200;
     margin-bottom: var( --brd-size-gap-l );
-    font-size: 62px;
+    font-size: clamp( 40px, 14vw, 62px );
     font-weight: bold;
     line-height: 1;
     text-transform: uppercase;
   }
 
-  &__contentWrapper {
+  &__modalWrapper {
     position: relative;
-    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     overflow: hidden;
     background: radial-gradient(ellipse 100% 70% at bottom, var( --brd-color-theme ) -80%, transparent 90%);
+
+    @media ( orientation: landscape ) {
+      min-height: 100%;
+      overflow: visible;
+    }
+  }
+
+  &__contentWrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
   }
 
   &__accent {
@@ -44,7 +58,7 @@ $cannon-count: 60;
     margin: var( --brd-size-gap ) var( --brd-size-gap-s ) var( --brd-size-gap ) var( --brd-size-gap );
     padding: var( --brd-size-gap-s ) var( --brd-size-gap );
     font-family: var( --brd-font-default-alt );
-    font-size: 18px;
+    font-size: clamp( 15px, 4.5vw, 18px );
     font-weight: bold;
     color: var( --brd-color-bg );
     border-radius: var( --brd-size-border-radius-s );
@@ -67,7 +81,7 @@ $cannon-count: 60;
   &__blurWrapper {
     position: relative;
     z-index: 200;
-    padding: 50px var( --brd-size-gap ) var( --brd-size-gap );
+    padding: clamp( 32px, 11.3vw, 50px ) var( --brd-size-gap ) var( --brd-size-gap );
     border-radius: var( --brd-size-border-radius );
     backdrop-filter: blur( 5px );
   }
@@ -78,21 +92,27 @@ $cannon-count: 60;
     z-index: 200;
     margin-bottom: var( --brd-size-gap );
     font-family: var( --brd-font-default-alt );
-    font-size: 24px;
+    font-size: clamp( 18px, 6vw, 24px );
     color: var( --brd-color-font-accent );
   }
 
   &__wish {
-    font-size: 20px;
+    font-size: clamp( 16px, 5vw, 20px );
   }
 
   &__art {
-    position: absolute;
-    z-index: 100;
-    bottom: 0;
-    left: 50%;
-    transform: translateX( -50% );
-    width: 65%;
+    position: relative;
+    flex: 1;
+    min-height: 100px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    img {
+      max-width: 65%;
+      max-height: 100%;
+      object-fit: contain;
+    }
   }
 
   &__confetti {

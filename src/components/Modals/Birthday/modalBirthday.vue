@@ -69,7 +69,7 @@ const close = () => {
       :class="styles.modalBirthday"
   >
     <ion-content>
-      <div :class="styles.modalBirthday__contentWrapper"
+      <div :class="styles.modalBirthday__modalWrapper"
            ref="toShareBlock"
       >
         <div :class="styles.modalBirthday__confetti" aria-hidden="true">
@@ -92,35 +92,35 @@ const close = () => {
           ></span>
         </div>
 
-        <div :class="styles.modalBirthday__blurWrapper">
-        <div :class="styles.modalBirthday__title">
-          С днём<br />
-          рождения<span v-if="appStore.userName">,<br />
-            <span :class="styles.modalBirthday__accent">{{appStore.userName}}</span>
-          </span>!
-        </div>
+        <div :class="styles.modalBirthday__contentWrapper">
+          <div :class="styles.modalBirthday__blurWrapper">
+            <div :class="styles.modalBirthday__title">
+              С днём<br />
+              рождения<span v-if="appStore.userName">,<br />
+                <span :class="styles.modalBirthday__accent">{{appStore.userName}}</span>
+              </span>!
+            </div>
 
+            <div :class="styles.modalBirthday__text">
+              <template v-if="age !== null">
+                <span :class="styles.modalBirthday__accent">
+                  {{ age }} {{ declineUnit( age, 'year' ) }}
+                </span>
+                —
+              </template>
 
-          <div :class="styles.modalBirthday__text">
-            <template v-if="age !== null">
-              <span :class="styles.modalBirthday__accent">
-                {{ age }} {{ declineUnit( age, 'year' ) }}
-              </span>
-              —
-            </template>
+              {{ wish?.text }}
+            </div>
 
-            {{ wish?.text }}
+            <div :class="styles.modalBirthday__wish">
+              {{ wish?.wish }}
+            </div>
           </div>
 
-          <div :class="styles.modalBirthday__wish">
-            {{ wish?.wish }}
+          <div :class="styles.modalBirthday__art">
+            <img :src="art" alt="" />
           </div>
         </div>
-
-        <img :class="styles.modalBirthday__art"
-             :src="art"
-             alt=""
-        />
       </div>
     </ion-content>
 

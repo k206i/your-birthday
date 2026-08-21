@@ -8,6 +8,9 @@ import {computed, ref, watch} from 'vue';
 import {useRoute} from 'vue-router';
 import {formatDisplayDate, formatLocalDate, parseLocalDate} from '@/composables/localDate';
 import {currentDate} from '@/store/currentDate';
+import {appStore} from '@/store/appStore';
+import {declineUnit} from '@/composables/declineUnit';
+import {splitDuration} from '@/composables/splitDuration';
 import {getHolidaysNames, TGetHolidaysNamesResponse} from '@/api/getHolidaysNames';
 import {getNamesDays, TGetNamesDaysResponse} from '@/api/getDayNames';
 import {appVars} from '@/configApp';
@@ -94,6 +97,14 @@ const onDateConfirm = () => {
   isDateModalOpen.value = false;
   loadData();
 };
+
+const ageOnDate = computed(() => {
+  if ( !appStore.userBirthDate || !formattedDate.value ) {
+    return null;
+  }
+
+  return splitDuration( parseLocalDate( appStore.userBirthDate ), parseLocalDate( formattedDate.value ));
+});
 
 const primaryDateRef = ref< InstanceType< typeof WidgetPrimaryDate > >();
 let shouldScrollToDate: boolean = false;
@@ -190,6 +201,24 @@ onIonViewDidEnter(() => {
             Что особенного будет
             <span :style="{color: SUB_THEME_COLOR}">в день рождения</span>?
           </WidgetArtTitle>
+
+          <div v-if="ageOnDate"
+               :class="styles.dayConception__tipBlock"
+          >
+            <div :class="styles.dayConception__tipBlockTitle">
+              В этот день вам будет
+
+              <span :class="styles.dayConception__accentDate">
+                {{ ageOnDate.years }} {{ declineUnit( ageOnDate.years, 'year' ) }}
+                {{ ageOnDate.months }} {{ declineUnit( ageOnDate.months, 'month' ) }}
+                {{ ageOnDate.weeks }} {{ declineUnit( ageOnDate.weeks, 'week' ) }}
+              </span>
+            </div>
+
+            <div :class="styles.dayConception__tipBlockComment">
+              {{ conceptionDay }} · малышу — первый день
+            </div>
+          </div>
 
           <WidgetDayNamesList
               :class="styles.dayConception__block"

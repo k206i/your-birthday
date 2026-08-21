@@ -1,6 +1,12 @@
 .dayConception {
   position: relative;
 
+  &__accentDate {
+    font-weight: bold;
+    color: var( --brd-custom-theme-color );
+    white-space: nowrap;
+  }
+
   &__daysList {
     display: flex;
     flex-direction: column;
@@ -34,6 +40,25 @@
     margin-bottom: var( --brd-size-gap-xxs );
     font-family: var( --brd-font-default-alt );
     font-size: 14px;
+  }
+
+  &__tipBlock {
+    margin-bottom: var( --brd-size-gap );
+    padding-left: var( --brd-size-gap );
+    border-width: 0 0 0 3px;
+    border-style: solid;
+    border-color: var( --brd-custom-theme-color );
+  }
+
+  &__tipBlockTitle {
+    margin-bottom: var( --brd-size-gap-xs );
+    font-size: 16px;
+    color: var( --brd-color-font-accent );
+  }
+
+  &__tipBlockComment {
+    font-size: 14px;
+    color: var( --brd-color-font-low );
   }
 
   &__modalArt {

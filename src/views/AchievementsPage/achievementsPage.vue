@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import styles from './achievementsPage.module.scss';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
-import {IonContent, IonPage, onIonViewWillEnter} from '@ionic/vue';
+import {IonContent, IonPage, onIonViewDidEnter, onIonViewWillEnter} from '@ionic/vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {appVars} from '@/configApp';
 import WidgetAddBirthday from '@/components/Widgets/AddBirthday/widgetAddBirthday.vue';
@@ -22,7 +22,7 @@ import {declineUnit} from '@/composables/declineUnit';
 import {currentDate} from '@/store/currentDate';
 import {formatLocalDate, parseLocalDate} from '@/composables/localDate';
 import ModalAchievement from '@/components/Modals/Achievement/modalAchievement.vue';
-import {ref, computed} from 'vue';
+import {ref, computed, nextTick, onMounted} from 'vue';
 import UiProgressBar from '@/components/Ui/ProgressBar/uiProgressBar.vue';
 
 type TAchievementGroup = {
@@ -123,9 +123,24 @@ const onSelectAchievement = ( achievement: TAchievementCombined ) => {
   isAchievementModalOpen.value = true;
 };
 
+const tabsListRef = ref< HTMLElement >();
+
 onIonViewWillEnter(() => {
   selectedGroupId.value = getGroupIdByLastAchievement();
 });
+
+const scrollTabIntoView = async () => {
+  await nextTick();
+
+  const index: number = groups.findIndex( item => item.id === selectedGroupId.value );
+
+  tabsListRef.value?.children.item( index )?.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'center' });
+};
+
+// onIonViewDidEnter не срабатывает при первой загрузке
+onMounted( scrollTabIntoView );
+
+onIonViewDidEnter( scrollTabIntoView );
 </script>
 
 <template>
@@ -156,7 +171,8 @@ onIonViewWillEnter(() => {
               styles.achievementsPage__block
             ]"
         >
-          <ul :class="[
+          <ul ref="tabsListRef"
+              :class="[
                 stylesOverflowSection.overflowSection__overflowWrapper,
                 styles.achievementsPage__tabsList
               ]"

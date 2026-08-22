@@ -2,7 +2,8 @@
 // чтобы обе стороны не разъехались.
 //
 // Шкалы у ачивок разные и напрямую несопоставимые: weeks считаются от даты рождения,
-// days — от начала своего стрика. Поэтому сравниваем не числа шкал, а календарные даты.
+// days — от начала своего стрика, years — от даты свадьбы. Поэтому сравниваем
+// не числа шкал, а календарные даты.
 
 import { appStore } from '@/store/appStore';
 import { currentDate } from '@/store/currentDate';
@@ -82,6 +83,18 @@ export const getAchievementDate = ( achievement: TAchievementCombined ): number 
 
     const date: Date = parseLocalDate( appStore.userBirthDate );
     date.setDate( date.getDate() + achievement.weeks * 7 );
+
+    return date.getTime();
+  }
+
+  // setFullYear даёт ту же календарную дату через N лет, с учётом високосных
+  if ( achievement.years !== undefined ) {
+    if ( !appStore.weddingDate ) {
+      return null;
+    }
+
+    const date: Date = parseLocalDate( appStore.weddingDate );
+    date.setFullYear( date.getFullYear() + achievement.years );
 
     return date.getTime();
   }

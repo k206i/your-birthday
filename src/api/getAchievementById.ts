@@ -12,6 +12,7 @@ export type TAchievementCombined = {
   comment?: string,
   weeks?: number,
   days?: number, // Дни стрика — для ачивок, основанных на дневной шкале
+  years?: number, // Годовщины свадьбы: календарные годы от даты свадьбы
   ageText?: string,
   person?: string,
   wiki?: string,

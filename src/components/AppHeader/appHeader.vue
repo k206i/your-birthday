@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import {IonHeader, IonToolbar, IonButtons, IonBackButton } from '@ionic/vue';
 import { arrowBack } from 'ionicons/icons';
-import { useRoute } from 'vue-router';
 import styles from './appHeader.module.scss';
 import AvatarShort from '@/components/Avatar/Short/avatarShort.vue';
 import {getTitleImage} from '@/composables/getTitleImage';
 
-const route = useRoute();
 const props = defineProps<{
   pageName?: string,
   isHomePage?: boolean,

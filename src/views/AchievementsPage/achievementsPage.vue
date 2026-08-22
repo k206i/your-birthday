@@ -14,6 +14,7 @@ import famousData from '@/jsons/achievements_famous.json';
 import beardData from '@/jsons/achievements_beard.json';
 import dietData from '@/jsons/achievements_diet.json';
 import sportData from '@/jsons/achievements_sport.json';
+import weddingData from '@/jsons/achievements_wedding.json';
 import {TAchievementCombined} from '@/api/getAchievementById';
 import {getStreakDays, isAchievementReceived, setStreakStart, TStreakName} from '@/api/getAchievementDate';
 import {getAchievementsProgress} from '@/api/getAchievementsProgress';
@@ -38,6 +39,7 @@ const groups: TAchievementGroup[] = [
   { id: 'beard', icon: '🧙‍♂️', title: 'Борода', achievements: beardData as TAchievementCombined[], streakName: 'beard' },
   { id: 'diet', icon: '🍎', title: 'Диета', achievements: dietData as TAchievementCombined[], streakName: 'diet' },
   { id: 'sport', icon: '🏃', title: 'Спорт', achievements: sportData as TAchievementCombined[], streakName: 'sport' },
+  { id: 'wedding', icon: '💍', title: 'Свадьба', achievements: weddingData as TAchievementCombined[] },
 ];
 
 const getGroupIdByLastAchievement = (): string => {
@@ -90,6 +92,26 @@ const onStreakDateChange = ( event: Event, streakName: TStreakName ) => {
 
   if ( value ) {
     setStreakStart( streakName, value );
+  }
+};
+
+// У стриков нижняя граница десять лет, свадьба могла быть и полвека назад
+const weddingMinDate = computed(() => {
+  const date: Date = parseLocalDate( currentDate.value );
+  date.setFullYear( date.getFullYear() - 80 );
+
+  return formatLocalDate( date );
+});
+
+const onStartWedding = () => {
+  appStore.weddingDate = currentDate.value;
+};
+
+const onWeddingDateChange = ( event: Event ) => {
+  const value: string = ( event.target as HTMLInputElement ).value;
+
+  if ( value ) {
+    appStore.weddingDate = value;
   }
 };
 
@@ -224,6 +246,34 @@ onIonViewWillEnter(() => {
               />
             </div>
           </template>
+        </div>
+
+        <div v-if="selectedGroup.id === 'wedding' && !appStore.weddingDate">
+          <div :class="styles.achievementsPage__lightButton"
+               @click="onStartWedding"
+          >
+            {{ selectedGroup.icon }}
+
+            Мы поженились сегодня!
+          </div>
+
+          <div :class="styles.achievementsPage__shartDivider">
+            или
+          </div>
+
+          <div :class="styles.achievementsPage__streakDateWrap">
+            <div :class="styles.achievementsPage__streakAddDate">
+              📅 Укажите дату свадьбы
+            </div>
+
+            <input
+                :class="styles.achievementsPage__nativeDate"
+                type="date"
+                :min="weddingMinDate"
+                :max="maxDate"
+                @change="onWeddingDateChange"
+            />
+          </div>
         </div>
 
         <div v-if="progress.daysFromLast !== null && progress.daysToNext"

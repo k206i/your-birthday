@@ -40,6 +40,24 @@ import AvatarSetup from '@/components/Avatar/Setup/avatarSetup.vue';
 
       <div :class="styles.userProfile__block">
         <div :class="styles.userProfile__blockLabel">
+          Семья
+        </div>
+
+        <UiInput
+            :class="styles.userProfile__field"
+            v-model="appStore.weddingDate"
+            type="date"
+            label="Когда вы поженились?"
+            placeholder="выберите дату"
+        />
+
+        <div :class="styles.userProfile__blockComment">
+          Откроем достижения по годовщинам — от ситцевой до золотой&nbsp;💍
+        </div>
+      </div>
+
+      <div :class="styles.userProfile__block">
+        <div :class="styles.userProfile__blockLabel">
           Не забыть поздравить
         </div>
 

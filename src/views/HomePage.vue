@@ -3,7 +3,6 @@ import styles from './homePage.module.scss';
 import {IonContent, IonPage,} from '@ionic/vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
-import WidgetPageTitle from '@/components/Widgets/PageTitle/widgetPageTitle.vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import {appVars} from '@/configApp';
 import {appStore} from '@/store/appStore';

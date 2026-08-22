@@ -11,6 +11,9 @@ setLastAchievement();
 // Пересчёт ачивок при смене даты рождения
 watch(() => appStore.userBirthDate, () => setLastAchievement());
 
+// Дата свадьбы открывает шкалу годовщин
+watch(() => appStore.weddingDate, () => setLastAchievement());
+
 // Смена суток: без этого стрик не растёт при открытом приложении
 watch( currentDate, () => setLastAchievement());
 

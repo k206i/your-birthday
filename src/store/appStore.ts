@@ -19,6 +19,7 @@ type TAppStore = {
   dietStreakStart: string, // YYYY-MM-DD начала стрика диеты; пусто = не запущен
   sportStreakStart: string, // YYYY-MM-DD начала стрика спорта; пусто = не запущен
   femaleCycleLength: number, // Средняя длина цикла в днях, femaleCalendar
+  weddingDate: string, // YYYY-MM-DD даты свадьбы; пусто = не задана
 }
 
 const STORAGE_KEY = 'appStore';
@@ -39,6 +40,7 @@ export const appStore: TAppStore = reactive({
   dietStreakStart: '',
   sportStreakStart: '',
   femaleCycleLength: appVars.ovulation.cycleDefault,
+  weddingDate: '',
 });
 
 export const restoreAppStore = async (): Promise< void > => {

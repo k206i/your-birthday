@@ -16,7 +16,7 @@ import dietData from '@/jsons/achievements_diet.json';
 import sportData from '@/jsons/achievements_sport.json';
 import weddingData from '@/jsons/achievements_wedding.json';
 import {TAchievementCombined} from '@/api/getAchievementById';
-import {getStreakDays, isAchievementReceived, setStreakStart, TStreakName} from '@/api/getAchievementDate';
+import {getAchievementDate, getStreakDays, isAchievementReceived, setStreakStart, TStreakName} from '@/api/getAchievementDate';
 import {getAchievementsProgress} from '@/api/getAchievementsProgress';
 import {declineUnit} from '@/composables/declineUnit';
 import {currentDate} from '@/store/currentDate';
@@ -66,6 +66,24 @@ const streakDays = computed(() => {
   const streakName: TStreakName | undefined = selectedGroup.value.streakName;
 
   return streakName ? getStreakDays( streakName ) : null;
+});
+
+const groupCard = computed(() => {
+  const today: number = parseLocalDate( currentDate.value ).getTime();
+
+  let last: TAchievementCombined | null = null;
+  let lastAt: number = -Infinity;
+
+  for ( const item of selectedGroup.value.achievements ) {
+    const at: number | null = getAchievementDate( item );
+
+    if ( at !== null && at <= today && at > lastAt ) {
+      last = item;
+      lastAt = at;
+    }
+  }
+
+  return last ?? selectedGroup.value.achievements[ 0 ];
 });
 
 const progress = computed(() => getAchievementsProgress( selectedGroup.value.achievements ));
@@ -161,8 +179,7 @@ onIonViewDidEnter( scrollTabIntoView );
         </div>
 
         <AchievementFull
-            v-if="appStore.lastAchievement"
-            :achievement="appStore.lastAchievement"
+            :achievement="groupCard"
             :class="styles.achievementsPage__block"
         />
 

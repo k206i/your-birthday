@@ -11,7 +11,6 @@ import {ref} from 'vue';
 
 const isDonationModalOpen = ref( false );
 
-// Внешнюю ссылку открываю системным браузером, чтобы пользователь мог вернуться в приложение
 const openOnceDonation = async (): Promise< void > => {
   await Browser.open({ url: appVars.donations.onceUrl });
 };

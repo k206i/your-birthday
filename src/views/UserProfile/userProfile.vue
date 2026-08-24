@@ -6,6 +6,7 @@ import AppFooter from '@/components/AppFooter/appFooter.vue';
 import UiInput from '@/components/Ui/Input/uiInput.vue';
 import {appStore} from '@/store/appStore';
 import AvatarSetup from '@/components/Avatar/Setup/avatarSetup.vue';
+import WidgetAlert from '@/components/Widgets/Alert/widgetAlert.vue';
 </script>
 
 <template>
@@ -13,7 +14,15 @@ import AvatarSetup from '@/components/Avatar/Setup/avatarSetup.vue';
     <AppHeader page-name="Ваши <span class='accent-theme'>настройки</span>" />
 
     <ion-content :fullscreen="true" class="ion-padding">
-      <div :class="styles.userProfile__block">
+      <WidgetAlert
+          title="Ваши данные — только у вас"
+          comment="Все записи хранятся на устройстве, приложение работает офлайн.
+Если очистить данные или переустановить приложение, записи могут исчезнуть. Но их легко восстановить — главное, помнить важные даты."
+          type="warning"
+          dismiss-name="saveLocalData"
+      />
+
+      <div :class="styles.userProfile__avatarBlock">
         <AvatarSetup />
       </div>
 

@@ -20,6 +20,7 @@ type TAppStore = {
   sportStreakStart: string, // YYYY-MM-DD начала стрика спорта; пусто = не запущен
   femaleCycleLength: number, // Средняя длина цикла в днях, femaleCalendar
   weddingDate: string, // YYYY-MM-DD даты свадьбы; пусто = не задана
+  dismissedAlerts: string[], // dismissName закрытых предупреждений
 }
 
 const STORAGE_KEY = 'appStore';
@@ -41,6 +42,7 @@ export const appStore: TAppStore = reactive({
   sportStreakStart: '',
   femaleCycleLength: appVars.ovulation.cycleDefault,
   weddingDate: '',
+  dismissedAlerts: [],
 });
 
 export const restoreAppStore = async (): Promise< void > => {

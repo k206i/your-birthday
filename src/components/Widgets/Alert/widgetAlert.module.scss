@@ -1,0 +1,94 @@
+.widgetAlert {
+  $root: &;
+  padding: var( --brd-size-gap );
+  border-width: 0 0 0 3px;
+  border-color: var( --brd-color-font-low );
+  border-style: solid;
+  border-radius: var( --brd-size-border-radius );
+  background-color: color-mix( in srgb, var( --brd-color-font-low ), black var( --brd-color-mix-bg ));
+
+  &_info {
+    border-color: var( --brd-color-info );
+    background-color: color-mix( in srgb, var( --brd-color-info ), black var( --brd-color-mix-bg ));
+  }
+
+  &_warning {
+    border-color: var( --brd-color-warning );
+    background-color: color-mix( in srgb, var( --brd-color-warning ), black var( --brd-color-mix-bg ));
+  }
+
+  &_error {
+    border-color: var( --brd-color-error );
+    background-color: color-mix( in srgb, var( --brd-color-error ), black var( --brd-color-mix-bg ));
+  }
+
+  &__contentWrapper {
+    display: flex;
+    gap: var( --brd-size-gap-s );
+  }
+
+  &__content {
+    // Placeholder
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: var( --brd-color-font-low );
+
+    #{$root}_info & {
+      color: var( --brd-color-info );
+    }
+
+    #{$root}_warning & {
+      color: var( --brd-color-warning );
+    }
+
+    #{$root}_error & {
+      color: var( --brd-color-error );
+    }
+  }
+
+  &__title {
+    margin-bottom: var( --brd-size-gap-xs );
+    font-family: var( --brd-font-default-alt );
+    font-size: 16px;
+    font-weight: bold;
+    color: var( --brd-color-font-accent );
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__comment {
+    font-size: 14px;
+    color: var( --brd-color-font );
+  }
+
+  &__buttonWrapper {
+    margin-top: var( --brd-size-gap );
+    text-align: right;
+  }
+
+  &__button {
+    display: inline-block;
+    padding: var( --brd-size-gap-s ) var( --brd-size-gap );
+    border-radius: var( --brd-size-border-radius-s );
+    font-family: var( --brd-font-default-alt );
+    font-size: 14px;
+    color: var( --brd-color-theme-bg );
+    background-color: var( --brd-color-font-low );
+
+    #{$root}_info & {
+      background-color: var( --brd-color-info );
+    }
+
+    #{$root}_warning & {
+      background-color: var( --brd-color-warning );
+    }
+
+    #{$root}_error & {
+      background-color: var( --brd-color-error );
+    }
+  }
+}

@@ -9,6 +9,7 @@ import {TAchievementCombined} from '@/api/getAchievementById';
 import {isAchievementReceived} from '@/api/getAchievementDate';
 import {lockClosedOutline, shareSocial} from 'ionicons/icons';
 import {IonIcon} from '@ionic/vue';
+import {Browser} from '@capacitor/browser';
 
 const props = defineProps<{
   achievement: TAchievementCombined,
@@ -23,6 +24,10 @@ const rarityColor = computed(() => {
 
   return ( appVars.achievementColors as Record< string, string > )[ rarity ] ?? '';
 });
+
+const openLink = async ( url: string ): Promise< void > => {
+  await Browser.open({ url });
+};
 
 const shareRoot = ref< HTMLElement >();
 
@@ -89,7 +94,7 @@ const onShare = () => {
       <div v-if="props.achievement.person && props.achievement.wiki"
            :class="styles.achievementFull__subComment"
       >
-        {{ props.achievement.person }} на <a :href="props.achievement.wiki">Википедии</a>
+        {{ props.achievement.person }} на <a :href="props.achievement.wiki" @click.prevent="openLink( props.achievement.wiki )">Википедии</a>
       </div>
     </div>
   </div>

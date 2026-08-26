@@ -38,6 +38,7 @@ export const appVars = {
     epic: '#A876EC',
     legendary: '#F2B348',
     mythic: '#FF6EC7',
+    special: '#6ae340',
   },
   achievementTranslates: {
     common: 'Обычное',
@@ -45,6 +46,7 @@ export const appVars = {
     epic: 'Эпичное',
     legendary: 'Легендарное',
     mythic: 'Мифическое',
+    special: 'Специальное',
   },
   donations: {
     onceUrl: 'https://pay.cloudtips.ru/p/460b7ab7',

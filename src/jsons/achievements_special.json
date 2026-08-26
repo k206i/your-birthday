@@ -1,34 +1,50 @@
 [
   {
-    "id": "resist-fries",
-    "rarity": "common",
-    "icon": "🍟",
-    "image": "",
-    "name": "Устояла перед фри",
-    "comment": "Победа над конкретным искушением"
-  },
-  {
-    "id": "back-on-track",
-    "rarity": "rare",
-    "icon": "🥴",
-    "image": "",
-    "name": "Сорвалась, но вернулась",
-    "comment": "Перезапуск стрика после провала"
-  },
-  {
     "id": "ussr-born",
-    "rarity": "rare",
+    "rarity": "special",
     "icon": "☭",
     "image": "",
     "name": "Всегда готов!",
     "comment": "Родился в СССР"
   },
   {
-    "id": "new-beard",
-    "rarity": "rare",
+    "id": "gagarin-born",
+    "rarity": "special",
+    "icon": "☭",
+    "image": "",
+    "name": "Всегда готов!",
+    "comment": "Полетел вместе с Гагариным"
+  },
+  {
+    "id": "back-beard",
+    "rarity": "epic",
     "icon": "",
     "image": "",
-    "name": "Побрился!",
-    "comment": "Родился в СССР"
+    "name": "I'll be back!",
+    "comment": "Дорогу осилит растущая борода"
+  },
+  {
+    "id": "finish-beard",
+    "rarity": "special",
+    "icon": "",
+    "image": "",
+    "name": "I'll be back!",
+    "comment": "Дорогу осилит растущая борода"
+  },
+  {
+    "id": "back-diet",
+    "rarity": "epic",
+    "icon": "🥴",
+    "image": "",
+    "name": "Сорвалась, но вернулась",
+    "comment": "Перезапуск стрика после провала"
+  },
+  {
+    "id": "finish-diet",
+    "rarity": "epic",
+    "icon": "",
+    "image": "",
+    "name": "Сорвалась, но вернулась",
+    "comment": "Перезапуск стрика после провала"
   }
 ]

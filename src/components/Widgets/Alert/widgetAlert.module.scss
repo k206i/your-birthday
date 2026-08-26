@@ -1,5 +1,6 @@
 .widgetAlert {
   $root: &;
+  margin: 0 0 var( --brd-size-gap );
   padding: var( --brd-size-gap );
   border-width: 0 0 0 3px;
   border-color: var( --brd-color-font-low );

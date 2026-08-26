@@ -348,6 +348,18 @@
     "wiki": "https://ru.wikipedia.org/wiki/Джексон,_Майкл"
   },
   {
+    "id": "famous_70",
+    "image": "famous_70.webp",
+    "icon": "⚓",
+    "person": "Пётр I",
+    "name": "Плотник Пётр Михайлов",
+    "comment": "Под этим именем Пётр Первый несколько месяцев работал плотником на амстердамской верфи. При двух метрах роста инкогнито держалось так себе.",
+    "weeks": 2738,
+    "ageText": "52 года 34 недели",
+    "rarity": "epic",
+    "wiki": "https://ru.wikipedia.org/wiki/Пётр_I"
+  },
+  {
     "id": "famous_68",
     "image": "famous_68.webp",
     "icon": "🚩",

@@ -22,7 +22,7 @@ import WidgetAlert from '@/components/Widgets/Alert/widgetAlert.vue';
           dismiss-name="saveLocalData"
       />
 
-      <div :class="styles.userProfile__avatarBlock">
+      <div :class="styles.userProfile__block">
         <AvatarSetup />
       </div>
 
@@ -56,7 +56,7 @@ import WidgetAlert from '@/components/Widgets/Alert/widgetAlert.vue';
             :class="styles.userProfile__field"
             v-model="appStore.weddingDate"
             type="date"
-            label="Когда вы поженились?"
+            label="День рождения вашей семьи"
             placeholder="выберите дату"
         />
 

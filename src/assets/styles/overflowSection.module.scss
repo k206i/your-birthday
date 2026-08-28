@@ -1,11 +1,10 @@
 .overflowSection {
   position: relative;
   z-index: var( --brd-z-index-layout );
-  width: 100vw;
-  margin-left: calc( -1 * var( --brd-size-gap ));
+  margin: 0 calc( -1 * var( --brd-size-gap ));
 
   &__overflowWrapper {
-    max-width: 100vw;
+    max-width: 100%;
     overflow-x: auto;
     padding: 0 var( --brd-size-gap );
   }

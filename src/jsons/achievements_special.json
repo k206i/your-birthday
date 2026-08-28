@@ -1,49 +1,41 @@
 [
   {
-    "id": "ussr-born",
+    "id": "special_curious",
     "rarity": "special",
     "icon": "☭",
-    "image": "",
+    "image": "special_curious.webp",
+    "name": "Шаловливые ручки",
+    "comment": "Нашёл спрятанный функционал"
+  },
+  {
+    "id": "special_ussrBorn",
+    "rarity": "special",
+    "icon": "☭",
+    "image": "special_ussrBorn.webp",
     "name": "Всегда готов!",
     "comment": "Родился в СССР"
   },
   {
-    "id": "gagarin-born",
+    "id": "special_gagarinBorn",
     "rarity": "special",
     "icon": "☭",
-    "image": "",
+    "image": "special_gagarinBorn.webp",
     "name": "Всегда готов!",
     "comment": "Полетел вместе с Гагариным"
   },
   {
-    "id": "back-beard",
+    "id": "special_backBeard",
     "rarity": "epic",
-    "icon": "",
-    "image": "",
+    "icon": "☭",
+    "image": "special_backBeard.webp",
     "name": "I'll be back!",
     "comment": "Дорогу осилит растущая борода"
   },
   {
-    "id": "finish-beard",
-    "rarity": "special",
-    "icon": "",
-    "image": "",
-    "name": "I'll be back!",
-    "comment": "Дорогу осилит растущая борода"
-  },
-  {
-    "id": "back-diet",
+    "id": "special_backDiet",
     "rarity": "epic",
     "icon": "🥴",
-    "image": "",
-    "name": "Сорвалась, но вернулась",
-    "comment": "Перезапуск стрика после провала"
-  },
-  {
-    "id": "finish-diet",
-    "rarity": "epic",
-    "icon": "",
-    "image": "",
+    "image": "special_backDiet.webp",
     "name": "Сорвалась, но вернулась",
     "comment": "Перезапуск стрика после провала"
   }

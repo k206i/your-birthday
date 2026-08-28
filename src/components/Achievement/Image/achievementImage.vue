@@ -67,7 +67,10 @@ const rarityColor = computed(() => {
         <div :class="styles.achievementImage__outerGlow1__inner_1"></div>
       </div>
 
-      <div v-if="achievement.rarity === 'legendary'"
+      <div v-if="
+        achievement.rarity === 'legendary'
+        || achievement.rarity === 'special'
+        "
            :class="styles.achievementImage__outerGlow2"
       >
         <!-- 1. дыхание -->

@@ -15,6 +15,7 @@ import beardData from '@/jsons/achievements_beard.json';
 import dietData from '@/jsons/achievements_diet.json';
 import sportData from '@/jsons/achievements_sport.json';
 import weddingData from '@/jsons/achievements_wedding.json';
+import specialData from '@/jsons/achievements_special.json';
 import {TAchievementCombined} from '@/api/getAchievementById';
 import {getAchievementDate, getStreakDays, isAchievementReceived, setStreakStart, TStreakName} from '@/api/getAchievementDate';
 import {getAchievementsProgress} from '@/api/getAchievementsProgress';
@@ -31,6 +32,7 @@ type TAchievementGroup = {
   title: string,
   achievements: TAchievementCombined[],
   streakName?: TStreakName,
+  receivedOnly?: boolean,
 }
 
 const groups: TAchievementGroup[] = [
@@ -40,6 +42,7 @@ const groups: TAchievementGroup[] = [
   { id: 'diet', icon: '🍎', title: 'Диета', achievements: dietData as TAchievementCombined[], streakName: 'diet' },
   { id: 'sport', icon: '🏃', title: 'Спорт', achievements: sportData as TAchievementCombined[], streakName: 'sport' },
   { id: 'wedding', icon: '💍', title: 'Свадьба', achievements: weddingData as TAchievementCombined[] },
+  { id: 'special', icon: '⭐', title: 'Особые', achievements: specialData as TAchievementCombined[], receivedOnly: true },
 ];
 
 const getGroupIdByLastAchievement = (): string => {
@@ -59,6 +62,12 @@ const onSelectGroup = ( id: string ) => {
 
 const isReceived = ( achievement: TAchievementCombined ): boolean => {
   return isAchievementReceived( achievement );
+};
+
+const visibleGroups = computed(() => groups.filter( item => !item.receivedOnly || item.achievements.some( isAchievementReceived )));
+
+const groupAchievements = ( group: TAchievementGroup ): TAchievementCombined[] => {
+  return group.receivedOnly ? group.achievements.filter( isAchievementReceived ) : group.achievements;
 };
 
 // Пройденные дни стрика выбранной группы; null — стрик не запущен или у группы его нет
@@ -150,7 +159,7 @@ onIonViewWillEnter(() => {
 const scrollTabIntoView = async () => {
   await nextTick();
 
-  const index: number = groups.findIndex( item => item.id === selectedGroupId.value );
+  const index: number = visibleGroups.value.findIndex( item => item.id === selectedGroupId.value );
 
   tabsListRef.value?.children.item( index )?.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'center' });
 };
@@ -194,7 +203,7 @@ onIonViewDidEnter( scrollTabIntoView );
                 styles.achievementsPage__tabsList
               ]"
           >
-            <li v-for="group in groups"
+            <li v-for="group in visibleGroups"
                 :key="group.id"
                 :class="[
                   styles.achievementsPage__tabItem,
@@ -334,12 +343,12 @@ onIonViewDidEnter( scrollTabIntoView );
           Всё пройдено
         </div>
 
-        <ul v-for="group in groups"
+        <ul v-for="group in visibleGroups"
             v-show="group.id === selectedGroupId"
             :key="group.id"
             :class="styles.achievementsPage__achievementsList"
         >
-          <li v-for="achievement in group.achievements"
+          <li v-for="achievement in groupAchievements( group )"
               :key="achievement.id"
               :class="[
                 styles.achievementsPage__achievementsListItem,

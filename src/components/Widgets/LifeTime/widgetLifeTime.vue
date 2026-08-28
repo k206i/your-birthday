@@ -6,6 +6,7 @@ import {appVars} from '@/configApp';
 import {parseLocalDate} from '@/composables/localDate';
 import {declineUnit} from '@/composables/declineUnit';
 import {splitDuration} from '@/composables/splitDuration';
+import {grantSpecialAchievement} from '@/api/grantSpecialAchievement';
 
 const now = ref( Date.now() );
 let timerId: ReturnType< typeof setInterval > | null = null;
@@ -20,6 +21,7 @@ const onTap = () => {
 
   if ( tapTime - lastTapTime < 300 ) {
     isRestShown.value = !isRestShown.value;
+    grantSpecialAchievement( 'special_curious' );
   }
 
   lastTapTime = tapTime;

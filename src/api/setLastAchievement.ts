@@ -16,6 +16,7 @@ import beardAchievements from '@/jsons/achievements_beard.json';
 import dietAchievements from '@/jsons/achievements_diet.json';
 import sportAchievements from '@/jsons/achievements_sport.json';
 import weddingAchievements from '@/jsons/achievements_wedding.json';
+import specialAchievements from '@/jsons/achievements_special.json';
 
 const SOURCES: TAchievementCombined[] = [
   ...( famousAchievements as TAchievementCombined[] ),
@@ -24,6 +25,7 @@ const SOURCES: TAchievementCombined[] = [
   ...( dietAchievements as TAchievementCombined[] ),
   ...( sportAchievements as TAchievementCombined[] ),
   ...( weddingAchievements as TAchievementCombined[] ),
+  ...( specialAchievements as TAchievementCombined[] ),
 ];
 
 export const setLastAchievement = (): void => {

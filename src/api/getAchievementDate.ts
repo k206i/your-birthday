@@ -118,7 +118,10 @@ export const getAchievementDate = ( achievement: TAchievementCombined ): number 
     return date.getTime();
   }
 
-  return null;
+  // Ни одной шкалы — специальная ачивка, её дату записали в момент выдачи
+  const grantedAt: string | undefined = appStore.specialAchievements[ achievement.id ];
+
+  return grantedAt ? parseLocalDate( grantedAt ).getTime() : null;
 };
 
 export const isAchievementReceived = ( achievement: TAchievementCombined ): boolean => {

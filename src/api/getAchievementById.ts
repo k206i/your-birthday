@@ -8,7 +8,7 @@ export type TAchievementCombined = {
   icon: string,
   image: string,
   name: string,
-  rarity: 'common' | 'rare' | 'epic' | 'legendary' | 'mythic',
+  rarity: 'common' | 'rare' | 'epic' | 'legendary' | 'mythic' | 'special',
   comment?: string,
   weeks?: number,
   days?: number, // Дни стрика — для ачивок, основанных на дневной шкале

@@ -1,4 +1,5 @@
 export const appVars = {
+  floatingAlertTimer: 5, // секунд
   dayAdditionalPeriod: 14, // Дни до и после нормального течения беременности
   dayNormalPeriod: 18, // Погрешность в днях, соответствующая нормальному течению беременности
   pregnancyDuration: 280, // Дней. Акушерский срок (от первого дня последних месячных)

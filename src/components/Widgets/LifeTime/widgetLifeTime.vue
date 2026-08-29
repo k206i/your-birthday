@@ -7,6 +7,9 @@ import {parseLocalDate} from '@/composables/localDate';
 import {declineUnit} from '@/composables/declineUnit';
 import {splitDuration} from '@/composables/splitDuration';
 import {grantSpecialAchievement} from '@/api/grantSpecialAchievement';
+import {TAchievementCombined} from '@/api/getAchievementById';
+import FloatingAlert from '@/components/Ui/FloatingAlert/floatingAlert.vue';
+import AchievementShort from '@/components/Achievement/Short/achievementShort.vue';
 
 const now = ref( Date.now() );
 let timerId: ReturnType< typeof setInterval > | null = null;
@@ -16,12 +19,21 @@ let timerId: ReturnType< typeof setInterval > | null = null;
 const isRestShown = ref( false );
 let lastTapTime: number = 0;
 
+const alertAchievement = ref< TAchievementCombined | null >( null );
+const isAlertOpen = ref( false );
+
 const onTap = () => {
   const tapTime: number = performance.now();
 
   if ( tapTime - lastTapTime < 300 ) {
     isRestShown.value = !isRestShown.value;
-    grantSpecialAchievement( 'special_curious' );
+
+    const granted: TAchievementCombined | null = grantSpecialAchievement( 'special_curious' );
+
+    if ( granted ) {
+      alertAchievement.value = granted;
+      isAlertOpen.value = true;
+    }
   }
 
   lastTapTime = tapTime;
@@ -189,5 +201,9 @@ const restTime = computed(() => {
         <span style="color: var( --brd-custom-theme-color )">Вы открыли новую главу в долголетии!!!</span>
       </div>
     </template>
+
+    <FloatingAlert v-model:is-open="isAlertOpen" @click.stop>
+      <AchievementShort v-if="alertAchievement" :achievement="alertAchievement" />
+    </FloatingAlert>
   </div>
 </template>

@@ -1,0 +1,17 @@
+.floatingAlert {
+  opacity: 0;
+  position: fixed;
+  right: 0;
+  bottom: 50px;
+  z-index: var( --brd-z-index-modal );
+  width: 300px;
+  transform: translateX( 100% );
+  transition:
+          var( --brd-transition-transform ),
+          var( --brd-transition-opacity);
+
+  &_isOpen {
+    opacity: 1;
+    transform: translateX( 0 );
+  }
+}

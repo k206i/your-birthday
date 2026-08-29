@@ -2,6 +2,7 @@
 
 import famousAchievements from '@/jsons/achievements_famous.json';
 import ageAchievements from '@/jsons/achievements_age.json';
+import specialAchievements from '@/jsons/achievements_special.json';
 
 export type TAchievementCombined = {
   id: string,
@@ -22,6 +23,7 @@ export type TAchievementCombined = {
 const FILES: Record< string, TAchievementCombined[] > = {
   famous: famousAchievements as TAchievementCombined[],
   age: ageAchievements as TAchievementCombined[],
+  special: specialAchievements as TAchievementCombined[],
 };
 
 export const getAchievementById = ( id: string ): TAchievementCombined | undefined => {

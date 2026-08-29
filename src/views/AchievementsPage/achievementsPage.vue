@@ -17,7 +17,8 @@ import sportData from '@/jsons/achievements_sport.json';
 import weddingData from '@/jsons/achievements_wedding.json';
 import specialData from '@/jsons/achievements_special.json';
 import {TAchievementCombined} from '@/api/getAchievementById';
-import {getAchievementDate, getStreakDays, isAchievementReceived, setStreakStart, TStreakName} from '@/api/getAchievementDate';
+import {getStreakDays, isAchievementReceived, setStreakStart, TStreakName} from '@/api/getAchievementDate';
+import {getLastAchievement} from '@/api/getLastAchievement';
 import {getAchievementsProgress} from '@/api/getAchievementsProgress';
 import {declineUnit} from '@/composables/declineUnit';
 import {currentDate} from '@/store/currentDate';
@@ -78,23 +79,7 @@ const streakDays = computed(() => {
   return streakName ? getStreakDays( streakName ) : null;
 });
 
-const groupCard = computed(() => {
-  const today: number = parseLocalDate( currentDate.value ).getTime();
-
-  let last: TAchievementCombined | null = null;
-  let lastAt: number = -Infinity;
-
-  for ( const item of selectedGroup.value.achievements ) {
-    const at: number | null = getAchievementDate( item );
-
-    if ( at !== null && at <= today && at > lastAt ) {
-      last = item;
-      lastAt = at;
-    }
-  }
-
-  return last ?? selectedGroup.value.achievements[ 0 ];
-});
+const groupCard = computed(() => getLastAchievement( selectedGroup.value.achievements ) ?? selectedGroup.value.achievements[ 0 ] );
 
 const progress = computed(() => getAchievementsProgress( selectedGroup.value.achievements ));
 

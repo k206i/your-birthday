@@ -1,0 +1,23 @@
+.appVersion {
+  position: relative;
+  color: var( --brd-color-font-low );
+  font-size: 12px;
+  user-select: none;
+
+  &__version {
+    text-align: center;
+  }
+
+  &__keysList {
+    display: flex;
+    flex-direction: column;
+    gap: var( --brd-size-gap-s );
+    margin: var( --brd-size-gap ) 0;
+  }
+
+  &__key {
+    display: flex;
+    align-items: center;
+    gap: var( --brd-size-gap-s );
+  }
+}

@@ -9,6 +9,7 @@ import { appStore } from '@/store/appStore';
 import { currentDate } from '@/store/currentDate';
 import { parseLocalDate } from '@/composables/localDate';
 import { getAchievementDate } from '@/api/getAchievementDate';
+import { getLastAchievement } from '@/api/getLastAchievement';
 import type { TAchievementCombined } from '@/api/getAchievementById';
 import famousAchievements from '@/jsons/achievements_famous.json';
 import ageAchievements from '@/jsons/achievements_age.json';
@@ -31,8 +32,6 @@ const SOURCES: TAchievementCombined[] = [
 export const setLastAchievement = (): void => {
   const today: number = parseLocalDate( currentDate.value ).getTime();
 
-  let last: TAchievementCombined | null = null;
-  let lastAt: number = -Infinity;
   let next: TAchievementCombined | null = null;
   let nextAt: number = Infinity;
 
@@ -44,17 +43,12 @@ export const setLastAchievement = (): void => {
       continue;
     }
 
-    if ( at <= today && at > lastAt ) {
-      last = item;
-      lastAt = at;
-    }
-
     if ( at > today && at < nextAt ) {
       next = item;
       nextAt = at;
     }
   }
 
-  appStore.lastAchievement = last;
+  appStore.lastAchievement = getLastAchievement( SOURCES );
   appStore.nextAchievement = next;
 }

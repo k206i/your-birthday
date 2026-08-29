@@ -141,8 +141,8 @@
   },
   {
     "id": "beard_15",
-    "days": 180,
-    "ageText": "180 дней",
+    "days": 150,
+    "ageText": "150 дней",
     "rarity": "legendary",
     "icon": "⚔️",
     "image": "beard_15.webp",
@@ -151,8 +151,8 @@
   },
   {
     "id": "beard_16",
-    "days": 270,
-    "ageText": "270 дней",
+    "days": 200,
+    "ageText": "200 дней",
     "rarity": "legendary",
     "icon": "👑",
     "image": "beard_16.webp",
@@ -161,8 +161,8 @@
   },
   {
     "id": "beard_17",
-    "days": 365,
-    "ageText": "365 дней",
+    "days": 270,
+    "ageText": "270 дней",
     "rarity": "legendary",
     "icon": "🔮",
     "image": "beard_17.webp",
@@ -171,8 +171,8 @@
   },
   {
     "id": "beard_18",
-    "days": 500,
-    "ageText": "500 дней",
+    "days": 300,
+    "ageText": "300 дней",
     "rarity": "legendary",
     "icon": "🦅",
     "image": "beard_18.webp",
@@ -181,12 +181,12 @@
   },
   {
     "id": "beard_19",
-    "days": 730,
-    "ageText": "730 дней",
+    "days": 365,
+    "ageText": "365 дней",
     "rarity": "mythic",
     "icon": "💎",
     "image": "beard_19.webp",
     "name": "Легенда растительности",
-    "comment": "О твоей бороде слагают легенды у костра. Ты больше не отращиваешь бороду — борода отращивает тебя."
+    "comment": "День рождения легенды о твоей бороде. Ты больше не отращиваешь бороду — борода отращивает тебя."
   }
 ]

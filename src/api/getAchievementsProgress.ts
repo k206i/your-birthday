@@ -16,6 +16,11 @@ export const getAchievementsProgress = ( achievements: TAchievementCombined[] ):
   let hasActiveScale: boolean = false;
 
   for ( const item of achievements ) {
+    // Ачивка без шкалы выдаётся за действие и не образует последовательности — в прогресс не идёт
+    if ( item.weeks === undefined && item.days === undefined && item.years === undefined ) {
+      continue;
+    }
+
     const at: number | null = getAchievementDate( item );
 
     if ( at === null ) {

@@ -23,6 +23,7 @@ import {declineUnit} from '@/composables/declineUnit';
 import {currentDate} from '@/store/currentDate';
 import {formatLocalDate, parseLocalDate} from '@/composables/localDate';
 import ModalAchievement from '@/components/Modals/Achievement/modalAchievement.vue';
+import WidgetAlert from '@/components/Widgets/Alert/widgetAlert.vue';
 import {ref, computed, nextTick, onMounted} from 'vue';
 import UiProgressBar from '@/components/Ui/ProgressBar/uiProgressBar.vue';
 
@@ -221,6 +222,15 @@ onIonViewDidEnter( scrollTabIntoView );
             </li>
           </ul>
         </div>
+
+        <WidgetAlert
+            v-if="selectedGroup.id === 'special'"
+            :class="styles.achievementsPage__block"
+            type="info"
+            title="Особые достижения 👀"
+            comment="Приложение молчит о них нарочно. Расписания, календаря или очевидного пути получения тут нет. Раз одну нашли — где-то ждут остальные 🔎"
+            dismiss-name="specialAchievements"
+        />
 
         <div v-if="selectedGroup.streakName">
           <template v-if="streakDays !== null">

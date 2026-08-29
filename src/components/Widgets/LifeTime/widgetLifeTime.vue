@@ -25,7 +25,7 @@ const isAlertOpen = ref( false );
 const onTap = () => {
   const tapTime: number = performance.now();
 
-  if ( tapTime - lastTapTime < 300 ) {
+  if ( tapTime - lastTapTime < appVars.multiTapDelay ) {
     isRestShown.value = !isRestShown.value;
 
     const granted: TAchievementCombined | null = grantSpecialAchievement( 'special_curious' );
@@ -203,7 +203,7 @@ const restTime = computed(() => {
     </template>
 
     <FloatingAlert v-model:is-open="isAlertOpen" @click.stop>
-      <AchievementShort v-if="alertAchievement" :achievement="alertAchievement" />
+      <AchievementShort v-if="alertAchievement" :achievement="alertAchievement" is-last />
     </FloatingAlert>
   </div>
 </template>

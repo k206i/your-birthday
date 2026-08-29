@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import styles from './achievementShort.module.scss';
-import {arrowForwardOutline, chevronUpOutline} from 'ionicons/icons';
+import {arrowForwardOutline} from 'ionicons/icons';
 import {IonIcon} from '@ionic/vue';
 import {appVars} from '@/configApp';
 import AchievementImage from '@/components/Achievement/Image/achievementImage.vue';
@@ -59,11 +59,6 @@ const rarityColor = computed(() => {
          :class="styles.achievementShort__linkButton"
     >
       <ion-icon :icon="arrowForwardOutline"></ion-icon>
-    </div>
-    <div v-else
-         :class="styles.achievementShort__linkButton"
-    >
-      <ion-icon :icon="chevronUpOutline"></ion-icon>
     </div>
 
     <router-link

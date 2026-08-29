@@ -7,6 +7,7 @@ import UiInput from '@/components/Ui/Input/uiInput.vue';
 import {appStore} from '@/store/appStore';
 import AvatarSetup from '@/components/Avatar/Setup/avatarSetup.vue';
 import WidgetAlert from '@/components/Widgets/Alert/widgetAlert.vue';
+import AppVersion from '@/components/AppVersion/appVersion.vue';
 </script>
 
 <template>
@@ -112,6 +113,8 @@ import WidgetAlert from '@/components/Widgets/Alert/widgetAlert.vue';
           Чтобы не «э-э-э...» в ответственный момент 🥶
         </div>
       </div>
+
+      <AppVersion />
     </ion-content>
 
     <AppFooter />

@@ -8,6 +8,14 @@
     "comment": "Нашёл спрятанный функционал"
   },
   {
+    "id": "special_dev",
+    "rarity": "special",
+    "icon": "\uD83D\uDEE0",
+    "image": "special_dev.webp",
+    "name": "Я стал разработчиком!",
+    "comment": "Любознательность победила аккуратность. Понять можно по-разному \uD83D\uDE05"
+  },
+  {
     "id": "special_ussrBorn",
     "rarity": "special",
     "icon": "☭",

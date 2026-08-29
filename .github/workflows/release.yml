@@ -28,6 +28,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Resolve version from tag
+        run: |
+          RAW="${GITHUB_REF_NAME#v}"
+          NUM="${RAW%%-*}"
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$NUM"
+          CODE=$(( ${MAJOR:-0} * 10000 + ${MINOR:-0} * 100 + ${PATCH:-0} ))
+          echo "versionName=$RAW versionCode=$CODE"
+          echo "APP_VERSION_NAME=$RAW" >> "$GITHUB_ENV"
+          echo "APP_VERSION_CODE=$CODE" >> "$GITHUB_ENV"
+
       - name: Build web
         run: npm run build
 
@@ -38,16 +48,6 @@ jobs:
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36"
-
-      - name: Resolve version from tag
-        run: |
-          RAW="${GITHUB_REF_NAME#v}"
-          NUM="${RAW%%-*}"
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$NUM"
-          CODE=$(( ${MAJOR:-0} * 10000 + ${MINOR:-0} * 100 + ${PATCH:-0} ))
-          echo "versionName=$RAW versionCode=$CODE"
-          echo "APP_VERSION_NAME=$RAW" >> "$GITHUB_ENV"
-          echo "APP_VERSION_CODE=$CODE" >> "$GITHUB_ENV"
 
       - name: Restore keystore
         env:

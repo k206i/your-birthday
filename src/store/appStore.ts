@@ -2,6 +2,7 @@ import { reactive, watch } from 'vue';
 import { Preferences } from '@capacitor/preferences';
 import { appVars } from '@/configApp';
 import type { TAchievementCombined } from '@/api/getAchievementById';
+import type { TStreakName } from '@/api/getAchievementDate';
 
 type TAppStore = {
   userName: string,
@@ -22,6 +23,7 @@ type TAppStore = {
   weddingDate: string, // YYYY-MM-DD даты свадьбы; пусто = не задана
   dismissedAlerts: string[], // dismissName закрытых предупреждений
   specialAchievements: Record< string, string >, // id специальной ачивки -> YYYY-MM-DD получения
+  resetedStreaks: TStreakName[], // стрики, которые сбрасывали: следующий запуск считается возвращением
 }
 
 const STORAGE_KEY = 'appStore';
@@ -45,6 +47,7 @@ export const appStore: TAppStore = reactive({
   weddingDate: '',
   dismissedAlerts: [],
   specialAchievements: {},
+  resetedStreaks: [],
 });
 
 export const restoreAppStore = async (): Promise< void > => {

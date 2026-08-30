@@ -19,6 +19,9 @@ import specialData from '@/jsons/achievements_special.json';
 import {TAchievementCombined} from '@/api/getAchievementById';
 import {getStreakDays, isAchievementReceived, setStreakStart, TStreakName} from '@/api/getAchievementDate';
 import {getLastAchievement} from '@/api/getLastAchievement';
+import {grantStreakRestart, markStreakReset} from '@/api/streakRestart';
+import FloatingAlert from '@/components/Ui/FloatingAlert/floatingAlert.vue';
+import AchievementShort from '@/components/Achievement/Short/achievementShort.vue';
 import {getAchievementsProgress} from '@/api/getAchievementsProgress';
 import {declineUnit} from '@/composables/declineUnit';
 import {currentDate} from '@/store/currentDate';
@@ -83,12 +86,24 @@ const groupCard = computed(() => getLastAchievement( selectedGroup.value.achieve
 
 const progress = computed(() => getAchievementsProgress( selectedGroup.value.achievements ));
 
+const alertAchievement = ref< TAchievementCombined | null >( null );
+const isAlertOpen = ref( false );
+
+const showAchievement = ( achievement: TAchievementCombined | null ) => {
+  if ( achievement ) {
+    alertAchievement.value = achievement;
+    isAlertOpen.value = true;
+  }
+};
+
 const onStartStreak = ( streakName: TStreakName ) => {
   setStreakStart( streakName, currentDate.value );
+  showAchievement( grantStreakRestart( streakName ));
 };
 
 const onResetStreak = ( streakName: TStreakName ) => {
   setStreakStart( streakName, '' );
+  markStreakReset( streakName );
 };
 
 const maxDate = computed(() => currentDate.value );
@@ -105,6 +120,7 @@ const onStreakDateChange = ( event: Event, streakName: TStreakName ) => {
 
   if ( value ) {
     setStreakStart( streakName, value );
+    showAchievement( grantStreakRestart( streakName ));
   }
 };
 
@@ -360,6 +376,10 @@ onIonViewDidEnter( scrollTabIntoView );
 
 
       </template>
+
+      <FloatingAlert v-model:is-open="isAlertOpen">
+        <AchievementShort v-if="alertAchievement" :achievement="alertAchievement" is-last />
+      </FloatingAlert>
     </ion-content>
 
     <ModalAchievement

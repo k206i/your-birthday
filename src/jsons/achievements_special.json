@@ -37,14 +37,22 @@
     "icon": "☭",
     "image": "special_backBeard.webp",
     "name": "I'll be back!",
-    "comment": "Дорогу осилит растущая борода"
+    "comment": "Терминатор бы одобрил, бритва — нет"
   },
   {
     "id": "special_backDiet",
     "rarity": "epic",
-    "icon": "🥴",
+    "icon": "\uD83E\uDD57",
     "image": "special_backDiet.webp",
-    "name": "Сорвалась, но вернулась",
-    "comment": "Перезапуск стрика после провала"
+    "name": "Салат, мы снова вместе",
+    "comment": "Торт всё понял и даже не обиделся"
+  },
+  {
+    "id": "special_backSport",
+    "rarity": "epic",
+    "icon": "\uD83D\uDCAA",
+    "image": "special_backSport.webp",
+    "name": "Второе дыхание",
+    "comment": "Открылось ровно там, где закончилось первое"
   }
 ]

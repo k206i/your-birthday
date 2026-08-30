@@ -47,6 +47,10 @@ const onClearSpecialAchievements = () => {
   setLastAchievement();
 };
 
+const onClearResetedStreaks = () => {
+  appStore.resetedStreaks = [];
+};
+
 const onClearDismissedAlerts = () => {
   appStore.dismissedAlerts = [];
 };
@@ -66,19 +70,41 @@ const onClearBirthdayGreeted = () => {
       <li :class="styles.appVersion__key">
         specialAchievements
         {{ appStore.specialAchievements }}
-        <ion-icon :icon="closeCircleOutline" @click="onClearSpecialAchievements"></ion-icon>
+        <ion-icon
+            :icon="closeCircleOutline"
+            @click="onClearSpecialAchievements"
+            :class="styles.appVersion__resetIcon"
+        ></ion-icon>
+      </li>
+
+      <li :class="styles.appVersion__key">
+        resetedStreaks
+        {{ appStore.resetedStreaks }}
+        <ion-icon
+            :icon="closeCircleOutline"
+            @click="onClearResetedStreaks"
+            :class="styles.appVersion__resetIcon"
+        ></ion-icon>
       </li>
 
       <li :class="styles.appVersion__key">
         dismissedAlerts
         {{ appStore.dismissedAlerts }}
-        <ion-icon :icon="closeCircleOutline" @click="onClearDismissedAlerts"></ion-icon>
+        <ion-icon
+            :icon="closeCircleOutline"
+            @click="onClearDismissedAlerts"
+            :class="styles.appVersion__resetIcon"
+        ></ion-icon>
       </li>
 
       <li :class="styles.appVersion__key">
         lastBirthdayGreetedDate
         {{ appStore.lastBirthdayGreetedDate }}
-        <ion-icon :icon="closeCircleOutline" @click="onClearBirthdayGreeted"></ion-icon>
+        <ion-icon
+            :icon="closeCircleOutline"
+            @click="onClearBirthdayGreeted"
+            :class="styles.appVersion__resetIcon"
+        ></ion-icon>
       </li>
     </ul>
 

@@ -378,7 +378,7 @@ onIonViewDidEnter( scrollTabIntoView );
       </template>
 
       <FloatingAlert v-model:is-open="isAlertOpen">
-        <AchievementShort v-if="alertAchievement" :achievement="alertAchievement" is-last />
+        <AchievementShort v-if="alertAchievement" :achievement="alertAchievement" is-alert />
       </FloatingAlert>
     </ion-content>
 

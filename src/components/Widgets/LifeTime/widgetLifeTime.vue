@@ -202,7 +202,7 @@ const restTime = computed(() => {
       </div>
     </template>
 
-    <FloatingAlert v-model:is-open="isAlertOpen" @click.stop>
+    <FloatingAlert v-model:is-open="isAlertOpen">
       <AchievementShort v-if="alertAchievement" :achievement="alertAchievement" is-last />
     </FloatingAlert>
   </div>

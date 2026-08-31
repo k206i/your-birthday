@@ -11,6 +11,7 @@ import {computed} from 'vue';
 const props = defineProps<{
   achievement: TAchievementCombined,
   isLast?: boolean,
+  isAlert?: boolean,
 }>();
 
 const rarityColor = computed(() => {
@@ -41,6 +42,9 @@ const rarityColor = computed(() => {
     <div :class="styles.achievementShort__contentWrapper">
       <div v-if="props.isLast" :class="styles.achievementShort__label">
         Последнее достижение
+      </div>
+      <div v-if="props.isAlert" :class="styles.achievementShort__label">
+        Вы получили достижение
       </div>
 
       <div :class="styles.achievementShort__title">

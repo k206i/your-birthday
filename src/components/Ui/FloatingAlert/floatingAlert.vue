@@ -38,12 +38,17 @@ onUnmounted( clearTimer );
 </script>
 
 <template>
-  <div :class="[
-        styles.floatingAlert,
-        props.isOpen && styles.floatingAlert_isOpen
-      ]"
-       @click="onClose"
-  >
-    <slot />
-  </div>
+  <!-- Телепорт в body: внутри ion-page всплывашку перекрывал футер -->
+  <Teleport to="body">
+    <div :class="[
+          styles.floatingAlert,
+          props.isOpen && styles.floatingAlert_isOpen
+        ]"
+         @click="onClose"
+    >
+      <div>
+      <slot />
+      </div>
+    </div>
+  </Teleport>
 </template>

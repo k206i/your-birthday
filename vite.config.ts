@@ -12,6 +12,8 @@ export default defineConfig({
   // В релизной сборке версию задаёт тег через APP_VERSION_NAME, локально её берём из package.json
   define: {
     __APP_VERSION__: JSON.stringify( process.env.APP_VERSION_NAME ?? pkg.version ),
+    // Проверка обновлений с GitHub. По умолчанию выключена: в магазинной сборке её быть не должно
+    __UPDATE_CHECK__: JSON.stringify( process.env.UPDATE_CHECK === 'true' ),
   },
   plugins: [
     vue(),

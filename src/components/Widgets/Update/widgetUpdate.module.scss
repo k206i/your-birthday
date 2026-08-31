@@ -1,0 +1,60 @@
+.widgetUpdate {
+  $root: &;
+  margin: 0 0 var( --brd-size-gap );
+  padding: var( --brd-size-gap );
+  border-width: 0 0 0 3px;
+  border-color: var( --brd-color-font-low );
+  border-style: solid;
+  border-radius: var( --brd-size-border-radius );
+  background-color: color-mix( in srgb, var( --brd-color-font-low ), black var( --brd-color-mix-bg ));
+
+  &__contentWrapper {
+    display: flex;
+    gap: var( --brd-size-gap-s );
+  }
+
+  &__content {
+    // Placeholder
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: var( --brd-color-font-low );
+  }
+
+  &__title {
+    margin-bottom: var( --brd-size-gap-s );
+    font-family: var( --brd-font-default-alt );
+    font-size: 16px;
+    font-weight: bold;
+    color: var( --brd-color-font-accent );
+  }
+
+  &__buttonWrapper {
+    display: flex;
+    gap: var( --brd-size-gap-s );
+  }
+
+  &__small {
+    font-size: 11px;
+    font-weight: normal;
+  }
+
+  &__button {
+    display: inline-block;
+    padding: var( --brd-size-gap-s ) var( --brd-size-gap );
+    border-radius: var( --brd-size-border-radius-s );
+    font-family: var( --brd-font-default );
+    font-size: 14px;
+    font-weight: bold;
+    color: var( --brd-color-theme-bg );
+    border: transparent 1px solid;
+    background-color: var( --brd-color-font-low );
+
+    &_light {
+      border-color: var( --brd-color-font-low );
+      color: var( --brd-color-font-low );
+      background: none;
+    }
+  }
+}

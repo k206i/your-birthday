@@ -38,12 +38,6 @@ jobs:
           echo "APP_VERSION_NAME=$RAW" >> "$GITHUB_ENV"
           echo "APP_VERSION_CODE=$CODE" >> "$GITHUB_ENV"
 
-      - name: Build web
-        run: npm run build
-
-      - name: Sync Capacitor
-        run: npx cap sync android
-
       - name: Prepare Android SDK
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
@@ -59,7 +53,16 @@ jobs:
           fi
           echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.jks"
 
-      - name: Build APK
+      # Сборка для GitHub: с проверкой обновлений, она уходит в релиз
+      - name: Build web with update check
+        env:
+          UPDATE_CHECK: 'true'
+        run: npm run build
+
+      - name: Sync Capacitor for GitHub
+        run: npx cap sync android
+
+      - name: Build GitHub APK
         working-directory: android
         env:
           KEYSTORE_PATH: ${{ runner.temp }}/release.jks
@@ -70,8 +73,33 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleRelease
 
-      - name: Rename APK
+      - name: Rename GitHub APK
         run: mv android/app/build/outputs/apk/release/app-release.apk "birthday-${GITHUB_REF_NAME}.apk"
+
+      # Сборка для магазинов: без проверки обновлений, она уходит в артефакты прогона
+      - name: Build web for stores
+        run: npm run build
+
+      - name: Sync Capacitor for stores
+        run: npx cap sync android
+
+      - name: Build store APK
+        working-directory: android
+        env:
+          KEYSTORE_PATH: ${{ runner.temp }}/release.jks
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: ./gradlew assembleRelease
+
+      - name: Rename store APK
+        run: mv android/app/build/outputs/apk/release/app-release.apk "birthday-${GITHUB_REF_NAME}-store.apk"
+
+      - name: Upload store APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: store-apk
+          path: birthday-${{ github.ref_name }}-store.apk
 
       - name: Publish release
         env:

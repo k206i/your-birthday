@@ -6,7 +6,7 @@ import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import {appVars} from '@/configApp';
 import {appStore} from '@/store/appStore';
-import {computed, ref, watch} from 'vue';
+import {computed, defineAsyncComponent, ref, watch} from 'vue';
 import {declineUnit} from '@/composables/declineUnit';
 import {getDaysToDate} from '@/composables/getDaysToDate';
 import {currentDate} from '@/store/currentDate';
@@ -15,6 +15,11 @@ import ModalBirthday from '@/components/Modals/Birthday/modalBirthday.vue';
 import UiProgressBar from '@/components/Ui/ProgressBar/uiProgressBar.vue';
 import {getCurrentWeekIndex} from '@/composables/getCurrentWeekIndex';
 import WidgetPageTitleHome from '@/components/Widgets/PageTitleHome/widgetPageTitleHome.vue';
+
+// динамический импорт выпадает из графа и в магазинную сборку не попадает
+const WidgetUpdate = __UPDATE_CHECK__
+    ? defineAsyncComponent(() => import( '@/components/Widgets/Update/widgetUpdate.vue' ))
+    : null;
 
 const isBirthdayWishOpen = ref( false );
 const daysToBirthday = computed(() => {
@@ -61,6 +66,8 @@ watch( isBirthdayToday, ( value ) => {
 
     <ion-content :fullscreen="true" class="ion-padding">
       <div id="container">
+        <component :is="WidgetUpdate" v-if="WidgetUpdate" />
+
         <WidgetPageTitleHome
             :class="styles.homePage__titleWidget"
             bg-image="dog-1_art"

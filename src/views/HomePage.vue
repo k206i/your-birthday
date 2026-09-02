@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import styles from './homePage.module.scss';
-import {IonContent, IonPage,} from '@ionic/vue';
+import {IonContent, IonModal, IonPage,} from '@ionic/vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
@@ -15,11 +15,18 @@ import ModalBirthday from '@/components/Modals/Birthday/modalBirthday.vue';
 import UiProgressBar from '@/components/Ui/ProgressBar/uiProgressBar.vue';
 import {getCurrentWeekIndex} from '@/composables/getCurrentWeekIndex';
 import WidgetPageTitleHome from '@/components/Widgets/PageTitleHome/widgetPageTitleHome.vue';
+import WidgetReelsOnboarding from '@/components/Widgets/ReelsOnboarding/widgetReelsOnboarding.vue';
 
 // динамический импорт выпадает из графа и в магазинную сборку не попадает
 const WidgetUpdate = __UPDATE_CHECK__
     ? defineAsyncComponent(() => import( '@/components/Widgets/Update/widgetUpdate.vue' ))
     : null;
+
+const isOnboardingOpen = ref( !appStore.isOnboardingShown );
+
+if ( isOnboardingOpen.value ) {
+  appStore.isOnboardingShown = true;
+}
 
 const isBirthdayWishOpen = ref( false );
 const daysToBirthday = computed(() => {
@@ -66,6 +73,19 @@ watch( isBirthdayToday, ( value ) => {
 
     <ion-content :fullscreen="true" class="ion-padding">
       <div id="container">
+        <ion-modal
+            :is-open="isOnboardingOpen"
+            keep-contents-mounted="true"
+            @did-dismiss="isOnboardingOpen = false"
+        >
+          <WidgetReelsOnboarding
+              show-progress
+              show-skip
+              @finish="isOnboardingOpen = false"
+              @skip="isOnboardingOpen = false"
+          />
+        </ion-modal>
+
         <component :is="WidgetUpdate" v-if="WidgetUpdate" />
 
         <WidgetPageTitleHome

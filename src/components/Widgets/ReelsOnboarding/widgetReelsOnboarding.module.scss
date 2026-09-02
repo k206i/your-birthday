@@ -1,0 +1,201 @@
+.widgetReelsOnboarding {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 50px var( --brd-size-side-indent ) var( --brd-size-gap-l );
+  padding-bottom: calc( var( --brd-size-gap-l ) + env( safe-area-inset-bottom, 0px ));
+  overflow: hidden;
+  font-family: var( --brd-font-default );
+  background-color: var( --brd-color-bg );
+  touch-action: pan-y;
+  user-select: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 130%;
+    height: 40%;
+    transform: translateX( -50% );
+    background: radial-gradient(
+                    closest-side,
+                    color-mix( in srgb, var( --brd-custom-theme-color ), transparent 76% ),
+                    transparent 100%
+    );
+    transition: background var( --brd-transition-duration ) ease;
+    pointer-events: none;
+  }
+
+  &__progress {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var( --brd-size-gap );
+  }
+
+  &__track {
+    flex: 1;
+    height: 4px;
+    overflow: hidden;
+    border-radius: var( --brd-size-border-radius-xs );
+    background-color: var( --brd-color-white-10 );
+  }
+
+  &__fill {
+    height: 100%;
+    border-radius: inherit;
+    background-color: var( --brd-color-theme );
+    transition: width ease var( --brd-transition-duration );
+  }
+
+  &__counter {
+    font-family: var( --brd-font-default-alt );
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: .04em;
+    font-variant-numeric: tabular-nums;
+    color: var( --brd-color-font-low );
+  }
+
+  &__slide {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var( --brd-size-gap-l );
+    min-height: 0;
+    padding-top: var( --brd-size-gap-l );
+  }
+
+  &__shot {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+  }
+
+  &__image {
+    display: block;
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: var( --brd-size-border-radius );
+    box-shadow: 0 20px 48px -16px color-mix( in srgb, var( --brd-custom-theme-color ), transparent 58% );
+    animation: reelsShotIn .5s ease both;
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var( --brd-size-gap-s );
+  }
+
+  &__title {
+    margin: 0;
+    font-family: var( --brd-font-default-alt );
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.2;
+    color: var( --brd-color-font-accent );
+    text-wrap: pretty;
+    animation: reelsCopyIn .45s ease .06s both;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var( --brd-color-font );
+    text-wrap: pretty;
+    animation: reelsCopyIn .45s ease .14s both;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: var( --brd-size-gap-l );
+    margin-top: var( --brd-size-gap-l );
+  }
+
+  &__next {
+    flex: 1;
+    height: var( --brd-size-input-height );
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: var( --brd-size-border-radius );
+    font-family: var( --brd-font-default-alt );
+    font-size: 18px;
+    font-weight: bold;
+    color: var( --brd-color-bg );
+    background-color: var( --brd-color-theme );
+    cursor: pointer;
+    transition: var( --brd-transition-transform );
+
+    &:active {
+      transform: scale( .975 );
+    }
+  }
+
+  &__skip {
+    margin: 0;
+    padding: var( --brd-size-gap-s ) var( --brd-size-gap-xs );
+    border: 0;
+    font-family: inherit;
+    font-size: 16px;
+    color: var( --brd-color-font-low );
+    background: none;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    transition: var( --brd-transition-color );
+
+    &:active {
+      color: var( --brd-color-font );
+    }
+  }
+}
+
+@keyframes reelsShotIn {
+  from {
+    opacity: 0;
+    transform: translateY( 16px ) scale( .965 );
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reelsCopyIn {
+  from {
+    opacity: 0;
+    transform: translateY( 12px );
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+  .widgetReelsOnboarding {
+    &__image,
+    &__title,
+    &__text {
+      animation: none;
+    }
+
+    &__fill {
+      transition: none;
+    }
+  }
+}

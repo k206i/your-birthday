@@ -185,7 +185,7 @@ watch( ovulationDates, async ( value ) => {
             </div>
 
             <div :class="stylesArtButton.artButton__comment">
-              {{ lastPeriodDate ? `📅 ${lastPeriodDate}` : 'Первый день последнего цикла' }}
+              {{ lastPeriodDate ? `📅 ${lastPeriodDate}` : 'Выберите дату' }}
             </div>
           </div>
 

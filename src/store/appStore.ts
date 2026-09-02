@@ -24,6 +24,7 @@ type TAppStore = {
   dismissedAlerts: string[], // dismissName закрытых предупреждений
   specialAchievements: Record< string, string >, // id специальной ачивки -> YYYY-MM-DD получения
   resetedStreaks: TStreakName[], // стрики, которые сбрасывали: следующий запуск считается возвращением
+  isOnboardingShown: boolean, // онбординг показывают один раз, при первом запуске
 }
 
 const STORAGE_KEY = 'appStore';
@@ -48,6 +49,7 @@ export const appStore: TAppStore = reactive({
   dismissedAlerts: [],
   specialAchievements: {},
   resetedStreaks: [],
+  isOnboardingShown: false,
 });
 
 export const restoreAppStore = async (): Promise< void > => {

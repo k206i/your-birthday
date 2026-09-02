@@ -58,6 +58,10 @@ const onClearDismissedAlerts = () => {
 const onClearBirthdayGreeted = () => {
   appStore.lastBirthdayGreetedDate = '';
 };
+
+const onClearOnboardingShown = () => {
+  appStore.isOnboardingShown = false;
+};
 </script>
 
 <template>
@@ -103,6 +107,16 @@ const onClearBirthdayGreeted = () => {
         <ion-icon
             :icon="closeCircleOutline"
             @click="onClearBirthdayGreeted"
+            :class="styles.appVersion__resetIcon"
+        ></ion-icon>
+      </li>
+
+      <li :class="styles.appVersion__key">
+        isOnboardingShown
+        {{ appStore.isOnboardingShown }}
+        <ion-icon
+            :icon="closeCircleOutline"
+            @click="onClearOnboardingShown"
             :class="styles.appVersion__resetIcon"
         ></ion-icon>
       </li>

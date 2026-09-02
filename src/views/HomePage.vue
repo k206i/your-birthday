@@ -245,7 +245,7 @@ watch( isBirthdayToday, ( value ) => {
                 link="/achievementsPage"
                 title="🎮 Достижения"
                 comment="Ачивки!"
-                bg-image="otter_art"
+                bg-image="lama_art"
                 :color="appVars.colors.achievements"
             />
           </li>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import styles from './widgetUpdate.module.scss';
 import {ref, computed, onMounted} from 'vue';
-import {Browser} from '@capacitor/browser';
 import {getLatestRelease, TRelease} from '@/api/getLatestRelease';
 import {compareVersions} from '@/composables/compareVersions';
 import {informationCircleOutline} from 'ionicons/icons';
@@ -36,13 +35,6 @@ const onClose = () => {
     appStore.dismissedAlerts.push( dismissName.value );
   }
 };
-
-// Прямая ссылка на apk даёт загрузку сразу; страница релиза — запасной путь
-const onOpen = async (): Promise< void > => {
-  if ( release.value ) {
-    await Browser.open({ url: release.value.apkUrl || release.value.url });
-  }
-};
 </script>
 
 <template>
@@ -61,9 +53,15 @@ const onOpen = async (): Promise< void > => {
 
 
         <div :class="styles.widgetUpdate__buttonWrapper">
-          <div @click="onOpen" :class="styles.widgetUpdate__button">
+          <!-- Ссылка, а не обработчик: Custom Tab не доводит загрузку apk до конца,
+               а target="_blank" Capacitor отдаёт системному браузеру -->
+          <a :href="release.apkUrl || release.url"
+             target="_blank"
+             rel="noopener"
+             :class="styles.widgetUpdate__button"
+          >
             Ура! Скачать<span v-if="sizeLabel" :class="styles.widgetUpdate__small"> ({{ sizeLabel }})</span>!
-          </div>
+          </a>
 
           <div @click="onClose" :class="[
               styles.widgetUpdate__button,

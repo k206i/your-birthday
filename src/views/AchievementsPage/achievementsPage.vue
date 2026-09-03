@@ -29,6 +29,7 @@ import {formatLocalDate, parseLocalDate} from '@/composables/localDate';
 import ModalAchievement from '@/components/Modals/Achievement/modalAchievement.vue';
 import WidgetAlert from '@/components/Widgets/Alert/widgetAlert.vue';
 import {ref, computed, nextTick, onMounted} from 'vue';
+import {useRoute} from 'vue-router';
 import UiProgressBar from '@/components/Ui/ProgressBar/uiProgressBar.vue';
 
 type TAchievementGroup = {
@@ -50,14 +51,16 @@ const groups: TAchievementGroup[] = [
   { id: 'special', icon: '⭐', title: 'Особые', achievements: specialData as TAchievementCombined[], receivedOnly: true },
 ];
 
-const getGroupIdByLastAchievement = (): string => {
-  const lastId: string | undefined = appStore.lastAchievement?.id;
-  const groupId: string = lastId ? lastId.split( '_' )[ 0 ] : '';
+const route = useRoute();
 
-  return groups.some( item => item.id === groupId ) ? groupId : groups[ 0 ].id;
+// Группу присылает виджет последнего достижения; с плитки на первом экране её нет
+const getGroupIdFromRoute = (): string => {
+  const group: unknown = route.query.group;
+
+  return typeof group === 'string' && groups.some( item => item.id === group ) ? group : groups[ 0 ].id;
 };
 
-const selectedGroupId = ref< string >( getGroupIdByLastAchievement() );
+const selectedGroupId = ref< string >( getGroupIdFromRoute() );
 
 const selectedGroup = computed(() => groups.find( item => item.id === selectedGroupId.value ) ?? groups[ 0 ] );
 
@@ -155,7 +158,7 @@ const onSelectAchievement = ( achievement: TAchievementCombined ) => {
 const tabsListRef = ref< HTMLElement >();
 
 onIonViewWillEnter(() => {
-  selectedGroupId.value = getGroupIdByLastAchievement();
+  selectedGroupId.value = getGroupIdFromRoute();
 });
 
 const scrollTabIntoView = async () => {

@@ -14,6 +14,9 @@ const props = defineProps<{
   isAlert?: boolean,
 }>();
 
+// Контракт id: [группа]_[номер] — тот же, по которому собраны группы на странице достижений
+const groupId = computed(() => props.achievement.id.split( '_' )[ 0 ] );
+
 const rarityColor = computed(() => {
   const rarity = props.achievement?.rarity;
 
@@ -67,7 +70,7 @@ const rarityColor = computed(() => {
 
     <router-link
         v-if="props.isLast"
-        to="/achievementsPage"
+        :to="{ path: '/achievementsPage', query: { group: groupId }}"
         :class="styles.achievementShort__link">
     </router-link>
   </div>

@@ -30,3 +30,6 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+
+# Собирается scripts/build-news.mjs и живёт в ветке data, в master ему не место
+/news.json

@@ -1,0 +1,57 @@
+name: Build news
+
+on:
+  schedule:
+    # Часы перечислены явно ради попадания на 10:17 по Москве: cron считает по UTC,
+    # а шаг */3 семёрку не даёт. Минута некруглая — на ровных очередь у GitHub плотнее
+    - cron: '17 1,4,7,10,13,16,19,22 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Зависимостей у скрипта нет, npm ci не нужен
+      - name: Build news.json
+        run: node scripts/build-news.mjs
+
+      # Переключение ветки затрёт рабочую копию, поэтому файл уносим заранее
+      - name: Stash the file
+        run: cp news.json "$RUNNER_TEMP/news.json"
+
+      - name: Publish to the data branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Ветка сиротская: в ней только news.json и ни одного коммита из master,
+          # поэтому автоматические обновления не попадают в историю приложения
+          if git ls-remote --exit-code --heads origin data > /dev/null; then
+            git fetch origin data
+            git checkout -B data origin/data
+          else
+            git checkout --orphan data
+            git rm -rf --cached . > /dev/null
+            rm -rf src android public scripts .github design cypress
+          fi
+
+          cp "$RUNNER_TEMP/news.json" news.json
+          git add -f news.json
+
+          if git diff --cached --quiet; then
+            echo "Новых постов нет, коммит не нужен"
+            exit 0
+          fi
+
+          git commit -m "Update news.json"
+          git push origin data

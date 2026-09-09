@@ -9,6 +9,7 @@ import LifeProgress from '@/views/LifeProgress/lifeProgress.vue';
 import UserProfile from '@/views/UserProfile/userProfile.vue';
 import AchievementsPage from '@/views/AchievementsPage/achievementsPage.vue';
 import DonationsPage from '@/views/DonationsPage/donationsPage.vue';
+import CardPage from '@/views/CardPage/cardPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -59,6 +60,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/donationsPage',
     name: 'DonationsPage',
     component: DonationsPage
+  },
+  {
+    path: '/cardPage',
+    name: 'CardPage',
+    component: CardPage
   }
 ]
 

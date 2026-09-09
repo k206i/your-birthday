@@ -249,6 +249,16 @@ watch( isBirthdayToday, ( value ) => {
                 :color="appVars.colors.achievements"
             />
           </li>
+
+          <li>
+            <WidgetPageLink
+                link="/cardPage"
+                title="Поздравить кого-то"
+                comment="Соберём открытку"
+                bg-image="lama_art"
+                :color="appVars.colors.achievements"
+            />
+          </li>
         </ul>
 
 

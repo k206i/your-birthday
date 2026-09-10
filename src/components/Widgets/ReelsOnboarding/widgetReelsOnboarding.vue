@@ -16,6 +16,7 @@ import imgFemaleCalendar from '@/assets/img/screenshots/screen-femaleCalendar.we
 import imgFertilityWindow from '@/assets/img/screenshots/screen-female-fertility-window.webp';
 import imgMaleCalendar from '@/assets/img/screenshots/screen-maleCalendar.webp';
 import imgBirthdayWish from '@/assets/img/screenshots/screen-birthday-wish.webp';
+import imgGiftCard from '@/assets/img/screenshots/screen-giftCard.webp';
 import imgDonationsSupport from '@/assets/img/screenshots/screen-donations-support.webp';
 import imgDonationsThanks from '@/assets/img/screenshots/screen-donations-thanks.webp';
 
@@ -124,6 +125,13 @@ const slides: TReelSlide[] = [
     title: 'Тут вас точно поздравят',
     text: 'В ваш день поздравление откроется само: конфетти, комплименты и случайный гость из зверинца. А кнопка на первом экране устроит всё то же самое прямо сейчас 🎉',
     themeColor: appVars.colors.dayConception,
+  },
+  {
+    id: 'giftCard',
+    image: imgGiftCard,
+    title: 'Теперь поздравьте сами, текст за нами',
+    text: 'Впишите имя — или не вписывайте, работает и так. Приложение придумает поздравление за вас, а дальше отправляйте его картинкой или копируйте текстом в любой мессенджер 🎁',
+    themeColor: appVars.colors.giftCard,
   },
   {
     id: 'donationsSupport',

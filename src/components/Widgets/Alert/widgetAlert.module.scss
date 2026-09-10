@@ -82,6 +82,7 @@
 
     #{$root}_info & {
       background-color: var( --brd-color-info );
+      color: var( --brd-color-font-accent );
     }
 
     #{$root}_warning & {

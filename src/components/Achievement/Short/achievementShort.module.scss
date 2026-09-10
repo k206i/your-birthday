@@ -4,13 +4,14 @@
   display: flex;
   align-items: center;
   gap: var( --brd-size-gap );
-  padding: var( --brd-size-gap );
+  padding: var( --brd-size-gap-s ) var( --brd-size-gap );
   border-radius: var( --brd-size-border-radius );
 
   &__icon {
     position: relative;
     z-index: 100;
     width: 70px;
+    padding: var( --brd-size-gap-s) 0;
   }
 
   &__contentWrapper {
@@ -28,6 +29,7 @@
     font-family: var( --brd-font-default-alt );
     font-size: 18px;
     font-weight: bold;
+    line-height: 1.2;
     color: var( --brd-color-font-accent );
   }
 

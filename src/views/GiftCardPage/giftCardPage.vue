@@ -41,7 +41,7 @@ const onShare = (): void => {
               '--brd-custom-theme-color': appVars.colors.giftCard,
             }"
   >
-    <AppHeader page-name="Поздравить <span class='accent-theme'>кого-то</span>" />
+    <AppHeader page-name="Ваша <span class='accent-theme'>открытка</span>" />
 
     <ion-content :fullscreen="true" class="ion-padding">
       <UiInput

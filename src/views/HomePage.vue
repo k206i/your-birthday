@@ -232,11 +232,11 @@ watch( isBirthdayToday, ( value ) => {
 
           <li>
             <WidgetPageLink
-                link="/dayConception"
-                title="Когда был день зачатия?"
-                comment="Что было в тот день?"
-                bg-image="dog-2_art"
-                :color="appVars.colors.dayConception"
+                link="/giftCardPage"
+                title="Что бы такое пожелать?"
+                comment="Придумаем поздравление за вас"
+                bg-image="cat-7_art"
+                :color="appVars.colors.giftCard"
             />
           </li>
 
@@ -252,11 +252,11 @@ watch( isBirthdayToday, ( value ) => {
 
           <li>
             <WidgetPageLink
-                link="/giftCardPage"
-                title="Поздравить кого-то"
-                comment="Соберём открытку"
-                bg-image="lama_art"
-                :color="appVars.colors.giftCard"
+                link="/dayConception"
+                title="Когда был день зачатия?"
+                comment="Что было в тот день?"
+                bg-image="dog-2_art"
+                :color="appVars.colors.dayConception"
             />
           </li>
         </ul>

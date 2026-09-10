@@ -2,25 +2,29 @@
   {
     "id": "classic",
     "tone": "warm",
-    "withName": "{name}, с днём рождения! Пусть {wish}, а {wish}.",
-    "withoutName": "С днём рождения! Пусть {wish}, а {wish}."
+    "headerWithName": "{name}, с днём рождения!",
+    "headerWithoutName": "С днём рождения!",
+    "text": "Пусть {wish}, а {wish}."
   },
   {
     "id": "list",
     "tone": "warm",
-    "withName": "{name}, с днём рождения! Желаю {gift}, {gift} и {gift}.",
-    "withoutName": "С днём рождения! Желаю {gift}, {gift} и {gift}."
+    "headerWithName": "{name}, с днём рождения!",
+    "headerWithoutName": "С днём рождения!",
+    "text": "Желаю {gift}, {gift} и {gift}."
   },
   {
     "id": "achievement",
     "tone": "fun",
-    "withName": "🏆 {name} получает достижение «{title}». Награда: годовой запас {gift}.",
-    "withoutName": "🏆 Достижение разблокировано: «{title}». Награда: годовой запас {gift}."
+    "headerWithName": "🏆 {name} получает достижение «{title}»",
+    "headerWithoutName": "🏆 Достижение разблокировано: «{title}»",
+    "text": "Награда: годовой запас {gift}."
   },
   {
     "id": "toast",
     "tone": "fun",
-    "withName": "{name}! {joke} {toastEnd}",
-    "withoutName": "{joke} {toastEnd}"
+    "headerWithName": "{name}! {joke}",
+    "headerWithoutName": "{joke}",
+    "text": "{toastEnd}"
   }
 ]

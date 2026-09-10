@@ -252,11 +252,11 @@ watch( isBirthdayToday, ( value ) => {
 
           <li>
             <WidgetPageLink
-                link="/cardPage"
+                link="/giftCardPage"
                 title="Поздравить кого-то"
                 comment="Соберём открытку"
                 bg-image="lama_art"
-                :color="appVars.colors.achievements"
+                :color="appVars.colors.giftCard"
             />
           </li>
         </ul>

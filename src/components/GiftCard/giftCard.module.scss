@@ -1,0 +1,35 @@
+@use "@/assets/styles/typography";
+
+.giftCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var( --brd-size-gap ) var( --brd-size-gap ) 0;
+  border-radius: var( --brd-size-border-radius );
+  background:
+          radial-gradient(120% 110% at 0%   0%,   rgba(168,118,236,.42) 0%, rgba(168,118,236,0) 62%),
+          radial-gradient(115% 105% at 100% 22%,  rgba( 90,166,232,.30) 0%, rgba( 90,166,232,0) 60%),
+          radial-gradient(120% 100% at 45%  105%, rgba(242,179,72,.20) 0%, rgba(242,179,72,0) 62%),
+          radial-gradient(90%  80%  at 78%  75%,  rgba(168,118,236,.18) 0%, rgba(168,118,236,0) 65%),
+          #16181d;
+
+  &__header {
+    @extend .typography__h2;
+    margin-bottom: var( --brd-size-gap-s );
+    text-align: center;
+  }
+
+  &__text {
+    font-family: var( --brd-font-default-alt );
+    font-size: 18px;
+    color: var( --brd-color-font );
+    text-align: center;
+  }
+
+  &__art {
+    width: 40%;
+    max-width: 160px;
+    margin-top: var( --brd-size-gap );
+    filter: drop-shadow(0 8px 22px rgba(12,15,23,.6));
+  }
+}

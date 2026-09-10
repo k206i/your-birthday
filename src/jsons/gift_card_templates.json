@@ -1,0 +1,65 @@
+[
+  {
+    "id": "classic",
+    "tone": "warm",
+    "headerWithName": "{name}, с днём рождения!",
+    "headerWithoutName": "С днём рождения!",
+    "text": "Пусть {wish}, а {wish}."
+  },
+  {
+    "id": "list",
+    "tone": "warm",
+    "headerWithName": "{name}, с днём рождения!",
+    "headerWithoutName": "С днём рождения!",
+    "text": "Желаю {gift}, {gift} и {gift}."
+  },
+  {
+    "id": "achievement",
+    "tone": "fun",
+    "headerWithName": "🏆 {name} получает достижение «{title}»",
+    "headerWithoutName": "🏆 Достижение разблокировано: «{title}»",
+    "text": "Награда: годовой запас {gift}."
+  },
+  {
+    "id": "toast",
+    "tone": "fun",
+    "headerWithName": "{name}! {joke}",
+    "headerWithoutName": "{joke}",
+    "text": "{toastEnd}"
+  },
+  {
+    "id": "short",
+    "tone": "warm",
+    "headerWithName": "{name}, поздравляю! 🎉",
+    "headerWithoutName": "Поздравляю! 🎉",
+    "text": "Пусть {wish}."
+  },
+  {
+    "id": "holiday",
+    "tone": "warm",
+    "headerWithName": "С праздником, {name}! 🎂",
+    "headerWithoutName": "С праздником! 🎂",
+    "text": "Желаю {gift}. И пусть {wish}."
+  },
+  {
+    "id": "jokeWish",
+    "tone": "fun",
+    "headerWithName": "{name}, с днём рождения!",
+    "headerWithoutName": "С днём рождения!",
+    "text": "{joke} Пусть {wish}."
+  },
+  {
+    "id": "unlock",
+    "tone": "fun",
+    "headerWithName": "🎮 {name} открывает достижение «{title}»",
+    "headerWithoutName": "🎮 Открыто достижение «{title}»",
+    "text": "Условие выполнено: ещё один год. Награда: годовой запас {gift}."
+  },
+  {
+    "id": "warm",
+    "tone": "warm",
+    "headerWithName": "{name}, с днём рождения! 💜",
+    "headerWithoutName": "С днём рождения! 💜",
+    "text": "Желаю {gift} и {gift}. И пусть {wish}."
+  }
+]

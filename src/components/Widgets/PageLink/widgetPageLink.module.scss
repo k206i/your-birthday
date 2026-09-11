@@ -1,4 +1,5 @@
 .widgetPageLink {
+  $root: &;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -7,6 +8,15 @@
   min-height: var( --brd-size-widget-min-height );
   text-decoration: none;
   border-radius: var( --brd-size-border-radius );
+
+  &_wide {
+    flex-direction: row;
+    justify-content: normal;
+    align-items: center;
+    gap: var( --brd-size-gap-s );
+    min-height: auto;
+    padding: var( --brd-size-gap-s );
+  }
 
   &__comment {
     padding-right: 30px;
@@ -41,6 +51,13 @@
     border-radius: 100%;
     font-size: 1.2em;
     color: var( --brd-color-theme-bg );
+
+    #{$root}_wide & {
+      position: relative;
+      right: 0;
+      bottom: 0;
+      margin-left: auto;
+    }
   }
 
   &__content {
@@ -51,6 +68,12 @@
     border-radius: var( --brd-size-border-radius-s );
     background-color: rgba( 0, 0, 0, .5 );
     backdrop-filter: blur( 5px );
+
+    #{$root}_wide & {
+      min-height: auto;
+      backdrop-filter: none;
+      background: none;
+    }
   }
 
   &__gradient {
@@ -72,5 +95,15 @@
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: left 50% bottom 0;
+  }
+
+  &__artWide {
+    width: 75px;
+    aspect-ratio: 1;
+    border-radius: var( --brd-size-border-radius );
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: var( --brd-color-black-50 );
   }
 }

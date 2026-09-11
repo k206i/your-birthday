@@ -23,6 +23,10 @@
     padding: 0;
   }
 
+  &__serviceWide {
+    grid-column: 1 / -1;
+  }
+
   &__leadBlock {
     padding: var( --brd-size-gap-s ) var( --brd-size-gap );
     color: var( --brd-color-pink );

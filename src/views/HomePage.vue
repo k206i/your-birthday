@@ -16,7 +16,7 @@ import UiProgressBar from '@/components/Ui/ProgressBar/uiProgressBar.vue';
 import {getCurrentWeekIndex} from '@/composables/getCurrentWeekIndex';
 import WidgetPageTitleHome from '@/components/Widgets/PageTitleHome/widgetPageTitleHome.vue';
 import WidgetReelsOnboarding from '@/components/Widgets/ReelsOnboarding/widgetReelsOnboarding.vue';
-import widgetPageLinkWide from '@/components/Widgets/PageLink/widgetPageLinkWide.vue';
+import WidgetPageLinkWide from '@/components/Widgets/PageLink/widgetPageLinkWide.vue';
 
 // динамический импорт выпадает из графа и в магазинную сборку не попадает
 const WidgetUpdate = __UPDATE_CHECK__
@@ -211,6 +211,17 @@ watch( isBirthdayToday, ( value ) => {
             />
           </li>
 
+          <li :class="styles.homePage__serviceWide">
+            <WidgetPageLinkWide
+                link="/giftCardPage"
+                title="Надо кого-то поздравить?"
+                comment="Придумаем поздравление за вас"
+                bg-image="cat-7_art"
+                :color="appVars.colors.giftCard"
+            />
+          </li>
+
+
           <li>
             <WidgetPageLink
                 link="/maleCalendar"
@@ -228,16 +239,6 @@ watch( isBirthdayToday, ( value ) => {
                 comment="Поищем идеальный день&nbsp;❤️"
                 bg-image="cat-1_art"
                 :color="appVars.colors.femaleCalendar"
-            />
-          </li>
-
-          <li :class="styles.homePage__serviceWide">
-            <widgetPageLinkWide
-                link="/giftCardPage"
-                title="Что бы такое пожелать?"
-                comment="Придумаем поздравление за вас"
-                bg-image="cat-7_art"
-                :color="appVars.colors.giftCard"
             />
           </li>
 

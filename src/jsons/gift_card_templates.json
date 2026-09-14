@@ -9,8 +9,8 @@
   {
     "id": "list",
     "tone": "warm",
-    "headerWithName": "{name}, с днём рождения!",
-    "headerWithoutName": "С днём рождения!",
+    "headerWithName": "{name}, с новым годом жизни! 🎂",
+    "headerWithoutName": "С новым годом жизни! 🎂",
     "text": "Желаю {gift}, {gift} и {gift}."
   },
   {
@@ -44,8 +44,8 @@
   {
     "id": "jokeWish",
     "tone": "fun",
-    "headerWithName": "{name}, с днём рождения!",
-    "headerWithoutName": "С днём рождения!",
+    "headerWithName": "Ну что, {name}, с днём рождения!",
+    "headerWithoutName": "Ну что, с днём рождения!",
     "text": "{joke} Пусть {wish}."
   },
   {
@@ -58,8 +58,8 @@
   {
     "id": "warm",
     "tone": "warm",
-    "headerWithName": "{name}, с днём рождения! 💜",
-    "headerWithoutName": "С днём рождения! 💜",
+    "headerWithName": "{name}, поздравляю от всей души! 💜",
+    "headerWithoutName": "Поздравляю от всей души! 💜",
     "text": "Желаю {gift} и {gift}. И пусть {wish}."
   }
 ]

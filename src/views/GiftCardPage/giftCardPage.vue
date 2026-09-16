@@ -18,12 +18,21 @@ const name = ref< string >( '' );
 const giftCard = ref< TGiftCard >( generateGiftCard() );
 const art = ref< string >( getModalBottomArt() );
 const shareRoot = ref< HTMLElement >();
+const isLoading = ref( false );
 
 const content = computed(() => renderGiftCard( giftCard.value, name.value ));
 
 const onRegenerate = (): void => {
-  giftCard.value = generateGiftCard();
-  art.value = getModalBottomArt();
+  isLoading.value = true;
+
+  setTimeout(() => {
+    giftCard.value = generateGiftCard();
+    art.value = getModalBottomArt();
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 100);
+  }, 100);
 };
 
 const onCopy = (): void => {
@@ -51,7 +60,10 @@ const onShare = (): void => {
           placeholder="Имя — или оставьте пустым"
       />
 
-      <div :class="styles.giftCardPage__block"
+      <div :class="[
+            styles.giftCardPage__block,
+            isLoading && styles.giftCardPage__block_isLoading
+          ]"
            ref="shareRoot"
       >
         <GiftCard

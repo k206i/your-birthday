@@ -3,6 +3,11 @@
 
   &__block {
     margin-bottom: var( --brd-size-gap );
+    transition: opacity .1s ease;
+
+    &_isLoading {
+      opacity: 0;
+    }
   }
 
   &__actions {

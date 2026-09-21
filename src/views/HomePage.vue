@@ -271,7 +271,7 @@ const openSocial = async ( url: string ): Promise< void > => {
 
         <div :class="styles.homePage__socials">
           <div :class="styles.homePage__socialsTitle">
-            Стримы и новости
+            Кто ещё родился сегодня?
           </div>
 
           <ul :class="styles.homePage__socialsList">

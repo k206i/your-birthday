@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import styles from './homePage.module.scss';
-import {IonContent, IonModal, IonPage,} from '@ionic/vue';
+import {IonContent, IonIcon, IonModal, IonPage,} from '@ionic/vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
@@ -17,6 +17,8 @@ import {getCurrentWeekIndex} from '@/composables/getCurrentWeekIndex';
 import WidgetPageTitleHome from '@/components/Widgets/PageTitleHome/widgetPageTitleHome.vue';
 import WidgetReelsOnboarding from '@/components/Widgets/ReelsOnboarding/widgetReelsOnboarding.vue';
 import WidgetPageLinkWide from '@/components/Widgets/PageLink/widgetPageLinkWide.vue';
+import {Browser} from '@capacitor/browser';
+import {logoTwitch} from 'ionicons/icons';
 
 // динамический импорт выпадает из графа и в магазинную сборку не попадает
 const WidgetUpdate = __UPDATE_CHECK__
@@ -65,6 +67,10 @@ watch( isBirthdayToday, ( value ) => {
     appStore.lastBirthdayGreetedDate = currentDate.value;
   }
 }, { immediate: true });
+
+const openSocial = async ( url: string ): Promise< void > => {
+  await Browser.open({ url });
+};
 
 </script>
 
@@ -263,6 +269,39 @@ watch( isBirthdayToday, ( value ) => {
           </li>
         </ul>
 
+        <div :class="styles.homePage__socials">
+          <div :class="styles.homePage__socialsTitle">
+            Стримы и новости
+          </div>
+
+          <ul :class="styles.homePage__socialsList">
+            <li>
+              <a
+                  :class="styles.homePage__socialButton"
+                  :style="{ '--social-color': appVars.socials.twitch.color }"
+                  :href="appVars.socials.twitch.url"
+                  aria-label="Twitch"
+                  @click.prevent="openSocial( appVars.socials.twitch.url )"
+              >
+                <ion-icon :icon="logoTwitch"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a
+                  :class="styles.homePage__socialButton"
+                  :style="{ '--social-color': appVars.socials.telegram.color }"
+                  :href="appVars.socials.telegram.url"
+                  aria-label="Telegram"
+                  @click.prevent="openSocial( appVars.socials.telegram.url )"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M23.91 3.79 20.3 20.84c-.25 1.21-.98 1.5-2 .94l-5.5-4.07-2.66 2.57c-.3.3-.55.56-1.1.56-.72 0-.6-.27-.84-.95L6.3 13.7l-5.45-1.7c-1.18-.35-1.19-1.16.26-1.75l21.26-8.2c.97-.43 1.9.24 1.53 1.73z" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
 
       </div>
     </ion-content>

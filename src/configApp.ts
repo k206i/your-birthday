@@ -54,5 +54,9 @@ export const appVars = {
   donations: {
     onceUrl: 'https://pay.cloudtips.ru/p/460b7ab7',
     subscribeDonation: 'https://boosty.to/k206i',
-  }
+  },
+  socials: {
+    twitch: { url: 'https://www.twitch.tv/day_of_birth', color: '#9146FF' },
+    telegram: { url: 'https://t.me/dayofbirth', color: '#2AABEE' },
+  },
 }

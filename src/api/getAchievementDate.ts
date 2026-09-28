@@ -49,7 +49,20 @@ const getStreakStart = ( streakName: TStreakName ): string => {
   return STREAK_ACCESS[ streakName ].get();
 };
 
+// Сброс — единственный момент, когда длину серии ещё можно узнать: дальше дата старта затирается
 export const setStreakStart = ( streakName: TStreakName, value: string ): void => {
+  if ( !value ) {
+    const days: number | null = getStreakDays( streakName );
+
+    if ( days !== null ) {
+      appStore.streakLastResults[ streakName ] = days;
+
+      if ( days > ( appStore.streakRecords[ streakName ] ?? 0 )) {
+        appStore.streakRecords[ streakName ] = days;
+      }
+    }
+  }
+
   STREAK_ACCESS[ streakName ].set( value );
 };
 

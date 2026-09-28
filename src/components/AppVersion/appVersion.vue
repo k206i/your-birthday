@@ -51,6 +51,11 @@ const onClearResetedStreaks = () => {
   appStore.resetedStreaks = [];
 };
 
+const onClearStreakHistory = () => {
+  appStore.streakRecords = {};
+  appStore.streakLastResults = {};
+};
+
 const onClearDismissedAlerts = () => {
   appStore.dismissedAlerts = [];
 };
@@ -87,6 +92,16 @@ const onClearOnboardingShown = () => {
         <ion-icon
             :icon="closeCircleOutline"
             @click="onClearResetedStreaks"
+            :class="styles.appVersion__resetIcon"
+        ></ion-icon>
+      </li>
+
+      <li :class="styles.appVersion__key">
+        streakRecords / streakLastResults
+        {{ appStore.streakRecords }} / {{ appStore.streakLastResults }}
+        <ion-icon
+            :icon="closeCircleOutline"
+            @click="onClearStreakHistory"
             :class="styles.appVersion__resetIcon"
         ></ion-icon>
       </li>

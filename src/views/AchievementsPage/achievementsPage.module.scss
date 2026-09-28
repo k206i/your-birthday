@@ -97,6 +97,29 @@
 
   }
 
+  &__streakRecord {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var( --brd-size-gap );
+
+    ion-icon {
+      flex-shrink: 0;
+      font-size: 22px;
+      color: var( --brd-custom-theme-color );
+    }
+  }
+
+  &__streakRecordTitle {
+    font-size: 13px;
+    color: var( --brd-color-font );
+  }
+
+  &__streakRecordLast {
+    font-size: 11px;
+    color: var( --brd-color-font-low );
+  }
+
   &__lightButton {
     display: flex;
     align-items: center;

@@ -24,6 +24,8 @@ type TAppStore = {
   dismissedAlerts: string[], // dismissName закрытых предупреждений
   specialAchievements: Record< string, string >, // id специальной ачивки -> YYYY-MM-DD получения
   resetedStreaks: TStreakName[], // стрики, которые сбрасывали: следующий запуск считается возвращением
+  streakRecords: Partial< Record< TStreakName, number > >, // лучшая серия по каждому стрику, в днях
+  streakLastResults: Partial< Record< TStreakName, number > >, // сколько продержались в последний раз, в днях
   isOnboardingShown: boolean, // онбординг показывают один раз, при первом запуске
 }
 
@@ -49,6 +51,8 @@ export const appStore: TAppStore = reactive({
   dismissedAlerts: [],
   specialAchievements: {},
   resetedStreaks: [],
+  streakRecords: {},
+  streakLastResults: {},
   isOnboardingShown: false,
 });
 

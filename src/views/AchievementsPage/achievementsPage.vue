@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import styles from './achievementsPage.module.scss';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
-import {IonContent, IonPage, onIonViewDidEnter, onIonViewWillEnter} from '@ionic/vue';
+import {IonContent, IonPage, onIonViewDidEnter, onIonViewWillEnter, IonIcon} from '@ionic/vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import {appVars} from '@/configApp';
 import WidgetAddBirthday from '@/components/Widgets/AddBirthday/widgetAddBirthday.vue';
@@ -31,6 +31,7 @@ import WidgetAlert from '@/components/Widgets/Alert/widgetAlert.vue';
 import {ref, computed, nextTick, onMounted} from 'vue';
 import {useRoute} from 'vue-router';
 import UiProgressBar from '@/components/Ui/ProgressBar/uiProgressBar.vue';
+import {trophyOutline} from 'ionicons/icons';
 
 type TAchievementGroup = {
   id: string,
@@ -83,6 +84,22 @@ const streakDays = computed(() => {
   const streakName: TStreakName | undefined = selectedGroup.value.streakName;
 
   return streakName ? getStreakDays( streakName ) : null;
+});
+
+// История серии; null, пока её ни разу не доводили до сброса.
+// Рекорд берём с оглядкой на текущие дни: идущая серия могла уже обогнать сохранённый
+const streakHistory = computed(() => {
+  const streakName: TStreakName | undefined = selectedGroup.value.streakName;
+  const last: number | undefined = streakName ? appStore.streakLastResults[ streakName ] : undefined;
+
+  if ( streakName === undefined || last === undefined ) {
+    return null;
+  }
+
+  return {
+    last,
+    record: Math.max( appStore.streakRecords[ streakName ] ?? 0, streakDays.value ?? 0 ),
+  };
 });
 
 const groupCard = computed(() => getLastAchievement( selectedGroup.value.achievements ) ?? selectedGroup.value.achievements[ 0 ] );
@@ -237,6 +254,22 @@ onIonViewDidEnter( scrollTabIntoView );
         />
 
         <div v-if="selectedGroup.streakName">
+          <div v-if="streakHistory" :class="styles.achievementsPage__streakRecord">
+            <ion-icon :icon="trophyOutline"></ion-icon>
+
+            <div>
+              <div :class="styles.achievementsPage__streakRecordTitle">
+                Личный рекорд — {{ streakHistory.record }} {{ declineUnit( streakHistory.record, 'day' ) }}
+              </div>
+
+              <div v-if="streakHistory.record > streakHistory.last"
+                   :class="styles.achievementsPage__streakRecordLast"
+              >
+                прошлая серия: {{ streakHistory.last }} {{ declineUnit( streakHistory.last, 'day' ) }}
+              </div>
+            </div>
+          </div>
+
           <template v-if="streakDays !== null">
             <div :class="styles.achievementsPage__streakInfo">
               <div>

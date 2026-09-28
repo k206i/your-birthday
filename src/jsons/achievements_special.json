@@ -22,8 +22,8 @@
     "rarity": "special",
     "icon": "☭",
     "image": "special_ussrBorn.webp",
-    "name": "Всегда готов!",
-    "comment": "Родился в СССР",
+    "name": "Сделано в СССР",
+    "comment": "На карте не найти, из памяти не стереть",
     "ageText": "За дату рождения до 26 декабря 1991 года"
   },
   {
@@ -31,9 +31,36 @@
     "rarity": "special",
     "icon": "☭",
     "image": "special_gagarinBorn.webp",
-    "name": "Всегда готов!",
+    "name": "Поехали!",
     "comment": "Полетел вместе с Гагариным",
     "ageText": "За дату рождения в 1961 году, когда Гагарин полетел в космос"
+  },
+  {
+    "id": "special_octobrist",
+    "rarity": "special",
+    "icon": "⭐",
+    "image": "special_octobrist.webp",
+    "name": "Октябрёнок",
+    "comment": "Звёздочка с кудрявым Лениным",
+    "ageText": "За дату рождения до 1983 года"
+  },
+  {
+    "id": "special_pioneer",
+    "rarity": "special",
+    "icon": "🎺",
+    "image": "special_pioneer.webp",
+    "name": "Будь готов!",
+    "comment": "Всегда готов!",
+    "ageText": "За дату рождения до 1980 года"
+  },
+  {
+    "id": "special_komsomol",
+    "rarity": "special",
+    "icon": "🚩",
+    "image": "special_komsomol.webp",
+    "name": "Партия сказала: надо!",
+    "comment": "Комсомол ответил: есть!",
+    "ageText": "За дату рождения до 1977 года"
   },
   {
     "id": "special_backBeard",

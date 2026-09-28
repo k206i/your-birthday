@@ -5,11 +5,16 @@ import {appStore} from '@/store/appStore';
 import {currentDate} from '@/store/currentDate';
 import {setLastAchievement} from '@/api/setLastAchievement';
 import {getStreakStarts} from '@/api/getAchievementDate';
+import {syncBirthDateAchievements} from '@/api/syncBirthDateAchievements';
 
+syncBirthDateAchievements();
 setLastAchievement();
 
 // Пересчёт ачивок при смене даты рождения
-watch(() => appStore.userBirthDate, () => setLastAchievement());
+watch(() => appStore.userBirthDate, () => {
+  syncBirthDateAchievements();
+  setLastAchievement();
+});
 
 // Дата свадьбы открывает шкалу годовщин
 watch(() => appStore.weddingDate, () => setLastAchievement());

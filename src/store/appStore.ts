@@ -27,6 +27,7 @@ type TAppStore = {
   streakRecords: Partial< Record< TStreakName, number > >, // лучшая серия по каждому стрику, в днях
   streakLastResults: Partial< Record< TStreakName, number > >, // сколько продержались в последний раз, в днях
   isOnboardingShown: boolean, // онбординг показывают один раз, при первом запуске
+  isContactsEnabled: boolean, // раздел дней рождения из контактов включён пользователем
 }
 
 const STORAGE_KEY = 'appStore';
@@ -54,6 +55,7 @@ export const appStore: TAppStore = reactive({
   streakRecords: {},
   streakLastResults: {},
   isOnboardingShown: false,
+  isContactsEnabled: false,
 });
 
 export const restoreAppStore = async (): Promise< void > => {

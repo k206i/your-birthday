@@ -1,7 +1,7 @@
 {
   "name": "birthday-date",
   "private": true,
-  "version": "1.4.11",
+  "version": "1.5.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -24,6 +24,7 @@
     "@capacitor/preferences": "^8.0.1",
     "@capacitor/share": "^8.0.1",
     "@capacitor/status-bar": "8.0.2",
+    "@capgo/capacitor-contacts": "^8.1.4",
     "@ionic/core": "^8.8.4",
     "@ionic/vue": "^8.8.4",
     "@ionic/vue-router": "^8.8.4",

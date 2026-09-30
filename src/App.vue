@@ -6,9 +6,11 @@ import {currentDate} from '@/store/currentDate';
 import {setLastAchievement} from '@/api/setLastAchievement';
 import {getStreakStarts} from '@/api/getAchievementDate';
 import {syncBirthDateAchievements} from '@/api/syncBirthDateAchievements';
+import {initContactsWatcher} from '@/api/getContactsBirthdays';
 
 syncBirthDateAchievements();
 setLastAchievement();
+initContactsWatcher();
 
 // Пересчёт ачивок при смене даты рождения
 watch(() => appStore.userBirthDate, () => {

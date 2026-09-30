@@ -28,4 +28,20 @@
   &__block {
     margin-bottom: var( --brd-size-gap-l );
   }
+
+  &__toggleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var( --brd-size-gap );
+    margin-bottom: var( --brd-size-gap-s );
+    font-size: 14px;
+    color: var( --brd-color-font );
+  }
+
+  &__actionLink {
+    color: var( --brd-color-font-accent );
+    text-decoration: underline dashed;
+    cursor: pointer;
+  }
 }

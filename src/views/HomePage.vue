@@ -19,6 +19,7 @@ import WidgetReelsOnboarding from '@/components/Widgets/ReelsOnboarding/widgetRe
 import WidgetPageLinkWide from '@/components/Widgets/PageLink/widgetPageLinkWide.vue';
 import {Browser} from '@capacitor/browser';
 import {logoTwitch} from 'ionicons/icons';
+import {isContactsMock} from '@/api/getContactsBirthdays';
 
 // динамический импорт выпадает из графа и в магазинную сборку не попадает
 const WidgetUpdate = __UPDATE_CHECK__
@@ -224,6 +225,16 @@ const openSocial = async ( url: string ): Promise< void > => {
                 comment="Придумаем поздравление за вас"
                 bg-image="cat-7_art"
                 :color="appVars.colors.giftCard"
+            />
+          </li>
+
+          <li v-if="appStore.isContactsEnabled || isContactsMock" :class="styles.homePage__serviceWide">
+            <WidgetPageLinkWide
+                link="/contactsBirthdaysPage"
+                title="Дни рождения из контактов"
+                comment="Чтобы никого не пропустить 🎂"
+                bg-image="panda_art"
+                :color="appVars.colors.contactsBirthdays"
             />
           </li>
 

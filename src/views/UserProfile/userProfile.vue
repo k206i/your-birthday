@@ -82,6 +82,38 @@ const onContactsToggle = async ( event: ToggleCustomEvent ) => {
 
       <div :class="styles.userProfile__block">
         <div :class="styles.userProfile__blockLabel">
+          Контакты
+        </div>
+
+        <div :class="styles.userProfile__toggleRow">
+          <div>
+            <div :class="styles.userProfile__toggleRowText">
+              Показывать дни рождения из контактов
+            </div>
+
+            <div :class="styles.userProfile__blockComment">
+              Контакты читаются только на этом телефоне: мы их не сохраняем и никуда не отправляем
+
+              <div v-if="isBlockedHintShown">
+                Доступ к контактам запрещён в настройках телефона.
+
+                <span :class="styles.userProfile__actionLink" @click="openContactsSettings">
+                  Открыть настройки
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <ion-toggle
+              :checked="isContactsToggleOn"
+              aria-label="Показывать дни рождения из контактов"
+              @ionChange="onContactsToggle"
+          ></ion-toggle>
+        </div>
+      </div>
+
+      <div :class="styles.userProfile__block">
+        <div :class="styles.userProfile__blockLabel">
           Семья
         </div>
 
@@ -119,34 +151,6 @@ const onContactsToggle = async ( event: ToggleCustomEvent ) => {
 
         <div :class="styles.userProfile__blockComment">
           Напомним за 3 дня, чтобы вы успели подготовиться 🎁
-        </div>
-      </div>
-
-      <div :class="styles.userProfile__block">
-        <div :class="styles.userProfile__blockLabel">
-          Контакты
-        </div>
-
-        <div :class="styles.userProfile__toggleRow">
-          Показывать дни рождения из контактов
-
-          <ion-toggle
-              :checked="isContactsToggleOn"
-              aria-label="Показывать дни рождения из контактов"
-              @ionChange="onContactsToggle"
-          ></ion-toggle>
-        </div>
-
-        <div :class="styles.userProfile__blockComment">
-          Контакты читаются только на этом телефоне: мы их не сохраняем и никуда не отправляем
-
-          <div v-if="isBlockedHintShown">
-            Доступ к контактам запрещён в настройках телефона.
-
-            <span :class="styles.userProfile__actionLink" @click="openContactsSettings">
-              Открыть настройки
-            </span>
-          </div>
         </div>
       </div>
 

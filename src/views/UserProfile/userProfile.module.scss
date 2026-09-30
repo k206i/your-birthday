@@ -31,12 +31,19 @@
 
   &__toggleRow {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     gap: var( --brd-size-gap );
     margin-bottom: var( --brd-size-gap-s );
+  }
+
+  &__toggleRowText {
+    margin-bottom: var( --brd-size-gap-s );
     font-size: 14px;
     color: var( --brd-color-font );
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &__actionLink {

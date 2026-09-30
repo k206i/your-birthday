@@ -1,4 +1,5 @@
 import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
 import type { Contact, ContactsPermissionState } from '@capgo/capacitor-contacts';
 import { appStore } from '@/store/appStore';
@@ -7,6 +8,9 @@ import type { TContactBirthday, TContactsPermission } from '@/store/contactsStor
 
 // blocked: диалог показать нельзя, остаются только настройки телефона
 export type TContactsEnableResult = 'enabled' | 'refused' | 'blocked';
+
+// В браузере при разработке настоящих контактов нет, подставляем тестовые
+export const isContactsMock: boolean = import.meta.env.MODE === 'development' && !Capacitor.isNativePlatform();
 
 // prompt-with-rationale — один отказ уже был, но спросить ещё можно; limited бывает только на iOS
 export const toContactsPermission = ( state: ContactsPermissionState ): TContactsPermission => {
@@ -83,6 +87,12 @@ export const enableContacts = async (): Promise< TContactsEnableResult > => {
 };
 
 export const syncContacts = async (): Promise< void > => {
+  if ( isContactsMock ) {
+    contactsBirthdays.value = ( await import( '@/api/contactsMock' )).getContactsMock();
+
+    return;
+  }
+
   if ( !appStore.isContactsEnabled ) {
     return;
   }

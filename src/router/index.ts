@@ -10,6 +10,7 @@ import UserProfile from '@/views/UserProfile/userProfile.vue';
 import AchievementsPage from '@/views/AchievementsPage/achievementsPage.vue';
 import DonationsPage from '@/views/DonationsPage/donationsPage.vue';
 import GiftCardPage from '@/views/GiftCardPage/giftCardPage.vue';
+import ContactsBirthdaysPage from '@/views/ContactsBirthdaysPage/contactsBirthdaysPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -65,6 +66,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/giftCardPage',
     name: 'GiftCardPage',
     component: GiftCardPage
+  },
+  {
+    path: '/contactsBirthdaysPage',
+    name: 'ContactsBirthdaysPage',
+    component: ContactsBirthdaysPage
   }
 ]
 

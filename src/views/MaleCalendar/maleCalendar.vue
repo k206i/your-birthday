@@ -365,7 +365,7 @@ watch( optimalDates, async ( value ) => {
       <WidgetArtButton
           v-if="birthDate"
           :color="appVars.colors.childBirthday"
-          :title="`Малыш может родиться примерно <div style='color: ${SUB_THEME_COLOR}; font-size: 1.2em; font-weight: bold'>${ formatDisplayDate( parseLocalDate( birthDate )) }</div> Давайте посмотрми, что интересного будет в этот день? 🐣`"
+          :title="`Малыш может родиться примерно <div style='color: ${SUB_THEME_COLOR}; font-size: 1.2em; font-weight: bold'>${ formatDisplayDate( parseLocalDate( birthDate )) }</div> Давайте посмотрим, что интересного будет в этот день? 🐣`"
           comment="Праздники, именины, знак зодиака и памятные даты"
           :link="`/childBirthday?birthDate=${birthDate}`"
           :art-src="penguinArt"

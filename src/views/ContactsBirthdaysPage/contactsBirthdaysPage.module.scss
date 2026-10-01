@@ -1,9 +1,56 @@
+@use "@/assets/styles/typography";
+
 .contactsBirthdaysPage {
+  &__listTitle {
+    font-family: var( --brd-font-default-alt );
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var( --brd-color-font-low );
+    text-transform: uppercase;
+  }
+
+  &__titleBlock {
+    position: relative;
+    z-index: var( --brd-z-index-layout );
+    min-height: 135px;
+    margin-bottom: var( --brd-size-gap-l );
+    padding: var( --brd-size-gap ) var( --brd-size-gap ) var( --brd-size-gap ) 140px;
+    border-radius: var( --brd-size-border-radius );
+    background-color: color-mix( in srgb, var( --brd-custom-theme-color ), black var( --brd-color-mix-bg ));
+  }
+
+  &__titleContentWrapper {
+    position: relative;
+    z-index: 200;
+  }
+
+  &__title {
+    @extend .typography__widgetTitle;
+    margin-bottom: var( --brd-size-gap-s );
+  }
+
+  &__titleComment {
+    font-size: 14px;
+    color: var( --brd-color-font );
+  }
+
+  &__art {
+    pointer-events: none;
+    position: absolute;
+    z-index: 100;
+    left: calc( -1 * var( --brd-size-gap ));
+    bottom: 0;
+    width: 100%;
+    height: calc( 100% + 30px );
+    background: url( "../../assets/img/animals/cat-8_art.webp" ) no-repeat 0 100%;
+    background-size: 150px auto;
+  }
+
   &__contactsList {
     position: relative;
     display: flex;
     flex-direction: column;
-    margin-bottom: var( --brd-size-gap-s );
+    margin-bottom: var( --brd-size-gap-xl );
   }
 
   &__contactItem {

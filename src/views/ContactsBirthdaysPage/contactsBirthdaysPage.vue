@@ -15,7 +15,7 @@ import {declineUnit} from '@/composables/declineUnit';
 import {computed} from 'vue';
 import {useRouter} from 'vue-router';
 
-const WEEKDAY_DAYS: number = 60;
+const SOON_DAYS: number = 60;
 
 const router = useRouter();
 
@@ -35,6 +35,8 @@ const getNextBirthday = ( contact: TContactBirthday, today: Date ): Date => {
 
 const upcomingBirthdays = computed(() => {
   const today: Date = parseLocalDate( currentDate.value );
+  const limit: Date = new Date( today );
+  limit.setDate( limit.getDate() + SOON_DAYS );
 
   return contactsBirthdays.value
     .map( contact => {
@@ -45,18 +47,26 @@ const upcomingBirthdays = computed(() => {
         date,
         age: contact.year ? date.getFullYear() - contact.year : 0,
         isToday: date.getTime() === today.getTime(),
+        isSoon: date <= limit,
       };
     })
     .sort(( a, b ) => a.date.getTime() - b.date.getTime() );
 });
 
-const formatBirthday = ( date: Date ): string => {
-  const limit: Date = parseLocalDate( currentDate.value );
-  limit.setDate( limit.getDate() + WEEKDAY_DAYS );
+const birthdaySections = computed(() => {
+  const soon = upcomingBirthdays.value.filter( item => item.isSoon );
+  const later = upcomingBirthdays.value.filter( item => !item.isSoon );
 
+  return [
+    { id: 'soon', title: 'Пора готовить подарки 🎁', items: soon },
+    { id: 'later', title: soon.length ? 'Ещё есть время' : '', items: later },
+  ].filter( section => section.items.length );
+});
+
+const formatBirthday = ( date: Date, isSoon: boolean ): string => {
   const dayMonth: string = date.toLocaleDateString( 'ru-RU', { day: 'numeric', month: 'long' });
 
-  if ( date > limit ) {
+  if ( !isSoon ) {
     return dayMonth;
   }
 
@@ -74,39 +84,61 @@ onIonViewWillEnter( syncContacts );
     <AppHeader page-name="Дни рождения <span class='accent-theme'>контактов</span>" />
 
     <ion-content :fullscreen="true" class="ion-padding">
-      <ul :class="styles.contactsBirthdaysPage__contactsList">
-        <li v-for="{ contact, date, age, isToday } in upcomingBirthdays"
-            :key="contact.id"
-            :class="styles.contactsBirthdaysPage__contactItem"
-        >
-          <div :class="styles.contactsBirthdaysPage__contactPic"
-               :style="{ color: getColorFromString( contact.name ) }"
-          >
-            {{ getInitials( contact.name ) }}
+
+      <div :class="styles.contactsBirthdaysPage__titleBlock">
+        <div :class="styles.contactsBirthdaysPage__titleContentWrapper">
+          <div :class="styles.contactsBirthdaysPage__title">
+            Кто следующий задувает свечи?
           </div>
 
-          <div :class="styles.contactsBirthdaysPage__content">
-            <div :class="styles.contactsBirthdaysPage__contactName">
-              {{ contact.name }}
+          <div :class="styles.contactsBirthdaysPage__titleComment">
+            Прямо из телефонной книги.<br />
+            Ближайшие наверху, а остальные подождут своей очереди 🎂
+          </div>
+        </div>
+
+        <div :class="styles.contactsBirthdaysPage__art"></div>
+      </div>
+
+      <template v-for="section in birthdaySections" :key="section.id">
+        <div v-if="section.title" :class="styles.contactsBirthdaysPage__listTitle">
+          {{ section.title }}
+        </div>
+
+        <ul :class="styles.contactsBirthdaysPage__contactsList">
+          <li v-for="{ contact, date, age, isToday, isSoon } in section.items"
+              :key="contact.id"
+              :class="styles.contactsBirthdaysPage__contactItem"
+          >
+            <div :class="styles.contactsBirthdaysPage__contactPic"
+                 :style="{ color: getColorFromString( contact.name ) }"
+            >
+              {{ getInitials( contact.name ) }}
             </div>
 
-            <div :class="styles.contactsBirthdaysPage__userComment">
-              {{ formatBirthday( date ) }}
+            <div :class="styles.contactsBirthdaysPage__content">
+              <div :class="styles.contactsBirthdaysPage__contactName">
+                {{ contact.name }}
+              </div>
 
-              <template v-if="age > 0">
-                · {{ isToday ? 'сегодня исполнилось' : 'исполнится' }} {{ age }} {{ declineUnit( age, 'year' ) }}
-              </template>
+              <div :class="styles.contactsBirthdaysPage__userComment">
+                {{ formatBirthday( date, isSoon ) }}
+
+                <template v-if="age > 0">
+                  · {{ isToday ? 'сегодня исполнилось' : 'исполнится' }} {{ age }} {{ declineUnit( age, 'year' ) }}
+                </template>
+              </div>
             </div>
-          </div>
 
-          <div v-if="isToday"
-               :class="styles.contactsBirthdaysPage__button"
-               @click="onCongratulate( contact )"
-          >
-            Поздравить
-          </div>
-        </li>
-      </ul>
+            <div v-if="isToday"
+                 :class="styles.contactsBirthdaysPage__button"
+                 @click="onCongratulate( contact )"
+            >
+              Поздравить
+            </div>
+          </li>
+        </ul>
+      </template>
     </ion-content>
 
     <AppFooter />

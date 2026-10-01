@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import styles from './giftCardPage.module.scss';
-import {IonContent, IonIcon, IonPage} from '@ionic/vue';
+import {IonContent, IonIcon, IonPage, onIonViewWillEnter} from '@ionic/vue';
 import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import GiftCard from '@/components/GiftCard/giftCard.vue';
@@ -14,7 +15,15 @@ import { shareElementAsImage } from '@/composables/shareElementAsImage';
 import {refreshOutline, copyOutline, shareOutline} from 'ionicons/icons';
 
 
-const name = ref< string >( '' );
+const route = useRoute();
+
+const getNameFromRoute = (): string | null => {
+  const queryName: unknown = route.query.name;
+
+  return typeof queryName === 'string' ? queryName : null;
+};
+
+const name = ref< string >( getNameFromRoute() ?? '' );
 const giftCard = ref< TGiftCard >( generateGiftCard() );
 const art = ref< string >( getModalBottomArt() );
 const shareRoot = ref< HTMLElement >();
@@ -42,6 +51,14 @@ const onCopy = (): void => {
 const onShare = (): void => {
   shareElementAsImage( shareRoot.value, 'gift-card.png' );
 };
+
+onIonViewWillEnter(() => {
+  const queryName: string | null = getNameFromRoute();
+
+  if ( queryName !== null ) {
+    name.value = queryName;
+  }
+});
 </script>
 
 <template>

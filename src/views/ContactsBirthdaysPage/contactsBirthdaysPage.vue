@@ -13,8 +13,15 @@ import {getColorFromString} from '@/composables/getColorFromString';
 import {parseLocalDate} from '@/composables/localDate';
 import {declineUnit} from '@/composables/declineUnit';
 import {computed} from 'vue';
+import {useRouter} from 'vue-router';
 
 const WEEKDAY_DAYS: number = 60;
+
+const router = useRouter();
+
+const onCongratulate = ( contact: TContactBirthday ): void => {
+  router.push({ path: '/giftCardPage', query: { name: contact.name } });
+};
 
 const getNextBirthday = ( contact: TContactBirthday, today: Date ): Date => {
   const date: Date = new Date( today.getFullYear(), contact.month - 1, contact.day );
@@ -90,6 +97,13 @@ onIonViewWillEnter( syncContacts );
                 · {{ isToday ? 'сегодня исполнилось' : 'исполнится' }} {{ age }} {{ declineUnit( age, 'year' ) }}
               </template>
             </div>
+          </div>
+
+          <div v-if="isToday"
+               :class="styles.contactsBirthdaysPage__button"
+               @click="onCongratulate( contact )"
+          >
+            Поздравить
           </div>
         </li>
       </ul>

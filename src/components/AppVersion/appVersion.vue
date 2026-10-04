@@ -67,6 +67,10 @@ const onClearBirthdayGreeted = () => {
 const onClearOnboardingShown = () => {
   appStore.isOnboardingShown = false;
 };
+
+const onClearCongratulatedContacts = () => {
+  appStore.congratulatedContacts = {};
+};
 </script>
 
 <template>
@@ -132,6 +136,16 @@ const onClearOnboardingShown = () => {
         <ion-icon
             :icon="closeCircleOutline"
             @click="onClearOnboardingShown"
+            :class="styles.appVersion__resetIcon"
+        ></ion-icon>
+      </li>
+
+      <li :class="styles.appVersion__key">
+        congratulatedContacts
+        {{ appStore.congratulatedContacts }}
+        <ion-icon
+            :icon="closeCircleOutline"
+            @click="onClearCongratulatedContacts"
             :class="styles.appVersion__resetIcon"
         ></ion-icon>
       </li>

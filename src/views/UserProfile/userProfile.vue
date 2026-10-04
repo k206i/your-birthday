@@ -94,7 +94,9 @@ const onContactsToggle = async ( event: ToggleCustomEvent ) => {
             <div :class="styles.userProfile__blockComment">
               Контакты читаются только на этом телефоне: мы их не сохраняем и никуда не отправляем
 
-              <div v-if="isBlockedHintShown">
+              <div v-if="isBlockedHintShown"
+                   :class="styles.userProfile__hiddenBlock"
+              >
                 Доступ к контактам запрещён в настройках телефона.
 
                 <span :class="styles.userProfile__actionLink" @click="openContactsSettings">

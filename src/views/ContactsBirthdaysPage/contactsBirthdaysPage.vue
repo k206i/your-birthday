@@ -8,14 +8,13 @@ import {contactsBirthdays} from '@/store/contactsStore';
 import type {TContactBirthday} from '@/store/contactsStore';
 import {currentDate} from '@/store/currentDate';
 import {syncContacts} from '@/api/getContactsBirthdays';
+import {getUpcomingBirthdays} from '@/api/getUpcomingBirthdays';
 import {getInitials} from '@/composables/getInitials';
 import {getColorFromString} from '@/composables/getColorFromString';
-import {parseLocalDate} from '@/composables/localDate';
+import {formatDayMonth} from '@/composables/localDate';
 import {declineUnit} from '@/composables/declineUnit';
 import {computed} from 'vue';
 import {useRouter} from 'vue-router';
-
-const SOON_DAYS: number = 60;
 
 const router = useRouter();
 
@@ -23,35 +22,7 @@ const onCongratulate = ( contact: TContactBirthday ): void => {
   router.push({ path: '/giftCardPage', query: { name: contact.name } });
 };
 
-const getNextBirthday = ( contact: TContactBirthday, today: Date ): Date => {
-  const date: Date = new Date( today.getFullYear(), contact.month - 1, contact.day );
-
-  if ( date < today ) {
-    return new Date( today.getFullYear() + 1, contact.month - 1, contact.day );
-  }
-
-  return date;
-};
-
-const upcomingBirthdays = computed(() => {
-  const today: Date = parseLocalDate( currentDate.value );
-  const limit: Date = new Date( today );
-  limit.setDate( limit.getDate() + SOON_DAYS );
-
-  return contactsBirthdays.value
-    .map( contact => {
-      const date: Date = getNextBirthday( contact, today );
-
-      return {
-        contact,
-        date,
-        age: contact.year ? date.getFullYear() - contact.year : 0,
-        isToday: date.getTime() === today.getTime(),
-        isSoon: date <= limit,
-      };
-    })
-    .sort(( a, b ) => a.date.getTime() - b.date.getTime() );
-});
+const upcomingBirthdays = computed(() => getUpcomingBirthdays( contactsBirthdays.value, currentDate.value ));
 
 const birthdaySections = computed(() => {
   const soon = upcomingBirthdays.value.filter( item => item.isSoon );
@@ -62,16 +33,6 @@ const birthdaySections = computed(() => {
     { id: 'later', title: soon.length ? 'Ещё есть время' : '', items: later },
   ].filter( section => section.items.length );
 });
-
-const formatBirthday = ( date: Date, isSoon: boolean ): string => {
-  const dayMonth: string = date.toLocaleDateString( 'ru-RU', { day: 'numeric', month: 'long' });
-
-  if ( !isSoon ) {
-    return dayMonth;
-  }
-
-  return `${ dayMonth }, ${ date.toLocaleDateString( 'ru-RU', { weekday: 'short' }) }`;
-};
 
 onIonViewWillEnter( syncContacts );
 </script>
@@ -122,7 +83,7 @@ onIonViewWillEnter( syncContacts );
               </div>
 
               <div :class="styles.contactsBirthdaysPage__userComment">
-                {{ formatBirthday( date, isSoon ) }}
+                {{ formatDayMonth( date, isSoon ) }}
 
                 <template v-if="age > 0">
                   · {{ isToday ? 'сегодня исполнилось' : 'исполнится' }} {{ age }} {{ declineUnit( age, 'year' ) }}

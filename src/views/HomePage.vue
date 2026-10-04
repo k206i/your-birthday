@@ -20,6 +20,10 @@ import WidgetPageLinkWide from '@/components/Widgets/PageLink/widgetPageLinkWide
 import {Browser} from '@capacitor/browser';
 import {logoTwitch} from 'ionicons/icons';
 import {isContactsMock} from '@/api/getContactsBirthdays';
+import WidgetCongratContact from '@/components/Widgets/CongratContact/widgetCongratContact.vue';
+import {contactsBirthdays} from '@/store/contactsStore';
+import {getUpcomingBirthdays} from '@/api/getUpcomingBirthdays';
+import {fixHeight} from '@/composables/fixHeight';
 
 // динамический импорт выпадает из графа и в магазинную сборку не попадает
 const WidgetUpdate = __UPDATE_CHECK__
@@ -72,6 +76,12 @@ watch( isBirthdayToday, ( value ) => {
 const openSocial = async ( url: string ): Promise< void > => {
   await Browser.open({ url });
 };
+
+const todayContactsBirthdays = computed(() => {
+  return getUpcomingBirthdays( contactsBirthdays.value, currentDate.value )
+    .filter( item => item.isToday && appStore.congratulatedContacts[ item.contact.id ] !== currentDate.value )
+    .map( item => item.contact );
+});
 
 </script>
 
@@ -166,6 +176,15 @@ const openSocial = async ( url: string ): Promise< void > => {
             </template>
           </template>
         </WidgetPageTitleHome>
+
+        <TransitionGroup name="brd-collapse" @before-leave="fixHeight">
+          <WidgetCongratContact
+              v-for="contact in todayContactsBirthdays"
+              :key="contact.id"
+              :class="styles.homePage__block"
+              :contact="contact"
+          />
+        </TransitionGroup>
 
         <div :class="[
               styles.homePage__silentButton,

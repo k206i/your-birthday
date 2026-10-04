@@ -16,6 +16,16 @@ export const formatLocalDate = ( dateObject: Date ): string => {
   return year + '-' + month + '-' + day;
 }
 
+export const formatDayMonth = ( dateObject: Date, withWeekday: boolean = false ): string => {
+  const dayMonth: string = dateObject.toLocaleDateString( 'ru-RU', { day: 'numeric', month: 'long' });
+
+  if ( !withWeekday ) {
+    return dayMonth;
+  }
+
+  return `${ dayMonth }, ${ dateObject.toLocaleDateString( 'ru-RU', { weekday: 'short' }) }`;
+};
+
 // Дата для отображения пользователю: "7 апр. 2027 г."
 export const formatDisplayDate = ( dateObject: Date ): string => {
   return dateObject.toLocaleDateString( 'ru-RU', {

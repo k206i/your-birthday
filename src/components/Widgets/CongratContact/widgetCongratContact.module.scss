@@ -1,0 +1,70 @@
+.widgetCongratContact {
+  position: relative;
+  padding: var( --brd-size-gap );
+  border-radius: var( --brd-size-border-radius );
+  background-color: color-mix( in srgb, var( --brd-color-theme ), black var( --brd-color-mix-bg ));
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: var( --brd-size-gap );
+  }
+
+  &__content {
+    //Placeholder
+  }
+
+  &__contactImg {
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    aspect-ratio: 1;
+    font-size: 18px;
+    border: 1px solid currentColor;
+    border-radius: 100%;
+    background-color: color-mix( in srgb, currentColor, black var( --brd-color-mix-bg ));
+  }
+
+  &__contactName {
+    font-family: var( --brd-font-default-alt );
+    font-size: 18px;
+    color: var( --brd-color-font-accent );
+    line-height: 1.2;
+  }
+
+  &__userComment {
+    margin-bottom: var( --brd-size-gap-s );
+    font-size: 12px;
+    color: var( --brd-color-font-low );
+  }
+
+  &__title {
+    font-family: var( --brd-font-default-alt );
+    font-size: 12px;
+    color: var( --brd-contacts-birthdays-theme-color );
+  }
+
+  &__buttons {
+    display: flex;
+    gap: var( --brd-size-gap-s );
+  }
+
+  &__button {
+    flex-shrink: 0;
+    display: block;
+    padding: 5px 10px;
+    font-size: 12px;
+    color: var( --brd-color-theme-bg );
+    border: 1px solid var( --brd-contacts-birthdays-theme-color );
+    background-color: var( --brd-contacts-birthdays-theme-color );
+    border-radius: var( --brd-size-border-radius-xs );
+
+    &_light {
+      color: var( --brd-contacts-birthdays-theme-color );
+      background-color: transparent;
+    }
+  }
+}

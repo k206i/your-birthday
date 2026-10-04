@@ -28,6 +28,7 @@ type TAppStore = {
   streakLastResults: Partial< Record< TStreakName, number > >, // сколько продержались в последний раз, в днях
   isOnboardingShown: boolean, // онбординг показывают один раз, при первом запуске
   isContactsEnabled: boolean, // раздел дней рождения из контактов включён пользователем
+  congratulatedContacts: Record< string, string >, // id контакта -> YYYY-MM-DD, когда нажали «Уже поздравили»
 }
 
 const STORAGE_KEY = 'appStore';
@@ -56,6 +57,7 @@ export const appStore: TAppStore = reactive({
   streakLastResults: {},
   isOnboardingShown: false,
   isContactsEnabled: false,
+  congratulatedContacts: {},
 });
 
 export const restoreAppStore = async (): Promise< void > => {

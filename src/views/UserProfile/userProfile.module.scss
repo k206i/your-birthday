@@ -51,4 +51,8 @@
     text-decoration: underline dashed;
     cursor: pointer;
   }
+
+  &__hiddenBlock {
+    margin-top: var( --brd-size-gap-s );
+  }
 }

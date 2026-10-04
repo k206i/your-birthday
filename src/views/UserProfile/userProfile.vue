@@ -1,45 +1,17 @@
 <script setup lang="ts">
 import styles from './userProfile.module.scss';
 import {IonContent, IonPage, IonToggle} from '@ionic/vue';
-import type {ToggleCustomEvent} from '@ionic/vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import UiInput from '@/components/Ui/Input/uiInput.vue';
 import {appStore} from '@/store/appStore';
-import {contactsPermission} from '@/store/contactsStore';
-import {disableContacts, enableContacts, openContactsSettings} from '@/api/getContactsBirthdays';
-import type {TContactsEnableResult} from '@/api/getContactsBirthdays';
+import {openContactsSettings} from '@/api/getContactsBirthdays';
+import {useContactsToggle} from '@/composables/useContactsToggle';
 import AvatarSetup from '@/components/Avatar/Setup/avatarSetup.vue';
 import WidgetAlert from '@/components/Widgets/Alert/widgetAlert.vue';
 import AppVersion from '@/components/AppVersion/appVersion.vue';
-import {computed, ref, watch} from 'vue';
 
-// IonToggle переключается сам, после отказа его нужно вернуть явно
-const isContactsToggleOn = ref< boolean >( appStore.isContactsEnabled );
-const isBlockedHintRequested = ref< boolean >( false );
-
-watch(() => appStore.isContactsEnabled, ( value: boolean ) => {
-  isContactsToggleOn.value = value;
-});
-
-const isBlockedHintShown = computed(() => isBlockedHintRequested.value && contactsPermission.value === 'denied' );
-
-const onContactsToggle = async ( event: ToggleCustomEvent ) => {
-  const isChecked: boolean = event.detail.checked;
-
-  isContactsToggleOn.value = isChecked;
-
-  if ( !isChecked ) {
-    disableContacts();
-
-    return;
-  }
-
-  const result: TContactsEnableResult = await enableContacts();
-
-  isBlockedHintRequested.value = result === 'blocked';
-  isContactsToggleOn.value = appStore.isContactsEnabled;
-};
+const { isContactsToggleOn, isBlockedHintShown, onContactsToggle } = useContactsToggle();
 </script>
 
 <template>

@@ -2,7 +2,11 @@
 
 import styles from './widgetReelsOnboarding.module.scss';
 import {ref, computed, onMounted, onBeforeUnmount} from 'vue';
+import {IonIcon, IonToggle} from '@ionic/vue';
+import {peopleOutline} from 'ionicons/icons';
 import {appVars} from '@/configApp';
+import {openContactsSettings} from '@/api/getContactsBirthdays';
+import {useContactsToggle} from '@/composables/useContactsToggle';
 
 import imgPersonalData from '@/assets/img/screenshots/screen-personalData.webp';
 import imgChooseAvatar from '@/assets/img/screenshots/screen-choose-avatar.webp';
@@ -16,6 +20,7 @@ import imgFemaleCalendar from '@/assets/img/screenshots/screen-femaleCalendar.we
 import imgFertilityWindow from '@/assets/img/screenshots/screen-female-fertility-window.webp';
 import imgMaleCalendar from '@/assets/img/screenshots/screen-maleCalendar.webp';
 import imgBirthdayWish from '@/assets/img/screenshots/screen-birthday-wish.webp';
+import imgContacts from '@/assets/img/screenshots/screen-contacts.webp';
 import imgGiftCard from '@/assets/img/screenshots/screen-giftCard.webp';
 import imgDonationsSupport from '@/assets/img/screenshots/screen-donations-support.webp';
 import imgDonationsThanks from '@/assets/img/screenshots/screen-donations-thanks.webp';
@@ -26,6 +31,7 @@ export type TReelSlide = {
   title: string,
   text: string,
   themeColor: string,
+  hasContactsToggle?: boolean,
 };
 
 const SWIPE_THRESHOLD: number = 48; // px
@@ -41,27 +47,51 @@ const props = defineProps<{
 
 const emit = defineEmits([ 'change', 'skip', 'finish' ]);
 
+const { isContactsToggleOn, isBlockedHintShown, onContactsToggle } = useContactsToggle();
+
 const slides: TReelSlide[] = [
   {
     id: 'personalData',
     image: imgPersonalData,
     title: 'Обойдёмся без регистрации',
-    text: 'Ни почты, ни пароля — нужна только дата рождения, и то для расчётов. По желанию добавьте имя, годовщину свадьбы, чей-нибудь день рождения и шпаргалку «кто это», чтобы не «э-э-э...» в ответственный момент 🤭',
+    text: 'Ни почты, ни пароля. Нужна только дата рождения, и то для расчётов. По желанию добавьте имя, годовщину свадьбы и день рождения того, кого точно нельзя забыть. А шпаргалка «кто это» спасёт от «э-э-э...» при встрече, например, с тёщей или начальником 🤭',
     themeColor: appVars.colors.dayConception,
   },
   {
     id: 'chooseAvatar',
     image: imgChooseAvatar,
     title: 'Кто будет за вас?',
-    text: 'Любой из этих мемов готов стать вашей аватаркой. Не выбирается — есть кубик «Решите за меня». Передумывать можно хоть каждый день 😊',
+    text: 'Любой из этих мемов готов стать вашей аватаркой. Не можете выбрать? Есть кубик «Решите за меня». Передумывать можно хоть каждый день 😊',
     themeColor: appVars.colors.dayConception,
   },
   {
     id: 'mainPage',
     image: imgMainPage,
     title: 'Первый экран держит всё в поле зрения',
-    text: 'Сколько дней до вашего дня рождения, кого поздравить следующим, последнее достижение. А ниже есть плитки разделов — загляните во все 👀',
+    text: 'Сколько дней до вашего дня рождения, кого поздравить следующим, последнее достижение. А ниже есть плитки разделов, загляните во все 👀',
     themeColor: appVars.colors.dayConception,
+  },
+  {
+    id: 'birthdayWish',
+    image: imgBirthdayWish,
+    title: 'Тут вас точно поздравят',
+    text: 'В ваш день поздравление откроется само: конфетти, комплименты и случайный гость из зверинца. А кнопка на первом экране устроит всё то же самое прямо сейчас 🎉',
+    themeColor: appVars.colors.dayConception,
+  },
+  {
+    id: 'contacts',
+    image: imgContacts,
+    title: 'Никого не забудете поздравить',
+    text: 'Приложение найдёт дни рождения в&nbsp;ваших контактах и&nbsp;в&nbsp;нужный день напомнит, у кого праздник. Контакты никуда не&nbsp;отправляются&nbsp;📇',
+    themeColor: appVars.colors.contactsBirthdays,
+    hasContactsToggle: true,
+  },
+  {
+    id: 'giftCard',
+    image: imgGiftCard,
+    title: 'Теперь поздравьте сами, текст за нами',
+    text: 'Впишите имя или не вписывайте, работает и так. Приложение придумает поздравление за вас, а дальше отправляйте его картинкой или копируйте текстом в любой мессенджер 🎁',
+    themeColor: appVars.colors.giftCard,
   },
   {
     id: 'lifeProgress',
@@ -74,7 +104,7 @@ const slides: TReelSlide[] = [
     id: 'achievements',
     image: imgAchievement,
     title: 'Достижения на любой вкус',
-    text: 'Возраст, знаменитости и годовщины набегают сами. А борода, диета и спорт считают дни — «15 дней без бритвы» уже звучит солидно 💎',
+    text: 'Возраст, знаменитости и годовщины набегают сами. А борода, диета и спорт считают дни: «15 дней без бритвы» уже звучит солидно 💎',
     themeColor: appVars.colors.achievements,
   },
   {
@@ -88,14 +118,14 @@ const slides: TReelSlide[] = [
     id: 'dayConception',
     image: imgDayConception,
     title: 'А всё начиналось примерно тогда',
-    text: 'Достаточно даты рождения — посчитаем примерный день зачатия и расскажем, чем он был знаменит: именины, события, знаки зодиака 👀',
+    text: 'Достаточно даты рождения, и мы посчитаем примерный день зачатия и расскажем, чем он был знаменит: именины, события, знаки зодиака 👀',
     themeColor: appVars.colors.dayConception,
   },
   {
     id: 'childBirthday',
     image: imgChildBirthday,
     title: 'Если ребёнок пока в планах',
-    text: 'Выберите желаемый день рождения — покажем примерный день зачатия, ваш возраст к тому моменту и именины малыша. Мы считаем и предполагаем, а советует пусть врач 💗',
+    text: 'Выберите желаемый день рождения, и мы покажем примерный день зачатия, ваш возраст к тому моменту и именины малыша. Мы считаем и предполагаем, а советует пусть врач 💗',
     themeColor: appVars.colors.childBirthday,
   },
   {
@@ -120,24 +150,10 @@ const slides: TReelSlide[] = [
     themeColor: appVars.colors.maleCalendar,
   },
   {
-    id: 'birthdayWish',
-    image: imgBirthdayWish,
-    title: 'Тут вас точно поздравят',
-    text: 'В ваш день поздравление откроется само: конфетти, комплименты и случайный гость из зверинца. А кнопка на первом экране устроит всё то же самое прямо сейчас 🎉',
-    themeColor: appVars.colors.dayConception,
-  },
-  {
-    id: 'giftCard',
-    image: imgGiftCard,
-    title: 'Теперь поздравьте сами, текст за нами',
-    text: 'Впишите имя — или не вписывайте, работает и так. Приложение придумает поздравление за вас, а дальше отправляйте его картинкой или копируйте текстом в любой мессенджер 🎁',
-    themeColor: appVars.colors.giftCard,
-  },
-  {
     id: 'donationsSupport',
     image: imgDonationsSupport,
     title: 'Ни рекламы, ни платных функций',
-    text: 'Если приложение пришлось по душе, его можно поддержать — разово или каждый месяц, сумму выбираете сами. Хомяк обрадуется любой 🐹',
+    text: 'Если приложение пришлось по душе, его можно поддержать: разово или каждый месяц, сумму выбираете сами. Хомяк обрадуется любой 🐹',
     themeColor: appVars.colors.donations,
   },
   {
@@ -279,27 +295,68 @@ onBeforeUnmount(() => {
             {{ currentSlide.title }}
           </h2>
 
-          <p :class="styles.widgetReelsOnboarding__text">
-            {{ currentSlide.text }}
+          <p :class="styles.widgetReelsOnboarding__text"
+             v-html="currentSlide.text"
+          >
           </p>
+
+          <!-- Без .stop протянутый пальцем ползунок перелистнул бы слайд -->
+          <div v-if="currentSlide.hasContactsToggle"
+               :class="styles.widgetReelsOnboarding__toggleBlock"
+               @pointerdown.stop
+               @pointerup.stop
+          >
+            <div :class="styles.widgetReelsOnboarding__toggleRow">
+              <div :class="styles.widgetReelsOnboarding__toggleIcon">
+                <ion-icon :icon="peopleOutline" aria-hidden="true"></ion-icon>
+              </div>
+
+              <div>
+                <div :class="styles.widgetReelsOnboarding__toggleTitle">
+                  Дни рождения из контактов
+                </div>
+
+                <div v-if="isBlockedHintShown"
+                     :class="styles.widgetReelsOnboarding__toggleHint"
+                >
+                  Доступ к контактам запрещён в настройках телефона.
+
+                  <div :class="styles.widgetReelsOnboarding__actionLink" @click="openContactsSettings">
+                    Открыть настройки
+                  </div>
+                </div>
+                <div v-else
+                     :class="styles.widgetReelsOnboarding__toggleHint"
+                >
+                  Включить можно сейчас или потом, в профиле
+                </div>
+              </div>
+
+              <ion-toggle
+                  :checked="isContactsToggleOn"
+                  aria-label="Показывать дни рождения из контактов"
+                  @ionChange="onContactsToggle"
+              ></ion-toggle>
+            </div>
+          </div>
         </div>
       </div>
     </Transition>
 
     <div :class="styles.widgetReelsOnboarding__actions">
-      <button type="button"
-              :class="styles.widgetReelsOnboarding__next"
-              @click="onNext"
-      >
-        {{ isLast ? ( props.finishLabel ?? 'Начать' ) : ( props.nextLabel ?? 'Далее' ) }}
-      </button>
-
       <button v-if="!isLast && props.showSkip !== false"
               type="button"
               :class="styles.widgetReelsOnboarding__skip"
               @click="onSkip"
       >
         {{ props.skipLabel ?? 'Пропустить экскурсию' }}
+      </button>
+
+      <button type="button"
+              :class="styles.widgetReelsOnboarding__next"
+              @click="onNext"
+      >
+        {{ isLast ? ( props.finishLabel ?? 'Начать' ) : ( props.nextLabel ?? 'Далее' ) }}
       </button>
     </div>
   </div>

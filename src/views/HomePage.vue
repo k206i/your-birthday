@@ -5,7 +5,7 @@ import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import {appVars} from '@/configApp';
-import {appStore} from '@/store/appStore';
+import {appStore, CONTACTS_OFFER_ALERT} from '@/store/appStore';
 import {computed, defineAsyncComponent, ref, watch} from 'vue';
 import {declineUnit} from '@/composables/declineUnit';
 import {getDaysToDate} from '@/composables/getDaysToDate';
@@ -19,8 +19,9 @@ import WidgetReelsOnboarding from '@/components/Widgets/ReelsOnboarding/widgetRe
 import WidgetPageLinkWide from '@/components/Widgets/PageLink/widgetPageLinkWide.vue';
 import {Browser} from '@capacitor/browser';
 import {logoTwitch} from 'ionicons/icons';
-import {isContactsMock} from '@/api/getContactsBirthdays';
+import {enableContacts, isContactsMock, openContactsSettings} from '@/api/getContactsBirthdays';
 import WidgetCongratContact from '@/components/Widgets/CongratContact/widgetCongratContact.vue';
+import WidgetAlert from '@/components/Widgets/Alert/widgetAlert.vue';
 import {contactsBirthdays} from '@/store/contactsStore';
 import {getUpcomingBirthdays} from '@/api/getUpcomingBirthdays';
 import {fixHeight} from '@/composables/fixHeight';
@@ -83,6 +84,24 @@ const todayContactsBirthdays = computed(() => {
     .map( item => item.contact );
 });
 
+const onContactsOfferAccept = async (): Promise< void > => {
+  if ( await enableContacts() === 'blocked' ) {
+    await openContactsSettings();
+  }
+};
+
+const contactsOfferButtons = [
+  { text: 'Не, потом', isLight: true, onClick: ( dismiss: () => void ) => dismiss() },
+  { text: 'Отлично! Давайте!', onClick: onContactsOfferAccept }
+];
+
+// Контакты включили здесь или в профиле: предложение больше не нужно, даже если потом выключат
+watch(() => appStore.isContactsEnabled, ( isEnabled: boolean ) => {
+  if ( isEnabled && !appStore.dismissedAlerts.includes( CONTACTS_OFFER_ALERT )) {
+    appStore.dismissedAlerts.push( CONTACTS_OFFER_ALERT );
+  }
+}, { immediate: true });
+
 </script>
 
 <template>
@@ -105,6 +124,14 @@ const todayContactsBirthdays = computed(() => {
         </ion-modal>
 
         <component :is="WidgetUpdate" v-if="WidgetUpdate" />
+
+        <WidgetAlert
+            type="info"
+            title="Новое: дни рождения из контактов&nbsp;🎉"
+            comment="Приложение может найти дни рождения, записанные в контактах, и подсказать, кого пора поздравить. Для этого нужен доступ к контактам: они читаются только на телефоне и никуда не отправляются."
+            :dismiss-name="CONTACTS_OFFER_ALERT"
+            :buttons="contactsOfferButtons"
+        />
 
         <WidgetPageTitleHome
             :class="styles.homePage__titleWidget"

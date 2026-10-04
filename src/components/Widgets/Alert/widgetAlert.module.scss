@@ -67,8 +67,11 @@
   }
 
   &__buttonWrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var( --brd-size-gap-s );
     margin-top: var( --brd-size-gap );
-    text-align: right;
   }
 
   &__button {
@@ -77,20 +80,32 @@
     border-radius: var( --brd-size-border-radius-s );
     font-family: var( --brd-font-default-alt );
     font-size: 14px;
+    border: 1px solid var( --brd-color-font-low );
     color: var( --brd-color-theme-bg );
     background-color: var( --brd-color-font-low );
 
     #{$root}_info & {
+      border-color: var( --brd-color-info );
       background-color: var( --brd-color-info );
       color: var( --brd-color-font-accent );
     }
 
     #{$root}_warning & {
+      border-color: var( --brd-color-warning );
       background-color: var( --brd-color-warning );
     }
 
     #{$root}_error & {
+      border-color: var( --brd-color-error );
       background-color: var( --brd-color-error );
+    }
+
+    &_light {
+      #{$root} & {
+        border-color: var( --brd-color-font-low );
+        color: var( --brd-color-font-low );
+        background-color: transparent;
+      }
     }
   }
 }

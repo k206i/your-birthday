@@ -33,6 +33,8 @@ type TAppStore = {
 
 const STORAGE_KEY = 'appStore';
 
+export const CONTACTS_OFFER_ALERT: string = 'contactsOffer';
+
 export const appStore: TAppStore = reactive({
   userName: '',
   userBirthDate: '',
@@ -50,7 +52,7 @@ export const appStore: TAppStore = reactive({
   sportStreakStart: '',
   femaleCycleLength: appVars.ovulation.cycleDefault,
   weddingDate: '',
-  dismissedAlerts: [],
+  dismissedAlerts: [ CONTACTS_OFFER_ALERT ], // Анонсы новых функций, которые свежей установке не нужны
   specialAchievements: {},
   resetedStreaks: [],
   streakRecords: {},

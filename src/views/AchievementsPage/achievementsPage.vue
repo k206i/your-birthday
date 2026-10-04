@@ -249,7 +249,7 @@ onIonViewDidEnter( scrollTabIntoView );
             :class="styles.achievementsPage__block"
             type="info"
             title="Особые достижения 👀"
-            comment="Эти достижения не привязаны ко времени. Одни находят вас сами, другие придётся поискать, и приложение о них молчит нарочно 🔎"
+            comment="Эти достижения не&nbsp;привязаны ко&nbsp;времени. Одни находят вас сами, другие прячутся, и&nbsp;приложение о&nbsp;них молчит нарочно&nbsp;🔎"
             dismiss-name="specialAchievements"
         />
 

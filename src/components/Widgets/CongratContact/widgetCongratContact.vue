@@ -61,12 +61,6 @@ const onCongratulated = (): void => {
         </div>
 
         <div :class="styles.widgetCongratContact__buttons">
-          <div :class="styles.widgetCongratContact__button"
-               @click="onCongratulate"
-          >
-            Поздравить
-          </div>
-
           <div :class="[
             styles.widgetCongratContact__button,
             styles.widgetCongratContact__button_light
@@ -74,6 +68,12 @@ const onCongratulated = (): void => {
                @click="onCongratulated"
           >
             Уже поздравили
+          </div>
+
+          <div :class="styles.widgetCongratContact__button"
+               @click="onCongratulate"
+          >
+            Поздравить
           </div>
         </div>
       </div>

@@ -61,13 +61,13 @@
     border-bottom: 1px solid var( --brd-color-white-10 );
   }
 
-  &__contactPic {
+  &__contactImg {
     flex-shrink: 0;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
+    width: 40px;
     aspect-ratio: 1;
     border-radius: 100%;
     font-size: 14px;

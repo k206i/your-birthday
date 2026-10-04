@@ -101,9 +101,15 @@
     width: 75px;
     aspect-ratio: 1;
     border-radius: var( --brd-size-border-radius );
-    background-size: auto 100%;
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: 0 0;
+    background-position: 0 100%;
     background-color: var( --brd-color-black-50 );
+
+    &_noBg {
+      border-radius: 0;
+      background-position: 0 50%;
+      background-color: transparent;
+    }
   }
 }

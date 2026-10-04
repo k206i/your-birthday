@@ -34,7 +34,7 @@ export const appVars = {
     achievements: '#F2B348',
     donations: '#FF8BEF',
     giftCard: '#D99A9A',
-    contactsBirthdays: '#FF9F6B',
+    contactsBirthdays: '#3ec6d2',
   },
   achievementColors: {
     common: '#8B8FA3',

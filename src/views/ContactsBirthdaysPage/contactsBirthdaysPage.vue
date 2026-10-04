@@ -93,7 +93,7 @@ onIonViewWillEnter( syncContacts );
 
           <div :class="styles.contactsBirthdaysPage__titleComment">
             Прямо из телефонной книги.<br />
-            Ближайшие наверху, а остальные подождут своей очереди 🎂
+            Чем ближе праздник, тем выше в списке 🎂
           </div>
         </div>
 
@@ -110,7 +110,7 @@ onIonViewWillEnter( syncContacts );
               :key="contact.id"
               :class="styles.contactsBirthdaysPage__contactItem"
           >
-            <div :class="styles.contactsBirthdaysPage__contactPic"
+            <div :class="styles.contactsBirthdaysPage__contactImg"
                  :style="{ color: getColorFromString( contact.name ) }"
             >
               {{ getInitials( contact.name ) }}

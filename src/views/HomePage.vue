@@ -233,7 +233,8 @@ const openSocial = async ( url: string ): Promise< void > => {
                 link="/contactsBirthdaysPage"
                 title="Дни рождения из контактов"
                 comment="Чтобы никого не пропустить 🎂"
-                bg-image="panda_art"
+                bg-image="phone_art"
+                art-no-bg
                 :color="appVars.colors.contactsBirthdays"
             />
           </li>

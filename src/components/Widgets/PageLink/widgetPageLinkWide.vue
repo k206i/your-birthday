@@ -9,6 +9,7 @@ const props = defineProps<{
   color: string,
   bgImage: string,
   link: string,
+  artNoBg?: boolean,
 }>();
 
 </script>
@@ -25,7 +26,8 @@ const props = defineProps<{
   >
     <div :class="[
           styles.widgetPageLink__artWide,
-          props.bgImage
+          props.bgImage,
+          props.artNoBg && styles.widgetPageLink__artWide_noBg
         ]"
     ></div>
 

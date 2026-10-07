@@ -39,10 +39,10 @@ ion-picker {
 }
 
 /*Полупрозрачность под header и footer. Убрал, т. к. начинает подтормаживать*/
-/*.translucent-bar ion-toolbar {*/
-/*    --background: rgba( var( --brd-color-bg-modal_rgb ), .9 );*/
-/*    backdrop-filter: blur( 10px );*/
-/*}*/
+.translucent-bar ion-toolbar {
+    --background: rgba( 14, 17, 26, .9 );
+    backdrop-filter: blur( 10px );
+}
 
 :root.ios ion-modal,
 :root.md ion-modal {

@@ -8,7 +8,7 @@ import {IonFooter, IonToolbar} from '@ionic/vue';
     <ion-toolbar>
       💜
       <router-link to="/donationsPage" :class="styles.appFooter__link">
-        Приложение держится на этих людях — и на вас
+        Спасибо всем, кто поддерживает приложение
       </router-link>
     </ion-toolbar>
   </ion-footer>

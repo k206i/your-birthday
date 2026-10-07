@@ -3,23 +3,56 @@ import styles from './contactsBirthdaysPage.module.scss';
 import {IonContent, IonPage, onIonViewWillEnter} from '@ionic/vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
+import AvatarContact from '@/components/Avatar/Contact/avatarContact.vue';
+import AvatarPicker from '@/components/Avatar/Picker/avatarPicker.vue';
 import {appVars} from '@/configApp';
+import {appStore} from '@/store/appStore';
 import {contactsBirthdays} from '@/store/contactsStore';
 import type {TContactBirthday} from '@/store/contactsStore';
 import {currentDate} from '@/store/currentDate';
 import {syncContacts} from '@/api/getContactsBirthdays';
 import {getUpcomingBirthdays} from '@/api/getUpcomingBirthdays';
-import {getInitials} from '@/composables/getInitials';
-import {getColorFromString} from '@/composables/getColorFromString';
+import {getContactAvatar, setContactAvatar} from '@/api/contactAvatars';
 import {formatDayMonth} from '@/composables/localDate';
 import {declineUnit} from '@/composables/declineUnit';
-import {computed} from 'vue';
+import {computed, ref} from 'vue';
 import {useRouter} from 'vue-router';
+import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 
 const router = useRouter();
 
 const onCongratulate = ( contact: TContactBirthday ): void => {
   router.push({ path: '/giftCardPage', query: { name: contact.name } });
+};
+
+// Контакт не сбрасываем при закрытии, иначе модалка опустеет во время анимации
+const pickerContact = ref< TContactBirthday | null >( null );
+const isPickerOpen = ref( false );
+
+const pickerAvatar = computed({
+  get: (): string => pickerContact.value ? getContactAvatar( pickerContact.value ) : '',
+  set: ( avatar: string ): void => {
+    if ( !pickerContact.value ) {
+      return;
+    }
+
+    setContactAvatar( pickerContact.value, avatar );
+  },
+});
+
+const AVATAR_TIP: string = 'contactAvatarTip';
+
+const isAvatarTipShown = computed(() => !appStore.dismissedAlerts.includes( AVATAR_TIP ));
+
+const onOpenPicker = ( contact: TContactBirthday ): void => {
+  pickerContact.value = contact;
+  isPickerOpen.value = true;
+
+  if ( isAvatarTipShown.value ) {
+    setTimeout(() => {
+      appStore.dismissedAlerts.push( AVATAR_TIP );
+    }, 600 );
+  }
 };
 
 const upcomingBirthdays = computed(() => getUpcomingBirthdays( contactsBirthdays.value, currentDate.value ));
@@ -54,13 +87,20 @@ onIonViewWillEnter( syncContacts );
 
           <div :class="styles.contactsBirthdaysPage__titleComment">
             Прямо из телефонной книги.<br />
-            Чем ближе праздник, тем выше в списке 🎂
+            Чем ближе праздник, тем выше в&nbsp;списке&nbsp;🎂
           </div>
         </div>
 
         <div :class="styles.contactsBirthdaysPage__art"></div>
       </div>
 
+      <WidgetTipInfo v-if="isAvatarTipShown" :color="appVars.colors.contactsBirthdays">
+        Аватарку <span :style="{color: appVars.colors.contactsBirthdays}">можно выбрать</span>, нажав на контакт
+      </WidgetTipInfo>
+
+      <div :class="styles.contactsBirthdaysPage__listTitleComment">
+
+      </div>
       <template v-for="section in birthdaySections" :key="section.id">
         <div v-if="section.title" :class="styles.contactsBirthdaysPage__listTitle">
           {{ section.title }}
@@ -70,12 +110,11 @@ onIonViewWillEnter( syncContacts );
           <li v-for="{ contact, date, age, isToday, isSoon } in section.items"
               :key="contact.id"
               :class="styles.contactsBirthdaysPage__contactItem"
+              @click="onOpenPicker( contact )"
           >
-            <div :class="styles.contactsBirthdaysPage__contactImg"
-                 :style="{ color: getColorFromString( contact.name ) }"
-            >
-              {{ getInitials( contact.name ) }}
-            </div>
+            <AvatarContact :class="styles.contactsBirthdaysPage__contactImg"
+                           :contact="contact"
+            />
 
             <div :class="styles.contactsBirthdaysPage__content">
               <div :class="styles.contactsBirthdaysPage__contactName">
@@ -93,13 +132,36 @@ onIonViewWillEnter( syncContacts );
 
             <div v-if="isToday"
                  :class="styles.contactsBirthdaysPage__button"
-                 @click="onCongratulate( contact )"
+                 @click.stop="onCongratulate( contact )"
             >
               Поздравить
             </div>
           </li>
         </ul>
       </template>
+
+      <AvatarPicker
+          v-model="pickerAvatar"
+          :is-open="isPickerOpen"
+          :title="pickerContact?.name ?? ''"
+          comment="Выберите персонажа, он появится вместо инициалов"
+          @close="isPickerOpen = false"
+      >
+        <AvatarContact v-if="pickerContact"
+                       :class="[
+                         styles.contactsBirthdaysPage__contactImg,
+                         styles.contactsBirthdaysPage__contactImg_large,
+                       ]"
+                       :contact="pickerContact"
+        />
+
+        <template #empty>
+          <AvatarContact v-if="pickerContact"
+                         :contact="pickerContact"
+                         hide-avatar
+          />
+        </template>
+      </AvatarPicker>
     </ion-content>
 
     <AppFooter />

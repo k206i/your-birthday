@@ -6,13 +6,24 @@ import {computed} from 'vue';
 import {appStore} from '@/store/appStore';
 import {getAvatarUrl} from '@/composables/getAvatarsList';
 
-// undefined, если аватарка не выбрана или сохранённого файла больше нет в сборке —
-// в обоих случаях показываем иконку вместо битой картинки
-const avatarUrl = computed(() => appStore.userAvatar ? getAvatarUrl( appStore.userAvatar ) : undefined );
+const props = defineProps<{
+  avatar?: string, // имя файла; без него показываем аватарку пользователя со ссылкой в профиль
+}>();
+
+const isUserAvatar = computed(() => props.avatar === undefined );
+
+const avatarName = computed(() => isUserAvatar.value ? appStore.userAvatar : props.avatar );
+
+// undefined, если аватарка не выбрана или её файла больше нет в сборке: тогда показываем слот вместо битой картинки
+const avatarUrl = computed(() => avatarName.value ? getAvatarUrl( avatarName.value ) : undefined );
 </script>
 
 <template>
-  <div :class="styles.avatarShort">
+  <div :class="[
+      styles.avatarShort,
+      isUserAvatar && styles.avatarShort_user,
+    ]"
+  >
     <template v-if="avatarUrl">
       <div :class="styles.avatarShort__artClip">
         <img :class="styles.avatarShort__art" :src="avatarUrl" alt="" />
@@ -24,8 +35,10 @@ const avatarUrl = computed(() => appStore.userAvatar ? getAvatarUrl( appStore.us
       />
     </template>
 
-    <ion-icon v-else :icon="personOutline"></ion-icon>
+    <slot v-else>
+      <ion-icon :class="styles.avatarShort__icon" :icon="personOutline"></ion-icon>
+    </slot>
 
-    <router-link to="/userProfile" :class="styles.avatarShort__link"></router-link>
+    <router-link v-if="isUserAvatar" to="/userProfile" :class="styles.avatarShort__link"></router-link>
   </div>
 </template>

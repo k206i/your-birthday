@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import styles from './widgetCongratContact.module.scss';
-import {getColorFromString} from '@/composables/getColorFromString';
-import {getInitials} from '@/composables/getInitials';
+import AvatarContact from '@/components/Avatar/Contact/avatarContact.vue';
 import {declineUnit} from '@/composables/declineUnit';
 import {formatDayMonth, parseLocalDate} from '@/composables/localDate';
 import {appVars} from '@/configApp';
@@ -37,11 +36,9 @@ const onCongratulated = (): void => {
             }"
   >
     <div :class="styles.widgetCongratContact__meta">
-      <div :class="styles.widgetCongratContact__contactImg"
-           :style="{ color: getColorFromString( props.contact.name ) }"
-      >
-        {{ getInitials( props.contact.name ) }}
-      </div>
+      <AvatarContact :class="styles.widgetCongratContact__contactImg"
+                     :contact="props.contact"
+      />
 
       <div :class="styles.widgetCongratContact__content">
         <div :class="styles.widgetCongratContact__title">

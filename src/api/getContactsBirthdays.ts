@@ -1,3 +1,4 @@
+import { watch } from 'vue';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { CapacitorContacts } from '@capgo/capacitor-contacts';
@@ -5,6 +6,7 @@ import type { Contact, ContactsPermissionState } from '@capgo/capacitor-contacts
 import { appStore } from '@/store/appStore';
 import { contactsBirthdays, contactsPermission } from '@/store/contactsStore';
 import type { TContactBirthday, TContactsPermission } from '@/store/contactsStore';
+import { reconcileContactAvatars } from '@/api/contactAvatars';
 
 // blocked: диалог показать нельзя, остаются только настройки телефона
 export type TContactsEnableResult = 'enabled' | 'refused' | 'blocked';
@@ -117,6 +119,7 @@ export const refreshContacts = async (): Promise< void > => {
 };
 
 export const initContactsWatcher = (): void => {
+  watch( contactsBirthdays, reconcileContactAvatars );
   syncContacts();
 
   App.addListener( 'appStateChange', ({ isActive }) => {

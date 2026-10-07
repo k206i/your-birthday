@@ -9,6 +9,12 @@
     text-transform: uppercase;
   }
 
+  &__listTitleComment {
+    font-family: var( --brd-font-default-alt );
+    font-size: 11px;
+    color: var( --brd-color-font-low );
+  }
+
   &__titleBlock {
     position: relative;
     z-index: var( --brd-z-index-layout );
@@ -63,15 +69,13 @@
 
   &__contactImg {
     flex-shrink: 0;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 40px;
-    aspect-ratio: 1;
-    border-radius: 100%;
     font-size: 14px;
-    background-color: color-mix( in srgb, currentColor, black var( --brd-color-mix-bg ));
+
+    &_large {
+      width: 100%;
+      font-size: 48px;
+    }
   }
 
   &__content {

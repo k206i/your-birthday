@@ -16,16 +16,8 @@
 
   &__contactImg {
     flex-shrink: 0;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    aspect-ratio: 1;
-    font-size: 18px;
-    border: 1px solid currentColor;
-    border-radius: 100%;
-    background-color: color-mix( in srgb, currentColor, black var( --brd-color-mix-bg ));
+    width: 90px;
+    font-size: 28px;
   }
 
   &__contactName {

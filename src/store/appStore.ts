@@ -4,6 +4,11 @@ import { appVars } from '@/configApp';
 import type { TAchievementCombined } from '@/api/getAchievementById';
 import type { TStreakName } from '@/api/getAchievementDate';
 
+export type TContactAvatar = {
+  nameHash: string,
+  avatar: string, // имя файла, как в userAvatar
+}
+
 type TAppStore = {
   userName: string,
   userBirthDate: string, // YYYY-MM-DD
@@ -29,6 +34,7 @@ type TAppStore = {
   isOnboardingShown: boolean, // онбординг показывают один раз, при первом запуске
   isContactsEnabled: boolean, // раздел дней рождения из контактов включён пользователем
   congratulatedContacts: Record< string, string >, // id контакта -> YYYY-MM-DD, когда нажали «Уже поздравили»
+  contactAvatars: Record< string, TContactAvatar >, // id контакта -> выбранная аватарка
 }
 
 const STORAGE_KEY = 'appStore';
@@ -60,6 +66,7 @@ export const appStore: TAppStore = reactive({
   isOnboardingShown: false,
   isContactsEnabled: false,
   congratulatedContacts: {},
+  contactAvatars: {},
 });
 
 export const restoreAppStore = async (): Promise< void > => {

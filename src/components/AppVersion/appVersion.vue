@@ -71,6 +71,10 @@ const onClearOnboardingShown = () => {
 const onClearCongratulatedContacts = () => {
   appStore.congratulatedContacts = {};
 };
+
+const onClearContactAvatars = () => {
+  appStore.contactAvatars = {};
+};
 </script>
 
 <template>
@@ -146,6 +150,16 @@ const onClearCongratulatedContacts = () => {
         <ion-icon
             :icon="closeCircleOutline"
             @click="onClearCongratulatedContacts"
+            :class="styles.appVersion__resetIcon"
+        ></ion-icon>
+      </li>
+
+      <li :class="styles.appVersion__key">
+        contactAvatars
+        {{ appStore.contactAvatars }}
+        <ion-icon
+            :icon="closeCircleOutline"
+            @click="onClearContactAvatars"
             :class="styles.appVersion__resetIcon"
         ></ion-icon>
       </li>

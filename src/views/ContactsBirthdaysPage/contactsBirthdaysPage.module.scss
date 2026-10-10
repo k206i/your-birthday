@@ -1,6 +1,47 @@
 @use "@/assets/styles/typography";
 
 .contactsBirthdaysPage {
+  &__listHeader {
+    display: flex;
+    align-items: center;
+    gap: var( --brd-size-gap-s );
+  }
+
+  &__sync {
+    display: flex;
+    align-items: center;
+    gap: var( --brd-size-gap-s );
+    margin-left: auto;
+    font-family: var( --brd-font-default-alt );
+    font-size: 12px;
+    color: var( --brd-color-font-low );
+    text-decoration: underline;
+    text-decoration-style: dashed;
+  }
+
+  &__syncIcon {
+    font-size: 16px;
+
+    &_spin {
+      animation: contactsSyncSpin .6s ease-in-out infinite;
+
+      @media ( prefers-reduced-motion: reduce ) {
+        animation: none;
+      }
+    }
+  }
+
+  &__refreshList {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    aspect-ratio: 1;
+    color: var( --brd-custom-theme-color );
+    border-radius: 100%;
+    background-color: color-mix( in srgb, var( --brd-custom-theme-color ), black var( --brd-color-mix-bg ));
+  }
+
   &__listTitle {
     font-family: var( --brd-font-default-alt );
     font-size: 12px;
@@ -9,17 +50,11 @@
     text-transform: uppercase;
   }
 
-  &__listTitleComment {
-    font-family: var( --brd-font-default-alt );
-    font-size: 11px;
-    color: var( --brd-color-font-low );
-  }
-
   &__titleBlock {
     position: relative;
     z-index: var( --brd-z-index-layout );
     min-height: 135px;
-    margin-bottom: var( --brd-size-gap-l );
+    margin-bottom: var( --brd-size-gap-xl );
     padding: var( --brd-size-gap ) var( --brd-size-gap ) var( --brd-size-gap ) 140px;
     border-radius: var( --brd-size-border-radius );
     background-color: color-mix( in srgb, var( --brd-custom-theme-color ), black var( --brd-color-mix-bg ));
@@ -102,5 +137,11 @@
     color: var( --brd-custom-theme-color );
     border: 1px solid currentColor;
     border-radius: var( --brd-size-border-radius-xs );
+  }
+
+  @keyframes contactsSyncSpin {
+    to {
+      transform: rotate( 360deg );
+    }
   }
 }

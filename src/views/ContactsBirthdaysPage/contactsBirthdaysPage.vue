@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import styles from './contactsBirthdaysPage.module.scss';
-import {IonContent, IonPage, onIonViewWillEnter} from '@ionic/vue';
+import {IonContent, IonIcon, IonPage, onIonViewWillEnter} from '@ionic/vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import AppFooter from '@/components/AppFooter/appFooter.vue';
 import AvatarContact from '@/components/Avatar/Contact/avatarContact.vue';
@@ -17,6 +17,7 @@ import {formatDayMonth} from '@/composables/localDate';
 import {declineUnit} from '@/composables/declineUnit';
 import {computed, ref} from 'vue';
 import {useRouter} from 'vue-router';
+import {syncOutline} from 'ionicons/icons';
 import WidgetTipInfo from '@/components/Widgets/TipInfo/widgetTipInfo.vue';
 
 const router = useRouter();
@@ -55,6 +56,28 @@ const onOpenPicker = ( contact: TContactBirthday ): void => {
   }
 };
 
+// Чтение занимает доли секунды, без минимума вращение иконки не успеют заметить
+const SYNC_MIN_DURATION: number = 600; // ms
+
+const isSyncing = ref( false );
+
+const onSync = async (): Promise< void > => {
+  if ( isSyncing.value ) {
+    return;
+  }
+
+  isSyncing.value = true;
+
+  try {
+    await Promise.all([
+      syncContacts(),
+      new Promise( resolve => setTimeout( resolve, SYNC_MIN_DURATION )),
+    ]);
+  } finally {
+    isSyncing.value = false;
+  }
+};
+
 const upcomingBirthdays = computed(() => getUpcomingBirthdays( contactsBirthdays.value, currentDate.value ));
 
 const birthdaySections = computed(() => {
@@ -66,6 +89,9 @@ const birthdaySections = computed(() => {
     { id: 'later', title: soon.length ? 'Ещё есть время' : '', items: later },
   ].filter( section => section.items.length );
 });
+
+// Заголовок первого раздела стоит в одной строке с кнопкой синхронизации
+const firstSectionTitle = computed(() => birthdaySections.value[ 0 ]?.title ?? '' );
 
 onIonViewWillEnter( syncContacts );
 </script>
@@ -98,11 +124,25 @@ onIonViewWillEnter( syncContacts );
         Аватарку <span :style="{color: appVars.colors.contactsBirthdays}">можно выбрать</span>, нажав на контакт
       </WidgetTipInfo>
 
-      <div :class="styles.contactsBirthdaysPage__listTitleComment">
+      <div :class="styles.contactsBirthdaysPage__listHeader">
+        <div v-if="firstSectionTitle" :class="styles.contactsBirthdaysPage__listTitle">
+          {{ firstSectionTitle }}
+        </div>
 
+        <div :class="styles.contactsBirthdaysPage__sync" @click="onSync">
+          <ion-icon :class="[
+              styles.contactsBirthdaysPage__syncIcon,
+              isSyncing && styles.contactsBirthdaysPage__syncIcon_spin,
+            ]"
+            :icon="syncOutline"
+          ></ion-icon>
+
+          Синхронизировать
+        </div>
       </div>
-      <template v-for="section in birthdaySections" :key="section.id">
-        <div v-if="section.title" :class="styles.contactsBirthdaysPage__listTitle">
+
+      <template v-for="( section, index ) in birthdaySections" :key="section.id">
+        <div v-if="index > 0 && section.title" :class="styles.contactsBirthdaysPage__listTitle">
           {{ section.title }}
         </div>
 

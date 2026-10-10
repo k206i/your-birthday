@@ -74,7 +74,7 @@ onIonViewWillEnter(() => {
           :class="styles.giftCardPage__block"
           v-model="name"
           label="Кого поздравляем?"
-          placeholder="Имя — или оставьте пустым"
+          placeholder="Введите имя или оставьте пустым"
       />
 
       <div :class="[

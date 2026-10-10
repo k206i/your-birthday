@@ -22,7 +22,7 @@ const { isContactsToggleOn, isBlockedHintShown, onContactsToggle } = useContacts
       <WidgetAlert
           title="Ваши данные — только у вас"
           comment="Все записи хранятся на устройстве, приложение работает офлайн.
-Если очистить данные или переустановить приложение, записи могут исчезнуть. Но их легко восстановить — главное, помнить важные даты."
+Если очистить данные или переустановить приложение, записи могут исчезнуть. Но их легко восстановить: главное, помнить важные даты."
           type="warning"
           dismiss-name="saveLocalData"
       />
@@ -100,7 +100,7 @@ const { isContactsToggleOn, isBlockedHintShown, onContactsToggle } = useContacts
         />
 
         <div :class="styles.userProfile__blockComment">
-          Откроем достижения по годовщинам — от ситцевой до золотой&nbsp;💍
+          Откроем достижения по годовщинам, от ситцевой до золотой&nbsp;💍
         </div>
       </div>
 

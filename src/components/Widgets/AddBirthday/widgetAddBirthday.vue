@@ -56,7 +56,7 @@ const birthDay = computed(() => {
     </div>
 
     <div :class="styles.widgetAddBirthday__comment">
-      Укажите дату рождения — и мы откроем ачивки по прожитым неделям: за возраст, эпоху и кумиров, которых вы обогнали ✨
+      Укажите дату рождения, и мы откроем достижения по прожитым неделям: за возраст, эпоху и кумиров, которых вы обогнали ✨
     </div>
 
     <div :class="styles.widgetAddBirthday__dateButtonWrap">

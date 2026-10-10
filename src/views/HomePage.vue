@@ -184,7 +184,7 @@ watch(() => appStore.isContactsEnabled, ( isEnabled: boolean ) => {
               <div v-else-if="isAdditionalBirthdaySoon"
                    :class="styles.homePage__leadBlock"
               >
-                🚨🚨🚨 <br />{{ appStore.additionalName }} уже репетирует задувание свечей — {{ daysToAdditionalBirthday === 1 ? 'остался' : 'осталось' }} <span class="accent">{{ daysToAdditionalBirthday }}</span>&nbsp;{{ declineUnit( daysToAdditionalBirthday ?? 0 ) }} 🎂
+                🚨🚨🚨 <br />{{ appStore.additionalName }} уже репетирует задувание свечей: {{ daysToAdditionalBirthday === 1 ? 'остался' : 'осталось' }} <span class="accent">{{ daysToAdditionalBirthday }}</span>&nbsp;{{ declineUnit( daysToAdditionalBirthday ?? 0 ) }} 🎂
               </div>
               <div v-else
                    :class="styles.homePage__leadBlock"
@@ -310,7 +310,7 @@ watch(() => appStore.isContactsEnabled, ( isEnabled: boolean ) => {
             <WidgetPageLink
                 link="/achievementsPage"
                 title="🎮 Достижения"
-                comment="Ачивки!"
+                comment="Награды за годы и привычки"
                 bg-image="lama_art"
                 :color="appVars.colors.achievements"
             />

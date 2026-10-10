@@ -213,8 +213,8 @@ const lifeDecades = computed(() => {
           :class="styles.lifeProgress__titleBlock"
           bg-image="otter_art"
           title="Визуализация жизненного пути 🎮"
-          lead="Посмотрите свой пройденный путь, получайте ачивки, стройте планы и живите!"
-          comment="Попробуйте получить мифическую ачивку&nbsp;🧙‍♂️"
+          lead="Посмотрите свой пройденный путь, получайте достижения, стройте планы и живите!"
+          comment="Попробуйте получить мифическое достижение&nbsp;🧙‍♂️"
       />
 
       <template v-if="appStore.userBirthDate">

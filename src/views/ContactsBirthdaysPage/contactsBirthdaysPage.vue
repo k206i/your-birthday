@@ -80,6 +80,8 @@ const onSync = async (): Promise< void > => {
 
 const upcomingBirthdays = computed(() => getUpcomingBirthdays( contactsBirthdays.value, currentDate.value ));
 
+const hasBirthdays = computed(() => upcomingBirthdays.value.length > 0 );
+
 const birthdaySections = computed(() => {
   const soon = upcomingBirthdays.value.filter( item => item.isSoon );
   const later = upcomingBirthdays.value.filter( item => !item.isSoon );
@@ -104,80 +106,127 @@ onIonViewWillEnter( syncContacts );
     <AppHeader page-name="Дни рождения <span class='accent-theme'>контактов</span>" />
 
     <ion-content :fullscreen="true" class="ion-padding">
-
       <div :class="styles.contactsBirthdaysPage__titleBlock">
         <div :class="styles.contactsBirthdaysPage__titleContentWrapper">
-          <div :class="styles.contactsBirthdaysPage__title">
-            Кто следующий задувает свечи?
-          </div>
+          <template v-if="hasBirthdays">
+            <div :class="styles.contactsBirthdaysPage__title">
+              Кто следующий задувает свечи?
+            </div>
 
-          <div :class="styles.contactsBirthdaysPage__titleComment">
-            Прямо из телефонной книги.<br />
-            Чем ближе праздник, тем выше в&nbsp;списке&nbsp;🎂
-          </div>
+            <div :class="styles.contactsBirthdaysPage__titleComment">
+              Прямо из телефонной книги.<br />
+              Чем ближе праздник, тем выше в&nbsp;списке&nbsp;🎂
+            </div>
+          </template>
+
+          <template v-else>
+            <div :class="styles.contactsBirthdaysPage__title">
+              Пока ни одного дня рождения
+            </div>
+
+            <div :class="styles.contactsBirthdaysPage__titleComment">
+              В контактах телефона не нашлось ни одной даты рождения.
+            </div>
+          </template>
         </div>
 
         <div :class="styles.contactsBirthdaysPage__art"></div>
       </div>
 
-      <WidgetTipInfo v-if="isAvatarTipShown" :color="appVars.colors.contactsBirthdays">
-        Аватарку <span :style="{color: appVars.colors.contactsBirthdays}">можно выбрать</span>, нажав на контакт
-      </WidgetTipInfo>
+      <template v-if="hasBirthdays">
+        <WidgetTipInfo v-if="isAvatarTipShown" :color="appVars.colors.contactsBirthdays">
+          Аватарку <span :style="{color: appVars.colors.contactsBirthdays}">можно выбрать</span>, нажав на контакт
+        </WidgetTipInfo>
 
-      <div :class="styles.contactsBirthdaysPage__listHeader">
-        <div v-if="firstSectionTitle" :class="styles.contactsBirthdaysPage__listTitle">
-          {{ firstSectionTitle }}
+        <div :class="styles.contactsBirthdaysPage__listHeader">
+          <div v-if="firstSectionTitle" :class="styles.contactsBirthdaysPage__listTitle">
+            {{ firstSectionTitle }}
+          </div>
+
+          <div :class="styles.contactsBirthdaysPage__sync" @click="onSync">
+            <ion-icon :class="[
+                styles.contactsBirthdaysPage__syncIcon,
+                isSyncing && styles.contactsBirthdaysPage__syncIcon_spin,
+              ]"
+              :icon="syncOutline"
+            ></ion-icon>
+
+            Синхронизировать
+          </div>
         </div>
 
-        <div :class="styles.contactsBirthdaysPage__sync" @click="onSync">
+        <template v-for="( section, index ) in birthdaySections" :key="section.id">
+          <div v-if="index > 0 && section.title" :class="styles.contactsBirthdaysPage__listTitle">
+            {{ section.title }}
+          </div>
+
+          <ul :class="styles.contactsBirthdaysPage__contactsList">
+            <li v-for="{ contact, date, age, isToday, isSoon } in section.items"
+                :key="contact.id"
+                :class="styles.contactsBirthdaysPage__contactItem"
+                @click="onOpenPicker( contact )"
+            >
+              <AvatarContact :class="styles.contactsBirthdaysPage__contactImg"
+                             :contact="contact"
+              />
+
+              <div :class="styles.contactsBirthdaysPage__content">
+                <div :class="styles.contactsBirthdaysPage__contactName">
+                  {{ contact.name }}
+                </div>
+
+                <div :class="styles.contactsBirthdaysPage__userComment">
+                  {{ formatDayMonth( date, isSoon ) }}
+
+                  <template v-if="age > 0">
+                    · {{ isToday ? 'сегодня исполнилось' : 'исполнится' }} {{ age }} {{ declineUnit( age, 'year' ) }}
+                  </template>
+                </div>
+              </div>
+
+              <div v-if="isToday"
+                   :class="styles.contactsBirthdaysPage__button"
+                   @click.stop="onCongratulate( contact )"
+              >
+                Поздравить
+              </div>
+            </li>
+          </ul>
+        </template>
+      </template>
+      <template v-else>
+        <div :class="styles.contactsBirthdaysPage__listTitle">
+          Как это исправить
+        </div>
+
+        <ul :class="styles.contactsBirthdaysPage__orderedList">
+          <li :class="styles.contactsBirthdaysPage__orderedListItem">
+            Откройте контакт в телефоне
+          </li>
+
+          <li :class="styles.contactsBirthdaysPage__orderedListItem">
+            Добавьте поле «День рождения»
+
+            <div :class="styles.contactsBirthdaysPage__listComment">
+              В некоторых телефонах оно спрятано под «Ещё» или называется «Важная дата»
+            </div>
+          </li>
+
+          <li :class="styles.contactsBirthdaysPage__orderedListItem">
+            Вернитесь сюда и синхронизируйте список
+          </li>
+        </ul>
+
+        <div :class="styles.contactsBirthdaysPage__syncButton" @click="onSync">
           <ion-icon :class="[
-              styles.contactsBirthdaysPage__syncIcon,
-              isSyncing && styles.contactsBirthdaysPage__syncIcon_spin,
-            ]"
-            :icon="syncOutline"
+                styles.contactsBirthdaysPage__syncButtonIcon,
+                isSyncing && styles.contactsBirthdaysPage__syncButtonIcon_spin,
+              ]"
+                    :icon="syncOutline"
           ></ion-icon>
 
           Синхронизировать
         </div>
-      </div>
-
-      <template v-for="( section, index ) in birthdaySections" :key="section.id">
-        <div v-if="index > 0 && section.title" :class="styles.contactsBirthdaysPage__listTitle">
-          {{ section.title }}
-        </div>
-
-        <ul :class="styles.contactsBirthdaysPage__contactsList">
-          <li v-for="{ contact, date, age, isToday, isSoon } in section.items"
-              :key="contact.id"
-              :class="styles.contactsBirthdaysPage__contactItem"
-              @click="onOpenPicker( contact )"
-          >
-            <AvatarContact :class="styles.contactsBirthdaysPage__contactImg"
-                           :contact="contact"
-            />
-
-            <div :class="styles.contactsBirthdaysPage__content">
-              <div :class="styles.contactsBirthdaysPage__contactName">
-                {{ contact.name }}
-              </div>
-
-              <div :class="styles.contactsBirthdaysPage__userComment">
-                {{ formatDayMonth( date, isSoon ) }}
-
-                <template v-if="age > 0">
-                  · {{ isToday ? 'сегодня исполнилось' : 'исполнится' }} {{ age }} {{ declineUnit( age, 'year' ) }}
-                </template>
-              </div>
-            </div>
-
-            <div v-if="isToday"
-                 :class="styles.contactsBirthdaysPage__button"
-                 @click.stop="onCongratulate( contact )"
-            >
-              Поздравить
-            </div>
-          </li>
-        </ul>
       </template>
 
       <AvatarPicker

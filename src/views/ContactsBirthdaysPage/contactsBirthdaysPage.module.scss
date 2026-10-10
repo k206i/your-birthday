@@ -19,6 +19,67 @@
     text-decoration-style: dashed;
   }
 
+  &__orderedList {
+    list-style: none;
+    counter-reset: list-counter;
+    margin: var( --brd-size-gap-s ) 0 var( --brd-size-gap-xl );
+    padding-left: 0;
+  }
+
+  &__orderedListItem {
+    position: relative;
+    counter-increment: list-counter;
+    padding: 3px 0 0 40px;
+    margin-bottom: var( --brd-size-gap );
+    font-size: 16px;
+
+    &::before {
+      content: counter( list-counter );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 29px;
+      aspect-ratio: 1;
+      border-radius: 100%;
+      color: var(--brd-custom-theme-color);
+      background-color: color-mix(in srgb, var(--brd-custom-theme-color), black var(--brd-color-mix-bg));
+    }
+  }
+
+  &__syncButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var( --brd-size-gap-s );
+    margin-bottom: var( --brd-size-gap );
+    padding: var( --brd-size-gap );
+    border: 1px solid var(--brd-custom-theme-color);
+    border-radius: var( --brd-size-border-radius );
+    font-family: var( --brd-font-default-alt );
+    font-size: 16px;
+    color: var(--brd-custom-theme-color);
+  }
+
+  &__syncButtonIcon {
+    font-size: 18px;
+
+    &_spin {
+      animation: contactsSyncSpin .6s ease-in-out infinite;
+
+      @media ( prefers-reduced-motion: reduce ) {
+        animation: none;
+      }
+    }
+  }
+
+  &__listComment {
+    font-size: 12px;
+    color: var( --brd-color-font-low );
+  }
+
   &__syncIcon {
     font-size: 16px;
 
@@ -105,7 +166,7 @@
   &__contactImg {
     flex-shrink: 0;
     width: 50px;
-    font-size: 14px;
+    font-size: 18px;
 
     &_large {
       width: 100%;

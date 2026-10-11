@@ -82,7 +82,7 @@ const slides: TReelSlide[] = [
     id: 'contacts',
     image: imgContacts,
     title: 'Никого не забудете поздравить',
-    text: 'Приложение найдёт дни рождения в&nbsp;ваших контактах и&nbsp;в&nbsp;нужный день напомнит, у кого праздник. Контакты никуда не&nbsp;отправляются&nbsp;📇',
+    text: 'Приложение найдёт дни рождения в&nbsp;ваших контактах, напомнит о&nbsp;празднике и&nbsp;даст подобрать каждому аватарку-мем. Контакты никуда не&nbsp;отправляются&nbsp;📇',
     themeColor: appVars.colors.contactsBirthdays,
     hasContactsToggle: true,
   },

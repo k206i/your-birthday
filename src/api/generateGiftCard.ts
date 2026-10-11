@@ -11,6 +11,7 @@ type TGiftCardTemplate = {
   headerWithName: string,
   headerWithoutName: string,
   text: string,
+  disabled?: boolean,
 }
 
 export type TGiftCard = {
@@ -25,7 +26,7 @@ export type TRenderedGiftCard = {
   text: string,
 }
 
-const templates: TGiftCardTemplate[] = giftCardTemplates as TGiftCardTemplate[];
+const templates: TGiftCardTemplate[] = ( giftCardTemplates as TGiftCardTemplate[] ).filter( item => !item.disabled );
 const slots: Record< string, string[] > = giftCardSlots as Record< string, string[] >;
 
 const RECENT_LIMIT: number = 10;

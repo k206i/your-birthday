@@ -4,17 +4,18 @@
     "tone": "warm",
     "headerWithName": "{name}, с днём рождения!",
     "headerWithoutName": "С днём рождения!",
-    "text": "Пусть {wish}, а {wish}."
+    "text": "Пусть {wish}, а {wish}. Желаю {gift} и {gift}."
   },
   {
     "id": "list",
     "tone": "warm",
     "headerWithName": "{name}, с новым годом жизни! 🎂",
     "headerWithoutName": "С новым годом жизни! 🎂",
-    "text": "Желаю {gift}, {gift} и {gift}."
+    "text": "Желаю {gift} и {gift}. Пусть {wish}, а {wish}."
   },
   {
     "id": "short",
+    "disabled": true,
     "tone": "warm",
     "headerWithName": "{name}, поздравляю! 🎉",
     "headerWithoutName": "Поздравляю! 🎉",
@@ -25,10 +26,11 @@
     "tone": "warm",
     "headerWithName": "С праздником, {name}! 🎂",
     "headerWithoutName": "С праздником! 🎂",
-    "text": "Желаю {gift}. И пусть {wish}."
+    "text": "Пусть {wish}. Желаю {gift} и {gift}. И пусть {wish}."
   },
   {
     "id": "jokeWish",
+    "disabled": true,
     "tone": "fun",
     "headerWithName": "Ну что, {name}, с днём рождения!",
     "headerWithoutName": "Ну что, с днём рождения!",
@@ -39,6 +41,6 @@
     "tone": "warm",
     "headerWithName": "{name}, поздравляю от всей души! 💜",
     "headerWithoutName": "Поздравляю от всей души! 💜",
-    "text": "Желаю {gift} и {gift}. И пусть {wish}."
+    "text": "Желаю {gift} и {gift}. Пусть {wish}, а ещё пусть {wish}."
   }
 ]

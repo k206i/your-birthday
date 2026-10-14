@@ -30,6 +30,11 @@ jobs:
 
       - name: Resolve version from tag
         run: |
+          if [[ ! "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-.+)?$ ]]; then
+            echo "Тег $GITHUB_REF_NAME не похож на vX.Y.Z, версию из него не вычислить"
+            exit 1
+          fi
+
           RAW="${GITHUB_REF_NAME#v}"
           NUM="${RAW%%-*}"
           IFS='.' read -r MAJOR MINOR PATCH <<< "$NUM"

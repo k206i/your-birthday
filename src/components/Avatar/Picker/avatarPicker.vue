@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import styles from './avatarPicker.module.scss';
 import {closeCircle} from 'ionicons/icons';
+import IconPencil from '@/assets/img/svg/icon-pencil.svg?component';
 import {IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonModal, IonToolbar} from '@ionic/vue';
 import {ref} from 'vue';
 import {getAvatarsList, TAvatar} from '@/composables/getAvatarsList';
@@ -10,9 +11,10 @@ const props = defineProps<{
   modelValue: string, // имя файла аватарки, пусто = не выбрана
   title: string,
   comment: string,
+  canEditTitle?: boolean,
 }>();
 
-const emit = defineEmits([ 'update:modelValue', 'close' ]);
+const emit = defineEmits([ 'update:modelValue', 'close', 'editTitle' ]);
 
 const isScaleAvatar = ref( false );
 
@@ -67,8 +69,15 @@ const onRandomAvatar = () => {
           <slot></slot>
         </div>
 
-        <div :class="styles.avatarPicker__modalTitle">
+        <div :class="[
+            styles.avatarPicker__modalTitle,
+            props.canEditTitle && styles.avatarPicker__modalTitle_editable,
+          ]"
+             @click="props.canEditTitle && emit( 'editTitle' )"
+        >
           {{ props.title }}
+
+          <IconPencil v-if="props.canEditTitle" :class="styles.avatarPicker__editIcon" />
         </div>
 
         <div :class="styles.avatarPicker__modalComment">

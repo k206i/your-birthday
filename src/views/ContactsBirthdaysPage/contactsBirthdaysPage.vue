@@ -10,7 +10,7 @@ import {appStore} from '@/store/appStore';
 import {contactsBirthdays} from '@/store/contactsStore';
 import type {TContactBirthday} from '@/store/contactsStore';
 import {currentDate} from '@/store/currentDate';
-import {syncContacts} from '@/api/getContactsBirthdays';
+import {editContact, syncContacts} from '@/api/getContactsBirthdays';
 import {getUpcomingBirthdays} from '@/api/getUpcomingBirthdays';
 import {getContactAvatar, setContactAvatar} from '@/api/contactAvatars';
 import {formatDayMonth} from '@/composables/localDate';
@@ -54,6 +54,16 @@ const onOpenPicker = ( contact: TContactBirthday ): void => {
       appStore.dismissedAlerts.push( AVATAR_TIP );
     }, 600 );
   }
+};
+
+// После правки имени модалка держала бы старое, поэтому закрываем её
+const onEditContact = (): void => {
+  if ( !pickerContact.value ) {
+    return;
+  }
+
+  isPickerOpen.value = false;
+  editContact( pickerContact.value.id );
 };
 
 // Чтение занимает доли секунды, без минимума вращение иконки не успеют заметить
@@ -234,7 +244,9 @@ onIonViewWillEnter( syncContacts );
           :is-open="isPickerOpen"
           :title="pickerContact?.name ?? ''"
           comment="Выберите персонажа, он появится вместо инициалов"
+          can-edit-title
           @close="isPickerOpen = false"
+          @edit-title="onEditContact"
       >
         <AvatarContact v-if="pickerContact"
                        :class="[

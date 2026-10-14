@@ -31,6 +31,20 @@
 
     margin-bottom: var( --brd-size-gap-xs );
     text-align: center;
+
+    &_editable {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var( --brd-size-gap-xs );
+      cursor: pointer;
+    }
+  }
+
+  &__editIcon {
+    flex-shrink: 0;
+    width: .8em;
+    height: .8em;
   }
 
   &__modalComment {

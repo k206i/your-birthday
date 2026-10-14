@@ -931,6 +931,11 @@
   resolved "https://registry.npmjs.org/@capacitor/keyboard/-/keyboard-8.0.3.tgz"
   integrity sha512-27Bv5/2w1Ss2njguBgTS98O0Bb8DRJhAARyzXYib0JlT/n6BrJw/EZ0CokM4C8GFUjFDjJnEKF1Ie01buTMEXQ==
 
+"@capacitor/local-notifications@8.3.1":
+  version "8.3.1"
+  resolved "https://registry.npmjs.org/@capacitor/local-notifications/-/local-notifications-8.3.1.tgz"
+  integrity sha512-F7zu/+p/mIR958YP4axOkeI5hBKRaXDyYjbNPrAil2wWfd7OxScPSTvP9t85NpQ0eULVRu0/sntoxOg6ck477A==
+
 "@capacitor/preferences@^8.0.1":
   version "8.0.1"
   resolved "https://registry.npmjs.org/@capacitor/preferences/-/preferences-8.0.1.tgz"

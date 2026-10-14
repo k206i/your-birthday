@@ -7,10 +7,15 @@ import {setLastAchievement} from '@/api/setLastAchievement';
 import {getStreakStarts} from '@/api/getAchievementDate';
 import {syncBirthDateAchievements} from '@/api/syncBirthDateAchievements';
 import {initContactsWatcher} from '@/api/getContactsBirthdays';
+import {initRemindersWatcher} from '@/api/birthdayReminders';
+import {useRouter} from 'vue-router';
+
+const router = useRouter();
 
 syncBirthDateAchievements();
 setLastAchievement();
 initContactsWatcher();
+initRemindersWatcher(() => router.push( '/home' ));
 
 // Пересчёт ачивок при смене даты рождения
 watch(() => appStore.userBirthDate, () => {

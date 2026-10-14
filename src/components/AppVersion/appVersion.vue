@@ -10,6 +10,7 @@ import {TAchievementCombined} from '@/api/getAchievementById';
 import FloatingAlert from '@/components/Ui/FloatingAlert/floatingAlert.vue';
 import AchievementShort from '@/components/Achievement/Short/achievementShort.vue';
 import {setLastAchievement} from '@/api/setLastAchievement';
+import {showTestReminder} from '@/api/birthdayReminders';
 
 const appVersion: string = __APP_VERSION__;
 
@@ -154,14 +155,11 @@ const onClearContactAvatars = () => {
         ></ion-icon>
       </li>
 
-      <li :class="styles.appVersion__key">
-        contactAvatars
-        {{ appStore.contactAvatars }}
-        <ion-icon
-            :icon="closeCircleOutline"
-            @click="onClearContactAvatars"
-            :class="styles.appVersion__resetIcon"
-        ></ion-icon>
+      <li :class="styles.appVersion__key"
+          style="text-decoration: underline; text-decoration-style: dashed"
+          @click="showTestReminder"
+      >
+        Уведомление о ДР (через 10 секунд)
       </li>
     </ul>
 

@@ -1,7 +1,7 @@
 {
   "name": "birthday-date",
   "private": true,
-  "version": "1.5.15",
+  "version": "1.5.16",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -21,6 +21,7 @@
     "@capacitor/filesystem": "^8.1.2",
     "@capacitor/haptics": "8.0.2",
     "@capacitor/keyboard": "8.0.3",
+    "@capacitor/local-notifications": "8.3.1",
     "@capacitor/preferences": "^8.0.1",
     "@capacitor/share": "^8.0.1",
     "@capacitor/status-bar": "8.0.2",

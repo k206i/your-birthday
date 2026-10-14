@@ -35,6 +35,7 @@ type TAppStore = {
   isContactsEnabled: boolean, // раздел дней рождения из контактов включён пользователем
   congratulatedContacts: Record< string, string >, // id контакта -> YYYY-MM-DD, когда нажали «Уже поздравили»
   contactAvatars: Record< string, TContactAvatar >, // id контакта -> выбранная аватарка
+  isRemindersEnabled: boolean, // уведомления о днях рождения включены пользователем
 }
 
 const STORAGE_KEY = 'appStore';
@@ -67,6 +68,7 @@ export const appStore: TAppStore = reactive({
   isContactsEnabled: false,
   congratulatedContacts: {},
   contactAvatars: {},
+  isRemindersEnabled: false,
 });
 
 export const restoreAppStore = async (): Promise< void > => {

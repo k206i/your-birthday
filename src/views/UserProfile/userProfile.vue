@@ -7,11 +7,18 @@ import UiInput from '@/components/Ui/Input/uiInput.vue';
 import {appStore} from '@/store/appStore';
 import {openContactsSettings} from '@/api/getContactsBirthdays';
 import {useContactsToggle} from '@/composables/useContactsToggle';
+import {useRemindersToggle} from '@/composables/useRemindersToggle';
 import AvatarSetup from '@/components/Avatar/Setup/avatarSetup.vue';
 import WidgetAlert from '@/components/Widgets/Alert/widgetAlert.vue';
 import AppVersion from '@/components/AppVersion/appVersion.vue';
 
 const { isContactsToggleOn, isBlockedHintShown, onContactsToggle } = useContactsToggle();
+
+const {
+  isRemindersToggleOn,
+  isBlockedHintShown: isRemindersBlockedHintShown,
+  onRemindersToggle,
+} = useRemindersToggle();
 </script>
 
 <template>
@@ -82,6 +89,40 @@ const { isContactsToggleOn, isBlockedHintShown, onContactsToggle } = useContacts
               :checked="isContactsToggleOn"
               aria-label="Показывать дни рождения из контактов"
               @ionChange="onContactsToggle"
+          ></ion-toggle>
+        </div>
+      </div>
+
+      <div :class="styles.userProfile__block">
+        <div :class="styles.userProfile__blockLabel">
+          Напоминания
+        </div>
+
+        <div :class="styles.userProfile__toggleRow">
+          <div>
+            <div :class="styles.userProfile__toggleRowText">
+              Включить напоминания
+            </div>
+
+            <div :class="styles.userProfile__blockComment">
+              В 10 утра в день рождения: ваш, близкого человека и контактов&nbsp;🎂
+
+              <div v-if="isRemindersBlockedHintShown"
+                   :class="styles.userProfile__hiddenBlock"
+              >
+                Уведомления запрещены в настройках телефона.
+
+                <span :class="styles.userProfile__actionLink" @click="openContactsSettings">
+                  Открыть настройки
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <ion-toggle
+              :checked="isRemindersToggleOn"
+              aria-label="Включить напоминания"
+              @ionChange="onRemindersToggle"
           ></ion-toggle>
         </div>
       </div>

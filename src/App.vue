@@ -15,7 +15,7 @@ const router = useRouter();
 syncBirthDateAchievements();
 setLastAchievement();
 initContactsWatcher();
-initRemindersWatcher(() => router.push( '/home' ));
+initRemindersWatcher(( tap ) => router.push({ path: tap.path, query: tap.name ? { name: tap.name } : {} }));
 
 // Пересчёт ачивок при смене даты рождения
 watch(() => appStore.userBirthDate, () => {

@@ -74,6 +74,25 @@ describe( 'напоминания о днях рождения', () => {
     expect( reminder.at ).toEqual( new Date( 2027, 2, 1, 10 ));
   });
 
+  test( 'нажатие ведёт в открытку, к контактам или на главную', () => {
+    const tapOn = ( patch: Partial< TReminderInput > ) => buildReminders( input( patch ), morning ).map(({ tap }) => tap );
+
+    expect( tapOn({ contacts: [ contact( '1', 'Аня', 10, 20 ) ] }))
+      .toEqual([{ path: '/giftCardPage', name: 'Аня' }]);
+
+    expect( tapOn({ additionalName: 'Мама', additionalBirthDate: '1965-10-20' }))
+      .toEqual([{ path: '/giftCardPage', name: 'Мама' }]);
+
+    expect( tapOn({ contacts: [ contact( '1', 'Аня', 10, 20 ), contact( '2', 'Вася', 10, 20 ) ] }))
+      .toEqual([{ path: '/contactsBirthdaysPage' }]);
+
+    expect( tapOn({ additionalName: 'Мама', additionalBirthDate: '1965-10-20', contacts: [ contact( '1', 'Аня', 10, 20 ) ] }))
+      .toEqual([{ path: '/home' }]);
+
+    expect( tapOn({ userBirthDate: '1990-10-20' }))
+      .toEqual([{ path: '/home' }]);
+  });
+
   test( 'контакты не попадают в напоминания, если функция выключена', () => {
     contactsBirthdays.value = [ contact( '1', 'Мама', 10, 20 ) ];
 

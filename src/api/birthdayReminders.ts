@@ -21,14 +21,23 @@ export type TReminderInput = {
   contacts: TContactBirthday[],
 }
 
+// Куда вести по нажатию на уведомление
+export type TReminderTap = {
+  path: string,
+  name?: string,
+}
+
 export type TReminder = {
   id: number,
   at: Date,
   title: string,
   body: string,
+  tap: TReminderTap,
 }
 
 const REMINDER_HOUR: number = 10;
+const ADDITIONAL_ID: string = 'additional';
+const HOME_TAP: TReminderTap = { path: '/home' };
 const CHANNEL_ID: string = 'birthdays';
 const OWN_ID_OFFSET: number = 1000000000;
 const SYNC_DELAY: number = 1000; // ms, чтобы не перепланировать на каждую букву имени
@@ -68,6 +77,15 @@ const getOthersText = ( names: string[] ): Pick< TReminder, 'title' | 'body' > =
   return { title: '🎂 Сегодня празднуют сразу несколько человек', body: `${ joinNames( names ) }. Самое время поздравить` };
 };
 
+const getOthersTap = ( names: string[], hasAdditional: boolean ): TReminderTap => {
+  if ( names.length === 1 ) {
+    return { path: '/giftCardPage', name: names[ 0 ] };
+  }
+
+  // Близкий человек виден только на главной, в списке контактов его может не быть
+  return hasAdditional ? HOME_TAP : { path: '/contactsBirthdaysPage' };
+};
+
 export const buildReminders = ( input: TReminderInput, now: Date ): TReminder[] => {
   const today: string = formatLocalDate( now );
   const reminders: TReminder[] = [];
@@ -81,29 +99,36 @@ export const buildReminders = ( input: TReminderInput, now: Date ): TReminder[] 
       at: getReminderTime( date ),
       title: 'С днём рождения! 🎉',
       body: 'Сегодня ваш день. Поздравление уже ждёт в приложении',
+      tap: HOME_TAP,
     });
   }
 
   const additional: TContactBirthday | null = input.additionalName
-    ? toBirthday( 'additional', input.additionalName, input.additionalBirthDate )
+    ? toBirthday( ADDITIONAL_ID, input.additionalName, input.additionalBirthDate )
     : null;
   const people: TContactBirthday[] = additional ? [ ...input.contacts, additional ] : input.contacts;
-  const days: Map< number, { date: Date, names: string[] } > = new Map();
+  const days: Map< number, { date: Date, names: string[], hasAdditional: boolean } > = new Map();
 
   for ( const { contact, date } of getUpcomingBirthdays( people, today )) {
     const id: number = getDayId( date );
-    const day = days.get( id ) ?? { date, names: [] };
+    const day = days.get( id ) ?? { date, names: [], hasAdditional: false };
 
     // Близкий человек может быть и в контактах с той же датой
     if ( !day.names.includes( contact.name )) {
       day.names.push( contact.name );
     }
 
+    day.hasAdditional = day.hasAdditional || contact.id === ADDITIONAL_ID;
     days.set( id, day );
   }
 
-  for ( const [ id, { date, names } ] of days ) {
-    reminders.push({ id, at: getReminderTime( date ), ...getOthersText( names ) });
+  for ( const [ id, { date, names, hasAdditional } ] of days ) {
+    reminders.push({
+      id,
+      at: getReminderTime( date ),
+      ...getOthersText( names ),
+      tap: getOthersTap( names, hasAdditional ),
+    });
   }
 
   return reminders
@@ -191,6 +216,7 @@ const runSync = async (): Promise< void > => {
       body: reminder.body,
       channelId: CHANNEL_ID,
       schedule: { at: reminder.at, allowWhileIdle: true },
+      extra: reminder.tap,
     })),
   });
 };
@@ -263,11 +289,12 @@ export const showTestReminder = async (): Promise< void > => {
       body: nearest?.body ?? 'Дней рождения пока нет',
       channelId: CHANNEL_ID,
       schedule: { at: new Date( Date.now() + TEST_REMINDER_DELAY ), allowWhileIdle: true },
+      extra: nearest?.tap ?? HOME_TAP,
     }],
   });
 };
 
-export const initRemindersWatcher = ( onReminderTap: () => void ): void => {
+export const initRemindersWatcher = ( onReminderTap: ( tap: TReminderTap ) => void ): void => {
   if ( !Capacitor.isNativePlatform()) {
     return;
   }
@@ -290,5 +317,7 @@ export const initRemindersWatcher = ( onReminderTap: () => void ): void => {
     { immediate: true },
   );
 
-  LocalNotifications.addListener( 'localNotificationActionPerformed', onReminderTap );
+  LocalNotifications.addListener( 'localNotificationActionPerformed', ({ notification }) => {
+    onReminderTap(( notification.extra as TReminderTap | undefined ) ?? HOME_TAP );
+  });
 };

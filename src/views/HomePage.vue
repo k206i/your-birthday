@@ -235,6 +235,27 @@ watch(() => appStore.isContactsEnabled, ( isEnabled: boolean ) => {
         />
 
         <ul :class="styles.homePage__servicesList">
+          <li :class="styles.homePage__serviceWide">
+            <WidgetPageLinkWide
+                link="/giftCardPage"
+                title="Надо кого-то поздравить?"
+                comment="Придумаем поздравление за вас"
+                bg-image="cat-7_art"
+                :color="appVars.colors.giftCard"
+            />
+          </li>
+
+          <li v-if="appStore.isContactsEnabled || isContactsMock" :class="styles.homePage__serviceWide">
+            <WidgetPageLinkWide
+                link="/contactsBirthdaysPage"
+                title="Дни рождения из контактов"
+                comment="Чтобы никого не пропустить 🎂"
+                bg-image="phone_art"
+                art-no-bg
+                :color="appVars.colors.contactsBirthdays"
+            />
+          </li>
+
           <li>
             <WidgetPageLink
                 link="/lifeProgress"
@@ -263,28 +284,6 @@ watch(() => appStore.isContactsEnabled, ( isEnabled: boolean ) => {
                 :color="appVars.colors.childBirthday"
             />
           </li>
-
-          <li :class="styles.homePage__serviceWide">
-            <WidgetPageLinkWide
-                link="/giftCardPage"
-                title="Надо кого-то поздравить?"
-                comment="Придумаем поздравление за вас"
-                bg-image="cat-7_art"
-                :color="appVars.colors.giftCard"
-            />
-          </li>
-
-          <li v-if="appStore.isContactsEnabled || isContactsMock" :class="styles.homePage__serviceWide">
-            <WidgetPageLinkWide
-                link="/contactsBirthdaysPage"
-                title="Дни рождения из контактов"
-                comment="Чтобы никого не пропустить 🎂"
-                bg-image="phone_art"
-                art-no-bg
-                :color="appVars.colors.contactsBirthdays"
-            />
-          </li>
-
 
           <li>
             <WidgetPageLink

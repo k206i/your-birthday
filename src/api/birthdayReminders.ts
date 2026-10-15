@@ -216,6 +216,7 @@ const runSync = async (): Promise< void > => {
       body: reminder.body,
       channelId: CHANNEL_ID,
       schedule: { at: reminder.at, allowWhileIdle: true },
+      isExactNotification: false, // иначе плагин открывает экран «Будильники и напоминания»
       extra: reminder.tap,
     })),
   });
@@ -289,6 +290,7 @@ export const showTestReminder = async (): Promise< void > => {
       body: nearest?.body ?? 'Дней рождения пока нет',
       channelId: CHANNEL_ID,
       schedule: { at: new Date( Date.now() + TEST_REMINDER_DELAY ), allowWhileIdle: true },
+      isExactNotification: false,
       extra: nearest?.tap ?? HOME_TAP,
     }],
   });

@@ -5,7 +5,7 @@ import AppFooter from '@/components/AppFooter/appFooter.vue';
 import WidgetPageLink from '@/components/Widgets/PageLink/widgetPageLink.vue';
 import AppHeader from '@/components/AppHeader/appHeader.vue';
 import {appVars} from '@/configApp';
-import {appStore, CONTACTS_OFFER_ALERT} from '@/store/appStore';
+import {appStore, CONTACTS_OFFER_ALERT, REMINDERS_OFFER_ALERT} from '@/store/appStore';
 import {computed, defineAsyncComponent, ref, watch} from 'vue';
 import {declineUnit} from '@/composables/declineUnit';
 import {getDaysToDate} from '@/composables/getDaysToDate';
@@ -20,6 +20,7 @@ import WidgetPageLinkWide from '@/components/Widgets/PageLink/widgetPageLinkWide
 import {Browser} from '@capacitor/browser';
 import {logoTwitch} from 'ionicons/icons';
 import {enableContacts, isContactsMock, openContactsSettings} from '@/api/getContactsBirthdays';
+import {enableReminders} from '@/api/birthdayReminders';
 import WidgetCongratContact from '@/components/Widgets/CongratContact/widgetCongratContact.vue';
 import WidgetAlert from '@/components/Widgets/Alert/widgetAlert.vue';
 import {contactsBirthdays} from '@/store/contactsStore';
@@ -102,6 +103,33 @@ watch(() => appStore.isContactsEnabled, ( isEnabled: boolean ) => {
   }
 }, { immediate: true });
 
+// Один анонс за раз, и только когда есть о чём напоминать
+const isRemindersOfferShown = computed(() => {
+  const hasDates: boolean = !!appStore.userBirthDate
+    || !!( appStore.additionalName && appStore.additionalBirthDate )
+    || appStore.isContactsEnabled;
+
+  return hasDates && appStore.dismissedAlerts.includes( CONTACTS_OFFER_ALERT );
+});
+
+// Настройки приложения в телефоне, там же и уведомления
+const onRemindersOfferAccept = async (): Promise< void > => {
+  if ( await enableReminders() === 'blocked' ) {
+    await openContactsSettings();
+  }
+};
+
+const remindersOfferButtons = [
+  { text: 'Не, потом', isLight: true, onClick: ( dismiss: () => void ) => dismiss() },
+  { text: 'Отлично! Давайте!', onClick: onRemindersOfferAccept }
+];
+
+watch(() => appStore.isRemindersEnabled, ( isEnabled: boolean ) => {
+  if ( isEnabled && !appStore.dismissedAlerts.includes( REMINDERS_OFFER_ALERT )) {
+    appStore.dismissedAlerts.push( REMINDERS_OFFER_ALERT );
+  }
+}, { immediate: true });
+
 </script>
 
 <template>
@@ -131,6 +159,15 @@ watch(() => appStore.isContactsEnabled, ( isEnabled: boolean ) => {
             comment="Приложение может найти дни рождения, записанные в контактах, и подсказать, кого пора поздравить. Для этого нужен доступ к контактам: они читаются только на телефоне и никуда не отправляются."
             :dismiss-name="CONTACTS_OFFER_ALERT"
             :buttons="contactsOfferButtons"
+        />
+
+        <WidgetAlert
+            v-if="isRemindersOfferShown"
+            type="info"
+            title="Новое: напоминания о днях рождения&nbsp;🔔"
+            comment="Приложение напомнит уведомлением в 10 утра, когда празднуете вы, близкий человек или кто-то из контактов. Для этого нужно разрешение на уведомления."
+            :dismiss-name="REMINDERS_OFFER_ALERT"
+            :buttons="remindersOfferButtons"
         />
 
         <WidgetPageTitleHome

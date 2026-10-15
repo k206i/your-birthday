@@ -41,6 +41,7 @@ type TAppStore = {
 const STORAGE_KEY = 'appStore';
 
 export const CONTACTS_OFFER_ALERT: string = 'contactsOffer';
+export const REMINDERS_OFFER_ALERT: string = 'remindersOffer';
 
 export const appStore: TAppStore = reactive({
   userName: '',

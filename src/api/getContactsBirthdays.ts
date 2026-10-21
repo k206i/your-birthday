@@ -121,14 +121,13 @@ export const refreshContacts = async (): Promise< void > => {
 // Контакт правят в системном приложении: после возврата нужно полное чтение, а не только проверка разрешения
 let isSyncOnResume: boolean = false;
 
-// Карточка, а не сразу редактор: displayUpdateContactById в плагине теряет id и открывает создание нового контакта
 export const editContact = async ( id: string ): Promise< void > => {
   isSyncOnResume = true;
 
   try {
-    await CapacitorContacts.displayContactById({ id });
+    await CapacitorContacts.displayUpdateContactById({ id });
   } catch {
-    // В браузере у плагина нет карточки контакта
+    // В браузере у плагина нет редактора контакта
     isSyncOnResume = false;
   }
 };
